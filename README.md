@@ -11,8 +11,8 @@ A la racine du dossier, exécuter la commande suivante :
 
 Le serveur devrait se lancer et écrire :
 
-> `>` eip@0.0.0 start /home/guerin_f/Project/Epitech/Github/Frontend-GUI
-> `>` node ./bin/www
+> `>` eip@0.0.0 start /home/guerin_f/Project/Epitech/Github/Frontend-GUI.
+> `>` node ./bin/www.
 
 Et voilà ! Le serveur est lancé, maintenant il suffit d'accèder à l'url : 
 
@@ -32,8 +32,7 @@ Le projet est actuellement une coquille vide, en attente des protocoles afin de 
 
 ### Ressources
 
-[En savoir plus sur JADE](http://jade-lang.com/reference/includes/)
-
+[En savoir plus sur JADE](http://jade-lang.com/reference/includes/).
 [En savoir plus sur NodeJs](https://nodejs.org/)
 
 [En savoir plus sur Express](http://expressjs.com/)
