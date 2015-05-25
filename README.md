@@ -25,16 +25,15 @@ Et voilà ! Le serveur est lancé, maintenant il suffit d'accèder à l'url :
 
 ## Avancement du projet
 
-Le projet est actuellement une coquille vide, en attente des protocoles afin de récupérer les données : 
+Le projet est actuellement une coquille vide, en attente des protocoles afin de récupérer des données dynamiques : 
 
-- L'architecture NodeJs/Express/Socket.IO fonctionnelle.
-- Téléchargement des fichiers sur le serveur via websocket. 
-- Design Css générale dans l'esprit flat design.
-- Création de divers plugins contenu dans "libraries" -> Gestion de fichiers, Gestion du menu, Traduction, Mysql.
-- Création des fichiers de traduction contenu dans "languages".
-- Création des différentes vue contenu dans "views".
+- Architecture NodeJs/Express/Socket.IO fonctionnelle
+- Téléchargement des fichiers sur le serveur via websocket
+- Design Css générale dans l'esprit flat design
+- Création de divers plugins contenu dans "libraries" -> Gestion de fichiers, Gestion du menu, Traduction, Mysql
+- Création des fichiers de traduction contenu dans "languages"
 
-### Ressources
+## Ressources
 
 - [En savoir plus sur JADE](http://jade-lang.com/reference/includes/).
 - [En savoir plus sur NodeJs](https://nodejs.org/)
