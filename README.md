@@ -1,2 +1,4 @@
-# Frontend-GUI
-Contient les sources du backoffice de gestions du contenu multimédia. Développer en NodeJs, utilisant Le framework Express 4.0 et Socket.IO
+# Frontend - GUI
+
+Projet développé en NodeJs basé sur le framework Express 4.0 et Socket.IO
+Ce backoffice dédié à la gestion du contenu multimédia est la passerelle entre l'utilisateur et Shopcast

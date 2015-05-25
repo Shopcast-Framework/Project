@@ -1,0 +1,12 @@
+extends ../default
+
+block head
+	script(type='text/javascript', src="/js/socket.io-stream.js")
+	script(type='text/javascript', src="/js/upload.js")
+
+block content
+	h1 #{page}
+	button.btn.btn-add Add file
+	button.btn.btn-upload Upload file(s)
+	button.btn.btn-delete Delete file(s)
+	ul.list-files.sortable

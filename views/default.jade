@@ -1,0 +1,43 @@
+doctype
+html(lang="en")
+	head
+		title= title
+		link(rel='stylesheet', href='/css/style.css')
+		link(rel='stylesheet', href='/css/jquery-ui.css')
+		script(type='text/javascript', src="/js/socket.io.js")
+		script(type='text/javascript', src="/js/jquery-1.10.2.js")
+		script(type='text/javascript', src="/js/jquery-ui-1.11.2.js")
+		script(type='text/javascript', src="/js/highchart.min.js")
+		script(type='text/javascript', src="/js/highchart-exporting.min.js")
+		script(type='text/javascript', src="/js/base.js")
+		block head
+	body
+		#main
+			nav#main-menu
+				div.user
+					div.user-img
+						img(src='/images/users/guerin_f.jpg')
+					div.user-name
+						span.name="Guerin_f"
+						span.badge=5
+				ul.list
+					each item in menu
+						li.item
+							a(href=item.url)
+								img(src=item.logo)
+								span=item.title
+			section#wrapper
+				section.toolbar
+					.title
+						h1=title
+						span.updated
+							Mise à jour le 25/05/2015 à 14h00	
+				block content
+			footer#footer
+				block footer
+		#shadow
+		#box
+			span.close
+				img(src='/images/system/close.png')
+			h3=title_user_box
+			.content
