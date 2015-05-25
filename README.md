@@ -12,12 +12,11 @@ A la racine du dossier, exécuter la commande suivante :
 Le serveur devrait se lancer et écrire :
 
 > `>` eip@0.0.0 start /home/guerin_f/Project/Epitech/Github/Frontend-GUI
-
 > `>` node ./bin/www
 
 Et voilà ! Le serveur est lancé, maintenant il suffit d'accèder à l'url : 
 
-**http://localhost:3000**
+**[http://localhost:3000](http://localhost:3000)**
 
 
 ## Avancement du projet
