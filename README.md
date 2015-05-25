@@ -7,13 +7,13 @@ Le templating utilisé est le système JADE
 
 A la racine du dossier, exécuter la commande suivante : 
 
-> $ npm start
+> npm start
 
 Le serveur devrait se lancer et écrire :
 
-> >eip@0.0.0 start /home/guerin_f/Project/Epitech/Github/Frontend-GUI
+> `>` eip@0.0.0 start /home/guerin_f/Project/Epitech/Github/Frontend-GUI
 
-> >node ./bin/www
+> `>` node ./bin/www
 
 Et voilà ! Le serveur est lancé, maintenant il suffit d'accèder à l'url : 
 
@@ -31,12 +31,12 @@ Le projet est actuellement une coquille vide, en attente des protocoles afin de 
 - Création des fichiers de traduction contenu dans "languages".
 - Création des différentes vue contenu dans "views".
 
-# Ressources
+### Ressources
 
-JADE : http://jade-lang.com/reference/includes/
+[En savoir plus sur JADE](http://jade-lang.com/reference/includes/)
 
-NodeJs : https://nodejs.org/
+[En savoir plus sur NodeJs](https://nodejs.org/)
 
-Express : http://expressjs.com/
+[En savoir plus sur Express](http://expressjs.com/)
 
-Socket.IO : http://socket.io/
+[En savoir plus sur Socket.IO](http://socket.io/)
