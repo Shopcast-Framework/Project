@@ -1,18 +1,22 @@
 # Frontend - GUI
 
-Projet développé en NodeJs basé sur le framework web 'Express' 4.0 et Socket.IO.  
+Projet développé en NodeJs basé sur le framework web 'Express' 4.0 et Socket.IO  
 Le templating utilisé est le système JADE
 
 ## Lancer le serveur
 
-A la racine du dossier, exécuter la commande suivante : 
+Accéder à la racine du dépôt :
+
+> cd your_path_to_the_repository/Frontend-GUI
+
+Ensuite, il suffit de lancer le serveur avec la commande suivante : 
 
 > npm start
 
 Le serveur devrait se lancer et écrire :
 
-> `>` eip@0.0.0 start /home/guerin_f/Project/Epitech/Github/Frontend-GUI.  
-> `>` node ./bin/www.
+> `>` eip@0.0.0 start /home/guerin_f/Project/Epitech/Github/Frontend-GUI  
+> `>` node ./bin/www
 
 Et voilà ! Le serveur est lancé, maintenant il suffit d'accèder à l'url : 
 
