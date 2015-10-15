@@ -1,18 +1,7 @@
 'use strict';
 
-var express = require('express');
-
-var config = [
-    {
-        name: 'playlist'
-    },
-    {
-        name: 'music',
-        actions: {
-            'search' : { verb: 'get', route: '/search/:id' }
-        }
-    }
-];
+var express = require('express'),
+    config = require('./config/routes');
 
 function RouteLoader(app) {
     var self = this;
@@ -27,13 +16,11 @@ function RouteLoader(app) {
             var controllerInstance = require('./controller/' + controller.name);
 
             self.ressource(controller.name, controllerInstance);
-
             for (var actionName in controller.actions)
             {
                 var action = controller.actions[actionName];
                 self.route(action.verb, '/' + controller.name + action.route, controllerInstance[actionName]);
             }
-
         }
         app.use('/api', self.api);
     };
