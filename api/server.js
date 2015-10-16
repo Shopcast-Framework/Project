@@ -1,8 +1,11 @@
 'use strict';
 
 var express = require('express'),
-    app = express(),
-    api = require('./api');
+    app     = express(),
+    api     = require('./api');
+
+require('./orm').load();
+
 
 app.listen(3000);
 

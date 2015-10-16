@@ -1,7 +1,7 @@
 'use strict';
 
-var express = require('express'),
-    config = require('./config/routes');
+var express     = require('express'),
+    config      = require('./config/routes');
 
 function RouteLoader(app) {
     var self = this;
@@ -15,7 +15,7 @@ function RouteLoader(app) {
             var controller = config[i];
             var controllerInstance = require('./controller/' + controller.name);
 
-            self.ressource(controller.name, controllerInstance);
+            self.resource(controller.name, controllerInstance);
             for (var actionName in controller.actions)
             {
                 var action = controller.actions[actionName];
@@ -30,7 +30,7 @@ function RouteLoader(app) {
         self.api[verb](route, action);
     };
 
-    self.ressource = function(controllerName, controller) {
+    self.resource = function(controllerName, controller) {
         var root = '/' + controllerName + '/';
         self.route('get', root, controller.get);
         self.route('post', root, controller.get);
