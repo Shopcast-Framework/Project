@@ -17,9 +17,6 @@ var Orm = function() {
             var model = self.sequelize.import(path.join(__dirname, './models', fileName));
             self.db[model.name] = model;
         });
-
-        // self.sequelize.sync(function() {});
-
     };
 
     self.init();
