@@ -5,7 +5,7 @@ var Sequelize   = require('sequelize');
 var User = function(sequelize) {
     var Model = sequelize.define('User', {
         username: Sequelize.STRING,
-        birthday: Sequelize.DATE
+        password: Sequelize.STRING
     });
 
     return Model;

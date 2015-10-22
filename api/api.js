@@ -31,9 +31,9 @@ function RouteLoader(app) {
     };
 
     self.resource = function(controllerName, controller) {
-        var root = '/' + controllerName + '/';
+        var root = '/' + controllerName;
         self.route('get', root, controller.get);
-        self.route('post', root, controller.get);
+        self.route('post', root, controller.post);
     };
 
     self.init(app);
