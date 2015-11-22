@@ -1,88 +1,42 @@
-var express = require( 'express' );
-var path = require( 'path' );
-var favicon = require( 'serve-favicon' );
-var logger = require( 'morgan' );
-var cookieParser = require( 'cookie-parser' );
-var bodyParser = require( 'body-parser' );
+var express = require('express')
+    , routes  = require('./routes')
+    , http = require('http')
+    , config = require('./config')
+    , bodyParser = require('body-parser')
 
-// Load the route handlers
+var app = module.exports = express();
+var server = http.createServer(app);
 
-var dashboard = require( './routes/dashboard' );
-var content = require( './routes/content' );
-var users = require( './routes/users' );
-var displayMode = require( './routes/displayMode' );
-var config = require( './routes/config' );
-
-var app = express();
-
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-
-    // intercept OPTIONS method
-    if ('OPTIONS' == req.method) {
-      res.send(200);
-    }
-    else {
-      next();
-    }
+app.close = function() {
+    server.close();
 };
 
-// view engine setup
-app.set( 'views', path.join( __dirname, 'views' ) );
-app.set( 'view engine', 'jade' );
-app.set( 'view options', { layout: false } );
-
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use( logger( 'dev' ) );
-app.use( bodyParser.json() );
-app.use( bodyParser.urlencoded( { extended: false } ) );
-app.use( cookieParser() );
-app.use( express.static( path.join( __dirname, 'public' ) ) );
-
-// All the http's routes
-app.get( '/', dashboard.index ); // Dasboard  page
-app.get( '/upload', content.upload ); // upload files page
-app.get( '/files', content.files ); // manage files page
-app.get( '/playlists', content.playlists ); // manage playlists page
-app.get( '/users', users.list ); // manage users page
-app.get( '/display-modes', displayMode.list ); // manage display mode page
-app.get( '/settings', config.list ); // manage configuration page
-
-
-// catch 404 and forward to error handler
-app.use(function( req, res, next ) {
-    var err = new Error( 'Not Found' );
-    err.status = 404;
-    next( err );
-});
-
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get( 'env' ) === 'development' ) {
-    app.use( function( err, req, res, next ) {
-        res.status( err.status || 500 );
-        res.render( 'error', {
-            message: err.message,
-            error: err
-        });
+app.listen = function() {
+    server.listen(config.port, function(){
+        console.log("Express server listening on port " + server.address().port + " in " + app.settings.env + " mode");
     });
-}
+};
 
-// production error handler
-// no stacktraces leaked to user
-app.use( function( err, req, res, next ) {
-    res.status( err.status || 500 );
-    res.render( 'error', {
-        message: err.message,
-        error: {}
-    });
-});
+app.run = function(){
 
+    app.set('view engine', 'jade');
+    app.use('/css', express.static(__dirname + '/public/css'));
+    app.use('/js', express.static(__dirname + '/public/js'));
+    app.use('/images', express.static(__dirname + '/public/images'));
+    app.use('/font', express.static(__dirname + '/public/font'));
+    app.use('/public', express.static(__dirname + '/public'));
+    app.use( bodyParser.json() );       // to support JSON-encoded bodies
+    app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+        extended: true
+    }));
 
-module.exports = app;
+    app.get('/', routes.index);
+    app.use('/files', routes.files);
+    app.use('/playlists', routes.playlists);
+    app.use('/users', routes.users);
+    app.use('/display', routes.display);
+    app.use('/settings', routes.settings);
+
+    app.listen();
+    return server;
+};

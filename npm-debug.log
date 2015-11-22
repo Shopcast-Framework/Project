@@ -1,27 +1,137 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'start' ]
+1 verbose cli [ '/usr/bin/node',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'ocean-themes',
+1 verbose cli   '-g' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.33
 4 verbose node symlink /usr/bin/node
-5 verbose run-script [ 'prestart', 'start', 'poststart' ]
-6 info prestart eip@0.0.0
-7 info start eip@0.0.0
-8 verbose unsafe-perm in lifecycle true
-9 info eip@0.0.0 Failed to exec start script
-10 error eip@0.0.0 start: `node ./bin/www`
-10 error Exit status 8
-11 error Failed at the eip@0.0.0 start script.
-11 error This is most likely a problem with the eip package,
-11 error not with npm itself.
-11 error Tell the author that this fails on your system:
-11 error     node ./bin/www
-11 error You can get their info via:
-11 error     npm owner ls eip
-11 error There is likely additional logging output above.
-12 error System Linux 3.13.0-24-generic
-13 error command "/usr/bin/node" "/usr/bin/npm" "start"
-14 error cwd /home/guerin_f/Project/Epitech/Github/Frontend-GUI
-15 error node -v v0.10.33
-16 error npm -v 1.4.28
-17 error code ELIFECYCLE
-18 verbose exit [ 1, true ]
+5 verbose cache add [ 'ocean-themes', null ]
+6 verbose cache add name=undefined spec="ocean-themes" args=["ocean-themes",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'ocean-themes',
+7 verbose parsed url   path: 'ocean-themes',
+7 verbose parsed url   href: 'ocean-themes' }
+8 silly lockFile 1fda9784-ocean-themes ocean-themes
+9 verbose lock ocean-themes /home/guerin_f/.npm/1fda9784-ocean-themes.lock
+10 silly lockFile 1fda9784-ocean-themes ocean-themes
+11 silly lockFile 1fda9784-ocean-themes ocean-themes
+12 verbose addNamed [ 'ocean-themes', '' ]
+13 verbose addNamed [ null, '*' ]
+14 silly lockFile 8b690c49-ocean-themes ocean-themes@
+15 verbose lock ocean-themes@ /home/guerin_f/.npm/8b690c49-ocean-themes.lock
+16 silly addNameRange { name: 'ocean-themes', range: '*', hasData: false }
+17 verbose request where is /ocean-themes
+18 verbose request registry https://registry.npmjs.org/
+19 verbose request id c9aafd860d4e64fd
+20 verbose url raw /ocean-themes
+21 verbose url resolving [ 'https://registry.npmjs.org/', './ocean-themes' ]
+22 verbose url resolved https://registry.npmjs.org/ocean-themes
+23 verbose request where is https://registry.npmjs.org/ocean-themes
+24 info trying registry request attempt 1 at 06:21:14
+25 verbose etag "9CTCC5QGTX8NZRXVC365G6HQ0"
+26 http GET https://registry.npmjs.org/ocean-themes
+27 http 304 https://registry.npmjs.org/ocean-themes
+28 silly registry.get cb [ 304,
+28 silly registry.get   { date: 'Sat, 21 Nov 2015 22:21:14 GMT',
+28 silly registry.get     via: '1.1 varnish',
+28 silly registry.get     'cache-control': 'max-age=60',
+28 silly registry.get     etag: '"9CTCC5QGTX8NZRXVC365G6HQ0"',
+28 silly registry.get     age: '12',
+28 silly registry.get     connection: 'keep-alive',
+28 silly registry.get     'x-served-by': 'cache-hkg6823-HKG',
+28 silly registry.get     'x-cache': 'HIT',
+28 silly registry.get     'x-cache-hits': '1',
+28 silly registry.get     'x-timer': 'S1448144474.556671,VS0,VE0',
+28 silly registry.get     vary: 'Accept' } ]
+29 verbose etag https://registry.npmjs.org/ocean-themes from cache
+30 silly addNameRange number 2 { name: 'ocean-themes', range: '*', hasData: true }
+31 silly addNameRange versions [ 'ocean-themes', [ '0.1.0', '0.1.2', '0.1.4' ] ]
+32 verbose addNamed [ 'ocean-themes', '0.1.4' ]
+33 verbose addNamed [ '0.1.4', '0.1.4' ]
+34 silly lockFile 8e40f965-ocean-themes-0-1-4 ocean-themes@0.1.4
+35 verbose lock ocean-themes@0.1.4 /home/guerin_f/.npm/8e40f965-ocean-themes-0-1-4.lock
+36 silly lockFile 8e40f965-ocean-themes-0-1-4 ocean-themes@0.1.4
+37 silly lockFile 8e40f965-ocean-themes-0-1-4 ocean-themes@0.1.4
+38 silly lockFile 8b690c49-ocean-themes ocean-themes@
+39 silly lockFile 8b690c49-ocean-themes ocean-themes@
+40 silly resolved [ { name: 'ocean-themes',
+40 silly resolved     version: '0.1.4',
+40 silly resolved     description: 'Organize Express views into themes',
+40 silly resolved     main: 'app.js',
+40 silly resolved     bin: { ocean: 'bin/index.js' },
+40 silly resolved     scripts: { test: 'mocha' },
+40 silly resolved     repository: '',
+40 silly resolved     keywords: [ 'express' ],
+40 silly resolved     author: { name: 'JP' },
+40 silly resolved     license: 'MIT',
+40 silly resolved     dependencies:
+40 silly resolved      { express: '~3.5.1',
+40 silly resolved        jade: '~1.3.0',
+40 silly resolved        ejs: '~1.0.0',
+40 silly resolved        underscore: '~1.6.0',
+40 silly resolved        npmlog: '0.0.6',
+40 silly resolved        'fs-extra': '~0.8.1',
+40 silly resolved        'ocean-logger': '~0.1.5',
+40 silly resolved        'utils-merge': '~1.0.0' },
+40 silly resolved     devDependencies: { mocha: '~1.18.2', chai: '~1.9.1' },
+40 silly resolved     engine: { node: '*' },
+40 silly resolved     _id: 'ocean-themes@0.1.4',
+40 silly resolved     dist:
+40 silly resolved      { shasum: '6fa363ca8c6bddb64a90bcb1f32d44f987ad298d',
+40 silly resolved        tarball: 'http://registry.npmjs.org/ocean-themes/-/ocean-themes-0.1.4.tgz' },
+40 silly resolved     _from: 'ocean-themes@',
+40 silly resolved     _npmVersion: '1.4.3',
+40 silly resolved     _npmUser: { name: 'sniezekjp', email: 'sniezekjp@aol.com' },
+40 silly resolved     maintainers: [ [Object] ],
+40 silly resolved     directories: {},
+40 silly resolved     _shasum: '6fa363ca8c6bddb64a90bcb1f32d44f987ad298d',
+40 silly resolved     _resolved: 'https://registry.npmjs.org/ocean-themes/-/ocean-themes-0.1.4.tgz',
+40 silly resolved     readme: 'ERROR: No README data found!' } ]
+41 info install ocean-themes@0.1.4 into /usr/lib
+42 info installOne ocean-themes@0.1.4
+43 verbose lib/node_modules/ocean-themes unbuild
+44 verbose tar unpack /home/guerin_f/.npm/ocean-themes/0.1.4/package.tgz
+45 silly lockFile b47781b4-sr-lib-node-modules-ocean-themes tar:///usr/lib/node_modules/ocean-themes
+46 verbose lock tar:///usr/lib/node_modules/ocean-themes /home/guerin_f/.npm/b47781b4-sr-lib-node-modules-ocean-themes.lock
+47 silly lockFile b6bdf8c0-m-ocean-themes-0-1-4-package-tgz tar:///home/guerin_f/.npm/ocean-themes/0.1.4/package.tgz
+48 verbose lock tar:///home/guerin_f/.npm/ocean-themes/0.1.4/package.tgz /home/guerin_f/.npm/b6bdf8c0-m-ocean-themes-0-1-4-package-tgz.lock
+49 silly gunzTarPerm modes [ '755', '644' ]
+50 error Error: EACCES, mkdir '/usr/lib/node_modules/ocean-themes'
+50 error  { [Error: EACCES, mkdir '/usr/lib/node_modules/ocean-themes']
+50 error   errno: 3,
+50 error   code: 'EACCES',
+50 error   path: '/usr/lib/node_modules/ocean-themes',
+50 error   fstream_type: 'Directory',
+50 error   fstream_path: '/usr/lib/node_modules/ocean-themes',
+50 error   fstream_class: 'DirWriter',
+50 error   fstream_stack:
+50 error    [ '/usr/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
+50 error      '/usr/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53',
+50 error      'Object.oncomplete (fs.js:107:15)' ] }
+51 error Please try running this command again as root/Administrator.
+52 error System Linux 3.13.0-24-generic
+53 error command "/usr/bin/node" "/usr/bin/npm" "install" "ocean-themes" "-g"
+54 error cwd /home/guerin_f/Project/Epitech/Github/Frontend-GUI
+55 error node -v v0.10.33
+56 error npm -v 1.4.28
+57 error path /usr/lib/node_modules/ocean-themes
+58 error fstream_path /usr/lib/node_modules/ocean-themes
+59 error fstream_type Directory
+60 error fstream_class DirWriter
+61 error code EACCES
+62 error errno 3
+63 error stack Error: EACCES, mkdir '/usr/lib/node_modules/ocean-themes'
+64 error fstream_stack /usr/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
+64 error fstream_stack /usr/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53
+64 error fstream_stack Object.oncomplete (fs.js:107:15)
+65 verbose exit [ 3, true ]

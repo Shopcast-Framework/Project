@@ -1,21 +1,28 @@
+var express = require( 'express' );
+var router = express.Router();
+var Promise = require( 'promise' );
 
-var Menu = require( '../libraries/menu' );
-var Translate = require( '../libraries/translate' );
+// Sequalize variable
+var models  = require( '../sequelize/models' );
+var MenuModel = models.menu;
 
+router.get('/', function( req, res ) { // Login request for the userList of files
 
-/**
- * Menu module, provide all features to manage all menus.
- * @constructor
- */
+	var promises = [];
+	var menu = null;
 
-exports.list = function( req, res ){
-
-	menu = new Menu();
-	translate = new Translate( "fr" );
-	res.render('users/list', { 
-		title: 'Eip',
-		page : translate.word( "User(s)" ),
-		menu: menu.getMenu( "main" )
+	var promiseMenu = MenuModel.findAll( { where: { isActive: true } } ).then( function( data ) {
+		var menu = JSON.parse( JSON.stringify( data ) );
+		return menu;
 	});
 
-};
+	promises.push( promiseMenu );
+
+	Promise.all( promises ).then( function( values ){
+		res.render( 'users', { title: 'Shopcast - Users', titleContent: 'Users (20)', active: '/users', menu: values[ 0 ] } );
+	}) ;
+
+});
+
+
+module.exports = router;
