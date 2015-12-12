@@ -1,0 +1,266 @@
+/**************************************************************
+***************************************************************
+************************** General ****************************
+***************************************************************
+***************************************************************/
+
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700,900);
+
+html, body, ul, #main{
+	width: 100%;
+	height: 100%;
+	margin:0;
+	padding:0;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 300;
+}
+
+body{
+	background-color: #FFF;
+	color: #333333;
+	font-size: 22px;
+	font-weight: lighter;
+}
+
+h1, h2, h3, h4, h5{
+	margin:0;
+	font-weight: normal;
+}
+
+a:focus{
+	outline:0; 
+}
+
+button:focus{
+	outline:0; 
+}
+
+ul{
+	list-style: none;
+}
+
+#main #wrapper{
+	position: absolute;
+	left: 15%;
+	width: 85%;
+}
+
+/**************************************************************
+***************************************************************
+*************************** Toolbar ***************************
+***************************************************************
+***************************************************************/
+
+#main .toolbar .title{
+	margin-bottom: 60px;
+	padding-left: 20px;
+	padding-top: 30px;
+}
+
+#main .toolbar .title > h1{
+	font-size: 30px;
+	font-weight: 500;
+	width: 100%;
+}
+
+#main .toolbar .title > .updated{
+	color: #6F7A8B;
+	font-size: 15px;
+	padding-left: 10px;
+	margin-top: -10px;
+	font-style: italic;
+}
+
+#main .toolbar .title > .updated:before{
+	content:"•";
+	padding-right: 5px;
+}
+
+
+/**************************************************************
+***************************************************************
+***************************** Menu ****************************
+***************************************************************
+***************************************************************/
+
+#main #main-menu{
+	background-color: #232838;
+	color: #FFF;
+	position: fixed;
+	width: 15%;
+	left: 0;
+	top: 0;
+	height: 100%;
+}
+
+#main #main-menu .user{
+	width: 100%;
+	margin-top: 20px;
+}
+
+#main #main-menu .user-img{
+	width: 75px;
+	margin: auto;
+	cursor: pointer;
+}
+
+#main #main-menu .user-img > img{
+	width: 100%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	border: 4px solid #232838;
+
+	transition: border 300ms;
+	-webkit-transition: border 300ms;
+}
+
+#main #main-menu .user-img > img:hover{
+	border: 4px solid #3DC054;
+}
+
+#main #main-menu .user-name{
+	width: 100%;
+	text-align: center;
+	margin-top: 10px;
+}
+
+#main #main-menu .user-name > .badge{
+	display:inline-table;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #3DC054;
+	color: #FFF;
+	font-size: 18px;
+	font-weight: 500;
+	text-align: center;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+	cursor:pointer;
+}
+
+#main #main-menu .user-name > .name{
+	font-size: 18px;
+	font-weight: 600;
+	padding-right: 15px;
+}
+
+#main #main-menu .list{
+	margin-top: 40px;
+}
+
+#main #main-menu .list > .item{
+
+	transition: background-color 300ms;
+	-webkit-transition: background-color 300ms;
+}
+
+#main #main-menu .list .item > a{
+	color: #FFF;
+	text-decoration: none;
+	font-size: 18px;
+	padding: 15px 0;
+	font-weight: 400;
+	padding-left: 10px;
+	display:block;
+}
+
+#main #main-menu .list .item a > img{
+	width: 30px;
+	margin-right: 15px;;
+	display: inline-table;
+	vertical-align: middle;
+}
+
+#main #main-menu .list > .item:hover{
+	/*background-color: #1E9FB4;*/
+	background-color: #3DC054;
+}
+
+/**************************************************************
+***************************************************************
+***************************** Box *****************************
+***************************************************************
+***************************************************************/
+
+#box{
+	position: fixed;
+	width: 70%;
+	height: 60%;
+	background-color: #FFF;
+	z-index:9999;
+	top: -100%;
+	left:15%;
+	margin-left: 125px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+}
+
+#box .close{
+	position: absolute;
+	width: 75px;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
+}
+
+#box .close > img{
+	width: 100%;
+}
+
+#shadow{
+	background-image: url(../images/system/shadow.png);
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 9998;
+	top: 0;
+	left:0;
+	display:none;
+}
+
+
+/**************************************************************
+***************************************************************
+*************************** Upload ****************************
+***************************************************************
+***************************************************************/
+
+#main #wrapper .list-files{
+	height: 100%;
+	width: 100%;
+}
+
+#main #wrapper .list-files > li{
+	background-color: #CCC;
+	padding: 10px 0;
+	z-index: 12;
+	width: 100%;
+	height: 50px;
+	cursor: move;
+}
+
+#main #wrapper .list-files li > input{
+	font-size: 20px;
+	z-index: 10;
+}
+
+/**************************************************************
+***************************************************************
+************************** Dashboard **************************
+***************************************************************
+***************************************************************/
+
+.dashboard{
+	width: 100%;
+	text-align: center;
+}
+
+.graphique{
+	width: 500px;
+	height: 500px;
+	margin:auto ;
+	display: inline-table;
+	vertical-align: middle;
+	margin: 0 40px;
+}
