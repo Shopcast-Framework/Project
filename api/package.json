@@ -1,0 +1,30 @@
+{
+  "name": "Api",
+  "version": "1.0.0",
+  "description": "Api of the project Shopcast",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Shopcast-Framework/FullProject"
+  },
+  "keywords": [
+    "cool",
+    "eip",
+    "carli",
+    "bocal",
+    "labeip"
+  ],
+  "author": "Shopcast",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shopcast-Framework/FullProject/issues"
+  },
+  "homepage": "https://github.com/Shopcast-Framework/FullProject",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
