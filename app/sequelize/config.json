@@ -1,0 +1,29 @@
+{
+  "development": {
+    "username": "shopcast",
+    "password": "s7fCQvxr9&mKey=.",
+    "database": "shopcast",
+    "host": "localhost",
+    "port": 3306,
+    "dialect": "mysql",
+    "logging": false
+  },
+  "test": {
+    "username": "shopcast",
+    "password": "s7fCQvxr9&mKey=.",
+    "database": "shopcast",
+    "host": "localhost",
+    "port": 3306,
+    "dialect": "mysql",
+    "logging": false
+  },
+  "production": {
+    "username": "shopcast",
+    "password": "s7fCQvxr9&mKey=.",
+    "database": "shopcast",
+    "host": "localhost",
+    "port": 3306,
+    "dialect": "mysql",
+    "logging": false
+  }
+}
