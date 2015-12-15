@@ -2,19 +2,27 @@
 
 var Routes = [
     {
-        name: 'playlist'
-    },
-    {
-        name: 'user'
-    },
-    {
-        name: 'session'
+        name: 'file'
     },
     {
         name: 'music',
         actions: {
             'search' : { verb: 'get', route: '/search/:id' }
         }
+    },
+    {
+        name: 'playlist',
+        sub: [
+            {
+                name: 'file'
+            }
+        ]
+    },
+    {
+        name: 'session'
+    },
+    {
+        name: 'user'
     }
 ];
 
