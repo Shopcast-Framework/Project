@@ -49,6 +49,7 @@ function RouteLoader(app) {
         var root = prefix + controllerName;
         self.route('get', root, controller.get);
         self.route('post', root, controller.post);
+        self.route('get', root + '/:id', controller.getOne);
     };
 
     self.init(app);
