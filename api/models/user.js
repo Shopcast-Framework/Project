@@ -3,12 +3,15 @@
 var Sequelize   = require('sequelize');
 
 var User = function(sequelize) {
-    var Model = sequelize.define('User', {
+    var model = sequelize
+    .define('User', {
         username: Sequelize.STRING,
         password: Sequelize.STRING
-    });
+    }, {underscored: true});
 
-    return Model;
+    return {
+        definition : model
+    };
 };
 
 module.exports = User;

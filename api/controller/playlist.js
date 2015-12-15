@@ -1,11 +1,28 @@
 'use strict';
 
+var orm         = require('../orm'),
+    Playlist    = orm.db.Playlist;
+
 var PlayListGet = function(req, res) {
-    res.send('Playlist: GET');
+    Playlist
+    .all()
+    .then(function(playlists) {
+        res.status(200).send({
+            message     : 'List of playlists',
+            playlists   : playlists
+        });
+    });
 };
 
 var PlayListPost = function(req, res) {
-    res.send('Playlist: POST');
+    Playlist
+    .create(req.body)
+    .then(function(playlist) {
+        res.status(200).send({
+            message     : 'Playlist successfully created',
+            playlist    : playlist
+        });
+    });
 };
 
 var PlayListController = {

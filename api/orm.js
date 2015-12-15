@@ -8,15 +8,24 @@ var Orm = function() {
     var self = this;
 
     self.init = function() {
+        var relationships = [],
+            model;
+
         self.sequelize = new Sequelize('shopcast', 'root', 'password');
         self.db = {};
 
         fs
         .readdirSync(path.join(__dirname, './models'))
         .forEach(function(fileName) {
-            var model = self.sequelize.import(path.join(__dirname, './models', fileName));
-            self.db[model.name] = model;
+            model = self.sequelize.import(path.join(__dirname, './models', fileName));
+            self.db[model.definition.name] = model.definition;
+            if (model.relationships)
+                relationships.push(model.relationships);
         });
+
+        for (var i in relationships) {
+            relationships[i]();
+        }
 
         self.sequelize.sync();
     };
