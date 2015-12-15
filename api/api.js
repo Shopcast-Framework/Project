@@ -1,7 +1,7 @@
 'use strict';
 
 var express     = require('express'),
-    config      = require('./config/routes');
+    routes      = require('./config/routes');
 
 function RouteLoader(app) {
     var self = this;
@@ -10,19 +10,34 @@ function RouteLoader(app) {
 
         self.api = express.Router();
 
-        for (var i = 0; i < config.length; i++)
-        {
-            var controller = config[i];
-            var controllerInstance = require('./controller/' + controller.name);
+        self.addRoutes('/', '/', routes);
 
-            self.resource(controller.name, controllerInstance);
-            for (var actionName in controller.actions)
-            {
-                var action = controller.actions[actionName];
-                self.route(action.verb, '/' + controller.name + action.route, controllerInstance[actionName]);
-            }
-        }
         app.use('/api', self.api);
+    };
+
+    self.addRoutes = function(prefix, resourcePrefix, routes) {
+        for (var i = 0; i < routes.length; i++) {
+            var controller = routes[i];
+            var controllerInst = require('./controller' + prefix + controller.name);
+
+            self.resource(resourcePrefix, controller.name, controllerInst);
+            self.addActions(controllerInst, prefix + controller.name, controller.actions);
+
+            if (controller.sub) {
+                var subResourcePrefix = prefix + controller.name + '/:' + controller.name + '_id/';
+                self.addRoutes(prefix + controller.name + '/', subResourcePrefix, controller.sub);
+            }
+
+        }
+    };
+
+    self.addActions = function(controllerInst, prefix, actions) {
+        for (var actionName in actions)
+        {
+            var action = actions[actionName];
+            self.route(action.verb, prefix + action.route, controllerInst[actionName]);
+        }
+
     };
 
     self.route = function(verb, route, action) {
@@ -30,8 +45,8 @@ function RouteLoader(app) {
         self.api[verb](route, action);
     };
 
-    self.resource = function(controllerName, controller) {
-        var root = '/' + controllerName;
+    self.resource = function(prefix, controllerName, controller) {
+        var root = prefix + controllerName;
         self.route('get', root, controller.get);
         self.route('post', root, controller.post);
     };
