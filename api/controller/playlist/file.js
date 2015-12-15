@@ -38,12 +38,29 @@ var FilePost = function(req, res) {
             });
         }
     });
+};
 
+var FileGetOne = function(req, res) {
+    File.findById(req.params.id)
+    .then(function(file) {
+        if (file) {
+            res.status(200).send({
+                message : 'File selected with id:' + req.params.id,
+                file    : file
+            });
+        }
+        else {
+            res.status(400).send({
+                message : 'File selected with id:' + req.params.id + ' was not found',
+            });
+        }
+    });
 };
 
 var FileController = {
-    get: FileGet,
-    post: FilePost
+    get     : FileGet,
+    post    : FilePost,
+    getOne  : FileGetOne
 };
 
 module.exports = FileController;

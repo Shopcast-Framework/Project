@@ -25,9 +25,14 @@ var FilePost = function(req, res) {
     });
 };
 
+var FileGetOne = function(req, res) {
+    res.send('File/:id: GET');
+};
+
 var FileController = {
-    get: FileGet,
-    post: FilePost
+    get     : FileGet,
+    post    : FilePost,
+    getOne  : FileGetOne
 };
 
 module.exports = FileController;

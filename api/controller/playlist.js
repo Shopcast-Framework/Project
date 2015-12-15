@@ -25,9 +25,27 @@ var PlayListPost = function(req, res) {
     });
 };
 
+var PlaylistGetOne = function(req, res) {
+    Playlist.findById(req.params.id)
+    .then(function(playlist) {
+        if (playlist) {
+            res.status(200).send({
+                message     : 'Playlist selected with id:' + req.params.id,
+                playlist    : playlist
+            });
+        }
+        else {
+            res.status(400).send({
+                message : 'Playlist selected with id:' + req.params.id + ' was not found',
+            });
+        }
+    });
+};
+
 var PlayListController = {
-    get : PlayListGet,
-    post: PlayListPost
+    get     : PlayListGet,
+    post    : PlayListPost,
+    getOne  : PlaylistGetOne
 };
 
 module.exports = PlayListController;

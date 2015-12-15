@@ -25,9 +25,27 @@ var UserPost = function(req, res) {
     });
 };
 
+var UserGetOne = function(req, res) {
+    User.findById(req.params.id)
+    .then(function(user) {
+        if (user) {
+            res.status(200).send({
+                message : 'User selected with id:' + req.params.id,
+                user    : user
+            });
+        }
+        else {
+            res.status(400).send({
+                message : 'User selected with id:' + req.params.id + ' was not found',
+            });
+        }
+    });
+};
+
 var UserController = {
-    get : UserGet,
-    post: UserPost
+    get     : UserGet,
+    post    : UserPost,
+    getOne  : UserGetOne
 };
 
 module.exports = UserController;

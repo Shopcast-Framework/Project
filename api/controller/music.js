@@ -12,10 +12,15 @@ var MusicSearch = function(req, res) {
     res.send('Music: SEARCH -> ' + req.params.id);
 };
 
+var MusicGetOne = function(req, res) {
+    res.send('Music/:id: GET');
+};
+
 var MusicController = {
-    get: MusicGet,
-    post: MusicPost,
-    search : MusicSearch
+    get     : MusicGet,
+    post    : MusicPost,
+    getOne  : MusicGetOne,
+    search  : MusicSearch
 };
 
 module.exports = MusicController;
