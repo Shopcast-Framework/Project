@@ -1,7 +1,8 @@
 'use strict';
 
 var orm         = require('../orm'),
-    Playlist    = orm.db.Playlist;
+    Playlist    = orm.db.Playlist,
+    File        = orm.db.File;
 
 var PlayListGet = function(req, res) {
     Playlist
@@ -26,7 +27,13 @@ var PlayListPost = function(req, res) {
 };
 
 var PlaylistGetOne = function(req, res) {
-    Playlist.findById(req.params.id)
+    Playlist.find({
+        where: {id:req.params.id},
+        include: [{
+            model: File,
+            as: 'files'
+        }]
+    })
     .then(function(playlist) {
         if (playlist) {
             res.status(200).send({
