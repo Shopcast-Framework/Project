@@ -11,7 +11,7 @@ var Orm = function() {
         var relationships = [],
             model;
 
-        self.sequelize = new Sequelize('shopcast', 'root', 'password' );
+        self.sequelize = new Sequelize('shopcast', 'shopcast', 's7fCQvxr9&mKey=.' );
         self.db = {};
 
         fs
