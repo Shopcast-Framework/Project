@@ -8,12 +8,15 @@ var User = function(sequelize) {
     .define('User', {
         username: Sequelize.STRING,
         password: Sequelize.STRING,
-        token: Sequelize.VIRTUAL
+        token: Sequelize.VIRTUAL,
+        role: Sequelize.INTEGER,
+        type: Sequelize.INTEGER,
+        last_connection: Sequelize.DATE
     }, {
         underscored: true,
         instanceMethods: {
             authenticate: function() {
-                this.token = jwt.sign(this.username, 'shhhhh');
+                this.token = jwt.sign(this.username, '/*986_@$*#[sdaw<!+');
             }
         }
     });
