@@ -30,9 +30,12 @@ var Authentificator = function(app) {
         User.find({
             where: {id: id},
             attributes: ['id', 'username', 'password']
-        }).then(function(err, user) {
-            console.log(err);
-            done(err, user);
+        }).then(function(user) {
+            console.log(user);
+            if (user)
+                done(user);
+            else
+                done(null, 'Error: Undefined user');
         });
     };
 

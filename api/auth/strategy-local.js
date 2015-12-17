@@ -38,6 +38,7 @@ var StrategyLocal = function(app, passport) {
                 if (err) {
                     return res.status(400).send(err);
                 }
+                user.authenticate();
                 return res.status(200).send(user);
             });
         })(req, res);
