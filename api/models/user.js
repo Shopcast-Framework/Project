@@ -14,6 +14,17 @@ var User = function(sequelize) {
         instanceMethods: {
             authenticate: function() {
                 this.token = jwt.sign(this.username, 'shhhhh');
+            },
+            verify: function(token, done) {
+                jwt.verify(token, 'shhhhh', function(err, decoded) {
+                    if (err) {
+                        return done(err);
+                    }
+                    if (decoded !== this.username) {
+                        return done('Error: Invalid token');
+                    }
+                    return done(null);
+                });
             }
         }
     });

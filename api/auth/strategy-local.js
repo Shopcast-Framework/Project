@@ -9,6 +9,7 @@ var StrategyLocal = function(app, passport) {
 
     self.init = function(app, passport) {
         var authenticate = function(username, password, done) {
+            console.log('AUTHENTICATE');
             User.find({
                 where: {username: username},
                 attributes: ['id', 'username', 'password']

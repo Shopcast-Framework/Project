@@ -10,12 +10,12 @@ function RouteLoader(app) {
 
         self.api = express.Router();
 
-        self.addRoutes('/', '/', routes);
+        self.createRoutes('/', '/', routes);
 
         app.use('/api', self.api);
     };
 
-    self.addRoutes = function(prefix, resourcePrefix, routes) {
+    self.createRoutes = function(prefix, resourcePrefix, routes) {
         for (var i = 0; i < routes.length; i++) {
             var controller = routes[i];
             var controllerInst = require('./controller' + prefix + controller.name);
@@ -25,7 +25,7 @@ function RouteLoader(app) {
 
             if (controller.sub) {
                 var subResourcePrefix = prefix + controller.name + '/:' + controller.name + '_id/';
-                self.addRoutes(prefix + controller.name + '/', subResourcePrefix, controller.sub);
+                self.createRoutes(prefix + controller.name + '/', subResourcePrefix, controller.sub);
             }
 
         }
@@ -44,6 +44,8 @@ function RouteLoader(app) {
         console.log('[' + verb + '] :', route);
         self.api[verb](route, action);
     };
+
+    TODO Mettre un truc pour caller user.verify()
 
     self.resource = function(prefix, controllerName, controller) {
         var root = prefix + controllerName;

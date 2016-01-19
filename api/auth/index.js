@@ -31,11 +31,11 @@ var Authentificator = function(app) {
             where: {id: id},
             attributes: ['id', 'username', 'password']
         }).then(function(user) {
-            console.log(user);
-            if (user)
-                done(user);
+            if (user) {
+                done(null, user);
+            }
             else
-                done(null, 'Error: Undefined user');
+                done('Error: Undefined user');
         });
     };
 
