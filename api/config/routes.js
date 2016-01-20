@@ -23,7 +23,10 @@ var Routes = [
         middlewares: ['auth']
     },
     {
-        name: 'session'
+        name: 'session',
+        actions: {
+            'option' : { verb: 'options', route: '/' },
+        },
     },
     {
         name: 'user',
