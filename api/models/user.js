@@ -16,12 +16,13 @@ var User = function(sequelize) {
                 this.token = jwt.sign(this.username, 'shhhhh');
             },
             verify: function(token, done) {
+                var self = this;
                 jwt.verify(token, 'shhhhh', function(err, decoded) {
                     if (err) {
                         return done(err);
                     }
-                    if (decoded !== this.username) {
-                        return done('Error: Invalid token');
+                    if (decoded !== self.username) {
+                        return done({message: 'Error: Invalid token'});
                     }
                     return done(null);
                 });

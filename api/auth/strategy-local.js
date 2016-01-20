@@ -33,14 +33,14 @@ var StrategyLocal = function(app, passport) {
                 return res.status(400).send(err);
             }
             if (!user) {
-                return res.status(400).send('Invalid user null');
+                return res.status(400).send({message:'Invalid user null'});
             }
             req.logIn(user, function(err) {
                 if (err) {
                     return res.status(400).send(err);
                 }
                 user.authenticate();
-                return res.status(200).send(user);
+                return res.status(200).send({message: 'User correctly authenticate', user: user});
             });
         })(req, res);
     };

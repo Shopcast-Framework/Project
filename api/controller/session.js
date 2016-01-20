@@ -5,6 +5,7 @@ var auth    = require('../auth');
 var SessionGet = function(req, res) {
     req = res;
     console.log('SESSION GET');
+    return res.status(200).send('Session ok');
 };
 
 var SessionPost = function(req, res) {
@@ -25,6 +26,7 @@ var SessionPost = function(req, res) {
 var SessionGetOne = function(req, res) {
     req = res;
     console.log('SESSION GET ONE');
+    return res.status(200).send('Session ok');
 };
 
 var SessionController = {
