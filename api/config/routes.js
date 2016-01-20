@@ -8,7 +8,7 @@ var Routes = [
     {
         name: 'music',
         actions: {
-            'search' : { verb: 'get', route: '/search/:id' }
+            'search' : { verb: 'get', route: '/search/:id' },
         },
         middlewares: ['auth']
     },
@@ -27,7 +27,7 @@ var Routes = [
     },
     {
         name: 'user',
-        middlewares: ['auth']
+        middlewares: [{name: 'auth', only: ['get', 'getOne']}]
     }
 ];
 

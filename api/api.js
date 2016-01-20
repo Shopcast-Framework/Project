@@ -19,10 +19,9 @@ function RouteLoader(app) {
         for (var i = 0; i < routes.length; i++) {
             var route = routes[i];
             var controllerInst = require('./controller' + prefix + route.name);
-            var middlewares = Middlewares.load(route.middlewares);
 
-            self.resource(resourcePrefix, route.name, controllerInst, middlewares);
-            self.addActions(controllerInst, prefix + route.name, route.actions, middlewares);
+            self.resource(resourcePrefix, route.name, controllerInst, route.middlewares);
+            self.addActions(controllerInst, prefix + route.name, route.actions, route.middlewares);
 
             if (route.sub) {
                 var subResourcePrefix = prefix + route.name + '/:' + route.name + '_id/';
@@ -31,26 +30,24 @@ function RouteLoader(app) {
         }
     };
 
-    self.addActions = function(controllerInst, prefix, actions, middlewares) {
+    self.addActions = function(controller, prefix, actions, middlewares) {
         for (var actionName in actions)
         {
             var action = actions[actionName];
-            self.route(action.verb, prefix + action.route, controllerInst[actionName], middlewares);
+            self.route(action.verb, prefix + action.route, controller, actionName, middlewares);
         }
     };
 
-    self.route = function(verb, route, action, middlewares) {
+    self.route = function(verb, route, controller, action, middlewares) {
         console.log('[' + verb + '] :', route);
-        // middlewares.push(action);
-        // console.log(middlewares);
-        self.api[verb](route, middlewares, action);
+        self.api[verb](route, Middlewares.load(action, middlewares), controller[action]);
     };
 
     self.resource = function(prefix, controllerName, controller, middlewares) {
         var root = prefix + controllerName;
-        self.route('get', root, controller.get, middlewares);
-        self.route('post', root, controller.post, middlewares);
-        self.route('get', root + '/:id', controller.getOne, middlewares);
+        self.route('get', root, controller, 'get', middlewares);
+        self.route('post', root, controller, 'post', middlewares);
+        self.route('get', root + '/:id', controller, 'getOne', middlewares);
     };
 
     self.init(app);

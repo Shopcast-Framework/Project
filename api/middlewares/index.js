@@ -15,19 +15,29 @@ var MiddlewaresLoader = function() {
         .forEach(function(fileName) {
             if (fileName !== 'index.js') {
                 middleware = require(path.join(__dirname, fileName));
-                console.log(middleware);
                 self.middlewares[middleware.name] = middleware.object;
             }
         });
     };
 
-    self.load = function(names) {
+    self.load = function(action, descriptors) {
         var middlewares = [];
-        console.log('\tNAMES:');
-        for (var i in names) {
-            var name = names[i];
-            if (self.middlewares[name])
-                middlewares.push(self.middlewares[name].run);
+        var name;
+        for (var i in descriptors) {
+            var descriptor = descriptors[i];
+
+            if (typeof(descriptor) === 'object') {
+                name = descriptor.name;
+                if (descriptor.only.indexOf(action) !== -1 && self.middlewares[name]) {
+                    middlewares.push(self.middlewares[name].run);
+                }
+            }
+
+            if (typeof(descriptor) === 'string') {
+                name = descriptor;
+                if (self.middlewares[name])
+                    middlewares.push(self.middlewares[name].run);
+            }
         }
         return middlewares;
     };
