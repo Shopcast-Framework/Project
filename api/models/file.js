@@ -10,7 +10,7 @@ var File = function(sequelize) {
         name        : Sequelize.STRING,
         description : Sequelize.STRING,
         type        : Sequelize.STRING,
-        size        : Sequelize.STRING
+        size        : Sequelize.FLOAT
     }, {underscored: true});
 
     var relationships = function() {
