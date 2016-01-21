@@ -20,6 +20,24 @@ var Authentificator = function(app) {
         self.loadStrategy(app);
     };
 
+    self.login = function(req, res) {
+        return function(err, user) {
+            if (err) {
+                return res.status(400).send(err);
+            }
+            if (!user) {
+                return res.status(400).send({message:'Invalid user null'});
+            }
+            req.logIn(user, function(err) {
+                if (err) {
+                    return res.status(400).send(err);
+                }
+                user.authenticate();
+                return res.status(200).send({message: 'User correctly authenticate', user: user});
+            });
+        };
+    };
+
     self.serializeUser = function(user, done) {
         console.log('SERIALIZE USER');
         done(null, user.id);
@@ -41,8 +59,8 @@ var Authentificator = function(app) {
 
     self.loadStrategy = function(app) {
         self.strategy = {
-            'local' : require('./strategy-local').load(app, passport),
-            'facebook' : require('./strategy-facebook').load(app, passport)
+            'local' : require('./strategy-local').load(app, passport, self.login),
+            'facebook' : require('./strategy-facebook').load(app, passport, self.login)
         };
     };
 

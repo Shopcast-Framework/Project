@@ -4,7 +4,7 @@ var LocalStrategy   = require('passport-local').Strategy,
             orm     = require('../orm'),
             User    = orm.db.User;
 
-var StrategyLocal = function(app, passport) {
+var StrategyLocal = function(app, passport, loginCallback) {
     var self = this;
 
     self.init = function(app, passport) {
@@ -28,21 +28,7 @@ var StrategyLocal = function(app, passport) {
     };
 
     self.authenticate = function(req, res) {
-        passport.authenticate('local', function(err, user) {
-            if (err) {
-                return res.status(400).send(err);
-            }
-            if (!user) {
-                return res.status(400).send({message:'Invalid user null'});
-            }
-            req.logIn(user, function(err) {
-                if (err) {
-                    return res.status(400).send(err);
-                }
-                user.authenticate();
-                return res.status(200).send({message: 'User correctly authenticate', user: user});
-            });
-        })(req, res);
+        passport.authenticate('local', loginCallback(req, res))(req, res);
     };
 
     self.init(app, passport);

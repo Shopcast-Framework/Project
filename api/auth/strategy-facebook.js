@@ -1,13 +1,13 @@
 'use strict';
 
-var FacebookStrategy    = require('passport-facebook-token');
-    // orm                 = require('../orm'),
-    // User                = orm.db.User;
+var FacebookStrategy    = require('passport-facebook-token'),
+    orm                 = require('../orm'),
+    User                = orm.db.User;
 
 var CLIENT_APP_ID = '751447004955328';
 var CLIENT_APP_SECRET = 'ee7d5dc104910ccde27df46651a87e3c';
 
-var StrategyLocal = function(app, passport) {
+var StrategyFacebook = function(app, passport, loginCallback) {
     var self = this;
 
     self.init = function(app, passport) {
@@ -18,11 +18,20 @@ var StrategyLocal = function(app, passport) {
         };
 
         var authenticate = function(accessToken, refreshToken, profile, done) {
-            console.log('JAUTHENTICATE AVEC:');
-            console.log(accessToken);
-            console.log(refreshToken);
-            console.log(profile);
-            return done('toto');
+            User.find({where: {facebookId:profile.userID}})
+            .then(function(user) {
+                if (user) {
+                    return done(null, user);
+                }
+                User
+                .create({
+                    username: profile.displayName,
+                    facebookId: profile.id
+                })
+                .then(function(user) {
+                    return done(null, user);
+                });
+            });
         };
 
         passport.use(new FacebookStrategy(facebookConf, authenticate));
@@ -30,16 +39,11 @@ var StrategyLocal = function(app, passport) {
 
     self.authenticate = function(req, res) {
         console.log(req.body);
-        passport.authenticate('facebook-token', function(err, user) {
-            console.log('HERE I AM');
-            console.log(err);
-            console.log(user);
-            res.status(200).send('User logged');
-        })(req, res);
+        passport.authenticate('facebook-token', loginCallback(req, res))(req, res);
     };
 
     self.init(app, passport);
     return this;
 };
 
-exports.load = StrategyLocal;
+exports.load = StrategyFacebook;

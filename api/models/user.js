@@ -11,6 +11,7 @@ var User = function(sequelize) {
         token: Sequelize.VIRTUAL,
         role: Sequelize.INTEGER,
         type: Sequelize.INTEGER,
+        facebookId: Sequelize.STRING,
         last_connection: Sequelize.DATE
     }, {
         underscored: true,
