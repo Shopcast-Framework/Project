@@ -1,19 +1,20 @@
 'use strict';
 
 var MusicGet = function(req, res) {
-    res.send('Music: GET');
+    console.log('GET MUSIC');
+    res.status(200).send('Music: GET');
 };
 
 var MusicPost = function(req, res) {
-    res.send('Music: POST');
+    res.status(200).send('Music: POST');
 };
 
 var MusicSearch = function(req, res) {
-    res.send('Music: SEARCH -> ' + req.params.id);
+    res.status(200).send('Music: SEARCH -> ' + req.params.id);
 };
 
 var MusicGetOne = function(req, res) {
-    res.send('Music/:id: GET');
+    res.status(200).send('Music/:id: GET');
 };
 
 var MusicController = {

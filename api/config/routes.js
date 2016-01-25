@@ -2,27 +2,35 @@
 
 var Routes = [
     {
-        name: 'file'
+        name: 'file',
+        middlewares: ['auth']
     },
     {
         name: 'music',
         actions: {
-            'search' : { verb: 'get', route: '/search/:id' }
-        }
+            'search' : { verb: 'get', route: '/search/:id' },
+        },
+        middlewares: ['auth']
     },
     {
         name: 'playlist',
         sub: [
             {
-                name: 'file'
+                name: 'file',
+                middlewares: ['auth']
             }
-        ]
+        ],
+        middlewares: ['auth']
     },
     {
-        name: 'session'
+        name: 'session',
+        actions: {
+            'option' : { verb: 'options', route: '/' },
+        },
     },
     {
-        name: 'user'
+        name: 'user',
+        middlewares: [{name: 'auth', only: ['get', 'getOne']}]
     }
 ];
 

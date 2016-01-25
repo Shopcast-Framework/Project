@@ -1,55 +1,53 @@
 'use strict';
 
-var express     = require('express'),
-    routes      = require('./config/routes');
+var Express     = require('express'),
+    Routes      = require('./config/routes'),
+    Middlewares = require('./middlewares').load();
 
 function RouteLoader(app) {
     var self = this;
 
     self.init = function(app) {
+        self.api = Express.Router();
 
-        self.api = express.Router();
-
-        self.addRoutes('/', '/', routes);
+        self.createRoutes('/', '/', Routes);
 
         app.use('/api', self.api);
     };
 
-    self.addRoutes = function(prefix, resourcePrefix, routes) {
+    self.createRoutes = function(prefix, resourcePrefix, routes) {
         for (var i = 0; i < routes.length; i++) {
-            var controller = routes[i];
-            var controllerInst = require('./controller' + prefix + controller.name);
+            var route = routes[i];
+            var controllerInst = require('./controller' + prefix + route.name);
 
-            self.resource(resourcePrefix, controller.name, controllerInst);
-            self.addActions(controllerInst, prefix + controller.name, controller.actions);
+            self.resource(resourcePrefix, route.name, controllerInst, route.middlewares);
+            self.addActions(controllerInst, prefix + route.name, route.actions, route.middlewares);
 
-            if (controller.sub) {
-                var subResourcePrefix = prefix + controller.name + '/:' + controller.name + '_id/';
-                self.addRoutes(prefix + controller.name + '/', subResourcePrefix, controller.sub);
+            if (route.sub) {
+                var subResourcePrefix = prefix + route.name + '/:' + route.name + '_id/';
+                self.createRoutes(prefix + route.name + '/', subResourcePrefix, route.sub);
             }
-
         }
     };
 
-    self.addActions = function(controllerInst, prefix, actions) {
+    self.addActions = function(controller, prefix, actions, middlewares) {
         for (var actionName in actions)
         {
             var action = actions[actionName];
-            self.route(action.verb, prefix + action.route, controllerInst[actionName]);
+            self.route(action.verb, prefix + action.route, controller, actionName, middlewares);
         }
-
     };
 
-    self.route = function(verb, route, action) {
+    self.route = function(verb, route, controller, action, middlewares) {
         console.log('[' + verb + '] :', route);
-        self.api[verb](route, action);
+        self.api[verb](route, Middlewares.load(action, middlewares), controller[action]);
     };
 
-    self.resource = function(prefix, controllerName, controller) {
+    self.resource = function(prefix, controllerName, controller, middlewares) {
         var root = prefix + controllerName;
-        self.route('get', root, controller.get);
-        self.route('post', root, controller.post);
-        self.route('get', root + '/:id', controller.getOne);
+        self.route('get', root, controller, 'get', middlewares);
+        self.route('post', root, controller, 'post', middlewares);
+        self.route('get', root + '/:id', controller, 'getOne', middlewares);
     };
 
     self.init(app);

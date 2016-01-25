@@ -1,12 +1,13 @@
 'use strict';
 
 var express     = require('express'),
-    app         = express();
+    app         = express(),
+    port        = 3000;
 
 require('./orm').load();
 require('./auth').load(app);
 require('./api').load(app);
 
-app.listen(3000);
+app.listen(port);
 
-console.log('Server running....');
+console.log('Server running on port ' + port + '....');
