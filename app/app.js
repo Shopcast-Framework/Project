@@ -1,11 +1,12 @@
-var express = require('express')
-    , routes  = require('./routes')
-    , http = require('http')
-    , config = require('./config')
-    , bodyParser = require('body-parser')
+'use strict';
 
-var app = module.exports = express();
-var server = http.createServer(app);
+var express = require('express'),
+    routes  = require('./routes'),
+    http = require('http'),
+    config = require('./config'),
+    bodyParser = require('body-parser'),
+    app = express(),
+    server = http.createServer(app);
 
 app.close = function() {
     server.close();
@@ -13,7 +14,7 @@ app.close = function() {
 
 app.listen = function() {
     server.listen(config.port, function(){
-        console.log("Express server listening on port " + server.address().port + " in " + app.settings.env + " mode");
+        console.log('Express server listening on port ' + server.address().port + ' in ' + app.settings.env + ' mode');
     });
 };
 
@@ -25,12 +26,10 @@ app.run = function(){
     app.use('/images', express.static(__dirname + '/public/images'));
     app.use('/font', express.static(__dirname + '/public/font'));
     app.use('/public', express.static(__dirname + '/public'));
-    app.use( bodyParser.json() );       // to support JSON-encoded bodies
-    app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-        extended: true
-    }));
+    app.use(bodyParser.urlencoded({extended: true}));
 
-    app.get('/', routes.index);
+    app.use('/', routes.homes);
+    app.use('/dashboards', routes.dashboards);
     app.use('/files', routes.files);
     app.use('/playlists', routes.playlists);
     app.use('/users', routes.users);
@@ -40,3 +39,5 @@ app.run = function(){
     app.listen();
     return server;
 };
+
+module.exports = app;
