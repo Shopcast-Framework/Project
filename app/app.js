@@ -28,7 +28,9 @@ app.run = function(){
     app.use('/public', express.static(__dirname + '/public'));
     app.use(bodyParser.urlencoded({extended: true}));
 
-    app.use('/', routes.homes);
+    app.use('/', routes.home);
+    app.use('/sign_in', routes.signin);
+    app.use('/session', routes.session);
     app.use('/dashboards', routes.dashboards);
     app.use('/files', routes.files);
     app.use('/playlists', routes.playlists);

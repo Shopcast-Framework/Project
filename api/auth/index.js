@@ -33,6 +33,7 @@ var Authentificator = function(app) {
                     return res.status(400).send(err);
                 }
                 user.authenticate();
+                console.log('return correclty');
                 return res.status(200).send({message: 'User correctly authenticate', user: user});
             });
         };
