@@ -15,9 +15,9 @@ var StrategyLocal = function(app, passport, loginCallback) {
                 attributes: ['id', 'username', 'password']
 	        }).then(function(user) {
                 if (!user) {
-                    done('Error: Could not find user: ' + username);
+                    done({message: 'Error: Could not find user: ' + username});
                 } else if (user.password !== password) {
-                    done('Invalid password');
+                    done({message: 'Invalid password'});
                 } else {
                     done(null, user);
                 }

@@ -1,10 +1,12 @@
 'use strict';
 
 var Express     = require('express'),
-    Routes      = require('./config/routes'),
-    Middlewares = require('./middlewares').load();
+    Routes      = require('./config/routes');
 
 function RouteLoader(app) {
+
+    var Middlewares = require('./middlewares').load();
+    Middlewares.useModules(app);
     var self = this;
 
     self.init = function(app) {
