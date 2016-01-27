@@ -6,6 +6,7 @@ var express = require('express'),
     config = require('./config'),
     bodyParser = require('body-parser'),
     app = express(),
+    session = require('express-session'),
     server = http.createServer(app);
 
 app.close = function() {
@@ -27,6 +28,7 @@ app.run = function(){
     app.use('/font', express.static(__dirname + '/public/font'));
     app.use('/public', express.static(__dirname + '/public'));
     app.use(bodyParser.urlencoded({extended: true}));
+    app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
     app.use('/', routes.home);
     app.use('/sign_in', routes.signin);

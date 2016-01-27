@@ -21,15 +21,19 @@ var Rest = function() {
 
         console.log('Je requete sur: ' + options.path);
         httpRequest = http.request(options, function(res) {
-            var response = null;
+            var response = '';
 
             res.setEncoding('utf8');
             res.on('data', function(res) {
-                response = res;
+                response += res;
             });
 
             res.on('end', function() {
-                defer.resolve(response);
+                if (res.statusCode !== 200) {
+                    defer.reject(response);
+                } else {
+                    defer.resolve(response);
+                }
             });
         });
 
