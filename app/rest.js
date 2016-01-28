@@ -12,7 +12,7 @@ var Rest = function() {
             options = {
                 hostname: 'localhost',
                 path: '/api/' + resource,
-                port: '3000',
+                port: '3001',
                 method: method,
                 headers: {
                     'content-type': 'application/json'

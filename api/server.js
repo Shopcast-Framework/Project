@@ -2,7 +2,7 @@
 
 var express     = require('express'),
     app         = express(),
-    port        = 3000;
+    port        = 3001;
 
 require('./orm').load();
 require('./auth').load(app);

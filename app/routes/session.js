@@ -19,6 +19,7 @@ Router.post('/', function( req, res ) {
         res.redirect('/dashboards?message=' + response.message);
     }, function(data) {
         console.log('ANSWER ERROR');
+        console.log(data);
         var response = JSON.parse(data);
 
         res.redirect('/sign_in?message=' + response.message);
