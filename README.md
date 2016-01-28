@@ -1,7 +1,15 @@
 # FullProject
 
+## Frontend
+
+Run:
+
+cd app
+gulp
+
 ## Middend
 
 Run:
 
-node api/server.js
+cd api
+gulp
