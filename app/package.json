@@ -23,6 +23,8 @@
     "jsonfile": "^2.2.1",
     "morgan": "~1.5.1",
     "mysql": "^2.9.0",
+    "passport": "^0.3.2",
+    "passport-google-oauth": "^0.2.0",
     "q": "^1.4.1",
     "request": "^2.64.0",
     "sequelize": "^3.9.0",

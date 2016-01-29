@@ -12,6 +12,7 @@ var User = function(sequelize) {
         role: Sequelize.INTEGER,
         type: Sequelize.INTEGER,
         facebookId: Sequelize.STRING,
+        googleId: Sequelize.STRING,
         last_connection: Sequelize.DATE
     }, {
         underscored: true,

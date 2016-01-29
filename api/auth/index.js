@@ -58,7 +58,8 @@ var Authentificator = function(app) {
     self.loadStrategy = function(app) {
         self.strategy = {
             'local' : require('./strategy-local').load(app, passport, self.login),
-            'facebook' : require('./strategy-facebook').load(app, passport, self.login)
+            'facebook' : require('./strategy-facebook').load(app, passport, self.login),
+            'google' : require('./strategy-google').load(app, passport, self.login)
         };
     };
 

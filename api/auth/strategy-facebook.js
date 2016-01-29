@@ -26,12 +26,12 @@ var StrategyFacebook = function(app, passport, loginCallback) {
                 User
                 .create({
                     username: profile.displayName,
-                    facebookId: profile.id
+                    facebookId: profile.userID
                 })
                 .then(function(user) {
                     return done(null, user);
-                });
-            });
+                }, done);
+            }, done);
         };
 
         passport.use(new FacebookStrategy(facebookConf, authenticate));
