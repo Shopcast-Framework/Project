@@ -15,7 +15,7 @@
     "debug": "~2.1.1",
     "express": "~4.11.0",
     "express-session": "^1.13.0",
-    "gulp": "^3.9.0",
+    "gulp": "^3.9.1",
     "gulp-if": "^1.2.5",
     "gulp-nodemon": "^2.0.4",
     "gulp-util": "^3.0.6",
