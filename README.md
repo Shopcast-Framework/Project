@@ -14,6 +14,5 @@ Lors de la première utilisation de l'interface, effectuer les actions suivante 
 ```
 > cd frontend
 > gulp
-
 ```
-L'interface est lancé sur le port 3001. Ouvrir l'url ** localhost:3001 **
+L'interface est lancé sur le port 3001. Pour accéder à l'interface -> **localhost:3001**
