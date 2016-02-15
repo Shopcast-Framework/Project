@@ -1,15 +1,19 @@
-# FullProject
+# Interface utilisateur
 
-## Frontend
+Cette interface permet aux utilisateurs de Shopcast de pouvoir gérer tous leurs contenu facilement et de manière intuitive.
 
-Run:
+#### Requis
 
-cd app
-gulp
+Lors de la première utilisation de l'interface, effectuer les actions suivante :  
+- Installer la base de données
+- Créer l'utilisateur login : **shopcast** & mdp : **toto**
+- Lancer la commande **npm install** à la racine
 
-## Middend
+#### Utilisation
 
-Run:
+```
+> cd frontend
+> gulp
 
-cd api
-gulp
+```
+L'interface est lancé sur le port 3001. Ouvrir l'url ** localhost:3001 **
