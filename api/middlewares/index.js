@@ -6,7 +6,6 @@ var path        = require('path'),
 var UseModules = function(app) {
     app.use(require('cookie-parser')());
     app.use(require('body-parser').json());
-    app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 };
 
 var MiddlewaresLoader = function() {
