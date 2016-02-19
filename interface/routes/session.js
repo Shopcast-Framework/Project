@@ -5,11 +5,10 @@ var Rest            = require('../rest');
 var passport        = require('passport');
 var GoogleStrategy  = require('passport-google-oauth').OAuth2Strategy;
 
-var onSuccess = function(req, res, data) {
+var onSuccess = function(req, res, datas) {
     console.log('ANSWER OK');
-    console.log(data);
     try {
-        var response = JSON.parse(data);
+        var response = JSON.parse(datas.body);
     } catch (e) {
         return res.redirect('/sign_in?message=Invalid data');
     }
@@ -19,14 +18,15 @@ var onSuccess = function(req, res, data) {
     }
 
     req.session.user = response.user;
+    res.set('set-cookie', datas.headers['set-cookie']);
     res.redirect('/dashboards?message=' + response.message);
 };
 
-var onError = function(req, res, data) {
+var onError = function(req, res, datas) {
     console.log('ANSWER ERROR');
-    console.log(data);
+    console.log(datas);
     try {
-        var response = JSON.parse(data);
+        var response = JSON.parse(datas.body);
     } catch (e) {
         return res.redirect('/sign_in?message=Invalid data');
     }
@@ -37,10 +37,10 @@ var onError = function(req, res, data) {
 Router.post('/', function( req, res ) {
 
     Rest.post('session', JSON.stringify(req.body))
-    .then(function(data) {
-        onSuccess(req, res, data);
-    }, function(data) {
-        onError(req, res, data);
+    .then(function(datas) {
+        onSuccess(req, res, datas);
+    }, function(datas) {
+        onError(req, res, datas);
     });
 });
 
@@ -66,10 +66,10 @@ Router.get('/auth/google/callback', function(req, res) {
             access_token: accessToken,
             refresh_token: refreshToken
         }))
-        .then(function(data) {
-            onSuccess(req, res, data);
-        }, function(data) {
-            onError(req, res, data);
+        .then(function(datas) {
+            onSuccess(req, res, datas);
+        }, function(datas) {
+            onError(req, res, datas);
         });
 
     })(req, res);
