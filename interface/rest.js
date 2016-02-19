@@ -6,6 +6,12 @@ var Rest = function() {
 
     var self = this;
 
+    self.middleware = function (req, res, next) {
+        self.user = req.session.user;
+        self.cookie = req.headers.cookie;
+        next();
+    };
+
     self.call = function(method, resource, body) {
         var defer = Q.defer(),
             httpRequest,
@@ -15,30 +21,38 @@ var Rest = function() {
                 port: '3001',
                 method: method,
                 headers: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    'cookie': self.cookie
                 }
             };
 
+        if (self.user) {
+            options.headers.Authorization = self.user.token;
+        }
+
         console.log('Je requete sur: ' + options.path);
         httpRequest = http.request(options, function(res) {
-            var response = '';
+            var datas = {
+                headers: res.headers,
+                body: ''
+            };
 
             res.setEncoding('utf8');
-            res.on('data', function(res) {
-                response += res;
+            res.on('data', function(data) {
+                datas.body += data;
             });
 
             res.on('end', function() {
                 if (res.statusCode !== 200) {
-                    defer.reject(response);
+                    defer.reject(datas);
                 } else {
-                    defer.resolve(response);
+                    defer.resolve(datas);
                 }
             });
         });
 
         httpRequest.on('error', function(error) {
-            defer.reject(error);
+            defer.reject(null, error);
         });
 
         if (body) {

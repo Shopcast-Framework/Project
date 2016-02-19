@@ -1,6 +1,7 @@
 var express = require( 'express' );
 var router = express.Router();
 var Promise = require( 'promise' );
+var Rest = require('../rest');
 
 // Sequalize variable
 var models  = require( '../sequelize/models' );
@@ -18,9 +19,13 @@ router.get('/', function( req, res ) { // Login request for the userList of file
 
 	promises.push( promiseMenu );
 
-	Promise.all( promises ).then( function( values ){
-		res.render( 'playlists', { title: 'Shopcast - Playlists', titleContent: 'My playlists (20)', active: '/playlists', menu: values[ 0 ] } );
-	}) ;
+	promises.push(Rest.get('playlist'));
+
+	Promise.all(promises).then(function(values) {
+		res.render('playlists', {title: 'Shopcast - Playlists', titleContent: 'My playlists (20)', active: '/playlists', menu: values[0]});
+	}, function(err) {
+		console.log(err);
+	});
 
 });
 
