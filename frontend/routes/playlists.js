@@ -22,7 +22,13 @@ router.get('/', function( req, res ) { // Login request for the userList of file
 	promises.push(Rest.get('playlist'));
 
 	Promise.all(promises).then(function(values) {
-		res.render('playlists', {title: 'Shopcast - Playlists', titleContent: 'My playlists (20)', active: '/playlists', menu: values[0]});
+		res.render('playlists', {
+			title: 'Shopcast - Playlists',
+			titleContent: 'My playlists (20)',
+			active: '/playlists',
+			menu: values[0],
+			playlists: values[1].body.playlists
+		});
 	}, function(err) {
 		console.log(err);
 	});

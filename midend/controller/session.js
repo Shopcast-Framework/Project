@@ -21,7 +21,11 @@ var SessionPost = function(req, res) {
     var strategy = auth.strategy[req.body.strategy];
 
     if (req.user) {
-        return res.status(200).send(req.user);
+        req.user.authenticate();
+        return res.status(200).send({
+            message: 'User already logged',
+            user: req.user
+        });
     }
 
     if (!strategy) {

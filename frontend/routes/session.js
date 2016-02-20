@@ -7,11 +7,7 @@ var GoogleStrategy  = require('passport-google-oauth').OAuth2Strategy;
 
 var onSuccess = function(req, res, datas) {
     console.log('ANSWER OK');
-    try {
-        var response = JSON.parse(datas.body);
-    } catch (e) {
-        return res.redirect('/sign_in?message=Invalid data');
-    }
+    var response = datas.body;
 
     if (!response.user || !response.user.token) {
         return res.redirect('/sign_in?message=Token is undefined');
