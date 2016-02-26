@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+	header.title-content
+		h1= titleContent
+		div.actions
+	article.wrapper-content#playlists
+		form(action='/playlists', method='post')
+			input(type='text' name='name' placeholder='Name')
+			input(type='text', name='description' placeholder='Description')
+			input(type='text', name='frequency', placeholder='Frequency')
+			input(type='text', name='tags' placeholder='Tags')
+			input(type='submit')

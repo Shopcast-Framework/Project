@@ -43,6 +43,12 @@ var Rest = function() {
             });
 
             res.on('end', function() {
+                try {
+                    datas.body = JSON.parse(datas.body);
+                } catch (e) {
+                    defer.reject(datas);
+                }
+
                 if (res.statusCode !== 200) {
                     defer.reject(datas);
                 } else {

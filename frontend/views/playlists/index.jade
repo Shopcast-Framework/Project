@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+	header.title-content
+		h1= titleContent
+		div.actions
+			a(href="/playlists/new" class="blue btn-floating btn-large waves-effect waves-circle waves-light")
+				i.material-icons add
+			a(class="red btn-floating btn-large waves-effect waves-circle waves-light")
+				i.material-icons delete
+	article.wrapper-content#playlists
+		form
+			table
+				thead
+					tr
+						th #
+						th name
+						th description
+						th frequency
+						th tags
+				tbody
+					each playlist, index in playlists
+						tr
+							td 
+								p
+									input(type="checkbox" id="line-item-#{index}" name="lines[]")
+									label(for="line-item-#{index}")
+							td #{playlist.name}
+							td #{playlist.description}
+							td #{playlist.frequency}
+							td #{playlist.tags}
+	
