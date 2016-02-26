@@ -20,7 +20,7 @@ body, html{
 *******************************************************************/
 
 #header{
-	padding-bottom: 140px;
+	padding-bottom: 240px;
 }
 
 #header .brand-logo{
@@ -31,8 +31,8 @@ body, html{
 }
 
 #header .brand-logo > span{
-	font-size: 50px;
-	font-weight: 500;
+	font-size: 30px;
+	font-weight: 600;
 }
 
 #header .page-title{
@@ -56,6 +56,13 @@ body, html{
 	margin-right: 10px;
 }
 
+#header .title{
+	font-size: 50px;
+	font-weight: 300;
+	text-align: center;
+	padding-top: 30px;
+}
+
 /*******************************************************************
 ********************************************************************
 ******************************* Body *******************************
@@ -73,6 +80,7 @@ body, html{
 	border-bottom: 1px solid #E6E6E6;
 	padding: 27px 30px;
 	position: relative;
+	text-align: center;
 }
 
 #main > header .actions{

@@ -32,10 +32,10 @@ app.run = function(){
     app.use(session({ name: 'connect.sid2', secret: 'keyboard cat', resave: true, saveUninitialized: true }));
     app.use(Rest.middleware);
 
-    app.use('/', routes.home);
-    app.use('/sign_in', routes.signin);
-    app.use('/session', routes.session);
+    //app.use('/', routes.home);
     app.use('/dashboards', routes.dashboards);
+    app.use('/signin', routes.signin);
+    app.use('/session', routes.session);
     app.use('/files', routes.files);
     app.use('/playlists', routes.playlists);
     app.use('/users', routes.users);
