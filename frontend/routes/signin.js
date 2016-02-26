@@ -3,24 +3,13 @@
 var express = require('express');
 var router = express.Router();
 var Promise = require( 'promise' );
+var menu    = require(__dirname + '/../menu.json')
 
-// Sequalize variable
-var models  = require('../sequelize/models');
-var MenuModel = models.menu;
 
 router.get('/', function( req, res ) {
 
-	var promises = [];
+	res.render('signin', { title: 'Sign in', titleTab: 'Shopcast - sign in', titleContent:'You can sign in with your e-mail, facebook or google account.', active: '', menu: menu } );
 
-    promises.push(
-        MenuModel.findAll( { where: { isActive: true } } ).then( function( data ) {
-            return JSON.parse( JSON.stringify( data ) );
-        })
-    );
-
-	Promise.all( promises ).then( function( values ){
-        res.render('signin', { title: 'Shopcast - Sign in', titleContent:'Sign in', active: '', menu: values[ 0 ] } );
-	}) ;
 });
 
 

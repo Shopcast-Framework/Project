@@ -4,13 +4,31 @@ block content
 	header.title-content
 		h1= titleContent
 	article.wrapper-content
+		div.row
+			form(class='col s12' action='/session', method='post')
+				div.row
+					input(type='hidden', name='strategy' value='local')
+					div.input-field.col.s12
+						i(class="material-icons prefix") account_circle
+						input(id="username" name="username" type="text" class="validate")
+						label(for="username") Username
+					div.input-field.col.s12
+						i(class="material-icons prefix") vpn_key
+						input(id="password" name="password" type="password" class="validate")
+						label(for="password") Password
+					div.col.s12.center-align
+						button(type="submit" class="btn amber darken-1 white-text waves-effect waves-light") Connect with email
+			div.center-align Or you can use...
+			div.col.s12.center-align
+				button(id='facebookBtn' class="btn blue white-text waves-effect waves-light") Connect with Facebook
+				a(href='/session/auth/google' class="btn red white-text waves-effect waves-light") Connect with Google
+				
+
 		form(action='/session', method='post')
 			input(type='hidden', name='strategy' value='local')
 			input(type='text', name='username')
 			input(type='password', name='password')
 			input(type='submit')
-	
-		button(id='facebookBtn') Connect Facebook
-		a(href='/session/auth/google') Connect Google
+
 
 	script(type='text/javascript', src='js/facebookAuth.js')

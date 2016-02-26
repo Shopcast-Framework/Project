@@ -1,0 +1,38 @@
+[
+	{
+	  "name": "Dashboard",
+	  "icon": "dashboard",
+	  "url": "dashboards",
+	  "isActive": true
+	},
+	{
+	  "name": "My Files",
+	  "icon": "attach_file",
+	  "url": "files",
+	  "isActive": true
+	},
+	{
+	  "name": "My Playlists",
+	  "icon": "folder",
+	  "url": "playlists",
+	  "isActive": true
+	},
+	{
+	  "name": "Users",
+	  "icon": "group",
+	  "url": "users",
+	  "isActive": true
+	},
+	{
+	  "name": "Display",
+	  "icon": "settings_ethernet",
+	  "url": "display",
+	  "isActive": true
+	},
+	{
+	  "name": "Settings",
+	  "icon": "settings",
+	  "url": "settings",
+	  "isActive": true
+	}
+]
