@@ -3,7 +3,7 @@ extends layout
 block content
 	header.title-content
 		h1= titleContent
-	article.wrapper-content
+	article.wrapper-content#sign-in
 		div.row
 			form(class='col s12' action='/session', method='post')
 				div.row
@@ -16,19 +16,21 @@ block content
 						i(class="material-icons prefix") vpn_key
 						input(id="password" name="password" type="password" class="validate")
 						label(for="password") Password
-					div.col.s12.center-align
-						button(type="submit" class="btn amber darken-1 white-text waves-effect waves-light") Connect with email
-			div.center-align Or you can use...
-			div.col.s12.center-align
-				button(id='facebookBtn' class="btn blue white-text waves-effect waves-light") Connect with Facebook
-				a(href='/session/auth/google' class="btn red white-text waves-effect waves-light") Connect with Google
+					div.col.s12.center-align.btn-valid
+						button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light")
+							i(class="material-icons right") send
+							Connect with email
+			div.col.s12.center-align.separate Or you can use...
+			div.col.s12.center-align.btn-connect
+				button(id='facebookBtn' class="btn btn-large blue white-text waves-effect waves-light") Connect with Facebook
+				a(href='/session/auth/google' class="btn btn-large red white-text waves-effect waves-light") Connect with Google
 				
 
-		form(action='/session', method='post')
-			input(type='hidden', name='strategy' value='local')
-			input(type='text', name='username')
-			input(type='password', name='password')
-			input(type='submit')
+		//form(action='/session', method='post')
+			//input(type='hidden', name='strategy' value='local')
+			//input(type='text', name='username')
+			//input(type='password', name='password')
+			//input(type='submit')
 
 
 	script(type='text/javascript', src='js/facebookAuth.js')

@@ -66,6 +66,32 @@ body, html{
 
 /*******************************************************************
 ********************************************************************
+***************************** Sign in ******************************
+********************************************************************
+*******************************************************************/
+
+#sign-in form{
+	margin-top: 40px;
+}
+
+#sign-in form .btn-valid{
+	margin-top: 20px;
+}
+
+#sign-in .separate{
+	text-align: center;
+	font-size: 30px;
+	font-weight: 300;
+	margin-top: 35px;
+	margin-bottom: 45px;
+}
+
+#sign-in .btn-connect .btn{
+	margin: 0 10px;
+}
+
+/*******************************************************************
+********************************************************************
 ******************************* Body *******************************
 ********************************************************************
 *******************************************************************/
@@ -110,4 +136,44 @@ body, html{
 	height: 100%;
 	overflow: auto;
 	margin-bottom: 88px
+}
+
+/***************************************************************************
+****************************************************************************
+************************** Materialize overwrite ***************************
+****************************************************************************
+***************************************************************************/
+
+.filled-in[type="checkbox"]:checked + label::after, [type="radio"]:checked + label::after{
+    border: 2px solid #03A9F4;
+    background-color: #03A9F4;
+}
+
+.input-field .prefix.active{
+    color: #03A9F4;
+}
+
+.input-field input[type=text]:focus + label, .input-field input[type=password]:focus + label {
+    color: #03A9F4;
+}
+
+.input-field input[type=text]:focus, .input-field input[type=password]:focus {
+    border-bottom: 1px solid #03A9F4;
+}
+
+.dropdown-content li span, .picker__close, .picker__today{
+    color: #03A9F4;
+}
+
+.picker__weekday-display, .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected{
+    background-color: #0277bd;
+}
+
+.picker__day.picker__day--today{
+    color: #0277bd;
+    font-weight: 500;
+}
+
+.picker__date-display{
+    background-color: #03A9F4;
 }
