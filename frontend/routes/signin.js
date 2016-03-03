@@ -8,7 +8,13 @@ var menu    = require(__dirname + '/../menu.json')
 
 router.get('/', function( req, res ) {
 
-	res.render('signin', { title: 'Sign in', titleTab: 'Shopcast - sign in', titleContent:'You can sign in with your e-mail, facebook or google account.', active: '', menu: menu } );
+	res.render('signin', { 	title: 'Sign in', 
+							titleTab: 'Shopcast - sign in', 
+							titleContent:'You can sign in with your e-mail, facebook or google account.', 
+							active: '', 
+							menu: menu,
+							isLogged: false
+						 } );
 
 });
 

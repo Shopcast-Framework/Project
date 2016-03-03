@@ -2,7 +2,11 @@
   $(function(){
 
     $( '.button-collapse').sideNav();
-    $( '#main .wrapper-content' ).css( "height", $( window ).height() - 200 )
+    $( '#main .wrapper-content' ).css( "height", $( window ).height() - 200 );
+    $('.modal-trigger').leanModal();
+	$(".dropdown-button").dropdown();
+	$('select').material_select();
+        
     //alert($( window ).height());
     //alert($( '#main .wrapper-content' ).height());
 

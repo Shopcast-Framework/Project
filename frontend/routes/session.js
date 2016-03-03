@@ -10,7 +10,7 @@ var onSuccess = function(req, res, datas) {
     var response = datas.body;
 
     if (!response.user || !response.user.token) {
-        return res.redirect('/sign_in?message=Token is undefined');
+        return res.redirect('/signin?message=Token is undefined');
     }
 
     req.session.user = response.user;
@@ -24,10 +24,10 @@ var onError = function(req, res, datas) {
     try {
         var response = JSON.parse(datas.body);
     } catch (e) {
-        return res.redirect('/sign_in?message=Invalid data');
+        return res.redirect('/signin?message=Invalid data');
     }
 
-    res.redirect('/sign_in?message=' + response.message);
+    res.redirect('/signin?message=' + response.message);
 };
 
 Router.post('/', function( req, res ) {

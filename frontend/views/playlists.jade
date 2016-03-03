@@ -1,16 +1,14 @@
-extends ../layout
+extends layout
 
 block content
 	header.title-content
 		h1= titleContent
 		div.actions
-			a(href="/playlists/new" class="blue btn-floating btn-large waves-effect waves-circle waves-light")
+			button(class="amber darken-2 btn-floating btn-large waves-effect waves-circle waves-light modal-trigger" data-target="new-element")
 				i.material-icons add
-			a(class="red btn-floating btn-large waves-effect waves-circle waves-light")
-				i.material-icons delete
 	article.wrapper-content#playlists
 		form
-			table
+			table.listing
 				thead
 					tr
 						th #
@@ -18,6 +16,7 @@ block content
 						th description
 						th frequency
 						th tags
+						th
 				tbody
 					each playlist, index in playlists
 						tr
@@ -29,4 +28,34 @@ block content
 							td #{playlist.description}
 							td #{playlist.frequency}
 							td #{playlist.tags}
-	
+							td.actions
+								button(class="light-blue btn-floating waves-effect waves-circle waves-light modal-trigger" data-target="new-playlist")
+									i.material-icons edit
+								button(class="red btn-floating waves-effect waves-circle waves-light")
+									i.material-icons delete
+	div(id="new-element" class="modal light-box")
+		h4(class="center-align light-blue") Add a new playlist
+		div(class="modal-content")
+			form(class="row" action='/playlists', method='post')
+				div.input-field.col.s12
+					i(class="material-icons prefix") edit
+					input(type='text' name='name' id="username")
+					label(for="username") Name
+				div.input-field.col.s12
+					i(class="material-icons prefix") description
+					input(type='text', name='description' id="description")
+					label(for="description") Description
+				div.input-field.col.s12
+					i(class="material-icons prefix") autorenew
+					input(type='text', name='frequency' id="frequency")
+					label(for="frequency") Frequency
+				div.input-field.col.s12
+					i(class="material-icons prefix") note
+					input(type='text', name='tags' id="tags")
+					label(for="tags") Tags
+				div.input-field.col.s12.actions.center-align
+					button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") Add
+						i(class="material-icons left") done
+					a(href="#!" class="modal-action modal-close btn btn-large red darken-1 white-text waves-effect waves-light") Cancel
+						i(class="material-icons left") cancel
+			

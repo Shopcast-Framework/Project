@@ -4,30 +4,63 @@ block content
 	header.title-content
 		h1= titleContent
 		div.actions
-			button(class="blue btn-floating btn-large waves-effect waves-circle waves-light")
+			button(class="amber darken-2 btn-floating btn-large waves-effect waves-circle waves-light modal-trigger" data-target="new-element")
 				i.material-icons add
-			button(class="red btn-floating btn-large waves-effect waves-circle waves-light")
-				i.material-icons delete
-	article.wrapper-content#files
+	article.wrapper-content#playlists
 		form
-			table
+			table.listing
 				thead
 					tr
 						th #
-						th name
-						th description
-						th type
-						th size
+						th username
+						th role
+						th last connection
+						th created at
+						th
 				tbody
-					each val in [1, 2, 3, 4, 5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
+					each user, index in users
 						tr
 							td 
 								p
-									input(type="checkbox" id="line-item-#{val}" name="lines[]")
-									label(for="line-item-#{val}")
-							td Test
-							td Test est un test de première classe
-							td mp4
-							td 25 mo
-	
-
+									input(type="checkbox" id="line-item-#{index}" name="lines[]")
+									label(for="line-item-#{index}")
+							td #{user.username}
+							td #{user.role}
+							td #{user.last_connection}
+							td #{user.created_at}
+							td.actions
+								button(class="light-blue btn-floating waves-effect waves-circle waves-light modal-trigger" data-target="new-element")
+									i.material-icons edit
+								button(class="red btn-floating waves-effect waves-circle waves-light")
+									i.material-icons delete
+	div(id="new-element" class="modal light-box")
+		h4(class="center-align light-blue") Add a new user
+		div(class="modal-content")
+			form(class="row" action='/users', method='post')
+				div.input-field.col.s12
+					i(class="material-icons prefix") edit
+					input(type='text' name='username' id="username")
+					label(for="username") Username
+				div.input-field.col.s12
+					i(class="material-icons prefix") email
+					input(type='email' name='email' id="email" class="validate")
+					label(for="email") Email
+				div.input-field.col.s12
+					i(class="material-icons prefix") vpn_key
+					input(type='password' name='userpassword' id="password")
+					label(for="password") Password
+				div.input-field.col.s12
+					select(name="role" id="role" class="validate")
+						option(value="" disabled="disabled" selected="selected") What is his role ?
+						option(value="0") Administrateur
+						option(value="1") Client
+					label(for="role") Role
+				div.input-field.col.s12
+					input(type="checkbox" id="send-email" name="send-email")
+					label(for="send-email") Do you want send an email with the credentials ?
+				div.input-field.col.s12.actions.center-align
+					button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") Add
+						i(class="material-icons left") done
+					a(href="#!" class="modal-action modal-close btn btn-large red darken-1 white-text waves-effect waves-light") Cancel
+						i(class="material-icons left") cancel
+			

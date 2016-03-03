@@ -3,7 +3,7 @@ html(lang='fr')
 	head
 		meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
 		meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1.0')
-		title= titleTab
+		title= Shopcast
 		link(rel='stylesheet', href='http://fonts.googleapis.com/icon?family=Material+Icons')
 		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/materialize.min.css')
 		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/nouislider.min.css')
@@ -15,27 +15,33 @@ html(lang='fr')
 					div(class="nav-wrapper light-blue")
 						a(id="logo-container" href="/" class="brand-logo") Logo
 						ul(class="right hide-on-med-and-down")
-							for m in menu
-								if active == m.url
-									li.active
-										a(href="#{m.url}")= m.name
-											i(class="material-icons left")= m.icon
-								else
-									li
-										a(href="#{m.url}")= m.name
-											i(class="material-icons left")= m.icon
-						ul(id="nav-mobile" class="side-nav")
-							for m in menu
-								if active == m.url
-									li.active
-										a(href="#{m.url}")= m.name
-											i(class="material-icons left")= m.icon
-								else
-									li
-										a(href="#{m.url}")= m.name
-											i(class="material-icons left")= m.icon
-						a(href="#" data-activates="nav-mobile" class="button-collapse")
-							i(class="material-icons") menu
+							if isLogged
+								for m in menu
+									if active == m.url
+										li.active
+											a(href="#{m.url}")= m.name
+												i(class="material-icons left")= m.icon
+									else
+										li
+											a(href="#{m.url}")= m.name
+												i(class="material-icons left")= m.icon
+
+								li.user
+									a(class="dropdown-button valign-wrapper" href="#!" data-activates="dropdown-user") 
+										img(src="#{user.avatar}" class="circle responsive-img avatar")
+										span #{user.name}
+										i(class="material-icons right valign") arrow_drop_down
+							else
+								li
+									a(href="#")
+										i(class="material-icons left") lock
+						ul(id="dropdown-user" class="dropdown-content")
+							li
+								a(href="#!" class="light-blue-text") My account
+									i(class="material-icons left") person
+							li
+								a(href="#!" class="red-text") Log out
+									i(class="material-icons left") exit_to_app
 					div.title= title
 		section#main.z-depth-1
 			block content
