@@ -6,11 +6,18 @@ var Sequelize   = require('sequelize'),
 var User = function(sequelize) {
     var model = sequelize
     .define('User', {
+        id: {
+            type: Sequelize.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
         username: Sequelize.STRING,
+        name: Sequelize.STRING,
+        avatar: Sequelize.STRING,
+        email: Sequelize.STRING,
         password: Sequelize.STRING,
         token: Sequelize.VIRTUAL,
         role: Sequelize.INTEGER,
-        type: Sequelize.INTEGER,
         facebookId: Sequelize.STRING,
         googleId: Sequelize.STRING,
         last_connection: Sequelize.DATE
