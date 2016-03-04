@@ -45,29 +45,19 @@ router.get('/', function( req, res ) {
 
 	var promises = [];
 
-	promises.push( Rest.get( 'playlist' ) );
+	promises.push(Rest.get('playlist'));
 
-<<<<<<< HEAD
-	Promise.all(promises).then(function(values) {
+	Promise.all( promises ).then(function(values) {
+		var playlists = values[1].body.playlists;
 		res.render('playlists/index', {
 			title: 'Shopcast - Playlists',
-			titleContent: 'My playlists (20)',
+			titleContent: 'My playlists (' + playlists.length + ')',
 			active: '/playlists',
-			menu: values[0],
-			playlists: values[1].body.playlists
+			menu: menu
 		});
-=======
-	Promise.all( promises ).then( function( values ) {
-		res.render('playlists', {title: 'Shopcast - Playlists', titleContent: 'My playlists (20)', active: '/playlists', menu: menu } );
->>>>>>> guerin_f
 	}, function(err) {
 		console.log(err);
 	});
 });
 
-<<<<<<< HEAD
 module.exports = router;
-=======
-
-module.exports = router;
->>>>>>> guerin_f
