@@ -25,7 +25,6 @@ var Rest = function() {
                     'cookie': self.cookie
                 }
             };
-
         if (self.user) {
             options.headers.Authorization = self.user.token;
         }

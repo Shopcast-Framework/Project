@@ -12,7 +12,7 @@ router.post('/', function(req, res) {
 	Rest.post('user', JSON.stringify(req.body)).then(function(response) {
 		res.redirect('/users?message=' + response.body.message);
 	}, function(err) {
-		console.log(err);
+		console.log(err); 
 		res.redirect('/users?message=' + err.message);
 	});
 

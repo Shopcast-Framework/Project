@@ -41,6 +41,7 @@ router.post('/', function(req, res) {
 
 // });
 
+
 router.delete('/:id', middlewares.isLogged, function( req, res ) {
 
 	var promises = [];
