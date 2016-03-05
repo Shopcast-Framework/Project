@@ -1,11 +1,9 @@
 extends layout
 
 block content
-	header.title-content
-		h1= titleContent
-		div.actions
-			button(class="amber darken-2 btn-floating btn-large waves-effect waves-circle waves-light modal-trigger" data-target="new-element")
-				i.material-icons add
+	header.actions
+		button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="new-element") Create a new user
+			i.material-icons.left add
 	article.wrapper-content#users
 		form
 			table.listing
@@ -22,7 +20,7 @@ block content
 						th
 				tbody
 					each user, index in users
-						tr
+						tr(data-keywords="#{user.username},#{user.name},#{user.email}")
 							//td 
 								//p
 									//input(type="checkbox" id="line-item-#{index}" name="lines[]")

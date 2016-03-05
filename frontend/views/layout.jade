@@ -3,7 +3,7 @@ html(lang='fr')
 	head
 		meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
 		meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1.0')
-		title= Shopcast
+		title #{titleTab}
 		link(rel='stylesheet', href='http://fonts.googleapis.com/icon?family=Material+Icons')
 		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/materialize.min.css')
 		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/nouislider.min.css')
@@ -43,8 +43,18 @@ html(lang='fr')
 								a(href="#!" class="red-text") Log out
 									i(class="material-icons left") exit_to_app
 					div.title= title
-		section#main.z-depth-1
-			block content
+		section#main
+			if isLogged
+				article.search-wrapper.z-depth-1
+					nav(class="white")
+						div(class="nav-wrapper container row")
+							div(class="input-field col s12")
+								input(aria-invalid="false" id="search" placeholder="Search" class="white" type="search")
+								label(for="search")
+									i(class="material-icons grey-text") search
+								i(class="material-icons") close
+			article.container
+				block content
 		script(type='text/javascript', src='js/jquery-v2.1.1.min.js')
 		script(type='text/javascript', src='js/nouislider.min.js')
 		script(type='text/javascript', src='js/materialize.min.js')

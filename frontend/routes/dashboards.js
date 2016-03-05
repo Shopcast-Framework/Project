@@ -12,7 +12,7 @@ router.get('/', middlewares.isLogged, function(req, res){
 	// console.log(req.session.user.token);
 	// console.log(req.session.user);
 	
-	res.render('dashboards', { title: 'Shopcast - Dashboard', titleContent:'Dashboard', active: '', menu: menu, isLogged: true, user: req.session.user } );
+	res.render('dashboards', { title: 'Shopcast - Dashboard', titleContent:'Dashboard', active: 'dashboards', menu: menu, isLogged: true, user: req.session.user } );
 
 });
 

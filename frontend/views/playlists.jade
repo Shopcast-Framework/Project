@@ -1,11 +1,9 @@
 extends layout
 
 block content
-	header.title-content
-		h1= titleContent
-		div.actions
-			button(class="amber darken-2 btn-floating btn-large waves-effect waves-circle waves-light modal-trigger" data-target="new-element")
-				i.material-icons add
+	header.actions
+			button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="new-element") Create a new playlist
+				i.material-icons.left add
 	article.wrapper-content#playlists
 		form
 			table.listing
@@ -19,7 +17,7 @@ block content
 						th
 				tbody
 					each playlist, index in playlists
-						tr
+						tr(data-keywords="#{playlist.name}")
 							td 
 								p
 									input(type="checkbox" id="line-item-#{index}" name="lines[]")

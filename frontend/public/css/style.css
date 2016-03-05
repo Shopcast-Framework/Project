@@ -7,7 +7,7 @@
 body, html{
 	margin: 0;
 	padding: 0;
-	background-color: #E6E6E6;
+	background-color: #FFF;
 	width: 100%;
 	height: 100%;
 	overflow: hidden
@@ -21,7 +21,7 @@ body, html{
 *******************************************************************/
 
 #header{
-	padding-bottom: 240px;
+	padding-bottom: 220px;
 }
 
 #header .brand-logo{
@@ -61,7 +61,7 @@ body, html{
 	font-size: 50px;
 	font-weight: 300;
 	text-align: center;
-	padding-top: 30px;
+	padding-top: 50px;
 }
 
 /*******************************************************************
@@ -97,33 +97,26 @@ body, html{
 *******************************************************************/
 
 #main{
-	width: 80%;
-	margin: -88px auto auto;
+	width: 100%;
 	background-color: #FFF;
 	height: 100%;
 }
 
-#main > header{
-	border-bottom: 1px solid #E6E6E6;
-	padding: 27px 30px;
+#main header.actions{
+	padding: 40px 0;
 	position: relative;
 	text-align: center;
 }
 
-#main > header .actions{
-	position: absolute;
-	right: 24px;
-	bottom: 18px;
+#main header{
+	text-align: center;
+	padding-top: 40px;
 }
 
-#main > header .actions button{
-	margin: 0 5px;
-}
-
-
-#main > header > h1{
+#main header h4{
 	margin: 0;
 	font-size: 30px;
+	font-weight: 300;
 	width: auto;
 	display: inline-table;
 	color: #3C4B53;
@@ -177,6 +170,10 @@ body, html{
 ************************** Materialize overwrite ***************************
 ****************************************************************************
 ***************************************************************************/
+
+.modal{
+	max-height: 90%;
+}
 
 .filled-in[type="checkbox"]:checked + label::after, [type="radio"]:checked + label::after{
     border: 2px solid #03A9F4;
