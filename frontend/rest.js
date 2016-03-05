@@ -50,6 +50,7 @@ var Rest = function() {
                 }
 
                 if (res.statusCode !== 200) {
+
                     defer.reject(datas);
                 } else {
                     defer.resolve(datas);

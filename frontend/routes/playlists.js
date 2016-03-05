@@ -10,8 +10,7 @@ var middlewares = require('../middlewares');
 router.post('/', function(req, res) {
 
 	Rest.post('playlist', JSON.stringify(req.body)).then(function(response) {
-		console.log(response);
-		res.redirect('/playlists?message=' + response.message);
+		res.redirect('/playlists?message=' + response.body.message);
 	}, function(err) {
 		console.log(err);
 		res.redirect('/playlists?message=' + err.message);
@@ -70,13 +69,19 @@ router.get('/', middlewares.isLogged, function( req, res ) {
 	promises.push( Rest.get( 'playlist' ) );
 
 	Promise.all(promises).then(function(values) {
+		
+		var playlists = values[0].body.playlists;
+		values[0].body.playlists.forEach(function(element,index,array){
+			playlists[index].tags = element.tags.split(",");
+		});
+
 		res.render('playlists', {
 			title: 'My playlists ('+values[0].body.playlists.length+')',
 			titleContent: 'You can manage all of your playlists from here',
 			active: 'playlists',
 			menu: menu,
 			username: "Guerin_f",
-			playlists: values[0].body.playlists,
+			playlists: playlists,
 			isLogged: true,
 			user: req.session.user
 		});

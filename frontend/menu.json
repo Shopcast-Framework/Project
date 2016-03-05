@@ -27,7 +27,7 @@
 	  "name": "Display",
 	  "icon": "settings_ethernet",
 	  "url": "display",
-	  "isActive": true
+	  "isActive": false
 	},
 	{
 	  "name": "Settings",

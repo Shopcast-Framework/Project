@@ -9,15 +9,12 @@ var middlewares = require('../middlewares');
 
 router.post('/', function(req, res) {
 
-	console.log(req.body);
-
-	var promises = [];
-
-	promises.push(
-		Rest.post('user', JSON.stringify(req.body))
-	);
-
-	res.render( 'users', { title: 'Shopcast - Users', titleContent: 'Users (20)', active: '/users', menu: menu } );
+	Rest.post('user', JSON.stringify(req.body)).then(function(response) {
+		res.redirect('/users?message=' + response.body.message);
+	}, function(err) {
+		console.log(err);
+		res.redirect('/users?message=' + err.message);
+	});
 
 });
 
@@ -34,7 +31,9 @@ router.get('/', middlewares.isLogged, function( req, res ) {
 			active: 'users',
 			menu: menu,
 			users: values[0].body.users,
-			isLogged: true
+			permission: [ "Administrateur", "Client"],
+			isLogged: true,
+			user: req.session.user
 		});
 	}, function(err) {
 		console.log(err);

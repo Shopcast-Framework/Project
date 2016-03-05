@@ -27,7 +27,9 @@ block content
 							td #{playlist.name}
 							td #{playlist.description}
 							td #{playlist.frequency}
-							td #{playlist.tags}
+							td 
+								each tag, index in playlist.tags
+									div.chip #{tag}
 							td.actions
 								button(class="light-blue btn-floating waves-effect waves-circle waves-light modal-trigger" data-target="new-playlist")
 									i.material-icons edit
@@ -53,7 +55,7 @@ block content
 					i(class="material-icons prefix") note
 					input(type='text', name='tags' id="tags")
 					label(for="tags") Tags
-				div.input-field.col.s12.actions.center-align
+				div.input-field.col.s12.actions.right-align
 					button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") Add
 						i(class="material-icons left") done
 					a(href="#!" class="modal-action modal-close btn btn-large red darken-1 white-text waves-effect waves-light") Cancel
