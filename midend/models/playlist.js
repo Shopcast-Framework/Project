@@ -10,7 +10,7 @@ var Playlist = function(sequelize) {
         name        : Sequelize.STRING,
         description : Sequelize.STRING,
         frequency   : Sequelize.STRING,
-        tags        : Sequelize.STRING
+        tags        : Sequelize.STRING,
     }, {underscored: true});
 
     var relationships = function() {
@@ -18,8 +18,8 @@ var Playlist = function(sequelize) {
     };
 
     return {
-        definition      : model,
-        relationships   : relationships
+        definition      : model
+        //relationships   : relationships
     };
 };
 

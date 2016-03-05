@@ -10,16 +10,17 @@ var File = function(sequelize) {
         name        : Sequelize.STRING,
         description : Sequelize.STRING,
         type        : Sequelize.STRING,
-        size        : Sequelize.FLOAT
+        size        : Sequelize.FLOAT,
+        duration    : Sequelize.INTEGER
     }, {underscored: true});
 
     var relationships = function() {
-        model.belongsTo(orm.db.Playlist);
+        model.belongsToMany(orm.db.Playlist);
     };
 
     return {
-        definition      : model,
-        relationships   : relationships
+        definition      : model
+        //relationships   : relationships
     };
 };
 
