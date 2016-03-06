@@ -1,15 +1,54 @@
 'use strict';
 
-var express = require('express');
-var router = express.Router();
-var Promise = require( 'promise' );
-var menu    = require(__dirname + '/../menu.json');
+var express = require('express'),
+	router = express.Router(),
+	Promise = require('promise'),
+	Rest	= require('../rest'),
+	menu    = require(__dirname + '/../menu.json'),
+	upload  = require('multer')({ dest: 'uploads/' });
 
-router.get('/', function( req, res ) { // Login request for the userList of files
+router.post('/', upload.any(), function(req, res) {
 
-	res.render( 'files', { title: 'Shopcast - Files', titleContent: 'My files (20)', active: '/files', menu: menu } );
+	var promises = [];
 
+	for (var i in req.files) {
+		promises.push(Rest.post('file', JSON.stringify(req.files[i])));
+	}
+	Promise.all(promises).then(function() {
+		res.redirect('/files?message=Files correctly upload');
+	}, function(err) {
+		console.log(err);
+		res.redirect('/playlists?message=Files can\'t be upload');
+	});
 });
 
+router.get('/new', function(req, res) {
+	res.render('files/new', {
+		title: 'Shopcast - Playlists',
+		titleContent: 'New playlist',
+		active: '/playlists',
+		menu: menu
+	});
+});
+
+router.get('/', function(req, res) {
+	var promises = [];
+
+	promises.push(Rest.get('file'));
+
+	Promise.all(promises).then(function(values) {
+		var files = values[0].body.files;
+
+		res.render('files/index', {
+			title: 'Shopcast - Files',
+			titleContent: 'My files (' + files.length + ')',
+			active: '/files',
+			files: files,
+			menu: menu
+		});
+	}, function(err) {
+		console.log(err);
+	});
+});
 
 module.exports = router;

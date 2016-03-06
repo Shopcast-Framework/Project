@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+	header.title-content
+		h1= titleContent
+		div.actions
+			a(href="/files/new" class="blue btn-floating btn-large waves-effect waves-circle waves-light")
+				i.material-icons add
+			a(class="red btn-floating btn-large waves-effect waves-circle waves-light")
+				i.material-icons delete
+	article.wrapper-content#files
+		form
+			table
+				thead
+					tr
+						th #
+						th name
+						th description
+						th type
+						th size
+				tbody
+					each file, index in files
+						tr
+							td 
+								p
+									input(type="checkbox" id="line-item-#{index}" name="lines[]")
+									label(for="line-item-#{index}")
+							td #{file.originalname}
+							td #{file.description}
+							td #{file.mimetype}
+							td #{file.size}
+	

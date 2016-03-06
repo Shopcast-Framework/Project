@@ -7,9 +7,12 @@ var File = function(sequelize) {
 
     var model = sequelize
     .define('File', {
-        name        : Sequelize.STRING,
         description : Sequelize.STRING,
-        type        : Sequelize.STRING,
+        encoding    : Sequelize.STRING,
+        filename    : Sequelize.STRING,
+        mimetype    : Sequelize.STRING,
+        originalname: Sequelize.STRING,
+        path        : Sequelize.STRING,
         size        : Sequelize.FLOAT
     }, {underscored: true});
 
