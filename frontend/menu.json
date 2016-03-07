@@ -18,12 +18,6 @@
 	  "isActive": true
 	},
 	{
-	  "name": "Users",
-	  "icon": "group",
-	  "url": "users",
-	  "isActive": true
-	},
-	{
 	  "name": "Display",
 	  "icon": "settings_ethernet",
 	  "url": "display",
@@ -34,5 +28,11 @@
 	  "icon": "settings",
 	  "url": "settings",
 	  "isActive": true
+	},
+	{
+		"name": "Logout",
+		"icon": "group",
+		"url": "session/logout",
+		"isActive": true
 	}
 ]
