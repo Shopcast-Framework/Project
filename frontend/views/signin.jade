@@ -2,7 +2,7 @@ extends layout
 
 block content
 	header.title-content
-		h4= titleContent
+		h4 #{translate.connectWith}
 	article.wrapper-content#sign-in
 		div.row
 			form(class='col s12' action='/session', method='post')
@@ -11,19 +11,18 @@ block content
 					div.input-field.col.s12
 						i(class="material-icons prefix") account_circle
 						input(id="username" name="username" type="text" class="validate")
-						label(for="username") Username
+						label(for="username") #{translate.username}
 					div.input-field.col.s12
 						i(class="material-icons prefix") vpn_key
 						input(id="password" name="password" type="password" class="validate")
-						label(for="password") Password
+						label(for="password") #{translate.password}
 					div.col.s12.center-align.btn-valid
-						button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light")
+						button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") #{translate.byEmail}
 							i(class="material-icons right") send
-							Connect with email
-			div.col.s12.center-align.separate Or you can use...
+			div.col.s12.center-align.separate #{translate.youCanChoose}
 			div.col.s12.center-align.btn-connect
-				button(id='facebookBtn' class="btn btn-large blue white-text waves-effect waves-light") Connect with Facebook
-				a(href='/session/auth/google' class="btn btn-large red white-text waves-effect waves-light") Connect with Google
+				button(id='facebookBtn' class="btn btn-large blue white-text waves-effect waves-light") #{translate.byFacebook}
+				a(href='/session/auth/google' class="btn btn-large red white-text waves-effect waves-light") #{translate.byGoogle}
 				
 
 		//form(action='/session', method='post')

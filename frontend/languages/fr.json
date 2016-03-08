@@ -1,0 +1,22 @@
+{
+  "SignIn": {
+    "title": "Se connecter à Shopcast",
+    "connectWith": "Connecter vous via votre e-mail, Facebook ou Google",
+    "username" : "Nom d'utilisateur",
+    "password" : "Mot de passe",
+    "byEmail" : "via e-mail",
+    "byFacebook" : "connexion via Facebook",
+    "byGoogle" : "connexion via Google",
+    "youCanChoose" : "Ou vous pouvez utiliser..."
+  },
+  "Playlists": {
+    "title": "Mes playlists (%)",
+    "subTitle": "Gérer toutes vos playlists",
+    "btnCreate": "Créer une nouvelle playlist",
+    "search" : "Rechercher",
+    "name" : "Nom",
+    "description" : "Description",
+    "frequency" : "Fréquence",
+    "tags" : "Tags"
+  }
+}

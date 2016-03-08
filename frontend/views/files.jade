@@ -1,0 +1,68 @@
+extends layout
+
+block content
+	header.actions
+			button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="new-element") Create a new files
+				i.material-icons.left add
+	article.wrapper-content#files
+		form
+			table.listing
+				thead
+					tr
+						th #
+						th name
+						th description
+						th original name
+						th type
+						th size
+						th tags
+						th
+				tbody
+					each file, index in files
+						tr(data-keywords="#{file.name}")
+							td 
+								p
+									input(type="checkbox" id="line-item-#{index}" name="lines[]")
+									label(for="line-item-#{index}")
+							td #{file.name}
+							td #{file.description}
+							td #{file.originalname}
+							td #{file.mimetype}
+							td #{file.size}
+							td 
+								if tags
+									each tag, index in file.tags
+										div.chip #{tag}
+							td.actions
+								button(class="light-blue btn-floating waves-effect waves-circle waves-light modal-trigger" data-target="edit-element")
+									i.material-icons edit
+								button(class="red btn-floating waves-effect waves-circle waves-light")
+									i.material-icons delete
+	div(id="new-element" class="modal light-box")
+		h4(class="center-align light-blue") Add a new playlist
+		div(class="modal-content")
+			form(class="row" action='/files' method='post' enctype='multipart/form-data')
+				div.input-field.col.s12
+					i(class="material-icons prefix") edit
+					input(type='text' name='name' id="name")
+					label(for="name") Name
+				div.input-field.col.s12
+					i(class="material-icons prefix") description
+					input(type='text', name='description' id="description")
+					label(for="description") Description
+				div.input-field.col.s12
+					i(class="material-icons prefix") note
+					input(type='text', name='tags' id="tags")
+					label(for="tags") Tags
+				div.file-field.input-field.col.s12
+					div(class="btn")
+						span File
+						input(type='file' name='file' accept='*' placeholder='File')
+					div(class="file-path-wrapper")
+						input(class="file-path validate" type="text")			
+				div.input-field.col.s12.actions.right-align
+					button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") Add
+						i(class="material-icons left") done
+					a(href="#!" class="modal-action modal-close btn btn-large red darken-1 white-text waves-effect waves-light") Cancel
+						i(class="material-icons left") cancel
+

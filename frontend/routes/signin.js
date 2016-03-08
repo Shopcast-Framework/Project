@@ -3,17 +3,19 @@
 var express = require('express');
 var router = express.Router();
 var Promise = require( 'promise' );
-var menu    = require(__dirname + '/../menu.json')
+var menu    = require(__dirname + '/../menu.json');
+var translate = require('../languages');
+var middlewares = require('../middlewares');
 
+router.get('/', middlewares.language, function(req, res) {
 
-router.get('/', function(req, res) {
-
-	res.render('signin', { 	title: 'Sign into Shopcast', 
-		titleTab: 'Shopcast - sign in', 
-		titleContent:'You can sign in with your e-mail, facebook or google account.', 
+	res.render('signin', { 	
 		active: '', 
 		menu: menu,
-		isLogged: false
+		isSearchBar: false,
+		isLogged: false,
+		translate : translate.getWordsByPage( req.cookies.language, "SignIn" ),
+		language: req.cookies.language
 	 } );
 
 });

@@ -6,8 +6,9 @@ var Promise = require('promise');
 var Rest = require('../rest');
 var menu    = require(__dirname + '/../menu.json');
 var middlewares = require('../middlewares');
+var translate = require('../languages');
 
-router.post('/', function(req, res) {
+router.post('/',middlewares.isLogged, function(req, res) {
 
 	Rest.post('user', JSON.stringify(req.body)).then(function(response) {
 		res.redirect('/users?message=' + response.body.message);
@@ -18,7 +19,7 @@ router.post('/', function(req, res) {
 
 });
 
-router.get('/', middlewares.isLogged, function( req, res ) {
+router.get('/', middlewares.isLogged, middlewares.language, function( req, res ) {
 
 	var promises = [];
 
@@ -33,7 +34,9 @@ router.get('/', middlewares.isLogged, function( req, res ) {
 			users: values[0].body.users,
 			permission: [ "Administrateur", "Client"],
 			isLogged: true,
-			user: req.session.user
+			isSearchBar: true,
+			user: req.session.user,
+			translate : translate.getWordsByPage( req.cookies.language, "SignIn" ),
 		});
 	}, function(err) {
 		console.log(err);

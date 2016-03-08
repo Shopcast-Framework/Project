@@ -6,8 +6,9 @@ var Promise = require( 'promise' );
 var Rest = require('../rest');
 var menu    = require(__dirname + '/../menu.json');
 var middlewares = require('../middlewares');
+var translate = require('../languages');
 
-router.post('/', function(req, res) {
+router.post('/',middlewares.isLogged, function(req, res) {
 
 	Rest.post('playlist', JSON.stringify(req.body)).then(function(response) {
 		console.log(response);
@@ -18,53 +19,7 @@ router.post('/', function(req, res) {
 	});
 });
 
-// router.get('/new', function(req, res) {
-
-// 	var promises = [];
-// 	var menu = null;
-
-// 	var promiseMenu = MenuModel.findAll({ where: { isActive: true }}).then(function(data) {
-// 		return JSON.parse(JSON.stringify(data));
-// 	});
-
-// 	promises.push(promiseMenu);
-
-// 	Promise.all(promises).then(function(values) {
-// 		res.render('playlists/new', {
-// 			title: 'Shopcast - Playlists',
-// 			titleContent: 'New playlist',
-// 			active: '/playlists',
-// 			menu: values[0]
-// 		});
-// 	}, function(err) {
-// 		console.log(err);
-// 	});
-
-// });
-
-
-router.delete('/:id', middlewares.isLogged, function( req, res ) {
-
-	var promises = [];
-
-	promises.push( Rest.get( 'playlist' ) );
-
-	Promise.all(promises).then(function(values) {
-		res.render('playlists', {
-			title: 'My playlists ('+values[0].body.playlists.length+')',
-			titleContent: 'You can manage all of your playlists from here',
-			active: 'playlists',
-			menu: menu,
-			playlists: values[0].body.playlists,
-			isLogged: true,
-			user: middlewares.getUserSession()
-		});
-	}, function(err) {
-		console.log(err);
-	});
-});
-
-router.get('/', middlewares.isLogged, function( req, res ) {
+router.get('/', middlewares.isLogged, middlewares.language, function( req, res ) {
 
 	var promises = [];
 
@@ -74,18 +29,19 @@ router.get('/', middlewares.isLogged, function( req, res ) {
 		
 		var playlists = values[0].body.playlists;
 		values[0].body.playlists.forEach(function(element,index,array){
-			playlists[index].tags = element.tags.split(",");
+			if ( playlists[index].tags != null )
+				playlists[index].tags = element.tags.split(",");
 		});
 
 		res.render('playlists', {
-			title: 'My playlists ('+values[0].body.playlists.length+')',
-			titleContent: 'You can manage all of your playlists from here',
 			active: 'playlists',
 			menu: menu,
-			username: "Guerin_f",
 			playlists: playlists,
 			isLogged: true,
-			user: req.session.user
+			isSearchBar: true,
+			user: req.session.user,
+			translate : translate.getWordsByPage( req.cookies.language, "Playlists", { title: playlists.length } ),
+			language: req.cookies.language
 		});
 	}, function(err) {
 		console.log(err);

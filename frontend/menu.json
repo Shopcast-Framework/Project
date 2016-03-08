@@ -28,11 +28,5 @@
 	  "icon": "settings",
 	  "url": "settings",
 	  "isActive": true
-	},
-	{
-		"name": "Logout",
-		"icon": "group",
-		"url": "session/logout",
-		"isActive": true
 	}
 ]

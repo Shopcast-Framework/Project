@@ -3,7 +3,7 @@ html(lang='fr')
 	head
 		meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
 		meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1.0')
-		title #{titleTab}
+		title #{translate.title}
 		link(rel='stylesheet', href='http://fonts.googleapis.com/icon?family=Material+Icons')
 		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/materialize.min.css')
 		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/nouislider.min.css')
@@ -40,11 +40,11 @@ html(lang='fr')
 								a(href="#!" class="light-blue-text") My account
 									i(class="material-icons left") person
 							li
-								a(href="#!" class="red-text") Log out
+								a(href="session/logout" class="red-text") Log out
 									i(class="material-icons left") exit_to_app
-					div.title= title
+					div.title #{translate.title}
 		section#main
-			if isLogged
+			if isSearchBar
 				article.search-wrapper.z-depth-1
 					nav(class="white")
 						div(class="nav-wrapper container row")
@@ -55,6 +55,20 @@ html(lang='fr')
 								i(class="material-icons") close
 			article.container
 				block content
+		div#language-select
+			a(class="waves-effect waves-light btn-flat modal-trigger" href="#modal-language" title="change language")
+				img(src="public/images/countries/#{language}.png")
+		div(id="modal-language" class="modal")
+			div(class="modal-content")
+				h4 List of available countries
+				p
+					ul.listing-countries
+						each val, index in translate.listing
+							li.country
+								a(href="?language=#{index}")
+									img(src="#{val}")
+			div(class="modal-footer")
+				a(href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat") Agree
 		script(type='text/javascript', src='js/jquery-v2.1.1.min.js')
 		script(type='text/javascript', src='js/nouislider.min.js')
 		script(type='text/javascript', src='js/materialize.min.js')

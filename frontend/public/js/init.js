@@ -5,6 +5,7 @@
     $('.modal-trigger').leanModal();
 	$(".dropdown-button").dropdown();
 	$('select').material_select();
+	$('ul.tabs').tabs();
 
 	$( "#main .search-wrapper #search" ).keyup(function(){
 		var val = $( this ).val();

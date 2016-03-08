@@ -5,9 +5,12 @@ var express = require('express'),
 	Promise = require('promise'),
 	Rest	= require('../rest'),
 	menu    = require(__dirname + '/../menu.json'),
-	upload  = require('multer')({ dest: 'uploads/' });
+	upload  = require('multer')({ dest: 'uploads/' }),
+	middlewares = require('../middlewares'),
+	humanize = require('humanize'),
+	translate = require('../languages');
 
-router.post('/', upload.any(), function(req, res) {
+router.post('/',middlewares.isLogged, upload.any(), function(req, res) {
 
 	var promises = [];
 
@@ -18,33 +21,36 @@ router.post('/', upload.any(), function(req, res) {
 		res.redirect('/files?message=Files correctly upload');
 	}, function(err) {
 		console.log(err);
-		res.redirect('/playlists?message=Files can\'t be upload');
+		res.redirect('/files?message=Files can\'t be upload');
 	});
 });
 
-router.get('/new', function(req, res) {
-	res.render('files/new', {
-		title: 'Shopcast - Playlists',
-		titleContent: 'New playlist',
-		active: '/playlists',
-		menu: menu
-	});
-});
+router.get('/', middlewares.isLogged, middlewares.language, function( req, res ) {
 
-router.get('/', function(req, res) {
 	var promises = [];
 
 	promises.push(Rest.get('file'));
 
 	Promise.all(promises).then(function(values) {
+		
 		var files = values[0].body.files;
+		values[0].body.files.forEach(function(element,index,array){
+			if ( files[index].tags != null )
+				files[index].tags = element.tags.split(",");
 
-		res.render('files/index', {
-			title: 'Shopcast - Files',
-			titleContent: 'My files (' + files.length + ')',
-			active: '/files',
+			files[index].size = humanize.filesize(files[index].size);
+		});
+
+		res.render('files', {
+			title: 'My Files ('+files.length+')',
+			titleContent: 'You can manage all of your files from here',
+			active: 'files',
+			menu: menu,
 			files: files,
-			menu: menu
+			isLogged: true,
+			isSearchBar: true,
+			user: req.session.user,
+			translate : translate.getWordsByPage( req.cookies.language, "SignIn" ),
 		});
 	}, function(err) {
 		console.log(err);
