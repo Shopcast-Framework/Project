@@ -2,6 +2,11 @@
 
 var auth    = require('../auth');
 
+var SessionDelete = function(req, res) {
+    req.logout();
+    return res.status(200).send({message: 'ok'});
+}
+
 var SessionGet = function(req, res) {
     req = res;
     console.log('SESSION GET');
@@ -46,7 +51,8 @@ var SessionController = {
     get     : SessionGet,
     post    : SessionPost,
     getOne  : SessionGetOne,
-    option  : SessionOption
+    option  : SessionOption,
+    delete  : SessionDelete
 };
 
 module.exports = SessionController;

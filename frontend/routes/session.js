@@ -30,8 +30,13 @@ var onError = function(req, res, datas) {
     res.redirect('/signin?message=' + response.message);
 };
 
-Router.post('/', function( req, res ) {
+Router.get('/logout', function(req, res) {
+    Rest.delete('session').then(function() {
+        res.redirect('/signin');
+    });
+});
 
+Router.post('/', function(req, res) {
     Rest.post('session', JSON.stringify(req.body))
     .then(function(datas) {
         onSuccess(req, res, datas);

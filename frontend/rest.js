@@ -77,6 +77,10 @@ var Rest = function() {
         return self.call('post', resource, body);
     };
 
+    self.delete = function(resource, body) {
+        return self.call('delete', resource, body);
+    };
+
     return this;
 };
 

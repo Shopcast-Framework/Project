@@ -10,10 +10,11 @@ var middlewares = require('../middlewares');
 router.post('/', function(req, res) {
 
 	Rest.post('playlist', JSON.stringify(req.body)).then(function(response) {
+		console.log(response);
 		res.redirect('/playlists?message=' + response.body.message);
 	}, function(err) {
 		console.log(err);
-		res.redirect('/playlists?message=' + err.message);
+		res.redirect('/playlists?message=' + err.body.message);
 	});
 });
 
@@ -67,7 +68,7 @@ router.get('/', middlewares.isLogged, function( req, res ) {
 
 	var promises = [];
 
-	promises.push( Rest.get( 'playlist' ) );
+	promises.push(Rest.get('playlist'));
 
 	Promise.all(promises).then(function(values) {
 		
@@ -92,4 +93,3 @@ router.get('/', middlewares.isLogged, function( req, res ) {
 });
 
 module.exports = router;
-

@@ -41,6 +41,9 @@ function RouteLoader(app) {
     };
 
     self.route = function(verb, route, controller, action, middlewares) {
+        if (controller[action] === undefined) {
+            return ;
+        }
         console.log('[' + verb + '] :', route);
         self.api[verb](route, Middlewares.load(action, middlewares), controller[action]);
     };
@@ -50,6 +53,7 @@ function RouteLoader(app) {
         self.route('get', root, controller, 'get', middlewares);
         self.route('post', root, controller, 'post', middlewares);
         self.route('get', root + '/:id', controller, 'getOne', middlewares);
+        self.route('delete', root, controller, 'delete', middlewares);
     };
 
     self.init(app);
