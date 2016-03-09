@@ -15,7 +15,8 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 		isLogged: true,
 		isSearchBar: false,
 		user: req.session.user,
-		translate : translate.getWordsByPage( req.cookies.language, "SignIn" ),
+		translate : translate.getWordsByPage( req.cookies.language, "Settings" ),
+		language: req.cookies.language
 	});
 
 	// var promises = [];

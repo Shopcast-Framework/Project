@@ -9,14 +9,52 @@
     "byGoogle" : "connect with Google",
     "youCanChoose" : "Or you can use..."
   },
+  "Dashboard": {
+    "title": "Dashboard"
+  },
   "Playlists": {
     "title": "My playlists (%)",
-    "subTitle": "You can manage all of your files from here",
     "btnCreate": "Create a new playlist",
+    "newPlaylist": "New playlist",
     "search" : "Search",
     "name" : "Name",
     "description" : "Description",
     "frequency" : "Frequency",
-    "tags" : "Tags"
+    "tags" : "Tags",
+    "btnAdd": "Ajouter",
+    "btnCancel": "Annuler"
+  },
+  "Files": {
+    "title": "My fichiers (%)",
+    "btnCreate": "add a new file",
+    "newFile": "New file",
+    "search" : "Search",
+    "name" : "Name",
+    "nameOriginal" : "Original",
+    "description" : "Description",
+    "type" : "Type",
+    "size" : "Size",
+    "tags" : "Tags",
+    "btnAdd": "Add",
+    "btnCancel": "Cancel"
+  },
+  "Settings": {
+    "title": "Settings",
+    "tabGeneral": "General",
+    "tabTranslate": "Translate"
+  },
+  "Language": {
+    "title": "Langages disponible",
+    "btn": "Ok",
+    "language": "language"
+  },
+  "Menu": {
+    "dashboard": "Dashboard",
+    "files": "My files",
+    "playlists": "My playlists",
+    "display": "Display",
+    "settings": "Settings",
+    "myAccount": "My account",
+    "logout": "Log out"
   }
 }

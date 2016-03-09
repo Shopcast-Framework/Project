@@ -9,14 +9,52 @@
     "byGoogle" : "connexion via Google",
     "youCanChoose" : "Ou vous pouvez utiliser..."
   },
+  "Dashboard": {
+    "title": "Tableau de bord"
+  },
   "Playlists": {
     "title": "Mes playlists (%)",
-    "subTitle": "Gérer toutes vos playlists",
     "btnCreate": "Créer une nouvelle playlist",
+    "newPlaylist": "Nouvelle playlist",
     "search" : "Rechercher",
     "name" : "Nom",
     "description" : "Description",
     "frequency" : "Fréquence",
-    "tags" : "Tags"
+    "tags" : "Tags",
+    "btnAdd": "Ajouter",
+    "btnCancel": "Annuler"
+  },
+  "Files": {
+    "title": "Mes fichiers (%)",
+    "btnCreate": "Ajouter un nouveau fichier",
+    "newFile": "Nouveau fichier",
+    "search" : "Rechercher",
+    "name" : "Nom",
+    "nameOriginal" : "Original",
+    "description" : "Description",
+    "type" : "Type",
+    "size" : "Poids",
+    "tags" : "Tags",
+    "btnAdd": "Ajouter",
+    "btnCancel": "Annuler"
+  },
+  "Settings": {
+    "title": "Configuration",
+    "tabGeneral": "Général",
+    "tabTranslate": "Traduction"
+  },
+  "Language": {
+    "title": "Langues disponible",
+    "btn": "Ok",
+    "language": "langue"
+  },
+  "Menu": {
+    "dashboard": "Tableau de bord",
+    "files": "Mes fichiers",
+    "playlists": "Mes playlists",
+    "display": "Moniteurs",
+    "settings": "Configuration",
+    "myAccount": "Mon compte",
+    "logout": "Déconnexion"
   }
 }

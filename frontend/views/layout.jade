@@ -19,11 +19,11 @@ html(lang='fr')
 								for m in menu
 									if active == m.url
 										li.active
-											a(href="#{m.url}")= m.name
+											a(href="#{m.url}") #{translate.Menu[m.name]}
 												i(class="material-icons left")= m.icon
 									else
 										li
-											a(href="#{m.url}")= m.name
+											a(href="#{m.url}") #{translate.Menu[m.name]}
 												i(class="material-icons left")= m.icon
 
 								li.user
@@ -37,10 +37,10 @@ html(lang='fr')
 										i(class="material-icons left") lock
 						ul(id="dropdown-user" class="dropdown-content")
 							li
-								a(href="#!" class="light-blue-text") My account
+								a(href="#!" class="light-blue-text") #{translate.Menu.myAccount}
 									i(class="material-icons left") person
 							li
-								a(href="session/logout" class="red-text") Log out
+								a(href="session/logout" class="red-text") #{translate.Menu.logout}
 									i(class="material-icons left") exit_to_app
 					div.title #{translate.title}
 		section#main
@@ -49,26 +49,26 @@ html(lang='fr')
 					nav(class="white")
 						div(class="nav-wrapper container row")
 							div(class="input-field col s12")
-								input(aria-invalid="false" id="search" placeholder="Search" class="white" type="search")
+								input(aria-invalid="false" id="search" placeholder="#{translate.search}" class="white" type="search")
 								label(for="search")
 									i(class="material-icons grey-text") search
 								i(class="material-icons") close
 			article.container
 				block content
-		div#language-select
-			a(class="waves-effect waves-light btn-flat modal-trigger" href="#modal-language" title="change language")
+		div#language-select.z-depth-1
+			a(class="waves-effect waves-light modal-trigger" href="#modal-language" title="language")
+				span #{translate.Language.language}
 				img(src="public/images/countries/#{language}.png")
-		div(id="modal-language" class="modal")
+		div(id="modal-language" class="modal light-box")
+			h4(class="center-align light-blue") #{translate.Language.title}
 			div(class="modal-content")
-				h4 List of available countries
-				p
-					ul.listing-countries
-						each val, index in translate.listing
-							li.country
-								a(href="?language=#{index}")
-									img(src="#{val}")
+				ul.listing-countries
+					each val, index in translate.listing
+						li.country
+							a(href="?language=#{index}")
+								img(src="#{val}")
 			div(class="modal-footer")
-				a(href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat") Agree
+				a(href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat") #{translate.Language.btn}
 		script(type='text/javascript', src='js/jquery-v2.1.1.min.js')
 		script(type='text/javascript', src='js/nouislider.min.js')
 		script(type='text/javascript', src='js/materialize.min.js')

@@ -20,14 +20,18 @@ var Language = function() {
     self.getWordsByPage = function ( language, page, values ) {
     	if ( values !== null && values !== undefined )
     	{
-    		console.log("hello");
     		for( var val in values ) {
     			languages[ language ][ page ][ val ] = languages[ language ][ page ][ val ].replace( "%", values[ val ] );
-    			console.log("helloss");
     		}
-    		console.log("hellozz");
     	}
+
+    	// Add languages listing
     	languages[ language ][ page ].listing = self.listing();
+    	languages[ language ][ page ].Language = languages[ language ][ "Language" ];
+
+    	// Add menu
+    	languages[ language ][ page ].Menu = languages[ language ][ "Menu" ];
+
         return languages[ language ][ page ];
     };
 

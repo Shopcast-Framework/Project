@@ -42,15 +42,14 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 		});
 
 		res.render('files', {
-			title: 'My Files ('+files.length+')',
-			titleContent: 'You can manage all of your files from here',
 			active: 'files',
 			menu: menu,
 			files: files,
 			isLogged: true,
 			isSearchBar: true,
 			user: req.session.user,
-			translate : translate.getWordsByPage( req.cookies.language, "SignIn" ),
+			translate : translate.getWordsByPage( req.cookies.language, "Files", { title: files.length } ),
+			language: req.cookies.language
 		});
 	}, function(err) {
 		console.log(err);

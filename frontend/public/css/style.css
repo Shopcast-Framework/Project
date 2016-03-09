@@ -64,14 +64,32 @@ body, html{
 }
 
 #language-select{
-	width: 100px;
+	width: 120px;
 	position: fixed;
-	bottom: 15px;
-	right: -10px;
+	bottom: 0;
+	right: 0;
+	height: 40px;
+}
+
+#language-select > a{
+	width: 100%;
+	position: relative;
+	height: 100%;
+}
+
+#language-select span{
+	position: absolute;
+	top: 8px;
+	left: 12px;
+	font-size: 15px;
+	color: #333;
 }
 
 #language-select img{
-	width: 40px;
+	position: absolute;
+	width: 30px;
+	right: 12px;
+	top: 5px;
 }
 
 /*******************************************************************
@@ -109,7 +127,6 @@ body, html{
 #main{
 	width: 100%;
 	background-color: #FFF;
-	height: 100%;
 }
 
 #main header.actions{
@@ -137,7 +154,6 @@ body, html{
 	padding: 0 25px;
 	padding-bottom: 20px;
 	height: 100%;
-	overflow: auto;
 	margin-bottom: 88px
 }
 
@@ -173,6 +189,20 @@ body, html{
 
 .light-box .modal-content .actions .btn{
 	margin: 0 10px;
+}
+
+#modal-language .listing-countries{
+	text-align: center;
+}
+
+#modal-language .listing-countries .country{
+	display: inline-block;
+	width: 40px;
+	margin: 0 10px;
+}
+
+#modal-language .listing-countries .country img{
+	width: 40px;
 }
 
 /***************************************************************************

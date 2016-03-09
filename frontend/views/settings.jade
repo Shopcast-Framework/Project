@@ -6,8 +6,19 @@ block content
 			div.col.s12
 				ul.tabs
 					li(class="tab col s3")
-						a(href="#general") General
+						a(href="#general") #{translate.tabGeneral}
 					li(class="tab col s3")
-						a(href="#translate") Translate
+						a(href="#translate") #{translate.tabTranslate}
 			div(id="general" class="col s12") Test 1
-			div(id="translate" class="col s12") Translate
+			div(id="translate" class="col s12") 
+				ul(class="collapsible" data-collapsible="accordion")
+					li
+						div(class="collapsible-header") First
+							i(class="material-icons") filter_drama
+						div(class="collapsible-body")
+							p Lorem ipsum dolor sit amet.
+					li
+						div(class="collapsible-header") First
+							i(class="material-icons") filter_drama
+						div(class="collapsible-body")
+							p Lorem ipsum dolor sit amet.

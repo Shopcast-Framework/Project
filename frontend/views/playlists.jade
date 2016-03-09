@@ -2,7 +2,7 @@ extends layout
 
 block content
 	header.actions
-			button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="new-element") Create a new playlist
+			button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="new-element") #{translate.btnCreate}
 				i.material-icons.left add
 	article.wrapper-content#playlists
 		form
@@ -10,10 +10,10 @@ block content
 				thead
 					tr
 						th #
-						th name
-						th description
-						th frequency
-						th tags
+						th #{translate.name}
+						th #{translate.description}
+						th #{translate.frequency}
+						th #{translate.tags}
 						th
 				tbody
 					each playlist, index in playlists
@@ -34,28 +34,28 @@ block content
 								button(class="red btn-floating waves-effect waves-circle waves-light")
 									i.material-icons delete
 	div(id="new-element" class="modal light-box")
-		h4(class="center-align light-blue") Add a new playlist
+		h4(class="center-align light-blue") #{translate.newPlaylist}
 		div(class="modal-content")
 			form(class="row" action='/playlists', method='post')
 				div.input-field.col.s12
 					i(class="material-icons prefix") edit
 					input(type='text' name='name' id="username")
-					label(for="username") Name
+					label(for="username") #{translate.name}
 				div.input-field.col.s12
 					i(class="material-icons prefix") description
 					input(type='text', name='description' id="description")
-					label(for="description") Description
+					label(for="description") #{translate.description}
 				div.input-field.col.s12
 					i(class="material-icons prefix") autorenew
 					input(type='text', name='frequency' id="frequency")
-					label(for="frequency") Frequency
+					label(for="frequency") #{translate.frequency}
 				div.input-field.col.s12
 					i(class="material-icons prefix") note
 					input(type='text', name='tags' id="tags")
-					label(for="tags") Tags
+					label(for="tags") #{translate.tags}
 				div.input-field.col.s12.actions.right-align
-					button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") Add
+					button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") #{translate.btnAdd}
 						i(class="material-icons left") done
-					a(href="#!" class="modal-action modal-close btn btn-large red darken-1 white-text waves-effect waves-light") Cancel
+					a(href="#!" class="modal-action modal-close btn btn-large red darken-1 white-text waves-effect waves-light") #{translate.btnCancel}
 						i(class="material-icons left") cancel
 			
