@@ -34,8 +34,6 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 		});
 
 		res.render('user/list', {
-			title: 'Users ('+users.length+')',
-			titleContent: 'You can manage all users from here',
 			active: 'users',
 			menu: menu,
 			users: users,

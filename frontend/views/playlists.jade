@@ -1,10 +1,10 @@
 extends layout
 
 block content
-	header.actions
+	header.actions.container
 			button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="new-element") #{translate.btnCreate}
 				i.material-icons.left add
-	article.wrapper-content#playlists
+	article.wrapper-content.container#playlists
 		form
 			table.listing
 				thead

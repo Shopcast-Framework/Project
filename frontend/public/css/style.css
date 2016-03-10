@@ -69,6 +69,7 @@ body, html{
 	bottom: 0;
 	right: 0;
 	height: 40px;
+	background-color: #FFF;
 }
 
 #language-select > a{
@@ -154,7 +155,7 @@ body, html{
 	padding: 0 25px;
 	padding-bottom: 20px;
 	height: 100%;
-	margin-bottom: 88px
+	margin-bottom: 50px;
 }
 
 #main .wrapper-content .listing .actions{
@@ -203,6 +204,115 @@ body, html{
 #settings #translate .page-list .collapsible-body form{
 	margin: auto;
 }
+
+/*******************************************************************
+********************************************************************
+**************************** Dashboard *****************************
+********************************************************************
+*******************************************************************/
+
+#dashboard{
+	padding-top: 40px !important;
+}
+
+#dashboard .chart-wrapper{
+	text-align: center;
+	padding: 10px;
+}
+
+#dashboard .chart-wrapper .header h4{
+	color: #FFF;
+	padding-bottom: 30px;
+	font-size: 30px;
+	font-weight: 300
+}
+
+#dashboard .chart-wrapper .legends
+{
+	padding-top: 10px;
+}
+
+#dashboard .chart-wrapper .legends .legend {
+	display: inline-block;
+	width: 20%;
+}
+
+#dashboard .chart-wrapper .legends .legend > div{
+	display: inline-block;
+}
+
+#dashboard .chart-wrapper .legends .legend .square{
+	width: 15px;
+	height: 15px;
+}
+
+#dashboard .chart-wrapper .legends .legend .name{
+	font-size: 14px;
+	font-weight: 400;
+	color: #FFF;
+	margin-left: 10px;
+}
+
+#dashboard .chart-wrapper .legends .legend.ct-series-a .square{
+	background-color: #fdd835;
+}
+
+#dashboard .chart-wrapper .legends .legend.ct-series-b .square{
+	background-color: #ef5350;
+}
+
+#dashboard .chart-wrapper .legends .legend.ct-series-c .square{
+	background-color: #69f0ae;
+}
+
+.ct-chart .ct-label.ct-vertical,
+.ct-chart .ct-label.ct-horizontal{
+  	color: #FFF;
+  	font-size: 13px;
+}
+
+.ct-chart .ct-grid.ct-vertical,
+.ct-chart .ct-grid.ct-horizontal {
+  	stroke: rgba(255, 255, 255, 0.3);
+  	shape-rendering: auto;
+}
+
+.ct-chart .ct-series.ct-series-a .ct-line {
+  	stroke: #fdd835;
+  	stroke-width: 6px;
+  	stroke-linecap: round;
+}
+
+.ct-chart .ct-series.ct-series-b .ct-line {
+  	stroke: #ef5350;
+  	stroke-width: 6px;
+  	stroke-linecap: round;
+}
+
+.ct-chart .ct-series.ct-series-c .ct-line {
+  stroke: #69f0ae;
+  stroke-width: 6px;
+  stroke-linecap: round;
+}
+
+.ct-chart .ct-series.ct-series-a .ct-bar{
+	stroke: #fdd835;
+  	stroke-width: 40px;
+  	stroke-linecap: butt;
+}
+
+.ct-chart .ct-series.ct-series-b .ct-bar {
+  	stroke: #ef5350;
+  	stroke-width: 40px;
+  	stroke-linecap: butt;
+}
+
+.ct-chart .ct-series.ct-series-c .ct-bar {
+  stroke: #69f0ae;
+  stroke-width: 40px;
+  stroke-linecap: butt;
+}
+
 
 /*******************************************************************
 ********************************************************************

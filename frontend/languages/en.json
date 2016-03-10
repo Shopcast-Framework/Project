@@ -1,6 +1,7 @@
 {
   "SignIn": {
     "title": "Sign into Shopcast",
+    "tabTitle": "Sign in - Shopcast",
     "connectWith": "You can connect with you e-mail, Facebook or Google account",
     "username" : "Username",
     "password" : "password",
@@ -10,10 +11,12 @@
     "youCanChoose" : "Or you can use..."
   },
   "Dashboard": {
-    "title": "Dashboard"
+    "title": "Dashboard",
+    "tabTitle": "Dashboard - Shopcast"
   },
   "Playlists": {
     "title": "My playlists (%)",
+    "tabTitle": "My playlists - Shopcast",
     "btnCreate": "Create a new playlist",
     "newPlaylist": "New playlist",
     "search" : "Search",
@@ -26,6 +29,7 @@
   },
   "Users": {
     "title": "Users (%)",
+    "tabTitle": "Users - Shopcast",
     "btnCreate": "add a new user",
     "newUser": "Nouvel utilisateur",
     "search" : "Search",
@@ -45,6 +49,7 @@
   },
   "Files": {
     "title": "My files (%)",
+    "tabTitle": "My files - Shopcast",
     "btnCreate": "add a new file",
     "newFile": "New file",
     "search" : "Search",
@@ -59,6 +64,7 @@
   },
   "Settings": {
     "title": "Settings",
+    "tabTitle": "Settings - Shopcast",
     "tabGeneral": "General",
     "tabTranslate": "Translate"
   },

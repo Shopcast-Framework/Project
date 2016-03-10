@@ -1,7 +1,27 @@
 extends layout
 
 block content
-	header.title-content
-		h1= titleContent
-	article.wrapper-content
-		p toto
+	article.wrapper-content.row#dashboard
+		div(class="chart-wrapper chart-header col s7 z-depth-1 light-blue darken-2")
+			div.header
+				h4 Evolution des vues des playlists sur une journée
+			div(class="ct-chart" id="chart-playlist-view")
+			div.legends
+				div.legend.ct-series-a
+					div.square
+					div.name Mon super gâteau
+				div.legend.ct-series-b
+					div.square
+					div.name Nouvelle collection
+				div.legend.ct-series-c
+					div.square
+					div.name Promotions
+			div.footer
+		div(class="chart-wrapper col s4 offset-s1 z-depth-1 light-blue darken-2")
+			div.header
+				h4 Utilisation des moniteurs
+			div(class="ct-chart" id="chart-display")
+			div.footer
+
+block script
+	script(type='text/javascript', src='js/dashboard.js')
