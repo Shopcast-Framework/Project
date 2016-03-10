@@ -24,6 +24,12 @@
 	  "isActive": false
 	},
 	{
+	  "name": "users",
+	  "icon": "person",
+	  "url": "users",
+	  "isActive": true
+	},
+	{
 	  "name": "settings",
 	  "icon": "settings",
 	  "url": "settings",

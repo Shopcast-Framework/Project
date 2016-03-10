@@ -26,17 +26,25 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 	promises.push( Rest.get( 'user' ) );
 
 	Promise.all(promises).then(function(values) {
-		res.render('users', {
-			title: 'Users ('+values[0].body.users.length+')',
+
+		var users = values[0].body.users;
+		values[0].body.users.forEach(function(element,index,array){
+			if ( users[index].avatar == null )
+				users[index].avatar = "public/images/users/default.png";
+		});
+
+		res.render('user/list', {
+			title: 'Users ('+users.length+')',
 			titleContent: 'You can manage all users from here',
 			active: 'users',
 			menu: menu,
-			users: values[0].body.users,
+			users: users,
 			permission: [ "Administrateur", "Client"],
 			isLogged: true,
 			isSearchBar: true,
 			user: req.session.user,
-			translate : translate.getWordsByPage( req.cookies.language, "SignIn" ),
+			translate : translate.getWordsByPage( req.cookies.language, "Users", { title: users.length } ),
+			language: req.cookies.language,
 		});
 	}, function(err) {
 		console.log(err);

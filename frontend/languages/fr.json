@@ -24,6 +24,25 @@
     "btnAdd": "Ajouter",
     "btnCancel": "Annuler"
   },
+  "Users": {
+    "title": "Utilisateurs (%)",
+    "btnCreate": "Ajouter un nouvel utilisateur",
+    "newUser": "Nouvel utilisateur",
+    "search" : "Rechercher",
+    "name" : "Nom",
+    "username" : "Nom d'utilisateur",
+    "email" : "E-mail",
+    "role" : "Rôle",
+    "lastConnection" : "Dernière connexion",
+    "createdAt" : "Crée le",
+    "password": "Mot de passe",
+    "roleAdmin": "Administrateur",
+    "roleClient": "Client",
+    "whatRole": "Quel sera son rôle ?",
+    "sendEmail": "Voulez-vous envoyer les identifiants par e-mail ?",
+    "btnAdd": "Ajouter",
+    "btnCancel": "Annuler"
+  },
   "Files": {
     "title": "Mes fichiers (%)",
     "btnCreate": "Ajouter un nouveau fichier",
@@ -46,13 +65,16 @@
   "Language": {
     "title": "Langues disponible",
     "btn": "Ok",
-    "language": "langue"
+    "language": "langue",
+    "fr": "Français",
+    "en": "Anglais"
   },
   "Menu": {
     "dashboard": "Tableau de bord",
     "files": "Mes fichiers",
     "playlists": "Mes playlists",
     "display": "Moniteurs",
+    "users": "Utilisateurs",
     "settings": "Configuration",
     "myAccount": "Mon compte",
     "logout": "Déconnexion"

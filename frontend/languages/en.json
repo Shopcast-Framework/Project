@@ -24,8 +24,27 @@
     "btnAdd": "Ajouter",
     "btnCancel": "Annuler"
   },
+  "Users": {
+    "title": "Users (%)",
+    "btnCreate": "add a new user",
+    "newUser": "Nouvel utilisateur",
+    "search" : "Search",
+    "name" : "Name",
+    "username" : "Username",
+    "email" : "E-mail",
+    "role" : "Role",
+    "lastConnection" : "Last connection",
+    "createdAt" : "Created at",
+    "password": "Password",
+    "roleAdmin": "Administrator",
+    "roleClient": "Client",
+    "whatRole": "What is his role ?",
+    "sendEmail": "Do you want send an email with the credentials ?",
+    "btnAdd": "Add",
+    "btnCancel": "Cancel"
+  },
   "Files": {
-    "title": "My fichiers (%)",
+    "title": "My files (%)",
     "btnCreate": "add a new file",
     "newFile": "New file",
     "search" : "Search",
@@ -44,9 +63,11 @@
     "tabTranslate": "Translate"
   },
   "Language": {
-    "title": "Langages disponible",
+    "title": "Langages available",
     "btn": "Ok",
-    "language": "language"
+    "language": "language",
+    "fr": "French",
+    "en": "English"
   },
   "Menu": {
     "dashboard": "Dashboard",
@@ -54,6 +75,7 @@
     "playlists": "My playlists",
     "display": "Display",
     "settings": "Settings",
+    "users": "Users",
     "myAccount": "My account",
     "logout": "Log out"
   }

@@ -11,14 +11,22 @@ block content
 						a(href="#translate") #{translate.tabTranslate}
 			div(id="general" class="col s12") Test 1
 			div(id="translate" class="col s12") 
-				ul(class="collapsible" data-collapsible="accordion")
-					li
-						div(class="collapsible-header") First
-							i(class="material-icons") filter_drama
-						div(class="collapsible-body")
-							p Lorem ipsum dolor sit amet.
-					li
-						div(class="collapsible-header") First
-							i(class="material-icons") filter_drama
-						div(class="collapsible-body")
-							p Lorem ipsum dolor sit amet.
+				ul(class="collapsible language-list" data-collapsible="accordion")
+					each val, index in allTranslates
+						li
+							div(class="collapsible-header") 
+								div.valign-wrapper
+									img(src="#{translate.listing[index]}" class="valign")
+								span #{translate.Language[index]}
+							div(class="collapsible-body")
+								ul(class="collapsible container page-list" data-collapsible="accordion")
+									each va, inde in val
+										li
+											div(class="collapsible-header") #{inde}
+												i(class="material-icons") filter_drama
+											div(class="collapsible-body")
+												each v, i in va
+													form(class="row container")
+														div.input-field.col.s12
+															input(type='text' name='name' value="#{v}")
+															label(for="username") #{i}

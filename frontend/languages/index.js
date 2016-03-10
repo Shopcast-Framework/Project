@@ -35,6 +35,10 @@ var Language = function() {
         return languages[ language ][ page ];
     };
 
+    self.getTranslate = function(){
+    	return languages;
+    }
+
     return this;
 };
 
