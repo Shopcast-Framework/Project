@@ -2,9 +2,9 @@ extends layout
 
 block content
 	article.wrapper-content.row#dashboard
-		div(class="chart-wrapper chart-header col s7 z-depth-1 light-blue darken-2")
+		div(class="chart-wrapper chart-header col s7 z-depth-2")
 			div.header
-				h4 Evolution des vues des playlists sur une journée
+				h4 Evolution de l'audience des playlists sur une journée
 			div(class="ct-chart" id="chart-playlist-view")
 			div.legends
 				div.legend.ct-series-a
@@ -16,12 +16,74 @@ block content
 				div.legend.ct-series-c
 					div.square
 					div.name Promotions
-			div.footer
-		div(class="chart-wrapper col s4 offset-s1 z-depth-1 light-blue darken-2")
+		div(class="chart-wrapper col s4 offset-s1 z-depth-2")
 			div.header
 				h4 Utilisation des moniteurs
 			div(class="ct-chart" id="chart-display")
-			div.footer
+		div.divider
+		div(class="table-wrapper center-align col s12")
+			h4 Playlist en cours de lecture
+			table.listing.centered
+				thead
+					tr
+						th #
+						th name
+						th moniteur
+						th temps restant
+						th audience
+						th status
+						th
+				tbody
+					tr.green.accent-2
+						td 4
+						td Meilleure vente
+						td Moniteur 4
+						td 9 minutes
+						td 3
+						td Audience en dessous du seuil défini
+						td.actions
+							button(class="light-blue darken-1 btn-floating waves-effect waves-circle waves-light modal-trigger" data-target="edit-element")
+								i.material-icons pause
+							button(class="light-blue darken-3 btn-floating waves-effect waves-circle waves-light")
+								i.material-icons info
+					tr
+						td 1
+						td Mon super gâteau
+						td Moniteur 2
+						td 15 minutes
+						td 14
+						td OK
+						td.actions
+							button(class="light-blue darken-1 btn-floating waves-effect waves-circle waves-light modal-trigger" data-target="edit-element")
+								i.material-icons pause
+							button(class="light-blue darken-3 btn-floating waves-effect waves-circle waves-light")
+								i.material-icons info
+					tr.yellow.darken-1
+						td 2
+						td Nouvelle collection
+						td Moniteur 1
+						td 3 minutes
+						td 32
+						td Bientôt finie
+						td.actions
+							button(class="light-blue darken-1 btn-floating waves-effect waves-circle waves-light modal-trigger" data-target="edit-element")
+								i.material-icons pause
+							button(class="light-blue darken-3 btn-floating waves-effect waves-circle waves-light")
+								i.material-icons info
+					tr.red.lighten-1
+						td 3
+						td Promotion
+						td Moniteur 3
+						td 9 minutes
+						td 0
+						td Moniteur déconnecté
+						td.actions
+							button(class="light-blue darken-1 btn-floating waves-effect waves-circle waves-light modal-trigger" data-target="edit-element")
+								i.material-icons pause
+							button(class="light-blue darken-3 btn-floating waves-effect waves-circle waves-light")
+								i.material-icons info
 
 block script
+	//link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/magnet.css')
+	//script(type='text/javascript', src='js/magnet.min.js')
 	script(type='text/javascript', src='js/dashboard.js')

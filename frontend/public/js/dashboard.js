@@ -1,4 +1,8 @@
 
+// Manage the grid
+
+//$('#dashboard').magnet();
+
 // Playlists views
 
 var data = {
@@ -12,7 +16,7 @@ var data = {
 
 var options = {
 
-	height:300,
+	height:250,
   	showPoint: false,
   	showArea: true,
   	lineSmooth: false,
@@ -52,7 +56,7 @@ var data = {
 }
 
 var options = {
-	height: 300,
+	height: 250,
   	distributeSeries: true,
   	axisX: {
     	showGrid: false,

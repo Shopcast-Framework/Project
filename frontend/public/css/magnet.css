@@ -1,0 +1,67 @@
+.magnet {
+  width: 100%;
+}
+
+.magnet-filter {
+  margin-bottom: 72px;
+}
+
+.magnet-filter .btn {
+  border: none;
+  color: #414149;
+}
+
+.magnet-filter .btn.active {
+  color: #1CEAC3;
+}
+
+.magnet-item {
+  margin: 0 10px 10px 0;
+}
+
+.magnet-item.w1 {
+  width: 19%;
+}
+
+.magnet-item.w2 {
+  width: 39%;
+}
+
+.magnet-item.w3 {
+  width: 59%;
+}
+
+.magnet-item.w4 {
+  width: 79%;
+}
+
+.magnet-item.h1 {
+  height: 200px;
+}
+
+.magnet-item.h2 {
+  width: 300px;
+}
+
+.magnet-item.h3 {
+  height: 400px;
+}
+
+.magnet-item.h4 {
+  height: 500px;
+}
+
+.magnet-item.h4 {
+  height: 600px;
+}
+
+.magnet-item.even,
+.magnet-item.odd,
+.magnet-item.prime {
+  background-color: transparent;
+  color: #1CEAC3;
+}
+
+div[class*="col-sm-"].dw {
+  width: 50%;
+}

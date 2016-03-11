@@ -20,7 +20,7 @@ body, html{
 *******************************************************************/
 
 #header{
-	padding-bottom: 220px;
+	padding-bottom: 200px;
 }
 
 #header .brand-logo{
@@ -57,7 +57,7 @@ body, html{
 }
 
 #header .title{
-	font-size: 50px;
+	font-size: 45px;
 	font-weight: 300;
 	text-align: center;
 	padding-top: 50px;
@@ -213,6 +213,8 @@ body, html{
 
 #dashboard{
 	padding-top: 40px !important;
+	margin-bottom: 100px !important;
+	height: auto !important;
 }
 
 #dashboard .chart-wrapper{
@@ -220,8 +222,37 @@ body, html{
 	padding: 10px;
 }
 
-#dashboard .chart-wrapper .header h4{
+#dashboard .divider{
+	width: 100%;
+	margin: 50px 0;
+	background-color: transparent;
+	border:none;
+}
+
+#dashboard .table-wrapper{
+	
+}
+
+#dashboard .table-wrapper table th,
+#dashboard .table-wrapper table td{
+	color: #333;
+}
+
+#dashboard .table-wrapper table tr.red td,
+#dashboard .table-wrapper table tr.grey td,
+#dashboard .table-wrapper table tr.orange td{
 	color: #FFF;
+}
+
+#dashboard .table-wrapper h4{
+	color: #333;
+	padding-bottom: 30px;
+	font-size: 30px;
+	font-weight: 300
+}
+
+#dashboard .chart-wrapper .header h4{
+	color: #333;
 	padding-bottom: 30px;
 	font-size: 30px;
 	font-weight: 300
@@ -249,7 +280,7 @@ body, html{
 #dashboard .chart-wrapper .legends .legend .name{
 	font-size: 14px;
 	font-weight: 400;
-	color: #FFF;
+	color: #333;
 	margin-left: 10px;
 }
 
@@ -267,13 +298,13 @@ body, html{
 
 .ct-chart .ct-label.ct-vertical,
 .ct-chart .ct-label.ct-horizontal{
-  	color: #FFF;
+  	color: 333;
   	font-size: 13px;
 }
 
 .ct-chart .ct-grid.ct-vertical,
 .ct-chart .ct-grid.ct-horizontal {
-  	stroke: rgba(255, 255, 255, 0.3);
+  	stroke: rgba(51, 51, 51, 0.3);
   	shape-rendering: auto;
 }
 
