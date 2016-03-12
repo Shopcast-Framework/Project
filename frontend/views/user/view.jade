@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+	header
+		div.avatar-wrapper
+			img(src="#{session.avatar}")
+		div.informations
+		div.sub-informations
+	article.wrapper-content.container.z-depth-2#user-view
+
+block script
+	link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/user-view.css')

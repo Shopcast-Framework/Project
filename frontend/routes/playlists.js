@@ -34,12 +34,12 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 		});
 
 		res.render('playlists', {
-			active: 'playlists',
+			active: '/playlists',
 			menu: menu,
 			playlists: playlists,
 			isLogged: true,
 			isSearchBar: true,
-			user: req.session.user,
+			session: req.session.user,
 			translate : translate.getWordsByPage( req.cookies.language, "Playlists", { title: playlists.length } ),
 			language: req.cookies.language
 		});

@@ -11,13 +11,16 @@ var Language = function() {
 
     self.listing = function(){
     	var listing = {
-    		"fr" : "public/images/countries/fr.png",
-    		"en" : "public/images/countries/en.png",
+    		"fr" : "/public/images/countries/fr.png",
+    		"en" : "/public/images/countries/en.png",
     	};
     	return listing;
     }
 
     self.getWordsByPage = function ( language, page, values ) {
+        if ( languages[ language ][ page ] === undefined )
+            return null;
+
     	if ( values !== null && values !== undefined )
     	{
     		for( var val in values ) {

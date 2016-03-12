@@ -5,18 +5,26 @@ html(lang='fr')
 		meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1.0')
 		title #{translate.tabTitle}
 		link(rel='stylesheet', href='http://fonts.googleapis.com/icon?family=Material+Icons')
-		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/materialize.min.css')
+		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/materialize.css')
 		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/magnet.css')
 		link(href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" rel="stylesheet" type="text/css")
 		link(rel='stylesheet', href='/css/style.css')
 	body
-		header(class="light-blue darken-1" id="header")
-			div.navbar-fixed
-				nav(class="menu light-blue darken-1" role="navigation")
+		header(class="light-blue" id="header")
+			div
+				nav(class="menu light-blue" role="navigation")
 					div(class="nav-wrapper")
-						a(id="logo-container" href="/" class="brand-logo") Logo
-						ul(class="right hide-on-med-and-down")
-							if isLogged
+						if isLogged
+							a(href="!#" data-activates="slide-out" class="button-collapse show-on-large light-blue")
+								i(class="mdi-navigation-menu")
+							ul(class="side-nav" id="slide-out")
+								li.user.light-blue.z-depth-1
+									a(class="valign-wrapper" href="/users/#{session.id}")
+										
+										div.informations
+											p #{session.name}
+									a(href="/session/logout" title="#{translate.Menu.logout}" class="red darken-1 btn-floating waves-effect waves-light logout dont-apply-btn")
+										i.material-icons.dont-apply-icon exit_to_app
 								for m in menu
 									if active == m.url
 										li.active
@@ -26,39 +34,26 @@ html(lang='fr')
 										li
 											a(href="#{m.url}") #{translate.Menu[m.name]}
 												i(class="material-icons left")= m.icon
-
-								li.user
-									a(class="dropdown-button valign-wrapper" href="#!" data-activates="dropdown-user") 
-										img(src="#{user.avatar}" class="circle responsive-img avatar")
-										span #{user.name}
-										i(class="material-icons right valign") arrow_drop_down
-							else
-								li
-									a(href="#")
-										i(class="material-icons left") lock
-						ul(id="dropdown-user" class="dropdown-content")
-							li
-								a(href="#!" class="light-blue-text") #{translate.Menu.myAccount}
-									i(class="material-icons left") person
-							li
-								a(href="session/logout" class="red-text") #{translate.Menu.logout}
-									i(class="material-icons left") exit_to_app
+						else
+							a(href="#" class="lock")
+								i(class="material-icons left") lock
 					div.title #{translate.title}
 		section#main
 			if isSearchBar
-				article.search-wrapper.z-depth-1
-					nav(class="white")
+				article.search-wrapper
+					nav(class="white z-depth-01")
 						div(class="nav-wrapper container row")
 							div(class="input-field col s12")
 								input(aria-invalid="false" id="search" placeholder="#{translate.search}" class="white" type="search")
 								label(for="search")
 									i(class="material-icons grey-text") search
 								i(class="material-icons") close
+				div.substitute
 			block content
 		div#language-select.z-depth-1
 			a(class="waves-effect waves-light modal-trigger" href="#modal-language" title="language")
 				span #{translate.Language.language}
-				img(src="public/images/countries/#{language}.png")
+				img(src="/public/images/countries/#{language}.png")
 		div(id="modal-language" class="modal light-box")
 			h4(class="center-align light-blue") #{translate.Language.title}
 			div(class="modal-content")

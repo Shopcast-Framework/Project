@@ -18,6 +18,33 @@
 		})
 	})
 
+	// Init substitue
+	$( "#main .substitute" ).css( "height", $( "#main .search-wrapper" ).height() );
+	$( "#main .substitute" ).css( "display", "none" );
+
+	// Watch the scroll
+	$( window ).scroll( function() {
+		var searchBar = $( "#main .search-wrapper" );
+		var substitute = $( "#main .substitute" );
+
+		var top = searchBar.offset().top;
+		if ( searchBar.hasClass( "fixed" ) )
+			top = substitute.offset().top
+
+    	if ( ( top - $( window ).scrollTop() ) <= 0 )
+    	{
+    		substitute.css( "display", "block" ); 
+    		searchBar.addClass( "fixed" );
+    		searchBar.children( "nav" ).removeClass( "z-depth-01" ).addClass( "z-depth-1" );
+    	}
+    	else
+    	{
+    		substitute.css( "display", "none" ); 
+    		searchBar.removeClass( "fixed" );
+    		searchBar.children( "nav" ).removeClass( "z-depth-1" ).addClass( "z-depth-01" );
+    	}
+	});
+
 	// Create toast for message
 	var message = getURLParameter( "message" );
 	if ( message !== null && message !== undefined )

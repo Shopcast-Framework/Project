@@ -42,12 +42,12 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 		});
 
 		res.render('files', {
-			active: 'files',
+			active: '/files',
 			menu: menu,
 			files: files,
 			isLogged: true,
 			isSearchBar: true,
-			user: req.session.user,
+			session: req.session.user,
 			translate : translate.getWordsByPage( req.cookies.language, "Files", { title: files.length } ),
 			language: req.cookies.language
 		});

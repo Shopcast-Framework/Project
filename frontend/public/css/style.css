@@ -7,7 +7,7 @@
 body, html{
 	margin: 0;
 	padding: 0;
-	background-color: #FFF;
+	background-color: #F9F9F9;
 	width: 100%;
 	height: 100%;
 }
@@ -20,7 +20,11 @@ body, html{
 *******************************************************************/
 
 #header{
-	padding-bottom: 200px;
+	padding-bottom: 140px;
+}
+
+#header nav{
+	background-color: transparent;
 }
 
 #header .brand-logo{
@@ -45,22 +49,70 @@ body, html{
 }
 
 #header .menu .user{
+	padding: 0;
+	position: relative;
 }
 
-#header .menu .user a{
-	font-size: 15px;
+#header .menu .side-nav{
+	z-index: 1000;
+}
+
+#header .menu .side-nav li{
+	padding: 0;
+}
+
+#header .menu .user > a:not(.dont-apply-btn){
+	padding: 0;
+	height: 204px;
+	position: relative;
+}
+
+#header .menu .user .logout{
+	position: absolute;
+	bottom: 15px;
+	right: 15px;
 }
 
 #header .menu .user .avatar{
-	width: 45px;
-	margin-right: 10px;
+	width: 30%;
+	position: absolute;
+	left: 35%;
+	top: 30px;
+}
+
+#header .menu .user .informations{
+	position: absolute;
+	color: #F9F9F9;
+	text-align: center;
+	bottom: 0px;
+	font-size: 16px;
+	font-weight: 500;
+	left: 16px;
+}
+
+#header .menu .user .informations p{
+	margin: 0;
+}
+
+#header .menu .button-collapse{
+	position: fixed;
+	top: 0px;
+	left: 0;
+	z-index: 999;
+	width: 60px;
+	text-align: center;
+}
+
+#header .menu .lock{
+	margin-left: 15px;
+	display: block;
 }
 
 #header .title{
 	font-size: 45px;
 	font-weight: 300;
 	text-align: center;
-	padding-top: 50px;
+	padding-top: 5px;
 }
 
 #language-select{
@@ -70,6 +122,7 @@ body, html{
 	right: 0;
 	height: 40px;
 	background-color: #FFF;
+	z-index: 9999
 }
 
 #language-select > a{
@@ -127,7 +180,15 @@ body, html{
 
 #main{
 	width: 100%;
-	background-color: #FFF;
+	background-color: transparent;
+}
+
+#main .search-wrapper.fixed{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	left: 0;
+	z-index: 100;
 }
 
 #main header.actions{
@@ -167,7 +228,7 @@ body, html{
 }
 
 #main .wrapper-content .listing td img{
-	width: 55px;
+	width: 45px;
 }
 
 #main .wrapper-content .listing td .chip{
@@ -236,11 +297,13 @@ body, html{
 #dashboard .table-wrapper table th,
 #dashboard .table-wrapper table td{
 	color: #333;
+	font-weight: 500;
 }
 
+#dashboard .table-wrapper table tr.amber td,
 #dashboard .table-wrapper table tr.red td,
-#dashboard .table-wrapper table tr.grey td,
-#dashboard .table-wrapper table tr.orange td{
+#dashboard .table-wrapper table tr.orange td,
+#dashboard .table-wrapper table tr.green td{
 	color: #FFF;
 }
 
@@ -383,6 +446,11 @@ body, html{
 ************************** Materialize overwrite ***************************
 ****************************************************************************
 ***************************************************************************/
+
+
+.z-depth-01{
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
 
 .modal{
 	max-height: 90%;

@@ -2,19 +2,19 @@
 	{
 	  "name": "dashboard",
 	  "icon": "dashboard",
-	  "url": "dashboards",
+	  "url": "/dashboards",
 	  "isActive": true
 	},
 	{
 	  "name": "files",
 	  "icon": "attach_file",
-	  "url": "files",
+	  "url": "/files",
 	  "isActive": true
 	},
 	{
 	  "name": "playlists",
 	  "icon": "folder",
-	  "url": "playlists",
+	  "url": "/playlists",
 	  "isActive": true
 	},
 	{
@@ -26,13 +26,13 @@
 	{
 	  "name": "users",
 	  "icon": "person",
-	  "url": "users",
+	  "url": "/users",
 	  "isActive": true
 	},
 	{
 	  "name": "settings",
 	  "icon": "settings",
-	  "url": "settings",
+	  "url": "/settings",
 	  "isActive": true
 	}
 ]

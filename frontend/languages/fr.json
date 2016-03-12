@@ -47,6 +47,9 @@
     "btnAdd": "Ajouter",
     "btnCancel": "Annuler"
   },
+  "User": {
+
+  },
   "Files": {
     "title": "Mes fichiers (%)",
     "tabTitle": "Mes fichiers - Shopcast",

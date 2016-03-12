@@ -14,11 +14,11 @@ router.get('/', middlewares.isLogged, middlewares.language, function(req, res){
 	// console.log(req.session.user);
 	
 	res.render('dashboards', { 
-			active: 'dashboards', 
+			active: '/dashboards', 
 			menu: menu, 
 			isLogged: true, 
 			isSearchBar: false,
-			user: req.session.user,
+			session: req.session.user,
 			translate : translate.getWordsByPage( req.cookies.language, "Dashboard" ),
 			language: req.cookies.language
 	});

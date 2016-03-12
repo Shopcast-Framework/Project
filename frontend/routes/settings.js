@@ -10,11 +10,11 @@ var translate = require('../languages');
 router.get('/', middlewares.isLogged, middlewares.language, function( req, res ) {
 
 	res.render('settings', {
-		active: 'settings',
+		active: '/settings',
 		menu: menu,
 		isLogged: true,
 		isSearchBar: false,
-		user: req.session.user,
+		session: req.session.user,
 		translate : translate.getWordsByPage( req.cookies.language, "Settings" ),
 		language: req.cookies.language,
 		allTranslates: translate.getTranslate()

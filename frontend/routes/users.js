@@ -19,6 +19,34 @@ router.post('/',middlewares.isLogged, function(req, res) {
 
 });
 
+router.get('/:id', middlewares.isLogged, middlewares.language, function( req, res ) {
+
+	var promises = [];
+
+	promises.push( Rest.get( 'user/' + req.params.id ) );
+
+	Promise.all(promises).then(function(values) {
+
+		var user = values[0].body.user;
+
+		if ( user.avatar == null )
+			user.avatar = "public/images/users/default.png";
+
+		res.render('user/view', {
+			active: '',
+			menu: menu,
+			user: user,
+			isLogged: true,
+			isSearchBar: false,
+			session: req.session.user,
+			translate : translate.getWordsByPage( req.cookies.language, "User" ),
+			language: req.cookies.language,
+		});
+	}, function(err) {
+		console.log(err);
+	});
+});
+
 router.get('/', middlewares.isLogged, middlewares.language, function( req, res ) {
 
 	var promises = [];
@@ -34,13 +62,13 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 		});
 
 		res.render('user/list', {
-			active: 'users',
+			active: '/users',
 			menu: menu,
 			users: users,
 			permission: [ "Administrateur", "Client"],
 			isLogged: true,
 			isSearchBar: true,
-			user: req.session.user,
+			session: req.session.user,
 			translate : translate.getWordsByPage( req.cookies.language, "Users", { title: users.length } ),
 			language: req.cookies.language,
 		});

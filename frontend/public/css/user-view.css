@@ -1,0 +1,21 @@
+body, html{
+	background: url( "../images/background.jpg" );
+	background-size: cover;
+	background-position: center center;
+}
+
+#header{ 
+	background-color: transparent !important; 
+}
+
+#header nav{
+	box-shadow: 0 8px 17px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+#main{
+	background-color: transparent;
+}
+
+#main .wrapper-content{
+	background-color: #FFF;
+}
