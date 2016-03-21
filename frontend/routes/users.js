@@ -36,10 +36,11 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 			active: '',
 			menu: menu,
 			user: user,
+			permission: [ "Administrateur", "Client" ],
 			isLogged: true,
 			isSearchBar: false,
 			session: req.session.user,
-			translate : translate.getWordsByPage( req.cookies.language, "User" ),
+			translate : translate.getWordsByPage( req.cookies.language, "User", { title: user.name, tabTitle: user.name } ),
 			language: req.cookies.language,
 		});
 	}, function(err) {

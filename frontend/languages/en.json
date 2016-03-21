@@ -47,6 +47,10 @@
     "btnAdd": "Add",
     "btnCancel": "Cancel"
   },
+  "User": {
+    "title": "%",
+    "tabTitle": "% - Shopcast"
+  },
   "Files": {
     "title": "My files (%)",
     "tabTitle": "My files - Shopcast",
@@ -80,6 +84,7 @@
     "files": "My files",
     "playlists": "My playlists",
     "display": "Display",
+    "explore": "Explore",
     "settings": "Settings",
     "users": "Users",
     "myAccount": "My account",

@@ -2,7 +2,7 @@ extends layout
 
 block content
 	article.wrapper-content.row#dashboard
-		div(class="chart-wrapper chart-header col s7 z-depth-2")
+		div(class="chart-wrapper chart-header col s7 z-depth-1")
 			div.header
 				h4 Evolution de l'audience des playlists sur une journée
 			div(class="ct-chart" id="chart-playlist-view")
@@ -16,7 +16,7 @@ block content
 				div.legend.ct-series-c
 					div.square
 					div.name Promotions
-		div(class="chart-wrapper col s4 offset-s1 z-depth-2")
+		div(class="chart-wrapper col s4 offset-s1 z-depth-1")
 			div.header
 				h4 Utilisation des moniteurs
 			div(class="ct-chart" id="chart-display")
@@ -86,4 +86,5 @@ block content
 block script
 	//link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/magnet.css')
 	//script(type='text/javascript', src='js/magnet.min.js')
+	script(src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js")
 	script(type='text/javascript', src='js/dashboard.js')

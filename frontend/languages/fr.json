@@ -38,7 +38,7 @@
     "email" : "E-mail",
     "role" : "Rôle",
     "lastConnection" : "Dernière connexion",
-    "createdAt" : "Crée le",
+    "createdAt" : "Membre depuis",
     "password": "Mot de passe",
     "roleAdmin": "Administrateur",
     "roleClient": "Client",
@@ -48,7 +48,17 @@
     "btnCancel": "Annuler"
   },
   "User": {
-
+    "title": "%",
+    "tabTitle": "% - Shopcast",
+    "name" : "Nom",
+    "username" : "Nom d'utilisateur",
+    "email" : "E-mail",
+    "role" : "Rôle",
+    "lastConnection" : "Dernière connexion",
+    "createdAt" : "Membre depuis",
+    "shopCreatedAt" : "Crée le",
+    "phone": "Téléphone",
+    "address": "Adresse"
   },
   "Files": {
     "title": "Mes fichiers (%)",
@@ -84,6 +94,7 @@
     "playlists": "Mes playlists",
     "display": "Moniteurs",
     "users": "Utilisateurs",
+    "explore": "Explore",
     "settings": "Configuration",
     "myAccount": "Mon compte",
     "logout": "Déconnexion"

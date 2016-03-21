@@ -20,7 +20,7 @@ html(lang='fr')
 							ul(class="side-nav" id="slide-out")
 								li.user.light-blue.z-depth-1
 									a(class="valign-wrapper" href="/users/#{session.id}")
-										
+										img(src="#{session.avatar}" class="circle responsive-img avatar z-depth-1")
 										div.informations
 											p #{session.name}
 									a(href="/session/logout" title="#{translate.Menu.logout}" class="red darken-1 btn-floating waves-effect waves-light logout dont-apply-btn")
@@ -64,8 +64,8 @@ html(lang='fr')
 								img(src="#{val}")
 			div(class="modal-footer")
 				a(href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat") #{translate.Language.btn}
-		script(type='text/javascript', src='js/jquery-v2.1.1.min.js')
-		script(type='text/javascript', src='js/materialize.min.js')
-		script(src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js")
-		script(type='text/javascript', src='js/init.js')
+		script(type='text/javascript', src='/js/jquery-v2.1.1.min.js')
+		script(type='text/javascript', src='/js/materialize.min.js')
+		//script(src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js")
+		script(type='text/javascript', src='/js/init.js')
 		block script

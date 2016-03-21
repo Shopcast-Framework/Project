@@ -74,10 +74,11 @@ body, html{
 }
 
 #header .menu .user .avatar{
-	width: 30%;
+	width: 31%;
 	position: absolute;
 	left: 35%;
 	top: 30px;
+	border: 4px solid #FFF;
 }
 
 #header .menu .user .informations{
@@ -233,6 +234,63 @@ body, html{
 
 #main .wrapper-content .listing td .chip{
 	margin: 0 5px; 
+}
+
+#main .wrapper-no-header{
+	margin-top: 40px;
+}
+
+/*******************************************************************
+********************************************************************
+******************************* User *******************************
+********************************************************************
+*******************************************************************/
+
+#user-view .informations-wrapper{
+	position: relative;
+}
+
+#user-view .informations-wrapper h4{
+	color: #333;
+	border-bottom: 1px solid #CCC;
+	font-weight: 300;
+	font-size: 34px;
+	margin: 20px 0;
+}
+
+#user-view .informations-wrapper .btn-edit{
+	position: absolute;
+	top: 10px;
+	right: 11px;
+}
+
+#user-view .informations-wrapper .informations{
+	margin-top: 25px;
+}
+
+#user-view .informations-wrapper .informations .item{
+	width: 100%;
+	font-size: 0;
+	padding: 3px 15px;
+}
+
+#user-view .informations-wrapper .informations .item > div{
+	display: inline-table;
+	width: 50%;
+}
+
+#user-view .informations-wrapper .informations .item .key{
+	font-weight: 500;
+	font-size: 19px;
+	color: #333;
+	text-align: left;
+}
+
+#user-view .informations-wrapper .informations .item .value{
+	font-weight: 300;
+	font-size: 16px;
+	color: #333;
+	text-align: right;
 }
 
 
