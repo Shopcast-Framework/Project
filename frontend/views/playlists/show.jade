@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+	header.title-content
+		h1= titleContent
+		div.actions
+	article.wrapper-content#playlists
+		form(action='/playlists/#{playlist.id}', method='post')
+			input(type='text' name='name' placeholder='Name' value='#{playlist.name}')
+			input(type='text', name='description' placeholder='Description' value='#{playlist.description}')
+			input(type='text', name='frequency', placeholder='Frequency' value='#{playlist.frequency}')
+			input(type='text', name='tags' placeholder='Tags' value='#{playlist.tags}')
+			input(type='submit')
