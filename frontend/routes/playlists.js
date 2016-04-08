@@ -1,8 +1,8 @@
 'use strict';
 
-var express	= require( 'express' ),
+var express	= require('express'),
 	router	= express.Router(),
-	Promise	= require( 'promise' ),
+	Promise	= require('promise'),
 	Rest	= require('../rest'),
 	menu	= require(__dirname + '/../menu.json');
 

@@ -3,6 +3,25 @@
 var orm     = require('../orm'),
     User    = orm.db.User;
 
+var UserPut = function(req, res) {
+    User
+    .find({
+        where: {id: req.params.id}
+    })
+    .then(function(user) {
+        console.log("HERE:");
+        console.log(req.body);
+        user.updateAttributes(req.body).then(function(user) {
+            res.status(200).send({
+                message     : 'User correctly updated',
+                user        : user
+            });
+        }, function(err) {
+            res.status(300).send(err);
+        });
+    });
+};
+
 var UserGet = function(req, res) {
     User
     .all()
@@ -45,6 +64,7 @@ var UserGetOne = function(req, res) {
 var UserController = {
     get     : UserGet,
     post    : UserPost,
+    put     : UserPut,
     getOne  : UserGetOne
 };
 

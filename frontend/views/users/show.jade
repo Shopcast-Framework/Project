@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+	header.title-content
+		h1= titleContent
+		div.actions
+	article.wrapper-content#playlists
+		form(action='/users/#{user.id}', method='post')
+			input(type='text' name='username' placeholder='Username' value='#{user.username}')
+			input(type='submit')
