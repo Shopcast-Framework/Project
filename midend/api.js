@@ -54,7 +54,7 @@ function RouteLoader(app) {
         self.route('post', root, controller, 'post', middlewares);
         self.route('get', root + '/:id', controller, 'getOne', middlewares);
         self.route('put', root + '/:id', controller, 'put', middlewares);
-        self.route('delete', root, controller, 'delete', middlewares);
+        self.route('delete', root + '/:id', controller, 'delete', middlewares);
     };
 
     self.init(app);

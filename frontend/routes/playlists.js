@@ -25,6 +25,17 @@ router.get('/new', function(req, res) {
 	});
 });
 
+router.post('/delete', function(req, res) {
+	var promises = [];
+
+	for (var i in req.body.playlist) {
+		promises.push(Rest.delete('playlist/' + req.body.playlist[i]));
+	}
+	Promise.all(promises).then(function() {
+		res.redirect('/playlists');
+	});
+});
+
 router.post('/:id', function(req, res) {
 	Rest.put('playlist/' + req.params.id, JSON.stringify(req.body)).then(function(response) {
 		console.log(response);

@@ -6,10 +6,10 @@ block content
 		div.actions
 			a(href="/playlists/new" class="blue btn-floating btn-large waves-effect waves-circle waves-light")
 				i.material-icons add
-			a(class="red btn-floating btn-large waves-effect waves-circle waves-light")
-				i.material-icons delete
 	article.wrapper-content#playlists
-		form
+		form(action='/playlists/delete', method='post')
+			button(type='submit' class="red btn-floating btn-large waves-effect waves-circle waves-light")
+				i.material-icons delete
 			table
 				thead
 					tr
@@ -23,9 +23,9 @@ block content
 						tr
 							td 
 								p
-									input(type="checkbox" id="line-item-#{index}" name="lines[]")
+									input(type="checkbox" id="line-item-#{index}" name="playlist[]" value="#{playlist.id}")
 									label(for="line-item-#{index}")
-							td /playlists/#{playlist.id}/edit
+							td a /playlists/#{playlist.id}/edit /a
 							td #{playlist.description}
 							td #{playlist.frequency}
 							td #{playlist.tags}

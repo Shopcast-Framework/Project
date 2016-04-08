@@ -67,11 +67,22 @@ var PlaylistGetOne = function(req, res) {
     });
 };
 
+var PlaylistDelete = function(req, res) {
+    Playlist
+    .destroy({
+        where: {id: req.params.id}
+    })
+    .then(function() {
+        res.status(200).send({message : 'Playlist correctly deleted'});
+    });
+}
+
 var PlayListController = {
     get     : PlayListGet,
     post    : PlayListPost,
     put     : PlayListPut,
-    getOne  : PlaylistGetOne
+    getOne  : PlaylistGetOne,
+    delete  : PlaylistDelete
 };
 
 module.exports = PlayListController;
