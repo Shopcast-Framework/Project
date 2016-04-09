@@ -11,3 +11,7 @@ block content
 			input(type='text', name='frequency', placeholder='Frequency' value='#{playlist.frequency}')
 			input(type='text', name='tags' placeholder='Tags' value='#{playlist.tags}')
 			input(type='submit')
+		hr
+		form(action='/playlists/#{playlist.id}/files' method='post' enctype='multipart/form-data')
+			input(type='file' name='file' accept='video/*' placeholder='File')
+			input(type='submit' value='Add a file')

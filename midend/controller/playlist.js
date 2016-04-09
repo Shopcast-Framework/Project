@@ -75,7 +75,7 @@ var PlaylistDelete = function(req, res) {
     .then(function() {
         res.status(200).send({message : 'Playlist correctly deleted'});
     });
-}
+};
 
 var PlayListController = {
     get     : PlayListGet,

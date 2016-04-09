@@ -31,6 +31,35 @@ router.get('/new', function(req, res) {
 	});
 });
 
+router.post('/:id', function(req, res) {
+	console.log(req.body);
+	Rest.put('file/' + req.params.id, JSON.stringify(req.body)).then(function(response) {
+		console.log(response);
+		res.redirect('/files?message=' + response.body.message);
+	}, function(err) {
+		console.log(err);
+		res.redirect('/files?message=' + err.body.message);
+	});
+});
+
+router.get('/:id', function(req, res) {
+	var promises = [];
+
+	promises.push(Rest.get('file/' + req.params.id));
+
+	Promise.all(promises).then(function(values) {
+		var file = values[0].body.file;
+
+		res.render('files/show', {
+			title: 'Shopcast - File',
+			titleContent: 'My file (' + file.filename + ')',
+			active: '/files',
+			file: file,
+			menu: menu
+		});
+	})
+});
+
 router.get('/', function(req, res) {
 	var promises = [];
 
