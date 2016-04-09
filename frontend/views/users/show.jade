@@ -7,4 +7,8 @@ block content
 	article.wrapper-content#playlists
 		form(action='/users/#{user.id}', method='post')
 			input(type='text' name='username' placeholder='Username' value='#{user.username}')
+			input(type='text' name='description' placeholder='Description' value='#{user.description}')
+			input(type='text' name='age' placeholder='Age' value='#{user.age}')
+			input(type='text' name='sex' placeholder='Sex' value='#{user.sex}')
+			input(type='text' name='location' placeholder='Location' value='#{user.location}')
 			input(type='submit')

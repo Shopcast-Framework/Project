@@ -7,7 +7,10 @@ var User = function(sequelize) {
     var model = sequelize
     .define('User', {
         username: Sequelize.STRING,
-        password: Sequelize.STRING,
+        description: Sequelize.STRING,
+        age: Sequelize.STRING,
+        sex: Sequelize.STRING,
+        location: Sequelize.STRING,
         token: Sequelize.VIRTUAL,
         role: Sequelize.INTEGER,
         type: Sequelize.INTEGER,
