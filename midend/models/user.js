@@ -23,6 +23,7 @@ var User = function(sequelize) {
         instanceMethods: {
             authenticate: function() {
                 this.token = jwt.sign(this.username, '/*986_@$*#[sdaw<!+');
+                this.updateAttributes({last_connection: new Date()});
             },
             verify: function(token, done) {
                 var self = this;
