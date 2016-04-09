@@ -4,7 +4,7 @@ var express	= require('express'),
 	router	= express.Router(),
 	Promise	= require('promise'),
 	Rest	= require('../rest'),
-	menu	= require(__dirname + '/../menu.json');
+	menu	= require(__dirname + '/../modules/menu.js')
 
 router.post('/', function(req, res) {
 	Rest.post('playlist', JSON.stringify(req.body)).then(function(response) {
@@ -21,7 +21,7 @@ router.get('/new', function(req, res) {
 		title: 'Shopcast - Playlists',
 		titleContent: 'New playlist',
 		active: '/playlists',
-		menu: menu
+		menu: menu.load(req.session.user)
 	});
 });
 
@@ -61,7 +61,7 @@ router.get('/:id', function(req, res) {
 			titleContent: 'Show playlist',
 			active: '/playlists',
 			playlist: playlist,
-			menu: menu
+			menu: menu.load(req.session.user)
 		});
 	}, function(err) {
 		console.log(err);
@@ -81,7 +81,7 @@ router.get('/', function(req, res) {
 			titleContent: 'My playlists (' + playlists.length + ')',
 			active: '/playlists',
 			playlists: playlists,
-			menu: menu
+			menu: menu.load(req.session.user)
 		});
 	}, function(err) {
 		console.log(err);

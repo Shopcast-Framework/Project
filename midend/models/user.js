@@ -11,6 +11,7 @@ var User = function(sequelize) {
         age: Sequelize.STRING,
         sex: Sequelize.STRING,
         location: Sequelize.STRING,
+        password: Sequelize.STRING,
         token: Sequelize.VIRTUAL,
         role: Sequelize.INTEGER,
         type: Sequelize.INTEGER,

@@ -45,7 +45,8 @@ var UserPost = function(req, res) {
 };
 
 var UserGetOne = function(req, res) {
-    User.findById(req.params.id)
+    User
+    .findById(req.params.id)
     .then(function(user) {
         if (user) {
             res.status(200).send({
@@ -61,7 +62,18 @@ var UserGetOne = function(req, res) {
     });
 };
 
+var UserDelete = function(req, res) {
+    User
+    .destroy({
+        where: {id: req.params.id}
+    })
+    .then(function() {
+        res.status(200).send({message : 'User correctly deleted'});
+    });
+}
+
 var UserController = {
+    delete  : UserDelete,
     get     : UserGet,
     post    : UserPost,
     put     : UserPut,

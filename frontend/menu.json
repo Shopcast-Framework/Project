@@ -26,7 +26,7 @@
 	{
 	  "name": "Settings",
 	  "icon": "settings",
-	  "url": "settings",
+	  "url": "users/:user_id",
 	  "isActive": true
 	},
 	{

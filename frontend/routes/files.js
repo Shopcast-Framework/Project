@@ -4,7 +4,7 @@ var express = require('express'),
 	router = express.Router(),
 	Promise = require('promise'),
 	Rest	= require('../rest'),
-	menu    = require(__dirname + '/../menu.json'),
+	menu    = require(__dirname + '/../modules/menu.js'),
 	upload  = require('multer')({ dest: 'uploads/' });
 
 router.post('/', upload.any(), function(req, res) {
@@ -27,7 +27,7 @@ router.get('/new', function(req, res) {
 		title: 'Shopcast - Playlists',
 		titleContent: 'New playlist',
 		active: '/playlists',
-		menu: menu
+		menu: menu.load(req.session.user)
 	});
 });
 
@@ -55,7 +55,7 @@ router.get('/:id', function(req, res) {
 			titleContent: 'My file (' + file.filename + ')',
 			active: '/files',
 			file: file,
-			menu: menu
+			menu: menu.load(req.session.user)
 		});
 	})
 });
@@ -73,7 +73,7 @@ router.get('/', function(req, res) {
 			titleContent: 'My files (' + files.length + ')',
 			active: '/files',
 			files: files,
-			menu: menu
+			menu: menu.load(req.session.user)
 		});
 	}, function(err) {
 		console.log(err);

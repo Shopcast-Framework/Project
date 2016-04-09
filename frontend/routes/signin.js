@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var Promise = require( 'promise' );
-var menu    = require(__dirname + '/../menu.json')
+var menu    = require(__dirname + '/../modules/menu.js')
 
 
 router.get('/', function(req, res) {
@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
 		titleTab: 'Shopcast - sign in',
 		titleContent: 'You can sign in with your e-mail, facebook or google account.',
 		active: '', 
-		menu: menu
+		menu: menu.load(req.session.user)
 	});
 
 });

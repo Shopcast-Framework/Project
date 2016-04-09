@@ -4,7 +4,7 @@ var express = require('express'),
 	router 	= express.Router(),
 	Promise = require('promise'),
 	Rest 	= require('../rest'),
-	menu    = require(__dirname + '/../menu.json');
+	menu    = require(__dirname + '/../modules/menu.js')
 
 router.post('/', function(req, res) {
 	var promises = [];
@@ -27,6 +27,12 @@ router.post('/:id', function(req, res) {
 	});
 });
 
+router.get('/:id/delete', function(req, res) {
+	Rest.delete('user/' + req.params.id).then(function() {
+		res.redirect('/signin');
+	});
+});
+
 router.get('/:id', function(req, res) {
 	var promises = [];
 
@@ -35,14 +41,12 @@ router.get('/:id', function(req, res) {
 	Promise.all(promises).then(function(values) {
 		var user = values[0].body.user;
 
-		console.log(user);
-
 		res.render('users/show', {
 			title: 'Shopcast - Users',
 			titleContent: 'Show user',
 			active: '/users',
 			user: user,
-			menu: menu
+			menu: menu.load(req.session.user)
 		});
 	}, function(err) {
 		console.log(err);
@@ -54,7 +58,7 @@ router.get('/', function(req, res) {
 		title: 'Shopcast - Users',
 		titleContent: 'Users (20)',
 		active: '/users',
-		menu: menu
+		menu: menu.load(req.session.user)
 	});
 });
 

@@ -4,6 +4,8 @@ block content
 	header.title-content
 		h1= titleContent
 		div.actions
+			a(href='/users/#{user.id}/delete' class='red btn-floating btn-large waves-effect waves-circle waves-light')
+				i.material-icons delete
 	article.wrapper-content#playlists
 		form(action='/users/#{user.id}', method='post')
 			input(type='text' name='username' placeholder='Username' value='#{user.username}')
