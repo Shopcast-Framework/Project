@@ -4,7 +4,8 @@ var express	= require('express'),
 	router	= express.Router(),
 	Promise	= require('promise'),
 	Rest	= require('../rest'),
-	menu	= require(__dirname + '/../modules/menu.js')
+	menu	= require(__dirname + '/../modules/menu.js'),
+	upload  = require('multer')({ dest: 'uploads/' });
 
 router.post('/', function(req, res) {
 	Rest.post('playlist', JSON.stringify(req.body)).then(function(response) {
@@ -35,6 +36,22 @@ router.post('/delete', function(req, res) {
 		res.redirect('/playlists');
 	});
 });
+
+router.post('/:id/files', upload.any(), function(req, res) {
+
+	var promises = [];
+
+	for (var i in req.files) {
+		promises.push(Rest.post('playlist/' + req.params.id + '/file', JSON.stringify(req.files[i])));
+	}
+	Promise.all(promises).then(function() {
+		res.redirect('/playlists?message=Files correctly upload');
+	}, function(err) {
+		console.log(err);
+		res.redirect('/playlists?message=Files can\'t be upload');
+	});
+});
+
 
 router.post('/:id', function(req, res) {
 	Rest.put('playlist/' + req.params.id, JSON.stringify(req.body)).then(function(response) {

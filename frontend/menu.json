@@ -2,37 +2,37 @@
 	{
 	  "name": "Dashboard",
 	  "icon": "dashboard",
-	  "url": "dashboards",
+	  "url": "/dashboards",
 	  "isActive": true
 	},
 	{
 	  "name": "My Files",
 	  "icon": "attach_file",
-	  "url": "files",
+	  "url": "/files",
 	  "isActive": true
 	},
 	{
 	  "name": "My Playlists",
 	  "icon": "folder",
-	  "url": "playlists",
+	  "url": "/playlists",
 	  "isActive": true
 	},
 	{
 	  "name": "Display",
 	  "icon": "settings_ethernet",
-	  "url": "display",
+	  "url": "/display",
 	  "isActive": true
 	},
 	{
 	  "name": "Settings",
 	  "icon": "settings",
-	  "url": "users/:user_id",
+	  "url": "/users/:user_id",
 	  "isActive": true
 	},
 	{
 		"name": "Logout",
 		"icon": "group",
-		"url": "session/logout",
+		"url": "/session/logout",
 		"isActive": true
 	}
 ]

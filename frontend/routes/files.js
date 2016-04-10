@@ -18,7 +18,7 @@ router.post('/', upload.any(), function(req, res) {
 		res.redirect('/files?message=Files correctly upload');
 	}, function(err) {
 		console.log(err);
-		res.redirect('/playlists?message=Files can\'t be upload');
+		res.redirect('/files?message=Files can\'t be upload');
 	});
 });
 
