@@ -4,9 +4,9 @@ block content
 	header.title-content
 		h1= titleContent
 		div.actions
-			a(href="/files/new" class="blue btn-floating btn-large waves-effect waves-circle waves-light")
+			a(href='/files/new' class='blue btn-floating btn-large waves-effect waves-circle waves-light')
 				i.material-icons add
-			a(class="red btn-floating btn-large waves-effect waves-circle waves-light")
+			a(class='red btn-floating btn-large waves-effect waves-circle waves-light')
 				i.material-icons delete
 	article.wrapper-content#files
 		form
@@ -14,6 +14,7 @@ block content
 				thead
 					tr
 						th #
+						th edit link
 						th name
 						th description
 						th type
@@ -23,8 +24,10 @@ block content
 						tr
 							td 
 								p
-									input(type="checkbox" id="line-item-#{index}" name="lines[]")
-									label(for="line-item-#{index}")
+									input(type='checkbox' id='line-item-#{index}' name='lines[]')
+									label(for='line-item-#{index}')
+							td
+								a(href='/files/#{file.id}') edit
 							td #{file.originalname}
 							td #{file.description}
 							td #{file.mimetype}

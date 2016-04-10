@@ -5,7 +5,7 @@ var express = require('express'),
 	Promise = require('promise'),
 	Rest	= require('../rest'),
 	menu    = require(__dirname + '/../modules/menu.js'),
-	upload  = require('multer')({ dest: 'uploads/' });
+	upload  = require('multer')({ dest: 'public/uploads/' });
 
 router.post('/', upload.any(), function(req, res) {
 

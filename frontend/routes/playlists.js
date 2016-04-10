@@ -5,7 +5,7 @@ var express	= require('express'),
 	Promise	= require('promise'),
 	Rest	= require('../rest'),
 	menu	= require(__dirname + '/../modules/menu.js'),
-	upload  = require('multer')({ dest: 'uploads/' });
+	upload  = require('multer')({ dest: 'public/uploads/' });
 
 router.post('/', function(req, res) {
 	Rest.post('playlist', JSON.stringify(req.body)).then(function(response) {

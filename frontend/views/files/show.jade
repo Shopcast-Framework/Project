@@ -9,3 +9,6 @@ block content
 			input(type='text' name='filename' placeholder='Filename' value='#{file.filename}')
 			input(type='text' name='description' placeholder='Description' value='#{file.description}')
 			input(type='submit')
+	video(width="320", height="240", controls)
+		source(src="/#{file.path}", type="video/mp4")
+		|Your browser does not support the video tag.
