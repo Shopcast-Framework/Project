@@ -26,7 +26,6 @@ var onError = function(req, res, datas) {
     } catch (e) {
         return res.redirect('/signin?message=Invalid data');
     }
-
     res.redirect('/signin?message=' + response.message);
 };
 

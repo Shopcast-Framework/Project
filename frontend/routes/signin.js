@@ -10,7 +10,7 @@ var middlewares = require('../middlewares');
 router.get('/', middlewares.language, function(req, res) {
 
 	res.render('signin', { 	
-		active: '', 
+		active: '',
 		menu: menu,
 		isSearchBar: false,
 		isLogged: false,

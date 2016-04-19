@@ -12,9 +12,14 @@ var User = function(sequelize) {
             primaryKey: true
         },
         username: Sequelize.STRING,
+
         name: Sequelize.STRING,
         avatar: Sequelize.STRING,
         email: Sequelize.STRING,
+        description: Sequelize.STRING,
+        age: Sequelize.STRING,
+        sex: Sequelize.STRING,
+        location: Sequelize.STRING,
         password: Sequelize.STRING,
         token: Sequelize.VIRTUAL,
         role: Sequelize.INTEGER,
@@ -26,6 +31,7 @@ var User = function(sequelize) {
         instanceMethods: {
             authenticate: function() {
                 this.token = jwt.sign(this.username, '/*986_@$*#[sdaw<!+');
+                this.updateAttributes({last_connection: new Date()});
             },
             verify: function(token, done) {
                 var self = this;

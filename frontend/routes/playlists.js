@@ -26,7 +26,7 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 	promises.push(Rest.get('playlist'));
 
 	Promise.all(promises).then(function(values) {
-		
+
 		var playlists = values[0].body.playlists;
 		values[0].body.playlists.forEach(function(element,index,array){
 			if ( playlists[index].tags != null )
@@ -46,6 +46,7 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 	}, function(err) {
 		console.log(err);
 	});
+
 });
 
 module.exports = router;

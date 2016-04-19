@@ -1,7 +1,6 @@
 'use strict';
 
 var express = require('express'),
-    routes  = require('./routes'),
     http = require('http'),
     config = require('./config'),
     bodyParser = require('body-parser'),
@@ -35,15 +34,13 @@ app.run = function(){
     app.use(session({ name: 'connect.sid2', secret: 'keyboard cat', resave: true, saveUninitialized: true }));
     app.use(Rest.middleware);
 
-    //app.use('/', routes.home);
-    app.use('/dashboards', routes.dashboards);
-    app.use('/signin', routes.signin);
-    app.use('/session', routes.session);
-    app.use('/files', routes.files);
-    app.use('/playlists', routes.playlists);
-    app.use('/users', routes.users);
-    app.use('/display', routes.display);
-    app.use('/settings', routes.settings);
+    app.use('/dashboards', require('./routes/dashboards'));
+    app.use('/files', require('./routes/files'));
+    app.use('/playlists', require('./routes/playlists'));
+    app.use('/users', require('./routes/users'));
+    app.use('/signin', require('./routes/signin'));
+    app.use('/session', require('./routes/session'));
+
 
     app.listen();
     return server;

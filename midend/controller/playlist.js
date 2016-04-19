@@ -4,6 +4,23 @@ var orm         = require('../orm'),
     Playlist    = orm.db.Playlist,
     File        = orm.db.File;
 
+var PlayListPut = function(req, res) {
+    Playlist
+    .find({
+        where: {id: req.params.id}
+    })
+    .then(function(playlist) {
+        playlist.updateAttributes(req.body).then(function(playlist) {
+            res.status(200).send({
+                message     : 'Playlist correctly updated',
+                playlist    : playlist
+            });
+        }, function(err) {
+            res.status(300).send(err);
+        });
+    });
+};
+
 var PlayListGet = function(req, res) {
     Playlist
     .all()
@@ -27,8 +44,9 @@ var PlayListPost = function(req, res) {
 };
 
 var PlaylistGetOne = function(req, res) {
-    Playlist.find({
-        where: {id:req.params.id},
+    Playlist
+    .find({
+        where: {id: req.params.id},
         include: [{
             model: File,
             as: 'files'
@@ -49,10 +67,22 @@ var PlaylistGetOne = function(req, res) {
     });
 };
 
+var PlaylistDelete = function(req, res) {
+    Playlist
+    .destroy({
+        where: {id: req.params.id}
+    })
+    .then(function() {
+        res.status(200).send({message : 'Playlist correctly deleted'});
+    });
+};
+
 var PlayListController = {
     get     : PlayListGet,
     post    : PlayListPost,
-    getOne  : PlaylistGetOne
+    put     : PlayListPut,
+    getOne  : PlaylistGetOne,
+    delete  : PlaylistDelete
 };
 
 module.exports = PlayListController;

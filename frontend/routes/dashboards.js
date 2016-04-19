@@ -25,5 +25,4 @@ router.get('/', middlewares.isLogged, middlewares.language, function(req, res){
 
 });
 
-
 module.exports = router;

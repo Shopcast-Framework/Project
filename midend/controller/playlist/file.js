@@ -24,7 +24,6 @@ var FilePost = function(req, res) {
             File
             .create(req.body)
             .then(function(file) {
-                //TODO add validation and check here if file was correctly created
                 file.setPlaylist(playlist).then(function () {
                     res.status(200).send({
                         message : 'File successfully created',
