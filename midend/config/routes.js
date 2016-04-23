@@ -30,7 +30,13 @@ var Routes = [
     },
     {
         name: 'user',
-        middlewares: [{name: 'auth', only: ['get', 'getOne']}]
+        middlewares: [{name: 'auth', only: ['get', 'getOne']}],
+        sub: [
+            {
+                name: 'friend',
+                middlewares: ['auth']
+            }
+        ]
     }
 ];
 

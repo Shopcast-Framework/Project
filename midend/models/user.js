@@ -1,23 +1,24 @@
 'use strict';
 
 var Sequelize   = require('sequelize'),
-    jwt         = require('jsonwebtoken');
+    jwt         = require('jsonwebtoken'),
+    orm         = require('../orm');
 
 var User = function(sequelize) {
     var model = sequelize
     .define('User', {
-        username: Sequelize.STRING,
-        description: Sequelize.STRING,
-        age: Sequelize.STRING,
-        sex: Sequelize.STRING,
-        location: Sequelize.STRING,
-        password: Sequelize.STRING,
-        token: Sequelize.VIRTUAL,
-        role: Sequelize.INTEGER,
-        type: Sequelize.INTEGER,
-        facebookId: Sequelize.STRING,
-        googleId: Sequelize.STRING,
-        last_connection: Sequelize.DATE
+        username        : Sequelize.STRING,
+        description     : Sequelize.STRING,
+        age             : Sequelize.STRING,
+        sex             : Sequelize.STRING,
+        location        : Sequelize.STRING,
+        password        : Sequelize.STRING,
+        token           : Sequelize.VIRTUAL,
+        role            : Sequelize.INTEGER,
+        type            : Sequelize.INTEGER,
+        facebookId      : Sequelize.STRING,
+        googleId        : Sequelize.STRING,
+        last_connection : Sequelize.DATE
     }, {
         underscored: true,
         instanceMethods: {
@@ -40,8 +41,13 @@ var User = function(sequelize) {
         }
     });
 
+    var relationships = function() {
+        model.belongsToMany(orm.db.User, {as: 'friends', through: 'Friend'});
+    };
+
     return {
-        definition : model
+        definition      : model,
+        relationships   : relationships
     };
 };
 
