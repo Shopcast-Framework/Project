@@ -24,6 +24,12 @@
 	  "isActive": true
 	},
 	{
+	  "name": "Friends",
+	  "icon": "settings",
+	  "url": "/friends",
+	  "isActive": true
+	},
+	{
 	  "name": "Settings",
 	  "icon": "settings",
 	  "url": "/users/:user_id",

@@ -42,9 +42,13 @@ var FriendPost = function(req, res) {
                 message: "Error : Can't find user"
             });
         }
-        users[0].addFriend(users[1], { accepted : false });
-        res.status(200).send({
-            message: "Friendship request correctly send"
+        Q.all([
+            users[0].addFriend(users[1], { accepted : true }),
+            users[1].addFriend(users[0], { accepted : false })
+        ]).then(function() {
+            res.status(200).send({
+                message: "Friendship request correctly send"
+            });
         });
     }, function(err) {
         res.status(300).send(err);
@@ -52,17 +56,22 @@ var FriendPost = function(req, res) {
 };
 
 var FriendGet = function(req, res) {
-    User.findById(req.params.user_id).then(function(user) {
+    User.findById(req.params.user_id).then(function(user){
         if (user == null) {
             return res.status(300).send({
                 message: "Error : Can't find user"
             });
         }
         user.getFriends().then(function(friends) {
+            if (friends == null) {
+                return res.status(300).send({
+                    message: "Error : Can't find friends"
+                });
+            }
             res.status(200).send({
                 message: "List of friends",
                 friends: friends
-            })
+            });
         });
     });
 }
