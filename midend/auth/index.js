@@ -44,10 +44,7 @@ var Authentificator = function(app) {
 
     self.deserializeUser = function(id, done) {
         console.log('DESERIALIZE USER');
-        User.find({
-            where: {id: id},
-            attributes: ['id', 'username', 'password']
-        }).then(function(user) {
+        User.findById(id).then(function(user) {
             if (user) {
                 done(null, user);
             }

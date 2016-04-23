@@ -11,8 +11,7 @@ var StrategyLocal = function(app, passport, loginCallback) {
         var authenticate = function(username, password, done) {
             console.log('AUTHENTICATE');
             User.find({
-                where: {username: username},
-                attributes: ['id', 'username', 'password']
+                where: {username: username}
 	        }).then(function(user) {
                 if (!user) {
                     done({message: 'Error: Could not find user: ' + username});
