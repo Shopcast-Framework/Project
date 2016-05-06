@@ -1,20 +1,19 @@
 'use strict';
 
 var Sequelize   = require('sequelize'),
+    jwt         = require('jsonwebtoken'),
     orm         = require('../orm');
 
-var Playlist = function(sequelize) {
-
+var Planning = function(sequelize) {
     var model = sequelize
-    .define('Playlist', {
-        name        : Sequelize.STRING,
-        description : Sequelize.STRING,
-        frequency   : Sequelize.STRING,
-        tags        : Sequelize.STRING
+    .define('Planning', {
+        title       : Sequelize.STRING,
+        range_start : Sequelize.DATEONLY,
+        range_end   : Sequelize.DATEONLY,
+        start_at    : Sequelize.TIME
     }, {underscored: true});
 
     var relationships = function() {
-        model.hasMany(orm.db.File, {as: 'files'});
         model.belongsTo(orm.db.User);
     };
 
@@ -24,4 +23,4 @@ var Playlist = function(sequelize) {
     };
 };
 
-module.exports = Playlist;
+module.exports = Planning;

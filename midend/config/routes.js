@@ -6,6 +6,10 @@ var Routes = [
         middlewares: ['auth']
     },
     {
+        name: 'planning',
+        middlewares: ['auth']
+    },
+    {
         name: 'music',
         actions: {
             'search' : { verb: 'get', route: '/search/:id' },

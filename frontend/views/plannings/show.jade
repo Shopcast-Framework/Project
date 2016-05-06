@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+	header.title-content
+		h1= titleContent
+		div.actions
+	article.wrapper-content#files
+		div(id="calendar")
+		input(type="text", placeholder="Title", value="#{ planning.title }")
+		br
+		span
+			"Debut du planning #{planning.range_start}"
+		input(id="toto" type="date", value="#{ planning.range_start.substr(0, 10) }")
+		br
+		span
+			"Fin du planning #{ planning.range_end }"
+		input(id="titi" type="date", value="#{ planning.range_end.substr(0, 10) }")
+		br
+		span
+			"Playlist debut"
+		input(type="time", value="#{ planning.start_at }")
+
+	script.
+		$(document).ready(function() {
+			$('#calendar').fullCalendar({
+				events: [
+					{
+						title: '#{ planning.start_at }',
+						start: '#{ planning.range_start.substr(0, 10) }',
+						end: '#{ planning.range_end.substr(0, 10) }',
+						description: 'This is a cool event'
+					}
+				]
+			})
+		});

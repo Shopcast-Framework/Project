@@ -8,6 +8,11 @@ html(lang='fr')
 		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/materialize.min.css')
 		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/nouislider.min.css')
 		link(rel='stylesheet', href='/css/style.css')
+		script(type="application/javascript", src="http://momentjs.com/downloads/moment.min.js")
+		script(type='text/javascript', src='/js/jquery-v2.1.1.min.js')
+		script(type="text/javascript", src="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.7.0/fullcalendar.min.js")
+		link(rel="stylesheet", type="text/css", href="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.7.0/fullcalendar.min.css")
+
 	body
 		header(class="light-blue" id="header")
 			div.navbar-fixed
@@ -39,7 +44,6 @@ html(lang='fr')
 					div.title= title
 		section#main.z-depth-1
 			block content
-		script(type='text/javascript', src='/js/jquery-v2.1.1.min.js')
 		script(type='text/javascript', src='/js/nouislider.min.js')
 		script(type='text/javascript', src='/js/materialize.min.js')
 		script(type='text/javascript', src='/js/init.js')

@@ -5,20 +5,24 @@ var orm     = require('../orm'),
 
 var UserPut = function(req, res) {
     User
-    .find({
-        where: {id: req.params.id}
-    })
+    .findById(req.params.id)
     .then(function(user) {
-        console.log("HERE:");
-        console.log(req.body);
-        user.updateAttributes(req.body).then(function(user) {
-            res.status(200).send({
-                message     : 'User correctly updated',
-                user        : user
+        if (user) {
+            user.updateAttributes(req.body).then(function(user) {
+                res.status(200).send({
+                    message     : 'User correctly updated',
+                    user        : user
+                });
+            }, function(err) {
+                res.status(300).send(err);
             });
-        }, function(err) {
-            res.status(300).send(err);
-        });
+        } else {
+            res.status(400).send({
+                message : "Error can't edit user"
+            });
+        }
+    }, function(err) {
+        res.status(400).send(err);
     });
 };
 
@@ -30,6 +34,8 @@ var UserGet = function(req, res) {
             message : 'List of users',
             users : users
         });
+    }, function(err) {
+        res.status(400).send(err);
     });
 };
 
@@ -37,10 +43,18 @@ var UserPost = function(req, res) {
     User
     .create(req.body)
     .then(function(user) {
-        res.status(200).send({
-            message : 'User successfully created',
-            user : user
-        });
+        if (user) {
+            res.status(200).send({
+                message : 'User successfully created',
+                user : user
+            });
+        } else {
+            res.status(400).send({
+                message : "Error can't create user"
+            });
+        }
+    }, function(err) {
+        res.status(400).send(err);
     });
 };
 
@@ -53,12 +67,13 @@ var UserGetOne = function(req, res) {
                 message : 'User selected with id:' + req.params.id,
                 user    : user
             });
-        }
-        else {
+        } else {
             res.status(400).send({
                 message : 'User selected with id:' + req.params.id + ' was not found',
             });
         }
+    }, function(err) {
+        res.status(400).send(err);
     });
 };
 
@@ -69,6 +84,8 @@ var UserDelete = function(req, res) {
     })
     .then(function() {
         res.status(200).send({message : 'User correctly deleted'});
+    }, function(err) {
+        res.status(400).send(err);
     });
 }
 

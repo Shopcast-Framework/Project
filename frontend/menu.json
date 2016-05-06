@@ -18,6 +18,12 @@
 	  "isActive": true
 	},
 	{
+	  "name": "Programmation",
+	  "icon": "folder",
+	  "url": "/plannings",
+	  "isActive": true
+	},
+	{
 	  "name": "Display",
 	  "icon": "settings_ethernet",
 	  "url": "/display",

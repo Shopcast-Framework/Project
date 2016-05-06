@@ -37,12 +37,31 @@ var User = function(sequelize) {
                     }
                     return done(null);
                 });
+            },
+            getOnePlaylist: function(where, params) {
+                var self = this;
+                if (!params) {
+                    params = {}
+                }
+                params.where = where;
+                return orm.db.Playlist.find(params);
+            },
+            getOnePlanning: function(where, params) {
+                var self = this;
+                if (!params) {
+                    params = {}
+                }
+                params.where = where;
+                return orm.db.Planning.find(params);
             }
         }
     });
 
     var relationships = function() {
         model.belongsToMany(orm.db.User, {as: 'friends', through: 'Friend'});
+        model.hasMany(orm.db.Playlist);
+        model.hasMany(orm.db.File);
+        model.hasMany(orm.db.Planning);
     };
 
     return {
