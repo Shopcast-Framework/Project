@@ -1,12 +1,38 @@
 'use strict';
 
+var orm     = require('../orm'),
+    Music   = orm.db.Music;
+
 var MusicGet = function(req, res) {
-    console.log('GET MUSIC');
-    res.status(200).send('Music: GET');
+    Music
+    .all()
+    .then(function(musics) {
+        res.status(200).send({
+            message : 'List of musics',
+            musics  : musics
+        });
+    }, function(err) {
+        res.status(400).send(err);
+    });
 };
 
 var MusicPost = function(req, res) {
-    res.status(200).send('Music: POST');
+    Music
+    .create(req.body)
+    .then(function(music) {
+        if (music) {
+            res.status(200).send({
+                message : 'Music successfully created',
+                music   : music
+            });
+        } else {
+            res.status(400).send({
+                message : "Error can't create music"
+            });
+        }
+    }, function(err) {
+        res.status(400).send(err);
+    });
 };
 
 var MusicSearch = function(req, res) {

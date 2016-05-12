@@ -30,14 +30,18 @@
     "express": "^4.13.3",
     "express-session": "^1.12.1",
     "gulp": "^3.9.0",
+    "gulp-mocha": "^2.2.0",
     "gulp-nodemon": "^2.0.4",
+    "gulp-util": "^3.0.7",
     "jsonwebtoken": "^5.4.1",
+    "mocha": "^2.4.5",
     "mysql": "^2.9.0",
     "passport": "^0.3.2",
     "passport-facebook-token": "^3.1.0",
     "passport-google-token": "^0.1.2",
     "passport-local": "^1.0.0",
     "q": "^1.4.1",
-    "sequelize": "^3.14.2"
+    "sequelize": "^3.14.2",
+    "supertest": "^1.2.0"
   }
 }

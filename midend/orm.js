@@ -2,7 +2,12 @@
 
 var Sequelize   = require('sequelize'),
     path        = require('path'),
-    fs          = require('fs');
+    fs          = require('fs'),
+    config      = require('./config/db.json')[process.env.NODE_ENV];
+
+if (config == undefined) {
+    throw "Error can't retrieve configuration";
+}
 
 var Orm = function() {
     var self = this;
@@ -11,7 +16,7 @@ var Orm = function() {
         var relationships = [],
             model;
 
-        self.sequelize = new Sequelize('shopcast', 'shopcast', 's7fCQvxr9&mKey=.');
+        self.sequelize = new Sequelize(config.database, config.username, config.password);
         self.db = {};
 
         fs
@@ -31,7 +36,7 @@ var Orm = function() {
     };
 
     self.init();
-    return this;
+    return self;
 };
 
 exports.load = Orm;
