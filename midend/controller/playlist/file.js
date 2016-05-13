@@ -1,6 +1,6 @@
 'use strict';
 
-var orm         = require('../../orm'),
+var orm         = require(process.env.NODE_PATH + '/modules/orm'),
     File        = orm.db.File,
     Playlist    = orm.db.Playlist;
 

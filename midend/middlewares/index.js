@@ -16,10 +16,10 @@ var MiddlewaresLoader = function() {
         self.middlewares = {};
 
         fs
-        .readdirSync(path.join(__dirname))
+        .readdirSync(path.join(process.env.NODE_PATH, '/middlewares'))
         .forEach(function(fileName) {
             if (fileName !== 'index.js') {
-                middleware = require(path.join(__dirname, fileName));
+                middleware = require(path.join(process.env.NODE_PATH, '/middlewares', fileName));
                 self.middlewares[middleware.name] = middleware.object;
             }
         });

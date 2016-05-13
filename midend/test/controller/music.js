@@ -19,49 +19,4 @@ describe('Api music', function () {
         }, done);
     });
 
-    it('[GET] /', function(done) {
-        request(server)
-        .get('/api/music')
-        .expect(200, {
-            message : 'List of musics',
-            musics  : musics
-        }, done);
-    });
-
-    it('[GET] /', function(done) {
-        request(server)
-        .get('/api/music')
-        .expect(200, {
-            message : 'List of musics',
-            musics  : musics
-        }, done);
-    });
-
-    it('[GET] /', function(done) {
-        request(server)
-        .get('/api/music')
-        .expect(200, {
-            message : 'List of musics',
-            musics  : musics
-        }, done);
-    });
-
-    it('[GET] /', function(done) {
-        request(server)
-        .get('/api/music')
-        .expect(200, {
-            message : 'List of musics',
-            musics  : musics
-        }, done);
-    });
-
-    it('[GET] /', function(done) {
-        request(server)
-        .get('/api/music')
-        .expect(200, {
-            message : 'List of musics',
-            musics  : musics
-        }, done);
-    });
-
 });

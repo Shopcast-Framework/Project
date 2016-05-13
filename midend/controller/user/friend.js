@@ -1,6 +1,6 @@
 'use strict';
 
-var orm         = require('../../orm'),
+var orm         = require(process.env.NODE_PATH + '/modules/orm'),
     User        = orm.db.User,
     Friend      = orm.db.Friend,
     Q           = require('q');

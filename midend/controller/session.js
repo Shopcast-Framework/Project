@@ -1,6 +1,6 @@
 'use strict';
 
-var auth    = require('../auth');
+var auth    = require(process.env.NODE_PATH + '/modules/auth');
 
 var SessionDelete = function(req, res) {
     req.logout();

@@ -2,7 +2,7 @@
 
 var Sequelize   = require('sequelize'),
     jwt         = require('jsonwebtoken'),
-    orm         = require('../orm');
+    orm         = require(process.env.NODE_PATH + '/modules/orm');
 
 var User = function(sequelize) {
     var model = sequelize

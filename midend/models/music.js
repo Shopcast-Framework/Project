@@ -1,7 +1,7 @@
 'use strict';
 
 var Sequelize   = require('sequelize'),
-    orm         = require('../orm');
+    orm         = require(process.env.NODE_PATH + '/modules/orm');
 
 var Music = function(sequelize) {
     var model = sequelize

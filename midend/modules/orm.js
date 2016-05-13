@@ -3,7 +3,7 @@
 var Sequelize   = require('sequelize'),
     path        = require('path'),
     fs          = require('fs'),
-    config      = require('./config/db.json')[process.env.NODE_ENV];
+    config      = require(process.env.NODE_PATH + '/config/db.json')[process.env.NODE_ENV];
 
 if (config == undefined) {
     throw "Error can't retrieve configuration";
@@ -20,9 +20,9 @@ var Orm = function() {
         self.db = {};
 
         fs
-        .readdirSync(path.join(__dirname, './models'))
+        .readdirSync(path.join(process.env.NODE_PATH, 'models'))
         .forEach(function(fileName) {
-            model = self.sequelize.import(path.join(__dirname, './models', fileName));
+            model = self.sequelize.import(path.join(process.env.NODE_PATH, 'models', fileName));
             self.db[model.definition.name] = model.definition;
             if (model.relationships)
                 relationships.push(model.relationships);

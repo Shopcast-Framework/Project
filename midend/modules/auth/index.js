@@ -1,7 +1,7 @@
 'use strict';
 
 var passport    = require('passport'),
-        orm     = require('../orm'),
+        orm     = require(process.env.NODE_PATH + '/modules/orm'),
         User    = orm.db.User;
 
 var Authentificator = function(app) {

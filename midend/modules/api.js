@@ -1,11 +1,11 @@
 'use strict';
 
 var Express     = require('express'),
-    Routes      = require('./config/routes');
+    Routes      = require(process.env.NODE_PATH + '/config/routes');
 
 function RouteLoader(app) {
 
-    var Middlewares = require('./middlewares').load();
+    var Middlewares = require(process.env.NODE_PATH + '/middlewares').load();
     Middlewares.useModules(app);
     var self = this;
 
@@ -20,7 +20,7 @@ function RouteLoader(app) {
     self.createRoutes = function(prefix, resourcePrefix, routes) {
         for (var i = 0; i < routes.length; i++) {
             var route = routes[i];
-            var controllerInst = require('./controller' + prefix + route.name);
+            var controllerInst = require(process.env.NODE_PATH + '/controller' + prefix + route.name);
 
             self.resource(resourcePrefix, route.name, controllerInst, route.middlewares);
             self.addActions(controllerInst, prefix + route.name, route.actions, route.middlewares);
