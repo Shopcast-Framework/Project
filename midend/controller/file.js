@@ -1,6 +1,7 @@
 'use strict';
 
 var orm         = require(process.env.NODE_PATH + '/modules/orm'),
+    Message     = require(process.env.NODE_PATH + '/modules/messages'),
     File        = orm.db.File;
 
 var FileGet = function(req, res) {
@@ -8,7 +9,7 @@ var FileGet = function(req, res) {
     .all()
     .then(function(files) {
         res.status(200).send({
-            message     : 'List of files',
+            message     : Message.get("file:get:success"),
             files       : files
         });
     }, function(err) {
@@ -22,11 +23,11 @@ var FilePost = function(req, res) {
     .then(function(file) {
         if (file == null) {
             return res.status(300).send({
-                message: "Error : Can't create file"
+                message: Message.get("file:post:failure")
             });
         }
         res.status(200).send({
-            message : 'File successfully created',
+            message : Message.get("file:post:success"),
             file    : file
         });
     }, function(err) {
@@ -42,11 +43,11 @@ var FileGetOne = function(req, res) {
     .then(function(file) {
         if (file == null) {
             return res.status(400).send({
-                message : 'File selected with id:' + req.params.id + ' was not found',
+                message : Message.get("file:getone:failure", req.params.id)
             });
         }
         res.status(200).send({
-            message     : 'File selected with id:' + req.params.id,
+            message     : Message.get("file:getone:success", req.params.id),
             file        : file
         });
     }, function(err) {
@@ -62,12 +63,12 @@ var FilePut = function(req, res) {
     .then(function(file) {
         if (file == null) {
             return res.status(300).send({
-                message: "Error : Can't find file"
+                message: Message.get("file:put:failure")
             });
         }
         file.updateAttributes(req.body).then(function(file) {
             res.status(200).send({
-                message     : 'File correctly updated',
+                message     : Message.get("file:put:success"),
                 file        : file
             });
         }, function(err) {
@@ -82,7 +83,7 @@ var FileDelete = function(req, res) {
         where: {id: req.params.id}
     })
     .then(function() {
-        res.status(200).send({message : 'File correctly deleted'});
+        res.status(200).send({message : Message.get("file:delete:success")});
     });
 };
 

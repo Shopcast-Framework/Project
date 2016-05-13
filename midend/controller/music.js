@@ -1,6 +1,7 @@
 'use strict';
 
 var orm     = require(process.env.NODE_PATH + '/modules/orm'),
+    Message = require(process.env.NODE_PATH + '/modules/messages'),
     Music   = orm.db.Music;
 
 var MusicGet = function(req, res) {
@@ -8,7 +9,7 @@ var MusicGet = function(req, res) {
     .all()
     .then(function(musics) {
         res.status(200).send({
-            message : 'List of musics',
+            message : Message.get('music:get:success'),
             musics  : musics
         });
     }, function(err) {
@@ -22,12 +23,12 @@ var MusicPost = function(req, res) {
     .then(function(music) {
         if (music) {
             res.status(200).send({
-                message : 'Music successfully created',
+                message : Message.get('music:post:success'),
                 music   : music
             });
         } else {
             res.status(400).send({
-                message : "Error can't create music"
+                message : Message.get('music:post:failure'),
             });
         }
     }, function(err) {

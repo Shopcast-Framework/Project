@@ -1,6 +1,7 @@
 'use strict';
 
 var orm         = require(process.env.NODE_PATH + '/modules/orm'),
+    Message     = require(process.env.NODE_PATH + '/modules/messages'),
     Planning    = orm.db.Planning;
 
 var PlanningGet = function(req, res) {
@@ -8,7 +9,7 @@ var PlanningGet = function(req, res) {
     .all()
     .then(function(plannings) {
         res.status(200).send({
-            message     : 'List of plannings',
+            message     : Message.get("planning:get:success"),
             plannings   : plannings
         });
     }, function(err) {
@@ -22,12 +23,12 @@ var PlanningGetOne = function(req, res) {
     .then(function(planning) {
         if (planning) {
             res.status(200).send({
-                message     : 'Planning of id: ' + req.params.id,
+                message     : Message.get("planning:getone:success", req.params.id),
                 planning    : planning
             });
         } else {
             res.status(400).send({
-                message : "Error can't find planning"
+                message : Message.get("planning:getone:success")
             })
         }
     }, function(err) {

@@ -1,10 +1,11 @@
 'use strict';
 
-var auth    = require(process.env.NODE_PATH + '/modules/auth');
+var auth    = require(process.env.NODE_PATH + '/modules/auth'),
+    Message = require(process.env.NODE_PATH + '/modules/messages');
 
 var SessionDelete = function(req, res) {
     req.logout();
-    return res.status(200).send({message: 'ok'});
+    return res.status(200).send({message: Message.get("session:delete:success")});
 }
 
 var SessionGet = function(req, res) {
@@ -28,14 +29,14 @@ var SessionPost = function(req, res) {
     if (req.user) {
         req.user.authenticate();
         return res.status(200).send({
-            message: 'User already logged',
-            user: req.user
+            message : Message.get("session:post:success"),
+            user    : req.user
         });
     }
 
     if (!strategy) {
         return res.status(301).send({
-            message     : 'Error : Invalid strategy : ' + req.body.strategy
+            message     : Message.get("session:post:failure", req.body.strategy)
         });
     }
     strategy.authenticate(req, res);

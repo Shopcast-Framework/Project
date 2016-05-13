@@ -1,6 +1,7 @@
 'use strict';
 
 var orm         = require(process.env.NODE_PATH + '/modules/orm'),
+    Message     = require(process.env.NODE_PATH + '/modules/messages'),
     Playlist    = orm.db.Playlist,
     User        = orm.db.User,
     File        = orm.db.File;
@@ -13,7 +14,7 @@ var PlayListPut = function(req, res) {
         .updateAttributes(req.body)
         .then(function(playlist) {
             res.status(200).send({
-                message     : 'Playlist correctly updated',
+                message     : Message.get("playlist:put:success"),
                 playlist    : playlist
             });
         }, function(err) {
@@ -29,7 +30,7 @@ var PlayListGet = function(req, res) {
     .getPlaylists()
     .then(function(playlists) {
         res.status(200).send({
-            message     : 'List of playlists',
+            message     : Message.get("playlist:get:success"),
             playlists   : playlists
         });
     }, function (err) {
@@ -42,7 +43,7 @@ var PlayListPost = function(req, res) {
     .createPlaylist(req.body)
     .then(function(playlist) {
         res.status(200).send({
-            message     : 'Playlist successfully created',
+            message     : Message.get("playlist:post:success"),
             playlist    : playlist
         });
     }, function(err) {
@@ -61,13 +62,11 @@ var PlaylistGetOne = function(req, res) {
     .then(function(playlist) {
         if (playlist) {
             res.status(200).send({
-                message     : 'Playlist selected with id:' + req.params.id,
+                message     : Message.get("playlist:getone:success", req.params.id),
                 playlist    : playlist
             });
         } else {
-            res.status(400).send({
-                message : 'Playlist selected with id:' + req.params.id + ' was not found',
-            });
+            res.status(400).send({message : Message.get("playlist:getone:failure")});
         }
     }, function(err) {
         res.status(400).send(err);
@@ -80,10 +79,10 @@ var PlaylistDelete = function(req, res) {
     .then(function(playlist) {
         if (playlist) {
             playlist.destroy().then(function() {
-                res.status(200).send({message : 'Playlist correctly deleted'});
+                res.status(200).send({message : Message.get("playlist:delete:success")});
             });
         } else {
-            res.status(400).send({message : 'Error no playlist deleted'});
+            res.status(400).send({message : Message.get("playlist:delete:failure")});
         }
     }, function(err) {
         res.status(400).send(err);

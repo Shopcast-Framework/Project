@@ -1,6 +1,7 @@
 'use strict';
 
 var orm         = require(process.env.NODE_PATH + '/modules/orm'),
+    Message     = require(process.env.NODE_PATH + '/modules/messages'),
     User        = orm.db.User,
     Friend      = orm.db.Friend,
     Q           = require('q');
@@ -14,17 +15,17 @@ var FriendPut = function(req, res) {
     }).then(function(friend) {
         if (friend == null) {
             return res.status(300).send({
-                message: "Error : Can't find user"
+                message: Message.get("friend:put:failure")
             });
         }
         friend.updateAttributes(req.body).then(function(friend) {
             if (friend == null) {
                 return res.status(300).send({
-                    message: "Error : Can't find user"
+                    message: Message.get("friend:put:failure")
                 });
             }
             res.status(200).send({
-                message: "Friendship correctly accepted"
+                message: Message.get("friend:put:success")
             });
         });
     }, function(err) {
@@ -39,7 +40,7 @@ var FriendPost = function(req, res) {
     ]).then(function(users) {
         if (users[0] == null || users[1] == null) {
             return res.status(300).send({
-                message: "Error : Can't find user"
+                message: Message.get("friend:post:failure")
             });
         }
         Q.all([
@@ -47,7 +48,7 @@ var FriendPost = function(req, res) {
             users[1].addFriend(users[0], { accepted : false })
         ]).then(function() {
             res.status(200).send({
-                message: "Friendship request correctly send"
+                message: Message.get("friend:post:success")
             });
         });
     }, function(err) {
@@ -59,17 +60,17 @@ var FriendGet = function(req, res) {
     User.findById(req.params.user_id).then(function(user){
         if (user == null) {
             return res.status(300).send({
-                message: "Error : Can't find user"
+                message: Message.get("friend:get:failure")
             });
         }
         user.getFriends().then(function(friends) {
             if (friends == null) {
                 return res.status(300).send({
-                    message: "Error : Can't find friends"
+                    message: Message.get("friend:get:failure")
                 });
             }
             res.status(200).send({
-                message: "List of friends",
+                message: Message.get("friend:get:success"),
                 friends: friends
             });
         });

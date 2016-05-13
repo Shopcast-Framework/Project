@@ -1,6 +1,7 @@
 'use strict';
 
 var orm     = require(process.env.NODE_PATH + '/modules/orm'),
+    Message = require(process.env.NODE_PATH + '/modules/messages'),
     User    = orm.db.User;
 
 var UserPut = function(req, res) {
@@ -10,16 +11,14 @@ var UserPut = function(req, res) {
         if (user) {
             user.updateAttributes(req.body).then(function(user) {
                 res.status(200).send({
-                    message     : 'User correctly updated',
+                    message     : Message.get("user:put:success"),
                     user        : user
                 });
             }, function(err) {
                 res.status(300).send(err);
             });
         } else {
-            res.status(400).send({
-                message : "Error can't edit user"
-            });
+            res.status(400).send({message : Message.get("user:put:failure")});
         }
     }, function(err) {
         res.status(400).send(err);
@@ -31,7 +30,7 @@ var UserGet = function(req, res) {
     .all()
     .then(function(users) {
         res.status(200).send({
-            message : 'List of users',
+            message : Message.get("user:get:success"),
             users : users
         });
     }, function(err) {
@@ -45,13 +44,11 @@ var UserPost = function(req, res) {
     .then(function(user) {
         if (user) {
             res.status(200).send({
-                message : 'User successfully created',
+                message : Message.get("user:post:success"),
                 user : user
             });
         } else {
-            res.status(400).send({
-                message : "Error can't create user"
-            });
+            res.status(400).send({message : Message.get("user:post:failure")});
         }
     }, function(err) {
         res.status(400).send(err);
@@ -64,12 +61,12 @@ var UserGetOne = function(req, res) {
     .then(function(user) {
         if (user) {
             res.status(200).send({
-                message : 'User selected with id:' + req.params.id,
+                message : Message.get("user:getone:success", req.params.id),
                 user    : user
             });
         } else {
             res.status(400).send({
-                message : 'User selected with id:' + req.params.id + ' was not found',
+                message : Message.get("user:getone:failure", req.params.id)
             });
         }
     }, function(err) {
@@ -83,7 +80,7 @@ var UserDelete = function(req, res) {
         where: {id: req.params.id}
     })
     .then(function() {
-        res.status(200).send({message : 'User correctly deleted'});
+        res.status(200).send({message : Message.get("user:delete:success")});
     }, function(err) {
         res.status(400).send(err);
     });

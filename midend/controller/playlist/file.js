@@ -1,6 +1,7 @@
 'use strict';
 
 var orm         = require(process.env.NODE_PATH + '/modules/orm'),
+    Message     = require(process.env.NODE_PATH + '/modules/messages'),
     File        = orm.db.File,
     Playlist    = orm.db.Playlist;
 
@@ -9,7 +10,7 @@ var FileGet = function(req, res) {
     .all()
     .then(function(files) {
         res.status(200).send({
-            message     : 'List of files',
+            message     : Message.get("file:get:success"),
             files       : files
         });
     });
@@ -26,14 +27,14 @@ var FilePost = function(req, res) {
             .then(function(file) {
                 file.setPlaylist(playlist).then(function () {
                     res.status(200).send({
-                        message : 'File successfully created',
+                        message : Message.get("file:post:success"),
                         file    : file
                     });
                 });
             });
         } else {
             res.status(400).send({
-                message : 'This playlist do not exist'
+                message : Message.get("file:post:failure")
             });
         }
     });
@@ -44,13 +45,13 @@ var FileGetOne = function(req, res) {
     .then(function(file) {
         if (file) {
             res.status(200).send({
-                message : 'File selected with id:' + req.params.id,
+                message : Message.get("file:getone:success", req.params.id),
                 file    : file
             });
         }
         else {
             res.status(400).send({
-                message : 'File selected with id:' + req.params.id + ' was not found',
+                message : Message.get("file:getone:failure", req.params.id),
             });
         }
     });
