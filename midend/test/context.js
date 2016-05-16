@@ -7,7 +7,9 @@ var Context = function() {
         self.token = null;
         self.request = require('supertest');
         self.server = self.request.agent(require(process.env.NODE_PATH + '/server.js'));
-        self.cleaner = require(process.env.NODE_PATH + '/test/database_cleaner.js');
+        self.orm = require(process.env.NODE_PATH + '/modules/orm');
+        self.Cleaner = require(process.env.NODE_PATH + '/test/database_cleaner.js')(self.orm);
+        self.Helper = require(process.env.NODE_PATH + '/test/helper.js')(self.orm);
         self.cleaned = false;
         self.authentified = false;
     };
@@ -15,7 +17,7 @@ var Context = function() {
     self.__auth = function(done) {
         var currentUser = __users[0];
 
-        self.cleaner.clean().then(function() {
+        self.Cleaner.clean().then(function() {
             self.cleaned = true;
             self.server
             .post('/api/session')
@@ -41,12 +43,12 @@ var Context = function() {
 
     self.clean = function(done) {
         if (!self.cleaned) {
-            self.cleaner.clean().then(done);
+            self.Cleaner.clean().then(done);
         } else {
             done();
         }
         ok = false;
-    }
+    };
 
     self.init();
     return self;

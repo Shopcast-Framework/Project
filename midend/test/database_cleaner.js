@@ -10,11 +10,11 @@ String.prototype.capitalize = function() {
     });
 };
 
-var DatabaseCleaner = function() {
+var DatabaseCleaner = function(orm) {
     var self = this;
 
-    self.init = function() {
-        self.orm = require(process.env.NODE_PATH + '/modules/orm');
+    self.init = function(orm) {
+        self.orm = orm
     };
 
     self.clean = function() {
@@ -33,11 +33,16 @@ var DatabaseCleaner = function() {
             );
             bulks.push(bulk);
         });
-        return Q.when(Q.all(bulks), function() {});
+        return Q.when(Q.all(bulks), function() {}, function(err) {
+            console.log(err);
+            throw err;
+        });
     }
 
-    self.init();
+    self.init(orm);
     return self;
 };
 
-module.exports = new DatabaseCleaner();
+module.exports = function(orm) {
+    return new DatabaseCleaner(orm);
+}
