@@ -1,0 +1,18 @@
+[
+    {
+        "id"                : 1,
+        "username"          : "username user",
+        "description"       : "description user",
+        "age"               : "42",
+        "sex"               : "sexe user",
+        "location"          : "location user",
+        "password"          : "password user",
+        "role"              : null,
+        "type"              : null,
+        "facebookId"        : null,
+        "googleId"          : null,
+        "last_connection"   : "2016-01-01T08:00:00.000Z",
+        "created_at"        : "2016-01-01T08:00:00.000Z",
+        "updated_at"        : "2016-01-01T08:00:00.000Z"
+    }
+]

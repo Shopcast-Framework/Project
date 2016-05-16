@@ -17,8 +17,8 @@ var File = function(sequelize) {
     }, {underscored: true});
 
     var relationships = function() {
-        model.belongsTo(orm.db.Playlist);
-        model.belongsTo(orm.db.User);
+        model.belongsTo(orm.db.Playlist, {constraints: false});
+        model.belongsTo(orm.db.User, {constraints: false});
     };
 
     return {

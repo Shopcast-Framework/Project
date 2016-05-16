@@ -9,7 +9,6 @@ var StrategyLocal = function(app, passport, loginCallback) {
 
     self.init = function(app, passport) {
         var authenticate = function(username, password, done) {
-            console.log('AUTHENTICATE');
             User.find({
                 where: {username: username}
 	        }).then(function(user) {

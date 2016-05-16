@@ -58,10 +58,10 @@ var User = function(sequelize) {
     });
 
     var relationships = function() {
-        model.belongsToMany(orm.db.User, {as: 'friends', through: 'Friend'});
-        model.hasMany(orm.db.Playlist);
-        model.hasMany(orm.db.File);
-        model.hasMany(orm.db.Planning);
+        model.belongsToMany(orm.db.User, {as: 'friends', through: 'Friend', constraints: false});
+        model.hasMany(orm.db.Playlist, {constraints: false});
+        model.hasMany(orm.db.File, {constraints: false});
+        model.hasMany(orm.db.Planning, {constraints: false});
     };
 
     return {

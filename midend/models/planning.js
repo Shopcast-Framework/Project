@@ -14,7 +14,7 @@ var Planning = function(sequelize) {
     }, {underscored: true});
 
     var relationships = function() {
-        model.belongsTo(orm.db.User);
+        model.belongsTo(orm.db.User, {constraints: false});
     };
 
     return {

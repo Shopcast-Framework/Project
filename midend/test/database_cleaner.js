@@ -14,7 +14,7 @@ var DatabaseCleaner = function() {
     var self = this;
 
     self.init = function() {
-        self.orm = require('../orm');
+        self.orm = require(process.env.NODE_PATH + '/modules/orm');
     };
 
     self.clean = function() {

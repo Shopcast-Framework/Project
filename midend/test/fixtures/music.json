@@ -1,8 +1,8 @@
 [
     {
-        "id": 1,
-        "name": "Music 1",
-        "createdAt": "2016-05-12T22:32:02.000Z",
-        "updatedAt": "2016-05-12T22:32:02.000Z"
+        "id"        : 1,
+        "name"      : "name music",
+        "createdAt" : "2016-01-01T08:00:00.000Z",
+        "updatedAt" : "2016-01-01T08:00:00.000Z"
     }
 ]
