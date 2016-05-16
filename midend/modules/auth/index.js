@@ -31,19 +31,16 @@ var Authentificator = function(app) {
                     return res.status(400).send(err);
                 }
                 user.authenticate();
-                console.log('return correclty');
                 return res.status(200).send({message: 'User correctly authenticate', user: user});
             });
         };
     };
 
     self.serializeUser = function(user, done) {
-        console.log('SERIALIZE USER');
         done(null, user.id);
     };
 
     self.deserializeUser = function(id, done) {
-        console.log('DESERIALIZE USER');
         User.findById(id).then(function(user) {
             if (user) {
                 done(null, user);

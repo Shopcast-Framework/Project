@@ -1,46 +1,388 @@
-var request     = require('supertest'),
-    passport    = require('passport'),
-    server      = request.agent(require(process.env.NODE_PATH + '/server.js')),
+var Context     = require(process.env.NODE_PATH + '/test/context.js'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
-    Cleaner     = require('../database_cleaner.js'),
-    Helper      = require('../helper.js'),
-    __users     = require('../fixtures/user.json');
+    Cleaner     = require(process.env.NODE_PATH + '/test/database_cleaner.js'),
+    Helper      = require(process.env.NODE_PATH + '/test/helper.js'),
+    __users     = require(process.env.NODE_PATH + '/test/fixtures/user.json');
 
 describe('Api user', function () {
-    var currentUser = __users[0],
-        token,
-        ok = true;
-
-    function auth(done) {
-        Cleaner.clean().then(function() {
-            server
-            .post('/api/session')
-            .set('Content-Type', 'application/json')
-            .send({'strategy': 'local', 'username': currentUser.username, 'password': currentUser.password})
-            .expect(function(res) {
-                token = res.body.user.token;
-            })
-            .end(done);
-        });
-    };
 
     before(function(done) {
-        auth(done);
+        this.timeout(0);
+        Context.auth(done);
     });
 
     beforeEach(function(done) {
-        if (ok) {
-            done();
-        } else {
-            Cleaner.clean().then(done);
-        }
-        ok = false;
+        this.timeout(300);
+        Context.clean(done);
     });
 
     it('[GET] /', function(done) {
-        server
+        Context.server
         .get('/api/user')
-        .set({'Content-Type' : 'application/json', 'Authorization': token})
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:get:success"),
+            users   : __users
+        }, done);
+    });
+
+    it('[GET] /', function(done) {
+        Context.server
+        .get('/api/user')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
         .expect(200, {
             message : Message.get("user:get:success"),
