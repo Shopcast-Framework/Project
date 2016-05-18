@@ -48,7 +48,7 @@ describe('Api user controller', function () {
     });
 
     it('[POST] /api/user', function(done) {
-        var newUser = Helper.build.new('User', __users[0]);
+        var newUser = Helper.build.new('User', __users[__users.length - 1]);
 
         Context.server
         .post('/api/user')
@@ -71,6 +71,27 @@ describe('Api user controller', function () {
         .expect(200, {
             message     : Message.get("user:put:success"),
             user        : editUser
+        }, done);
+    });
+
+    it('[PUT] /api/user/999 (Invalid id)', function(done) {
+        var editUser = Helper.build.edit('User', __users[0]);
+
+        Context.server
+        .put('/api/user/999')
+        .send(editUser)
+        .expect(Helper.date.truncate)
+        .expect(400, {
+            message : Message.get("user:put:failure")
+        }, done);
+    });
+
+    it('[DELETE] /api/user/1', function(done) {
+        Context.server
+        .del('/api/user/1')
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message : Message.get("user:delete:success")
         }, done);
     });
 

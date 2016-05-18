@@ -1,4 +1,6 @@
-var DATE = "2016-01-01T08:00:00.000Z";
+var Clone = require('clone');
+
+var DATE = "2016-01-01T00:00:00.000Z";
 
 var DateHelper = function() {
     var self = this;
@@ -80,6 +82,22 @@ var BuilderHelper = function(orm) {
         }
         return newobj;
     };
+
+    self.associate = function(name, originalDatas, ids, ressources) {
+        var associations = [],
+            datas = Clone(originalDatas);
+
+        for (var n in ids) {
+            var _datas = datas[n]
+            var _ids = ids[n];
+            for (var i in _ids) {
+                var id = _ids[i];
+                associations.push(ressources[id]);
+            }
+            datas[n][name] = (associations.length == 1 ? associations[0] : associations);
+        }
+        return datas;
+    }
 
     self.init(orm);
     return self;
