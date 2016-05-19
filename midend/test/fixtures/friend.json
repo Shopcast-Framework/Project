@@ -12,5 +12,12 @@
         "updated_at"    : "2016-01-01T00:00:00.000Z",
         "user_id"       : 2,
         "friend_id"     : 1
+    },
+    {
+        "accepted"      : false,
+        "created_at"    : "2016-01-01T00:00:00.000Z",
+        "updated_at"    : "2016-01-01T00:00:00.000Z",
+        "user_id"       : 1,
+        "friend_id"     : 4
     }
 ]

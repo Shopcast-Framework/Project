@@ -6,7 +6,11 @@ var orm         = require(process.env.NODE_PATH + '/modules/orm'),
 
 var PlanningGet = function(req, res) {
     Planning
-    .all()
+    .findAll({
+        where: {
+            user_id: req.user.id
+        }
+    })
     .then(function(plannings) {
         res.status(200).send({
             message     : Message.get("planning:get:success"),
@@ -18,8 +22,13 @@ var PlanningGet = function(req, res) {
 };
 
 var PlanningGetOne = function(req, res) {
-    req.user
-    .getOnePlanning({id: req.params.id})
+    Planning
+    .find({
+        where: {
+            id      : req.params.id,
+            user_id : req.user.id
+        }
+    })
     .then(function(planning) {
         if (planning) {
             res.status(200).send({
@@ -28,7 +37,7 @@ var PlanningGetOne = function(req, res) {
             });
         } else {
             res.status(400).send({
-                message : Message.get("planning:getone:success")
+                message : Message.get("planning:getone:failure")
             })
         }
     }, function(err) {

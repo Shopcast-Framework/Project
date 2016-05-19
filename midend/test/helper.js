@@ -9,22 +9,21 @@ var DateHelper = function() {
     self.__truncate = function(obj) {
         if (typeof(obj) == "object") {
             for (var k in obj) {
-                if (self.__truncate(obj[k])) {
-                    obj[k] = self.DATE;
-                }
+                obj[k] = self.__truncate(obj[k]) || obj[k];
             }
         } else if (typeof(obj) == "array") {
             for (var i = 0; i < obj.length; i++) {
-                if (self.__truncate(obj[i])) {
-                    obj[i] = self.DATE;
-                }
+                obj[i] = self.__truncate(obj[i]) || obj[i];
             }
         } else if (typeof(obj) == "string") {
             if (obj.substr(0, 4) == '2016') {
-                return true;
+                return self.DATE;
+            }
+            if (obj.substr(0, 4) == '2017') {
+                return obj.substr(0, 10);
             }
         }
-        return false;
+        return null;
     }
 
     self.truncate = function(res) {
@@ -84,12 +83,13 @@ var BuilderHelper = function(orm) {
     };
 
     self.associate = function(name, originalDatas, ids, ressources) {
-        var associations = [],
-            datas = Clone(originalDatas);
+        var datas = Clone(originalDatas);
 
         for (var n in ids) {
-            var _datas = datas[n]
-            var _ids = ids[n];
+            var associations = [],
+                _datas = datas[n]
+                _ids = ids[n];
+
             for (var i in _ids) {
                 var id = _ids[i];
                 associations.push(ressources[id]);

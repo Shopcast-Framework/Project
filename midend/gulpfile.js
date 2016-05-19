@@ -5,7 +5,7 @@ var gulp    = require('gulp'),
     nodemon = require('gulp-nodemon'),
     sys     = require('sys'),
     exec    = require('child_process').exec,
-    puts    = function(error, stdout, stderr) { sys.puts(stdout) };
+    puts    = function(error, stdout, stderr) { sys.puts(stdout); sys.puts(stderr) };
 
 gulp.task('serve', function() {
     process.env.NODE_ENV = util.env.env || 'development';

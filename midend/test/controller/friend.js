@@ -16,13 +16,9 @@ describe('Api friend controller', function () {
         Context.clean(done);
     });
 
-    // [get] : /user/:user_id/friend
-    // [post] : /user/:user_id/friend
-    // [put] : /user/:user_id/friend/:id
-
     it('[GET] /api/user/1/friend', function(done) {
-        var friend = __users[1],
-            friends = Helper.build.associate('Friend', [friend], [[0]], __friends);
+        var friend = [__users[1], __users[3]],
+            friends = Helper.build.associate('Friend', friend, [[0], [2]], __friends);
 
         Context.server
         .get('/api/user/1/friend')
@@ -34,31 +30,80 @@ describe('Api friend controller', function () {
         }, done);
     });
 
-    // it('[POST] /api/user/1/friend', function(done) {
-    //     var newUser = Helper.build.new('User', __users[0]);
-    //
-    //     Context.server
-    //     .post('/api/user')
-    //     .set('Content-Type', 'application/json')
-    //     .send(newUser)
-    //     .expect(Helper.date.truncate)
-    //     .expect(200, {
-    //         message : Message.get("user:post:success"),
-    //         user : newUser
-    //     }, done);
-    // });
-    //
-    // it('[PUT] /api/user/1/friend/2', function(done) {
-    //     var editUser = Helper.build.edit('User', __users[0]);
-    //
-    //     Context.server
-    //     .put('/api/user/1')
-    //     .send(editUser)
-    //     .expect(Helper.date.truncate)
-    //     .expect(200, {
-    //         message     : Message.get("user:put:success"),
-    //         user        : editUser
-    //     }, done);
-    // });
+    it('[GET] /api/user/999/friend (Invalid user)', function(done) {
+        Context.server
+        .get('/api/user/999/friend')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .expect(Helper.date.truncate)
+        .expect(300, {
+            message: Message.get("friend:get:failure")
+        }, done);
+    });
+
+    it('[POST] /api/user/1/friend', function(done) {
+        Context.server
+        .post('/api/user/1/friend')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .send({ friend_id: 3 })
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message: Message.get("friend:post:success")
+        }, done);
+    });
+
+    it('[POST] /api/user/999/friend (Invalid id)', function(done) {
+        Context.server
+        .post('/api/user/999/friend')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .send({ friend_id: 3 })
+        .expect(Helper.date.truncate)
+        .expect(300, {
+            message: Message.get("friend:post:failure")
+        }, done);
+    });
+
+    it('[POST] /api/user/1/friend (Invalid friend id)', function(done) {
+        Context.server
+        .post('/api/user/1/friend')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .send({ friend_id: 999 })
+        .expect(Helper.date.truncate)
+        .expect(300, {
+            message: Message.get("friend:post:failure")
+        }, done);
+    });
+
+    it('[PUT] /api/user/1/friend/4', function(done) {
+        Context.server
+        .put('/api/user/1/friend/4')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .send({ accepted: true })
+        .expect(Helper.date.truncate)
+        .expect(200, {
+            message: Message.get("friend:put:success")
+        }, done);
+    });
+
+    it('[PUT] /api/user/999/friend/4 (Invalid user id)', function(done) {
+        Context.server
+        .put('/api/user/999/friend/4')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .send({ accepted: true })
+        .expect(Helper.date.truncate)
+        .expect(300, {
+            message: Message.get("friend:put:failure")
+        }, done);
+    });
+
+    it('[PUT] /api/user/1/friend/999 (Invalid id)', function(done) {
+        Context.server
+        .put('/api/user/1/friend/999')
+        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .send({ accepted: true })
+        .expect(Helper.date.truncate)
+        .expect(300, {
+            message: Message.get("friend:put:failure")
+        }, done);
+    });
 
 });

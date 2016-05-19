@@ -30,5 +30,37 @@
         "last_connection"   : "2016-01-01T00:00:00.000Z",
         "created_at"        : "2016-01-01T00:00:00.000Z",
         "updated_at"        : "2016-01-01T00:00:00.000Z"
+    },
+    {
+        "id"                : 3,
+        "username"          : "username try friend",
+        "description"       : "description try friend",
+        "age"               : "22",
+        "sex"               : "sexe friend",
+        "location"          : "location friend",
+        "password"          : "password friend",
+        "role"              : 22,
+        "type"              : 22,
+        "facebookId"        : null,
+        "googleId"          : null,
+        "last_connection"   : "2016-01-01T00:00:00.000Z",
+        "created_at"        : "2016-01-01T00:00:00.000Z",
+        "updated_at"        : "2016-01-01T00:00:00.000Z"
+    },
+    {
+        "id"                : 4,
+        "username"          : "username no friend",
+        "description"       : "description no friend",
+        "age"               : "11",
+        "sex"               : "sexe friend",
+        "location"          : "location friend",
+        "password"          : "password friend",
+        "role"              : 11,
+        "type"              : 11,
+        "facebookId"        : null,
+        "googleId"          : null,
+        "last_connection"   : "2016-01-01T00:00:00.000Z",
+        "created_at"        : "2016-01-01T00:00:00.000Z",
+        "updated_at"        : "2016-01-01T00:00:00.000Z"
     }
 ]
