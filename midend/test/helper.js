@@ -45,7 +45,7 @@ var BuilderHelper = function(orm) {
             };
 
         for (var k in model.tableAttributes) {
-            var attr = self.orm.db.User.tableAttributes[k];
+            var attr = model.tableAttributes[k];
             var field = attr.field;
 
             if (field == 'id') { continue; }
@@ -67,7 +67,7 @@ var BuilderHelper = function(orm) {
             };
 
         for (var k in model.tableAttributes) {
-            var attr = self.orm.db.User.tableAttributes[k];
+            var attr = model.tableAttributes[k];
             var field = attr.field;
 
             if (field == 'id') { continue; }

@@ -38,6 +38,7 @@
     "file:put:success"          : "File correctly updated",
     "file:put:failure"          : "Error can't find file",
     "file:delete:success"       : "File correctly deleted",
+    "file:delete:failure"       : "Error can't delete the file",
 
     "friend:put:success"        : "Friendship correctly accepted",
     "friend:put:failure"        : "Error can't find user",

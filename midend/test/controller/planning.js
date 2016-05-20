@@ -1,7 +1,5 @@
 var Context     = require(process.env.NODE_PATH + '/test/context.js'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
-    __users     = require(process.env.NODE_PATH + '/test/fixtures/user.json'),
-    __friends   = require(process.env.NODE_PATH + '/test/fixtures/friend.json'),
     __plannings = require(process.env.NODE_PATH + '/test/fixtures/planning.json'),
     Helper      = Context.Helper;
 
