@@ -1,6 +1,7 @@
 'use strict';
 
-var orm         = require(process.env.NODE_PATH + '/modules/orm'),
+var Status      = require(process.env.NODE_PATH + '/config/status.json'),
+    orm         = require(process.env.NODE_PATH + '/modules/orm'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
     User        = orm.db.User,
     Friend      = orm.db.Friend,
@@ -14,22 +15,22 @@ var FriendPut = function(req, res) {
         }
     }).then(function(friend) {
         if (friend == null) {
-            return res.status(300).send({
+            return res.status(Status.UNAUTHORIZED).send({
                 message: Message.get("friend:put:failure")
             });
         }
         friend.updateAttributes(req.body).then(function(friend) {
             if (friend == null) {
-                return res.status(300).send({
+                return res.status(Status.UNAUTHORIZED).send({
                     message: Message.get("friend:put:failure")
                 });
             }
-            res.status(200).send({
+            res.status(Status.OK).send({
                 message: Message.get("friend:put:success")
             });
         });
     }, function(err) {
-        res.status(300).send(err);
+        res.status(Status.UNAUTHORIZED).send(err);
     });
 }
 
@@ -39,7 +40,7 @@ var FriendPost = function(req, res) {
         User.findById(req.body.friend_id)
     ]).then(function(users) {
         if (users[0] == null || users[1] == null) {
-            return res.status(300).send({
+            return res.status(Status.UNAUTHORIZED).send({
                 message: Message.get("friend:post:failure")
             });
         }
@@ -47,28 +48,28 @@ var FriendPost = function(req, res) {
             users[0].addFriend(users[1], { accepted : true }),
             users[1].addFriend(users[0], { accepted : false })
         ]).then(function() {
-            res.status(200).send({
+            res.status(Status.OK).send({
                 message: Message.get("friend:post:success")
             });
         });
     }, function(err) {
-        res.status(300).send(err);
+        res.status(Status.UNAUTHORIZED).send(err);
     });
 };
 
 var FriendGet = function(req, res) {
     if (req.params.user_id != req.user.id) {
-        return res.status(300).send({
+        return res.status(Status.UNAUTHORIZED).send({
             message: Message.get("friend:get:failure")
         });
     }
     req.user.getFriends().then(function(friends) {
         if (friends == null) {
-            return res.status(300).send({
+            return res.status(Status.UNAUTHORIZED).send({
                 message: Message.get("friend:get:failure")
             });
         }
-        res.status(200).send({
+        res.status(Status.OK).send({
             message: Message.get("friend:get:success"),
             friends: friends
         });

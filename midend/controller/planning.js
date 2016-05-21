@@ -1,6 +1,7 @@
 'use strict';
 
-var orm         = require(process.env.NODE_PATH + '/modules/orm'),
+var Status      = require(process.env.NODE_PATH + '/config/status.json'),
+    orm         = require(process.env.NODE_PATH + '/modules/orm'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
     Planning    = orm.db.Planning;
 
@@ -12,12 +13,12 @@ var PlanningGet = function(req, res) {
         }
     })
     .then(function(plannings) {
-        res.status(200).send({
+        res.status(Status.OK).send({
             message     : Message.get("planning:get:success"),
             plannings   : plannings
         });
     }, function(err) {
-        res.status(300).send(err);
+        res.status(Status.UNAUTHORIZED).send(err);
     });
 };
 
@@ -31,17 +32,17 @@ var PlanningGetOne = function(req, res) {
     })
     .then(function(planning) {
         if (planning) {
-            res.status(200).send({
+            res.status(Status.OK).send({
                 message     : Message.get("planning:getone:success", req.params.id),
                 planning    : planning
             });
         } else {
-            res.status(400).send({
+            res.status(Status.UNAUTHORIZED).send({
                 message : Message.get("planning:getone:failure")
             })
         }
     }, function(err) {
-        res.status(300).send(err);
+        res.status(Status.UNAUTHORIZED).send(err);
     });
 };
 

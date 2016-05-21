@@ -1,4 +1,5 @@
-var Context = require(process.env.NODE_PATH + '/test/context.js'),
+var Status      = require(process.env.NODE_PATH + '/config/status.json'),
+    Context = require(process.env.NODE_PATH + '/test/context.js'),
     Message = require(process.env.NODE_PATH + '/modules/messages'),
     __users = require(process.env.NODE_PATH + '/test/fixtures/user.json'),
     Helper  = Context.Helper;
@@ -20,7 +21,7 @@ describe('Api user controller', function () {
         .get('/api/user')
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message : Message.get("user:get:success"),
             users   : __users
         }, done);
@@ -31,7 +32,7 @@ describe('Api user controller', function () {
         .get('/api/user/1')
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message : Message.get("user:getone:success", 1),
             user    : __users[0]
         }, done);
@@ -42,7 +43,7 @@ describe('Api user controller', function () {
         .get('/api/user/999')
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
-        .expect(400, {
+        .expect(Status.UNAUTHORIZED, {
             message : Message.get("user:getone:failure", 999)
         }, done);
     });
@@ -55,7 +56,7 @@ describe('Api user controller', function () {
         .set('Content-Type', 'application/json')
         .send(newUser)
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message : Message.get("user:post:success"),
             user : newUser
         }, done);
@@ -68,7 +69,7 @@ describe('Api user controller', function () {
         .put('/api/user/1')
         .send(editUser)
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message     : Message.get("user:put:success"),
             user        : editUser
         }, done);
@@ -81,7 +82,7 @@ describe('Api user controller', function () {
         .put('/api/user/999')
         .send(editUser)
         .expect(Helper.date.truncate)
-        .expect(400, {
+        .expect(Status.UNAUTHORIZED, {
             message : Message.get("user:put:failure")
         }, done);
     });
@@ -90,7 +91,7 @@ describe('Api user controller', function () {
         Context.server
         .del('/api/user/1')
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message : Message.get("user:delete:success")
         }, done);
     });

@@ -1,4 +1,5 @@
-var Context     = require(process.env.NODE_PATH + '/test/context.js'),
+var Status      = require(process.env.NODE_PATH + '/config/status.json'),
+    Context     = require(process.env.NODE_PATH + '/test/context.js'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
     __playlists = require(process.env.NODE_PATH + '/test/fixtures/playlist.json'),
     __files     = require(process.env.NODE_PATH + '/test/fixtures/file.json'),
@@ -21,7 +22,7 @@ describe('Api playlist controller', function () {
         .get('/api/playlist')
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message     : Message.get("playlist:get:success"),
             playlists   : __playlists.slice(0, 2)
         }, done);
@@ -35,7 +36,7 @@ describe('Api playlist controller', function () {
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .send(newPlaylist)
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message     : Message.get("playlist:post:success"),
             playlist    : newPlaylist
         }, done);
@@ -48,7 +49,7 @@ describe('Api playlist controller', function () {
         .get('/api/playlist/1')
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message     : Message.get("playlist:getone:success", 1),
             playlist    : playlist[0]
         }, done);
@@ -59,7 +60,7 @@ describe('Api playlist controller', function () {
         .get('/api/playlist/999')
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
-        .expect(400, {
+        .expect(Status.UNAUTHORIZED, {
             message     : Message.get("playlist:getone:failure")
         }, done);
     });
@@ -72,7 +73,7 @@ describe('Api playlist controller', function () {
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .send(editPlaylist)
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message     : Message.get("playlist:put:success"),
             playlist    : editPlaylist
         }, done);
@@ -86,7 +87,7 @@ describe('Api playlist controller', function () {
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .send(editPlaylist)
         .expect(Helper.date.truncate)
-        .expect(400, {
+        .expect(Status.UNAUTHORIZED, {
             message     : Message.get("playlist:put:failure")
         }, done);
     });
@@ -96,7 +97,7 @@ describe('Api playlist controller', function () {
         .del('/api/playlist/1')
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message : Message.get("playlist:delete:success")
         }, done);
     });
@@ -106,7 +107,7 @@ describe('Api playlist controller', function () {
         .del('/api/playlist/999')
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
-        .expect(400, {
+        .expect(Status.UNAUTHORIZED, {
             message : Message.get("playlist:delete:failure")
         }, done);
     });

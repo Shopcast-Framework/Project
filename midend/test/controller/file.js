@@ -1,4 +1,5 @@
-var Context     = require(process.env.NODE_PATH + '/test/context.js'),
+var Status      = require(process.env.NODE_PATH + '/config/status.json'),
+    Context     = require(process.env.NODE_PATH + '/test/context.js'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
     __files     = require(process.env.NODE_PATH + '/test/fixtures/file.json'),
     Helper      = Context.Helper;
@@ -20,7 +21,7 @@ describe('Api file controller', function () {
         .get('/api/file')
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message     : Message.get("file:get:success"),
             files       : __files.slice(0, 2)
         }, done);
@@ -34,7 +35,7 @@ describe('Api file controller', function () {
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .send(newFile)
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message : Message.get("file:post:success"),
             file    : newFile
         }, done);
@@ -45,7 +46,7 @@ describe('Api file controller', function () {
         .get('/api/file/1')
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message     : Message.get("file:getone:success", 1),
             file        : __files[0]
         }, done);
@@ -56,7 +57,7 @@ describe('Api file controller', function () {
         .get('/api/file/999')
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
-        .expect(400, {
+        .expect(Status.UNAUTHORIZED, {
             message     : Message.get("file:getone:failure", 1)
         }, done);
     });
@@ -69,7 +70,7 @@ describe('Api file controller', function () {
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .send(editFile)
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message     : Message.get("file:put:success"),
             file        : editFile
         }, done);
@@ -83,7 +84,7 @@ describe('Api file controller', function () {
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .send(editFile)
         .expect(Helper.date.truncate)
-        .expect(300, {
+        .expect(Status.UNAUTHORIZED, {
             message: Message.get("file:put:failure")
         }, done);
     });
@@ -93,7 +94,7 @@ describe('Api file controller', function () {
         .del('/api/file/1')
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message : Message.get("file:delete:success")
         }, done);
     });
@@ -103,7 +104,7 @@ describe('Api file controller', function () {
         .del('/api/file/999')
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
-        .expect(400, {
+        .expect(Status.UNAUTHORIZED, {
             message : Message.get("file:delete:failure")
         }, done);
     });

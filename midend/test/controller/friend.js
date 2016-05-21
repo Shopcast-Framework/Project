@@ -1,4 +1,5 @@
-var Context     = require(process.env.NODE_PATH + '/test/context.js'),
+var Status      = require(process.env.NODE_PATH + '/config/status.json'),
+    Context     = require(process.env.NODE_PATH + '/test/context.js'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
     __users     = require(process.env.NODE_PATH + '/test/fixtures/user.json'),
     __friends   = require(process.env.NODE_PATH + '/test/fixtures/friend.json'),
@@ -27,7 +28,7 @@ describe('Api friend controller', function () {
         .get('/api/user/1/friend')
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message: Message.get("friend:get:success"),
             friends: friends
         }, done);
@@ -38,7 +39,7 @@ describe('Api friend controller', function () {
         .get('/api/user/999/friend')
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
-        .expect(300, {
+        .expect(Status.UNAUTHORIZED, {
             message: Message.get("friend:get:failure")
         }, done);
     });
@@ -49,7 +50,7 @@ describe('Api friend controller', function () {
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .send({ friend_id: 3 })
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message: Message.get("friend:post:success")
         }, done);
     });
@@ -60,7 +61,7 @@ describe('Api friend controller', function () {
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .send({ friend_id: 3 })
         .expect(Helper.date.truncate)
-        .expect(300, {
+        .expect(Status.UNAUTHORIZED, {
             message: Message.get("friend:post:failure")
         }, done);
     });
@@ -71,7 +72,7 @@ describe('Api friend controller', function () {
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .send({ friend_id: 999 })
         .expect(Helper.date.truncate)
-        .expect(300, {
+        .expect(Status.UNAUTHORIZED, {
             message: Message.get("friend:post:failure")
         }, done);
     });
@@ -82,7 +83,7 @@ describe('Api friend controller', function () {
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .send({ accepted: true })
         .expect(Helper.date.truncate)
-        .expect(200, {
+        .expect(Status.OK, {
             message: Message.get("friend:put:success")
         }, done);
     });
@@ -93,7 +94,7 @@ describe('Api friend controller', function () {
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .send({ accepted: true })
         .expect(Helper.date.truncate)
-        .expect(300, {
+        .expect(Status.UNAUTHORIZED, {
             message: Message.get("friend:put:failure")
         }, done);
     });
@@ -104,7 +105,7 @@ describe('Api friend controller', function () {
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .send({ accepted: true })
         .expect(Helper.date.truncate)
-        .expect(300, {
+        .expect(Status.UNAUTHORIZED, {
             message: Message.get("friend:put:failure")
         }, done);
     });
