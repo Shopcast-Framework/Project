@@ -38,7 +38,7 @@ var BuilderHelper = function(orm) {
         self.orm = orm;
     };
 
-    self.new = function(name, datas) {
+    self.new = function(name, datas, attrs) {
         var model = self.orm.db[name],
             newobj = {
                 id: datas.id + 1
@@ -55,6 +55,11 @@ var BuilderHelper = function(orm) {
                 newobj[field] = DATE;
             } else {
                 newobj[field] = datas[field] || null;
+            }
+        }
+        if (attrs) {
+            for (var k in attrs) {
+                newobj[k] = attrs[k];
             }
         }
         return newobj;
@@ -94,7 +99,10 @@ var BuilderHelper = function(orm) {
                 var id = _ids[i];
                 associations.push(ressources[id]);
             }
-            datas[n][name] = (associations.length == 1 ? associations[0] : associations);
+            if (name[name.length - 1] != 's') {
+                associations = associations[0];
+            }
+            datas[n][name] = associations;
         }
         return datas;
     }

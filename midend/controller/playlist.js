@@ -10,9 +10,15 @@ var PlayListPut = function(req, res) {
     req.user
     .getOnePlaylist({id: req.params.id})
     .then(function(playlist) {
+        if (!playlist) {
+            return res.status(400).send({message:Message.get("playlist:put:failure")})
+        }
         playlist
         .updateAttributes(req.body)
         .then(function(playlist) {
+            if (!playlist) {
+                return res.status(400).send({message:Message.get("playlist:put:failure")})
+            }
             res.status(200).send({
                 message     : Message.get("playlist:put:success"),
                 playlist    : playlist
@@ -52,11 +58,14 @@ var PlayListPost = function(req, res) {
 };
 
 var PlaylistGetOne = function(req, res) {
-    req.user
-    .getOnePlaylist({id: req.params.id}, {
+    Playlist.findOne({
+        where: {
+            id      : req.params.id,
+            user_id : req.user.id
+        },
         include: [{
             model: File,
-            as: 'files'
+            as: 'Files'
         }]
     })
     .then(function(playlist) {

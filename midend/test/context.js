@@ -47,7 +47,7 @@ var Context = function() {
         } else {
             done();
         }
-        ok = false;
+        self.cleaned = false;
     };
 
     self.init();

@@ -14,7 +14,7 @@ var Playlist = function(sequelize) {
     }, {underscored: true});
 
     var relationships = function() {
-        model.hasMany(orm.db.File, {as: 'files', constraints: false});
+        model.hasMany(orm.db.File, {constraints: false});
         model.belongsTo(orm.db.User, {constraints: false});
     };
 

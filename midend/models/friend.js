@@ -9,8 +9,13 @@ var Friend = function(sequelize) {
         accepted:   Sequelize.BOOLEAN
     }, {underscored: true});
 
+    var relationships = function() {
+        model.belongsTo(orm.db.User, {constraints: false});
+    };
+
     return {
-        definition      : model
+        definition      : model,
+        relationships   : relationships
     };
 };
 

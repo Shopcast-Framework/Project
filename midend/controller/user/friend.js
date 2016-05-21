@@ -57,22 +57,20 @@ var FriendPost = function(req, res) {
 };
 
 var FriendGet = function(req, res) {
-    User.findById(req.params.user_id).then(function(user){
-        if (user == null) {
+    if (req.params.user_id != req.user.id) {
+        return res.status(300).send({
+            message: Message.get("friend:get:failure")
+        });
+    }
+    req.user.getFriends().then(function(friends) {
+        if (friends == null) {
             return res.status(300).send({
                 message: Message.get("friend:get:failure")
             });
         }
-        user.getFriends().then(function(friends) {
-            if (friends == null) {
-                return res.status(300).send({
-                    message: Message.get("friend:get:failure")
-                });
-            }
-            res.status(200).send({
-                message: Message.get("friend:get:success"),
-                friends: friends
-            });
+        res.status(200).send({
+            message: Message.get("friend:get:success"),
+            friends: friends
         });
     });
 }

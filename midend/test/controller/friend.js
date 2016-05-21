@@ -17,8 +17,11 @@ describe('Api friend controller', function () {
     });
 
     it('[GET] /api/user/1/friend', function(done) {
-        var friend = [__users[1], __users[3]],
-            friends = Helper.build.associate('Friend', friend, [[0], [2]], __friends);
+        var friends = Helper.build.associate(
+            'Friend',
+            [__users[1], __users[3]], [[0], [2]],
+            __friends
+        );
 
         Context.server
         .get('/api/user/1/friend')

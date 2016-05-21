@@ -17,6 +17,7 @@
     "session:post:failure"      : "Error invalid strategy %s",
 
     "playlist:put:success"      : "Playlist correctly updated",
+    "playlist:put:failure"      : "Error, can't edit the playlist",
     "playlist:get:success"      : "List of playlists",
     "playlist:post:success"     : "Playlist successfully created",
     "playlist:getone:success"   :"Playlist selected with id: %s",
