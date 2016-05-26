@@ -1,0 +1,99 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Chaque personne du groupe dispose de sa propre branche d\u00e9sormais.\n\n\nInterface utilisateur\n\n\nCette interface permet aux utilisateurs de Shopcast de pouvoir g\u00e9rer tous leurs contenu facilement et de mani\u00e8re intuitive.\n\n\nRequis\n\n\nLors de la premi\u00e8re utilisation de l'interface, effectuer les actions suivante :\n- Installer la base de donn\u00e9es\n- Cr\u00e9er l'utilisateur login : \nshopcast\n \n mdp : \ntoto\n\n- Lancer la commande \nnpm install\n \u00e0 la racine\n\n\nUtilisation\n\n\n cd frontend\n\n gulp\n\n\n\n\nL'interface est lanc\u00e9 sur le port 3001. Pour acc\u00e9der \u00e0 l'interface -\n \nhttp://localhost:3001/signin\n\n\nApi\n\n\nL'api permet de requeter l'ensemble des donn\u00e9es. Elle utilise le standart rest est sera vou\u00e9e \u00e0 le respecter. Elle est l'unique acc\u00e8s direct a la base de donn\u00e9es.\n\n\nArchitecture\n\n\nElle utilise le syst\u00e8me MVC. Les vues n'ayant pas un interet particulier pour le formattage du JSON il n'y en a pas et les controlleurs retournent directement les donn\u00e9es.\n\n\nFormattage des requetes\n\n\nLes requetes se forme suivant le principes REST.\nUn model a donc les routes suivantes de cr\u00e9e :\n\n\n\n\n/api/model\n GET retourne l'ensemble des models\n\n\n/api/model\n POST cr\u00e9e un nouveau model en utilisant le body de la requete\n\n\n/api/model/:id\n GET retourne le model correspondant \u00e0 :id\n\n\n/api/model/:id\n DELETE supprime le model correspondant \u00e0 :id\n\n\n/api/model/:id\n PUT edit le model correspondant \u00e0 :id\n\n\n\n\nLe body pour les requetes PUT et POST devra etre de la forme suivante :\n\n\n{\n    attr1: value1,\n    attr2: value2\n}\n\n\n\nFormattage des reponses\n\n\nLes reponses sont tout au format JSON.\nChaque reponse a directement un attribut message avec comme valeur un chaine de carectere decrivant le resultat de la requete.\n\n\n{\n    message : \"Sucess\"\n    attr1 : value1\n}\n\n\n\nUtilisation\n\n\n cd midend\n\n gulp\n\n\n\n\nModules\n\n\napi.js\n\n\nCe module permet de cr\u00e9er automatiquement les routes.\nIl relit chaque route defini dans le fichier config/routes.js \u00e0 une fonction du controller.\nLe fichier de config permet aussi de setter le middlewares.\n\n\norm.js\n\n\nLoad l'ensemble des models. A la fin du loading cr\u00e9e les relations entre les models.\nA la fin de ce process le module recr\u00e9e l'ensemble des tables inexistantes avec les bonnes colonnes.\n\n\nMiddlewares\n\n\nLes middlewares sont defini dans le fichier config/routes.js\nA chaque requete les middlewares correspondant \u00e0 la requete sont automatiquement appel\u00e9s.\n\n\nmiddlewares/auth.js\n\n\nPermet de verifier la correcte authentification de l'utilisateur.\n\n\nSite vitrine\n\n\nCe site est template static visant \u00e0 promouvoir et expliquer le principe de Shopcast.\n\n\nUtilisation\n\n\nA la racine, ouvrir la page \nindex.html\n via votre navigateur pr\u00e9f\u00e9r\u00e9.\n\n\nReste \u00e0 faire\n\n\n\n\n[x] Mettre en place le template.\n\n\n[ ] Traduire tous les contenus.\n\n\n[ ] Enlever les lorem ipsum.", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#interface-utilisateur", 
+            "text": "Cette interface permet aux utilisateurs de Shopcast de pouvoir g\u00e9rer tous leurs contenu facilement et de mani\u00e8re intuitive.", 
+            "title": "Interface utilisateur"
+        }, 
+        {
+            "location": "/#requis", 
+            "text": "Lors de la premi\u00e8re utilisation de l'interface, effectuer les actions suivante :\n- Installer la base de donn\u00e9es\n- Cr\u00e9er l'utilisateur login :  shopcast    mdp :  toto \n- Lancer la commande  npm install  \u00e0 la racine", 
+            "title": "Requis"
+        }, 
+        {
+            "location": "/#utilisation", 
+            "text": "cd frontend  gulp  L'interface est lanc\u00e9 sur le port 3001. Pour acc\u00e9der \u00e0 l'interface -   http://localhost:3001/signin", 
+            "title": "Utilisation"
+        }, 
+        {
+            "location": "/#api", 
+            "text": "L'api permet de requeter l'ensemble des donn\u00e9es. Elle utilise le standart rest est sera vou\u00e9e \u00e0 le respecter. Elle est l'unique acc\u00e8s direct a la base de donn\u00e9es.", 
+            "title": "Api"
+        }, 
+        {
+            "location": "/#architecture", 
+            "text": "Elle utilise le syst\u00e8me MVC. Les vues n'ayant pas un interet particulier pour le formattage du JSON il n'y en a pas et les controlleurs retournent directement les donn\u00e9es.", 
+            "title": "Architecture"
+        }, 
+        {
+            "location": "/#formattage-des-requetes", 
+            "text": "Les requetes se forme suivant le principes REST.\nUn model a donc les routes suivantes de cr\u00e9e :   /api/model  GET retourne l'ensemble des models  /api/model  POST cr\u00e9e un nouveau model en utilisant le body de la requete  /api/model/:id  GET retourne le model correspondant \u00e0 :id  /api/model/:id  DELETE supprime le model correspondant \u00e0 :id  /api/model/:id  PUT edit le model correspondant \u00e0 :id   Le body pour les requetes PUT et POST devra etre de la forme suivante :  {\n    attr1: value1,\n    attr2: value2\n}", 
+            "title": "Formattage des requetes"
+        }, 
+        {
+            "location": "/#formattage-des-reponses", 
+            "text": "Les reponses sont tout au format JSON.\nChaque reponse a directement un attribut message avec comme valeur un chaine de carectere decrivant le resultat de la requete.  {\n    message : \"Sucess\"\n    attr1 : value1\n}", 
+            "title": "Formattage des reponses"
+        }, 
+        {
+            "location": "/#utilisation_1", 
+            "text": "cd midend  gulp", 
+            "title": "Utilisation"
+        }, 
+        {
+            "location": "/#modules", 
+            "text": "", 
+            "title": "Modules"
+        }, 
+        {
+            "location": "/#apijs", 
+            "text": "Ce module permet de cr\u00e9er automatiquement les routes.\nIl relit chaque route defini dans le fichier config/routes.js \u00e0 une fonction du controller.\nLe fichier de config permet aussi de setter le middlewares.", 
+            "title": "api.js"
+        }, 
+        {
+            "location": "/#ormjs", 
+            "text": "Load l'ensemble des models. A la fin du loading cr\u00e9e les relations entre les models.\nA la fin de ce process le module recr\u00e9e l'ensemble des tables inexistantes avec les bonnes colonnes.", 
+            "title": "orm.js"
+        }, 
+        {
+            "location": "/#middlewares", 
+            "text": "Les middlewares sont defini dans le fichier config/routes.js\nA chaque requete les middlewares correspondant \u00e0 la requete sont automatiquement appel\u00e9s.", 
+            "title": "Middlewares"
+        }, 
+        {
+            "location": "/#middlewaresauthjs", 
+            "text": "Permet de verifier la correcte authentification de l'utilisateur.", 
+            "title": "middlewares/auth.js"
+        }, 
+        {
+            "location": "/#site-vitrine", 
+            "text": "Ce site est template static visant \u00e0 promouvoir et expliquer le principe de Shopcast.", 
+            "title": "Site vitrine"
+        }, 
+        {
+            "location": "/#utilisation_2", 
+            "text": "A la racine, ouvrir la page  index.html  via votre navigateur pr\u00e9f\u00e9r\u00e9.", 
+            "title": "Utilisation"
+        }, 
+        {
+            "location": "/#reste-a-faire", 
+            "text": "[x] Mettre en place le template.  [ ] Traduire tous les contenus.  [ ] Enlever les lorem ipsum.", 
+            "title": "Reste \u00e0 faire"
+        }, 
+        {
+            "location": "/infra/", 
+            "text": "some infos about something like infrastructure", 
+            "title": "Infra"
+        }, 
+        {
+            "location": "/infra/#some-infos-about-something-like-infrastructure", 
+            "text": "", 
+            "title": "some infos about something like infrastructure"
+        }
+    ]
+}
