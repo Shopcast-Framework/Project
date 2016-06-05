@@ -1,29 +1,67 @@
 'use strict';
 
+var Role = require(process.env.NODE_PATH + '/config/roles.json');
+
 var Routes = [
     {
         name: 'file',
-        middlewares: ['auth']
+        middlewares: [
+            {
+                name:   'auth',
+                param: {
+                    roles: [Role.ADMIN, Role.USER]
+                }
+            }
+        ]
     },
     {
         name: 'planning',
-        middlewares: ['auth']
+        middlewares: [
+            {
+                name:   'auth',
+                param: {
+                    roles: [Role.ADMIN, Role.USER]
+                }
+            }
+        ]
     },
     {
         name: 'music',
         actions: {
             'search' : { verb: 'get', route: '/search/:id' },
-        }
+        },
+        middlewares: [
+            {
+                name:   'auth',
+                param: {
+                    roles: [Role.ADMIN, Role.USER]
+                }
+            }
+        ]
     },
     {
         name: 'playlist',
         sub: [
             {
                 name: 'file',
-                middlewares: ['auth']
+                middlewares: [
+                    {
+                        name:   'auth',
+                        param: {
+                            roles: [Role.ADMIN, Role.USER]
+                        }
+                    }
+                ]
             }
         ],
-        middlewares: ['auth']
+        middlewares: [
+            {
+                name:'auth',
+                param: {
+                    roles: [Role.ADMIN, Role.USER]
+                }
+            }
+        ]
     },
     {
         name: 'session',
@@ -33,13 +71,28 @@ var Routes = [
     },
     {
         name: 'user',
-        middlewares: [{name: 'auth', only: ['get', 'getOne']}],
+        middlewares: [
+            {
+                name: 'auth',
+                only: ['get', 'getOne'],
+                param: {
+                    roles: [Role.ADMIN, Role.USER]
+                }
+            }
+        ],
         sub: [
             {
                 name: 'friend',
-                middlewares: ['auth']
+                middlewares: [
+                    {
+                        name:   'auth',
+                        param: {
+                            roles: [Role.ADMIN, Role.USER]
+                        }
+                    }
+                ]
             }
-        ]
+        ],
     }
 ];
 

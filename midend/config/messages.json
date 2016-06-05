@@ -46,5 +46,8 @@
     "friend:post:success"       : "Friendship request correctly send",
     "friend:post:failure"       : "Error can't find user",
     "friend:get:success"        : "List of friends",
-    "friend:get:failure"        : "Error : Can't find user"
+    "friend:get:failure"        : "Error : Can't find user",
+
+    "middleware:auth:failure"   : "Error: Need to authenticate",
+    "middleware:auth:badrole"   : "Error: Permission do not allow to access this ressource"
 }

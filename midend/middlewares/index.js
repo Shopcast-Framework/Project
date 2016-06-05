@@ -25,30 +25,28 @@ var MiddlewaresLoader = function() {
         });
     };
 
-    self.useModules = UseModules;
+    self.only = function(descriptor, action) {
+        if (!descriptor.only)
+            return (true);
+        return (descriptor.only.indexOf(action) !== -1);
+    };
 
     self.load = function(action, descriptors) {
         var middlewares = [];
-        var name;
+        var name, param;
         for (var i in descriptors) {
             var descriptor = descriptors[i];
 
-            if (typeof(descriptor) === 'object') {
-                name = descriptor.name;
-                if (descriptor.only.indexOf(action) !== -1 && self.middlewares[name]) {
-                    middlewares.push(self.middlewares[name].run);
-                }
-            }
-
-            if (typeof(descriptor) === 'string') {
-                name = descriptor;
-                if (self.middlewares[name])
-                    middlewares.push(self.middlewares[name].run);
+            name = descriptor.name;
+            param = descriptor.param;
+            if (self.only(descriptor, action) && self.middlewares[name]) {
+                middlewares.push(self.middlewares[name].run.bind(param));
             }
         }
         return middlewares;
     };
 
+    self.useModules = UseModules;
     self.init();
     return self;
 };
