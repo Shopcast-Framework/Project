@@ -24,12 +24,6 @@
 	  "isActive": false
 	},
 	{
-	  "name": "explore",
-	  "icon": "explore",
-	  "url": "/explore",
-	  "isActive": true
-	},
-	{
 	  "name": "users",
 	  "icon": "person",
 	  "url": "/users",

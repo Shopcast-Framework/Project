@@ -16,7 +16,22 @@
 			else
 				$( this ).hide()
 		})
-	})
+	});
+
+	$( ".modal-edit" ).click(function() {
+		var form = $( this ).data( "target" );
+		$("#" + form + " input, #" + form + " textarea").each(function(){
+			$( this ).prop( "disabled", false );
+		});
+
+		$( "#" + form + " .actions" ).show();
+        $( "header button" ).hide();
+	});
+
+    $( ".modal-edit-cancel" ).click(function() {
+        e.preventDefault();
+        window.location.reload();
+    });
 
 	// Init substitue
 	$( "#main .substitute" ).css( "height", $( "#main .search-wrapper" ).height() );

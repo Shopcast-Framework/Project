@@ -1,37 +1,79 @@
 extends ../layout
 
 block content
-	header.title-content
-		h1= titleContent
-		div.actions
-	article.wrapper-content#playlists
-		form(action='/playlists/#{playlist.id}', method='post')
-			input(type='text' name='name' placeholder='Name' value='#{playlist.name}')
-			input(type='text', name='description' placeholder='Description' value='#{playlist.description}')
-			input(type='text', name='frequency', placeholder='Frequency' value='#{playlist.frequency}')
-			input(type='text', name='tags' placeholder='Tags' value='#{playlist.tags}')
-			input(type='submit')
-		hr
-		table
-			thead
-				tr
-					th #
-					th name
-					th description
-					th type
-					th size
-			tbody
-				each file, index in playlist.files
-					tr
-						td 
-							p
-								input(type="checkbox" id="line-item-#{index}" name="lines[]")
-								label(for="line-item-#{index}")
-						td #{file.originalname}
-						td #{file.description}
-						td #{file.mimetype}
-						td #{file.size}
-		hr
-		form(action='/playlists/#{playlist.id}/files' method='post' enctype='multipart/form-data')
-			input(type='file' name='file' accept='video/*' placeholder='File')
-			input(type='submit' value='Add a file')
+    header.actions.container
+        button(class="amber darken-2 btn btn-large waves-effect waves-light modal-edit" data-target="form-edit") #{translate.btnEdit}
+            i.material-icons.left edit
+    article.wrapper-content#playlist
+        section.container
+            form(action='/playlists/#{playlist.id}', method='post' id="form-edit")
+                div.input-field.col.s12
+                    i(class="material-icons prefix") edit
+                    label(for="name") #{translate.name}
+                    input(type='text' name='name' id="name" placeholder='Name' value='#{playlist.name}' disabled)
+                //div.input-field.col.s6
+                //    i(class="material-icons prefix") edit
+                //    label(for="name") #{translate.name}
+                //    input(type='text', name='frequency', placeholder='Frequency' value='#{playlist.frequency}')
+                div.input-field.col.s12
+                    i(class="material-icons prefix") description
+                    label(for="name") #{translate.name}
+                    textarea(name='description' class="materialize-textarea" placeholder='Description' disabled) #{playlist.description}
+                div.input-field.col.s12
+                    i(class="material-icons prefix") note
+                    label(for="name") #{translate.name}
+                    input(type='text', name='tags' placeholder='Tags' value='#{playlist.tags}' disabled)
+                div.input-field.col.s12.actions.center-align
+                    button(type='submit' class="green darken-2 btn btn-large waves-effect waves-light") #{translate.btnSave}
+                        i.material-icons.left done
+                    a(href='/playlists/#{playlist.id}' class="red darken-2 btn btn-large waves-effect waves-light modal-edit-cancel") #{translate.btnCancel}
+                        i.material-icons.left cancel
+        section
+            h2.center-align.title #{translate.titleFiles}
+            div.actions.center-align
+                button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="add-file") #{translate.btnAddFile}
+                    i.material-icons.left add
+            div.container
+                table
+                    thead
+                        tr
+                            th #
+                            th name
+                            th description
+                            th type
+                            th size
+                    tbody
+                        each file, index in playlist.files
+                            tr
+                                td
+                                    p
+                                        input(type="checkbox" id="line-item-#{index}" name="lines[]")
+                                        label(for="line-item-#{index}")
+                                td #{file.originalname}
+                                td #{file.description}
+                                td #{file.mimetype}
+                                td #{file.size}
+        div(id="add-file" class="modal light-box")
+            h4(class="center-align light-blue") #{translate.addFile}
+            div(class="modal-content")
+                div.row
+                    div.col.s12
+                        ul.tabs
+                            li.tab.col.s6
+                                a(href="#upload-file") #{translate.tabUploadFile}
+                            li.tab.col.s6
+                                a(href="#existing-file") #{translate.tabExistingFile}
+                    div(id="upload-file" class="col s12")
+                        form(action='/playlists/#{playlist.id}/files' method='post' enctype='multipart/form-data')
+                            div.input-field.col.s12
+                                input(type='file' name='file' accept='video/*' placeholder='File')
+                            div.input-field.col.s12.actions.right-align
+                                button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") #{translate.btnAddFile}
+                                    i(class="material-icons left") done
+                                a(href="#!" class="modal-action modal-close btn btn-large red darken-1 white-text waves-effect waves-light") #{translate.btnCancel}
+                                    i(class="material-icons left") cancel
+                    div(id="existing-file" class="col s12") Exist
+        //section
+        //    form(action='/playlists/#{playlist.id}/files' method='post' enctype='multipart/form-data')
+        //        input(type='file' name='file' accept='video/*' placeholder='File')
+        //        input(type='submit' value='Add a file')

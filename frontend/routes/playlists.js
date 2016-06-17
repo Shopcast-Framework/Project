@@ -33,7 +33,7 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 				playlists[index].tags = element.tags.split(",");
 		});
 
-		res.render('playlists', {
+		res.render('playlists/list', {
 			active: '/playlists',
 			menu: menu,
 			playlists: playlists,
@@ -41,6 +41,34 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 			isSearchBar: true,
 			session: req.session.user,
 			translate : translate.getWordsByPage( req.cookies.language, "Playlists", { title: playlists.length } ),
+			language: req.cookies.language
+		});
+	}, function(err) {
+		console.log(err);
+	});
+
+});
+
+router.get('/:id', middlewares.isLogged, middlewares.language, function( req, res ) {
+
+	var promises = [];
+    var id = req.params.id;
+
+	promises.push(Rest.get('playlist/'+id));
+
+	Promise.all(promises).then(function(values) {
+
+		var playlist = values[0].body.playlist;
+        playlist.tags = playlist.tags.split(",");
+
+		res.render('playlists/show', {
+			active: '/playlists',
+			menu: menu,
+			playlist: playlist,
+			isLogged: true,
+			isSearchBar: false,
+			session: req.session.user,
+			translate : translate.getWordsByPage( req.cookies.language, "Playlist", { title: playlist.name, tabTitle: playlist.name } ),
 			language: req.cookies.language
 		});
 	}, function(err) {

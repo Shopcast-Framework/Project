@@ -15,10 +15,10 @@
     "tabTitle": "Tableau de bord - Shopcast"
   },
   "Playlists": {
-    "title": "Mes playlists (%)",
-    "tabTitle": "Mes playlists - Shopcast",
-    "btnCreate": "Créer une nouvelle playlist",
-    "newPlaylist": "Nouvelle playlist",
+    "title": "Mes listes de lecture (%)",
+    "tabTitle": "Mes listes de lecture - Shopcast",
+    "btnCreate": "Créer une nouvelle liste",
+    "newPlaylist": "Nouvelle liste de lecture",
     "search" : "Rechercher",
     "name" : "Nom",
     "description" : "Description",
@@ -26,6 +26,18 @@
     "tags" : "Tags",
     "btnAdd": "Ajouter",
     "btnCancel": "Annuler"
+  },
+  "Playlist":{
+    "title": "Liste de lecture - %",
+    "tabTitle": "% - Shopcast",
+    "btnEdit": "Modifier",
+    "btnSave": "Sauvegarder",
+    "btnCancel":"Annuler",
+    "btnAddFile": "Ajouter un nouveau fichier",
+    "titleFiles": "Liste des fichiers",
+    "addFile": "Ajouter le fichier",
+    "tabUploadFile": "Téléverser un fichier",
+    "tabExistingFile": "Choisir un fichier existant"
   },
   "Users": {
     "title": "Utilisateurs (%)",
