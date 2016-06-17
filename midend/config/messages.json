@@ -1,0 +1,53 @@
+{
+    "music:get:success"         : "List of musics",
+    "music:post:success"        : "Music successfully created",
+    "music:post:failure"        : "Error can't create music",
+
+    "user:put:success"          : "User correctly updated",
+    "user:put:failure"          : "Error can't edit user",
+    "user:get:success"          : "List of users",
+    "user:post:success"         : "User successfully created",
+    "user:post:failure"         : "Error can't create user",
+    "user:getone:success"       : "User selected with id: %s",
+    "user:getone:failure"       : "User selected with id: %s was not found",
+    "user:delete:success"       : "User correctly deleted",
+
+    "session:delete:success"    : "Session correctly deleted",
+    "session:post:success"      : "User already logged",
+    "session:post:failure"      : "Error invalid strategy %s",
+
+    "playlist:put:success"      : "Playlist correctly updated",
+    "playlist:put:failure"      : "Error, can't edit the playlist",
+    "playlist:get:success"      : "List of playlists",
+    "playlist:post:success"     : "Playlist successfully created",
+    "playlist:getone:success"   :"Playlist selected with id: %s",
+    "playlist:getone:failure"   :"Playlist selected with id: %s was not found",
+    "playlist:delete:success"   :"Playlist correctly deleted",
+    "playlist:delete:failure"   :"Error no playlist deleted",
+
+    "planning:get:success"      : "List of plannings",
+    "planning:getone:success"   : "Planning of id: %s",
+    "planning:getone:failure"   : "Error can't find planning",
+
+    "file:get:success"          : "List of files",
+    "file:post:success"         : "File successfully created",
+    "file:post:failure"         : "Error can't create file",
+    "file:getone:success"       : "File selected with id %s",
+    "file:getone:failure"       : "File selected with id %s was not found",
+
+    "file:get:success"          : "List of files",
+    "file:put:success"          : "File correctly updated",
+    "file:put:failure"          : "Error can't find file",
+    "file:delete:success"       : "File correctly deleted",
+    "file:delete:failure"       : "Error can't delete the file",
+
+    "friend:put:success"        : "Friendship correctly accepted",
+    "friend:put:failure"        : "Error can't find user",
+    "friend:post:success"       : "Friendship request correctly send",
+    "friend:post:failure"       : "Error can't find user",
+    "friend:get:success"        : "List of friends",
+    "friend:get:failure"        : "Error : Can't find user",
+
+    "middleware:auth:failure"   : "Error: Need to authenticate",
+    "middleware:auth:badrole"   : "Error: Permission do not allow to access this ressource"
+}

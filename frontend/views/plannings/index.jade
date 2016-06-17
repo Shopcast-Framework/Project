@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+	header.title-content
+		h1= titleContent
+		div.actions
+	article.wrapper-content#files
+		table
+			thead
+				tr
+					th edit
+					th title
+			tbody
+				each planning in plannings
+					tr
+						td
+							a(href="/plannings/#{planning.id}") Edit
+						td
+							"#{ planning.title }"

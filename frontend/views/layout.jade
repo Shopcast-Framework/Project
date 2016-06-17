@@ -9,6 +9,11 @@ html(lang='fr')
 		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/magnet.css')
 		link(href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" rel="stylesheet" type="text/css")
 		link(rel='stylesheet', href='/css/style.css')
+		script(type="application/javascript", src="http://momentjs.com/downloads/moment.min.js")
+		script(type='text/javascript', src='/js/jquery-v2.1.1.min.js')
+		script(type="text/javascript", src="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.7.0/fullcalendar.min.js")
+		link(rel="stylesheet", type="text/css", href="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.7.0/fullcalendar.min.css")
+
 	body
 		header(class="light-blue" id="header")
 			div
@@ -50,6 +55,7 @@ html(lang='fr')
 								i(class="material-icons") close
 				div.substitute
 			block content
+<<<<<<< HEAD
 		div#language-select.z-depth-1
 			a(class="waves-effect waves-light modal-trigger" href="#modal-language" title="language")
 				span #{translate.Language.language}
@@ -65,6 +71,9 @@ html(lang='fr')
 			div(class="modal-footer")
 				a(href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat") #{translate.Language.btn}
 		script(type='text/javascript', src='/js/jquery-v2.1.1.min.js')
+=======
+		script(type='text/javascript', src='/js/nouislider.min.js')
+>>>>>>> master
 		script(type='text/javascript', src='/js/materialize.min.js')
 		//script(src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js")
 		script(type='text/javascript', src='/js/init.js')

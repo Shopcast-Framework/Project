@@ -1,11 +1,13 @@
 'use strict';
 
 var Sequelize   = require('sequelize'),
-    jwt         = require('jsonwebtoken');
+    jwt         = require('jsonwebtoken'),
+    orm         = require(process.env.NODE_PATH + '/modules/orm');
 
 var User = function(sequelize) {
     var model = sequelize
     .define('User', {
+<<<<<<< HEAD
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
@@ -26,6 +28,20 @@ var User = function(sequelize) {
         facebookId: Sequelize.STRING,
         googleId: Sequelize.STRING,
         last_connection: Sequelize.DATE
+=======
+        username        : Sequelize.STRING,
+        description     : Sequelize.STRING,
+        age             : Sequelize.STRING,
+        sex             : Sequelize.STRING,
+        location        : Sequelize.STRING,
+        password        : Sequelize.STRING,
+        token           : Sequelize.VIRTUAL,
+        role            : Sequelize.INTEGER,
+        type            : Sequelize.INTEGER,
+        facebookId      : Sequelize.STRING,
+        googleId        : Sequelize.STRING,
+        last_connection : Sequelize.DATE
+>>>>>>> master
     }, {
         underscored: true,
         instanceMethods: {
@@ -44,12 +60,37 @@ var User = function(sequelize) {
                     }
                     return done(null);
                 });
+            },
+            getOnePlaylist: function(where, params) {
+                var self = this;
+                if (!params) {
+                    params = {}
+                }
+                params.where = where;
+                return orm.db.Playlist.find(params);
+            },
+            getOnePlanning: function(where, params) {
+                var self = this;
+                if (!params) {
+                    params = {}
+                }
+                params.where = where;
+                return orm.db.Planning.find(params);
             }
         }
     });
 
+    var relationships = function() {
+        model.hasOne(orm.db.Friend, {constraints: false});
+        model.belongsToMany(orm.db.User, {as: 'Friends', through: 'Friend', constraints: false});
+        model.hasMany(orm.db.Playlist, {constraints: false});
+        model.hasMany(orm.db.File, {constraints: false});
+        model.hasMany(orm.db.Planning, {constraints: false});
+    };
+
     return {
-        definition : model
+        definition      : model,
+        relationships   : relationships
     };
 };
 

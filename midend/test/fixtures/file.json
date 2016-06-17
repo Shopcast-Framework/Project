@@ -1,0 +1,44 @@
+[
+    {
+        "id"            : 1,
+        "description"   : "Description file 1",
+        "encoding"      : "7bit",
+        "filename"      : "Nom de fichier",
+        "mimetype"      : "video/mp4",
+        "originalname"  : "GoPro HERO4- The Adventure of Life in 4K.mp4",
+        "path"          : "public/uploads/7be52841ad65337fbbe7eea0b8c4ee36",
+        "size"          : 107779000,
+        "created_at"    : "2016-01-01T00:00:00.000Z",
+        "updated_at"    : "2016-01-01T00:00:00.000Z",
+        "playlist_id"   : 1,
+        "user_id"       : 1
+    },
+    {
+        "id"            : 2,
+        "description"   : "Description file 2",
+        "encoding"      : "7bit",
+        "filename"      : "Nom de fichier",
+        "mimetype"      : "video/mp4",
+        "originalname"  : "GoPro HERO4- The Adventure of Life in 4K.mp4",
+        "path"          : "public/uploads/7be52841ad65337fbbe7eea0b8c4ee36",
+        "size"          : 107779000,
+        "created_at"    : "2016-01-01T00:00:00.000Z",
+        "updated_at"    : "2016-01-01T00:00:00.000Z",
+        "playlist_id"   : 2,
+        "user_id"       : 1
+    },
+    {
+        "id"            : 3,
+        "description"   : "Description file 2",
+        "encoding"      : "7bit",
+        "filename"      : "Nom de fichier",
+        "mimetype"      : "video/mp4",
+        "originalname"  : "GoPro HERO4- The Adventure of Life in 4K.mp4",
+        "path"          : "public/uploads/7be52841ad65337fbbe7eea0b8c4ee36",
+        "size"          : 107779000,
+        "created_at"    : "2016-01-01T00:00:00.000Z",
+        "updated_at"    : "2016-01-01T00:00:00.000Z",
+        "playlist_id"   : 3,
+        "user_id"       : 2
+    }
+]

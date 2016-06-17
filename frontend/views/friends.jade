@@ -1,0 +1,38 @@
+extends ./layout
+
+block content
+	header.title-content
+		h1= titleContent
+		div.actions
+			button(class='blue btn-floating btn-large waves-effect waves-circle waves-light')
+				i.material-icons add
+			button(class='red btn-floating btn-large waves-effect waves-circle waves-light')
+				i.material-icons delete
+	article.wrapper-content#files
+		table
+			thead
+				tr
+					th is_friend?
+					th name
+					th description
+			tbody
+				each friend in friends
+					tr
+						td 
+							if !friend.Friend.accepted
+								form(action='/friends/edit', method='post')
+									input(type='hidden' name='user' value='#{user.id}')
+									input(type='hidden' name='friend' value='#{friend.id}')
+									input(type='submit' value='Accept')
+							else
+								'Accepted'
+						td #{ friend.username }	
+						td #{ friend.description }
+		form(action='/friends', method='post')
+			input(type='hidden', name='user' value='#{user.id}')
+			//- Quelque part ici il me faudrait un form avec un filtre sur la liste de tous les utilisateur.
+			//- Ce filtre permettrais d'en selectionner un et de lui envoyer une demande d'amis.
+			//- Il remplacerait la variable value="2" en dur actuellement
+			input(type='hidden', name='friend' value='2')
+			input(type='submit' value='Send friendship request')
+					

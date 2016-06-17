@@ -18,15 +18,37 @@
 	  "isActive": true
 	},
 	{
+<<<<<<< HEAD
 	  "name": "display",
+=======
+	  "name": "Programmation",
+	  "icon": "folder",
+	  "url": "/plannings",
+	  "isActive": true
+	},
+	{
+	  "name": "Display",
+>>>>>>> master
 	  "icon": "settings_ethernet",
 	  "url": "display",
 	  "isActive": false
 	},
 	{
+<<<<<<< HEAD
 	  "name": "users",
 	  "icon": "person",
 	  "url": "/users",
+=======
+	  "name": "Friends",
+	  "icon": "settings",
+	  "url": "/friends",
+	  "isActive": true
+	},
+	{
+	  "name": "Settings",
+	  "icon": "settings",
+	  "url": "/users/:user_id",
+>>>>>>> master
 	  "isActive": true
 	},
 	{

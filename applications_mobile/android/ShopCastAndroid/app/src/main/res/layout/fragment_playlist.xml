@@ -1,0 +1,34 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="maxime.shopcastandroid.PlaylistFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="105dp"
+        android:layout_height="39dp"
+        android:text="Playlists"
+        android:layout_gravity="center_horizontal|top"
+        android:id="@+id/title_playlist"
+        android:textSize="25dp"
+        android:textColor="#80DEEA"
+        android:layout_margin="15dp" />
+
+    <ImageView
+        android:layout_width="114dp"
+        android:layout_height="114dp"
+        android:id="@+id/imageView"
+        android:layout_gravity="center"
+        android:src="@drawable/no_playlist"/>
+
+    <TextView
+        android:layout_width="214dp"
+        android:layout_height="140dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/no_playlist"
+        android:id="@+id/log_playlist"
+        android:layout_gravity="bottom|center_horizontal"
+        android:textSize="20dp" />
+
+</FrameLayout>
