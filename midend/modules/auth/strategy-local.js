@@ -10,12 +10,8 @@ var StrategyLocal = function(app, passport, loginCallback) {
     self.init = function(app, passport) {
         var authenticate = function(username, password, done) {
             User.find({
-<<<<<<< HEAD:midend/auth/strategy-local.js
                 where: {username: username},
                 attributes: ['id', 'username', 'name', 'password', 'avatar','email']
-=======
-                where: {username: username}
->>>>>>> master:midend/modules/auth/strategy-local.js
 	        }).then(function(user) {
                 if (!user) {
                     done({message: 'Error: Could not find user: ' + username});

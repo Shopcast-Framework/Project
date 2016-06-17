@@ -7,7 +7,6 @@ var Sequelize   = require('sequelize'),
 var User = function(sequelize) {
     var model = sequelize
     .define('User', {
-<<<<<<< HEAD
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
@@ -28,20 +27,6 @@ var User = function(sequelize) {
         facebookId: Sequelize.STRING,
         googleId: Sequelize.STRING,
         last_connection: Sequelize.DATE
-=======
-        username        : Sequelize.STRING,
-        description     : Sequelize.STRING,
-        age             : Sequelize.STRING,
-        sex             : Sequelize.STRING,
-        location        : Sequelize.STRING,
-        password        : Sequelize.STRING,
-        token           : Sequelize.VIRTUAL,
-        role            : Sequelize.INTEGER,
-        type            : Sequelize.INTEGER,
-        facebookId      : Sequelize.STRING,
-        googleId        : Sequelize.STRING,
-        last_connection : Sequelize.DATE
->>>>>>> master
     }, {
         underscored: true,
         instanceMethods: {
