@@ -19,6 +19,19 @@ router.post('/',middlewares.isLogged, function(req, res) {
 	});
 });
 
+router.post('/:id',middlewares.isLogged, function(req, res) {
+
+    var id = req.params.id;
+
+    Rest.put('playlist/' + id, JSON.stringify(req.body)).then(function(response) {
+        console.log(response);
+        res.redirect('/playlists/' + id + '?message=' + response.body.message);
+    }, function(err) {
+        console.log(err);
+        res.redirect('/playlists/' + id + '?message=' + response.body.message);
+    })
+});
+
 router.get('/', middlewares.isLogged, middlewares.language, function( req, res ) {
 
 	var promises = [];
@@ -54,17 +67,21 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 	var promises = [];
     var id = req.params.id;
 
+	promises.push(Rest.get('file'));
 	promises.push(Rest.get('playlist/'+id));
 
 	Promise.all(promises).then(function(values) {
 
-		var playlist = values[0].body.playlist;
+		var files = values[0].body.files;
+		console.log(files);
+		var playlist = values[1].body.playlist;
         playlist.tags = playlist.tags.split(",");
 
 		res.render('playlists/show', {
 			active: '/playlists',
 			menu: menu,
 			playlist: playlist,
+			files: files,
 			isLogged: true,
 			isSearchBar: false,
 			session: req.session.user,

@@ -1,5 +1,5 @@
 (function($){
-
+    
     $( '.button-collapse').sideNav();
     $( '#main .wrapper-content' ).css( "height", $( window ).height() - 200 );
     $('.modal-trigger').leanModal();
@@ -42,22 +42,26 @@
 		var searchBar = $( "#main .search-wrapper" );
 		var substitute = $( "#main .substitute" );
 
-		var top = searchBar.offset().top;
-		if ( searchBar.hasClass( "fixed" ) )
-			top = substitute.offset().top
+		if ( searchBar.length != 0 )
+		{
+			var top = searchBar.offset().top;
+			if ( searchBar.hasClass( "fixed" ) )
+				top = substitute.offset().top;
 
-    	if ( ( top - $( window ).scrollTop() ) <= 0 )
-    	{
-    		substitute.css( "display", "block" ); 
-    		searchBar.addClass( "fixed" );
-    		searchBar.children( "nav" ).removeClass( "z-depth-01" ).addClass( "z-depth-1" );
-    	}
-    	else
-    	{
-    		substitute.css( "display", "none" ); 
-    		searchBar.removeClass( "fixed" );
-    		searchBar.children( "nav" ).removeClass( "z-depth-1" ).addClass( "z-depth-01" );
-    	}
+			if ( ( top - $( window ).scrollTop() ) <= 0 )
+			{
+				substitute.css( "display", "block" );
+				searchBar.addClass( "fixed" );
+				searchBar.children( "nav" ).removeClass( "z-depth-01" ).addClass( "z-depth-1" );
+			}
+			else
+			{
+				substitute.css( "display", "none" );
+				searchBar.removeClass( "fixed" );
+				searchBar.children( "nav" ).removeClass( "z-depth-1" ).addClass( "z-depth-01" );
+			}
+		}
+
 	});
 
 	// Create toast for message

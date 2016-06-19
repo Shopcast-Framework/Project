@@ -19,30 +19,20 @@
 	},
 	{
 	  "name": "display",
-	  "name": "Programmation",
-	  "icon": "folder",
-	  "url": "/plannings",
+	  "icon": "settings_ethernet",
+	  "url": "/display",
 	  "isActive": true
 	},
 	{
-	  "name": "Display",
-	  "icon": "settings_ethernet",
-	  "url": "display",
+	  "name": "calendar",
+	  "icon": "event",
+	  "url": "/plannings",
 	  "isActive": false
 	},
 	{
 	  "name": "users",
 	  "icon": "person",
 	  "url": "/users",
-	  "name": "Friends",
-	  "icon": "settings",
-	  "url": "/friends",
-	  "isActive": true
-	},
-	{
-	  "name": "Settings",
-	  "icon": "settings",
-	  "url": "/users/:user_id",
 	  "isActive": true
 	},
 	{

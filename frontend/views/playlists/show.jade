@@ -30,25 +30,22 @@ block content
                         i.material-icons.left cancel
         section
             h2.center-align.title #{translate.titleFiles}
-            div.actions.center-align
-                button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="add-file") #{translate.btnAddFile}
+                button(class="amber darken-2 btn btn-large btn-floating waves-effect waves-light modal-trigger" data-target="add-file")
                     i.material-icons.left add
+            //div.actions.center-align
+            //    button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="add-file") #{translate.btnAddFile}
+            //        i.material-icons.left add
             div.container
                 table
                     thead
                         tr
-                            th #
                             th name
                             th description
                             th type
                             th size
                     tbody
-                        each file, index in playlist.files
+                        each file, index in playlist.Files
                             tr
-                                td
-                                    p
-                                        input(type="checkbox" id="line-item-#{index}" name="lines[]")
-                                        label(for="line-item-#{index}")
                                 td #{file.originalname}
                                 td #{file.description}
                                 td #{file.mimetype}
@@ -60,20 +57,53 @@ block content
                     div.col.s12
                         ul.tabs
                             li.tab.col.s6
-                                a(href="#upload-file") #{translate.tabUploadFile}
+                                a(href="#upload-file" class="active") #{translate.tabUploadFile}
                             li.tab.col.s6
                                 a(href="#existing-file") #{translate.tabExistingFile}
-                    div(id="upload-file" class="col s12")
-                        form(action='/playlists/#{playlist.id}/files' method='post' enctype='multipart/form-data')
-                            div.input-field.col.s12
+                    div(id="upload-file" class="col s12 center-align")
+                        form(action='/playlists/#{playlist.id}/files' method='post' enctype='multipart/form-data' class="container")
+                            div.input-field.file-field.col.s12
                                 input(type='file' name='file' accept='video/*' placeholder='File')
-                            div.input-field.col.s12.actions.right-align
+                            div(class="file-field input-field")
+                                div(class="btn")
+                                    span #{translate.btnChooseFile}
+                                    input(type="file" multiple)
+                                div(class="file-path-wrapper")
+                                    input(class="file-path validate" type="text")
+                            div.input-field.col.s12.actions.center-align
                                 button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") #{translate.btnAddFile}
                                     i(class="material-icons left") done
                                 a(href="#!" class="modal-action modal-close btn btn-large red darken-1 white-text waves-effect waves-light") #{translate.btnCancel}
                                     i(class="material-icons left") cancel
-                    div(id="existing-file" class="col s12") Exist
+                    div(id="existing-file" class="col s12")
+                        form(action='#' class="container")
+                            table
+                                thead
+                                    tr
+                                        th #
+                                        th name
+                                        th description
+                                        th type
+                                        th size
+                                tbody
+                                    each file, index in files
+                                        tr
+                                            td
+                                                p
+                                                    input(type="checkbox" id="file-item-#{index}" name="files[]" value="#{file.id}")
+                                                    label(for="file-item-#{index}")
+                                            td #{file.originalname}
+                                            td #{file.description}
+                                            td #{file.mimetype}
+                                            td #{file.size}
+                            div.input-field.col.s12.actions.center-align
+                                button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") #{translate.btnAddFile}
+                                    i(class="material-icons left") done
+                                a(href="#!" class="modal-action modal-close btn btn-large red darken-1 white-text waves-effect waves-light") #{translate.btnCancel}
+                                    i(class="material-icons left") cancel
         //section
         //    form(action='/playlists/#{playlist.id}/files' method='post' enctype='multipart/form-data')
         //        input(type='file' name='file' accept='video/*' placeholder='File')
         //        input(type='submit' value='Add a file')
+block script
+    script(type='text/javascript', src='/js/playlist.js')

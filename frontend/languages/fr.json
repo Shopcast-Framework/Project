@@ -33,11 +33,12 @@
     "btnEdit": "Modifier",
     "btnSave": "Sauvegarder",
     "btnCancel":"Annuler",
-    "btnAddFile": "Ajouter un nouveau fichier",
+    "btnAddFile": "Ajouter",
     "titleFiles": "Liste des fichiers",
-    "addFile": "Ajouter le fichier",
-    "tabUploadFile": "Téléverser un fichier",
-    "tabExistingFile": "Choisir un fichier existant"
+    "addFile": "Ajouter un/des fichier(s)",
+    "tabUploadFile": "Téléversement",
+    "tabExistingFile": "Fichiers existant",
+    "btnChooseFile": "Choisir un ou plusieurs fichiers"
   },
   "Users": {
     "title": "Utilisateurs (%)",
@@ -104,11 +105,12 @@
     "dashboard": "Tableau de bord",
     "files": "Mes fichiers",
     "playlists": "Mes playlists",
-    "display": "Moniteurs",
+    "display": "Mes moniteurs",
     "users": "Utilisateurs",
     "explore": "Explore",
     "settings": "Configuration",
     "myAccount": "Mon compte",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "calendar": "Calendrier"
   }
 }
