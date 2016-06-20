@@ -23,6 +23,7 @@ var FileGet = function(req, res) {
 };
 
 var FilePost = function(req, res) {
+    req.body.user_id = req.user.id;
     File
     .create(req.body)
     .then(function(file) {
