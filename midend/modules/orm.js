@@ -16,7 +16,12 @@ var Orm = function() {
         var relationships = [],
             model;
 
-        self.sequelize = new Sequelize(config.database, config.username, config.password);
+        self.sequelize = new Sequelize(config.database, config.username, config.password, {
+            logging : function(str) {
+                fs.writeFile(process.env.NODE_PATH + '/logs/sql.log', str);
+                fs.writeFile(process.env.NODE_PATH + '/logs/sql.log', "\n");
+            }
+        });
         self.db = {};
 
         fs
