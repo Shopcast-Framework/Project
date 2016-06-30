@@ -20,10 +20,10 @@
     "playlist:put:failure"      : "Error, can't edit the playlist",
     "playlist:get:success"      : "List of playlists",
     "playlist:post:success"     : "Playlist successfully created",
-    "playlist:getone:success"   :"Playlist selected with id: %s",
-    "playlist:getone:failure"   :"Playlist selected with id: %s was not found",
-    "playlist:delete:success"   :"Playlist correctly deleted",
-    "playlist:delete:failure"   :"Error no playlist deleted",
+    "playlist:getone:success"   : "Playlist selected with id: %s",
+    "playlist:getone:failure"   : "Playlist selected with id: %s was not found",
+    "playlist:delete:success"   : "Playlist correctly deleted",
+    "playlist:delete:failure"   : "Error no playlist deleted",
 
     "planning:get:success"      : "List of plannings",
     "planning:getone:success"   : "Planning of id: %s",
@@ -49,5 +49,12 @@
     "friend:get:failure"        : "Error : Can't find user",
 
     "middleware:auth:failure"   : "Error: Need to authenticate",
-    "middleware:auth:badrole"   : "Error: Permission do not allow to access this ressource"
+    "middleware:auth:badrole"   : "Error: Permission do not allow to access this ressource",
+    "group:put:success"         : "Group correctly updated",
+    "group:put:failure"         : "Error, can't edit the group",
+    "group:get:success"         : "List of group",
+    "group:post:success"        : "Group correctly created",
+    "group:getone:success"      : "Monitor selected with id: %s",
+    "group:getone:failure"      : "Error can't get this group",
+    "group:delete:success"      : "Group correctly deleted"
 }

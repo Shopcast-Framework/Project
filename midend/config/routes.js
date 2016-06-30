@@ -4,6 +4,17 @@ var Role = require(process.env.NODE_PATH + '/config/roles.json');
 
 var Routes = [
     {
+    {
+        name: 'group',
+        middlewares: [
+            {
+                name:   'auth',
+                param: {
+                    roles: [Role.ADMIN, Role.USER]
+                }
+            }
+        ]
+    },
         name: 'file',
         middlewares: [
             {
