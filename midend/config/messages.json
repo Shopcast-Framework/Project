@@ -50,6 +50,17 @@
 
     "middleware:auth:failure"   : "Error: Need to authenticate",
     "middleware:auth:badrole"   : "Error: Permission do not allow to access this ressource",
+
+    "monitor:put:failure"       : "Monitor correctly updated",
+    "monitor:put:failure"       : "Error, can't edit the playlist",
+    "monitor:get:success"       : "List of monitors",
+    "monitor:post:success"      : "Monitor correctly created",
+    "monitor:getone:success"    : "Monitor selected with id: %s",
+    "monitor:getone:failure"    : "Error, can't get this monitor",
+    "monitor:delete:success"    : "Monitor correctly deleted",
+    "monitor:associate:success" : "Monitor correctly associated",
+    "monitor:associate:failure" : "Error, can't associate this monitor",
+
     "group:put:success"         : "Group correctly updated",
     "group:put:failure"         : "Error, can't edit the group",
     "group:get:success"         : "List of group",
@@ -57,4 +68,5 @@
     "group:getone:success"      : "Monitor selected with id: %s",
     "group:getone:failure"      : "Error can't get this group",
     "group:delete:success"      : "Group correctly deleted"
+
 }

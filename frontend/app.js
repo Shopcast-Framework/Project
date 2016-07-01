@@ -32,6 +32,7 @@ app.run = function(){
     app.use(Rest.middleware);
 
     app.use('/dashboards', require('./routes/dashboards'));
+    app.use('/monitors', require('./routes/monitors'));
     app.use('/files', require('./routes/files'));
     app.use('/friends', require('./routes/friends'));
     app.use('/playlists', require('./routes/playlists'));

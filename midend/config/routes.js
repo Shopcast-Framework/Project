@@ -4,6 +4,25 @@ var Role = require(process.env.NODE_PATH + '/config/roles.json');
 
 var Routes = [
     {
+        name: 'monitor',
+        actions: {
+            'associate' : { verb: 'post', route: '/associate' },
+            'option' : { verb: 'options', route: '/associate' }
+        },
+        middlewares: [
+            {
+                name:   'auth',
+                param: {
+                    roles: [Role.ADMIN, Role.USER]
+                },
+                only: ['get', 'getOne', 'post', 'put', 'delete']
+            },
+            {
+                name:   'cross',
+                only: ['option', 'associate']
+            }
+        ]
+    },
     {
         name: 'group',
         middlewares: [
@@ -15,6 +34,7 @@ var Routes = [
             }
         ]
     },
+    {
         name: 'file',
         middlewares: [
             {
@@ -77,8 +97,14 @@ var Routes = [
     {
         name: 'session',
         actions: {
-            'option' : { verb: 'options', route: '/' },
+            'option' : { verb: 'options', route: '/' }
         },
+        middlewares: [
+            {
+                name:   'cross',
+                only: ['option', 'post']
+            }
+        ]
     },
     {
         name: 'user',
