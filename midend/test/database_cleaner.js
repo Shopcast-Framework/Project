@@ -1,8 +1,9 @@
 'use strict';
 
-var fs      = require('fs'),
-    path    = require('path'),
-    Q       = require('Q');
+var fs          = require('fs'),
+    path        = require('path'),
+    Q           = require('Q'),
+    CamelCase   = require('uppercamelcase');
 
 String.prototype.capitalize = function() {
     return this.toLowerCase().replace(/\b\w/g, function (m) {
@@ -22,12 +23,12 @@ var DatabaseCleaner = function(orm) {
         var files = fs.readdirSync(path.join(__dirname, 'fixtures'));
         files.forEach(function(fileName) {
             self.orm.db[
-                path.basename(fileName, '.json').capitalize()
+                CamelCase(path.basename(fileName, '.json'))
             ].truncate();
         });
         files.forEach(function(fileName) {
             var bulk = self.orm.db[
-                path.basename(fileName, '.json').capitalize()
+                CamelCase(path.basename(fileName, '.json'))
             ].bulkCreate(
                 require(path.join(__dirname, 'fixtures', fileName))
             );

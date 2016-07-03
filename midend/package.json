@@ -41,6 +41,7 @@
     "passport-local": "^1.0.0",
     "q": "^1.4.1",
     "sequelize": "^3.14.2",
-    "supertest": "^1.2.0"
+    "supertest": "^1.2.0",
+    "uppercamelcase": "^1.1.0"
   }
 }

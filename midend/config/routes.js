@@ -72,19 +72,10 @@ var Routes = [
     },
     {
         name: 'playlist',
-        sub: [
-            {
-                name: 'file',
-                middlewares: [
-                    {
-                        name:   'auth',
-                        param: {
-                            roles: [Role.ADMIN, Role.USER]
-                        }
-                    }
-                ]
-            }
-        ],
+        actions: {
+            'add' : { verb: 'post', route: '/:id/add' },
+            'sort' : { verb: 'post', route: '/:id/sort' }
+        },
         middlewares: [
             {
                 name:'auth',

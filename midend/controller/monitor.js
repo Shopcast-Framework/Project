@@ -76,13 +76,11 @@ var MonitorPost = function(req, res) {
     Monitor
     .create(req.body)
     .then(function(monitor) {
-        console.log("MONITOR ADDED");
         res.status(Status.OK).send({
             message     : Message.get("monitor:post:success"),
             monitor     : monitor
         });
     }, function(err) {
-        console.log(err);
         res.status(Status.UNAUTHORIZED).send(err);
     });
 };

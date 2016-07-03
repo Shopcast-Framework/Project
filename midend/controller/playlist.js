@@ -7,6 +7,40 @@ var Status      = require(process.env.NODE_PATH + '/config/status.json'),
     User        = orm.db.User,
     File        = orm.db.File;
 
+var PlaylistAdd = function(req, res) {
+    req.user
+    .getOnePlaylist({id: req.params.id}, {include:[{model:File, as: 'files'}]})
+    .then(function(playlist) {
+        if (!playlist) {
+            return res.status(Status.UNAUTHORIZED).send({message:Message.get("playlist:add:failure")});
+        }
+        playlist.add(req.user.id, req.body).then(function() {
+            res.status(Status.OK).send({message:Message.get("playlist:add:success")});
+        }, function() {
+            res.status(Status.UNAUTHORIZED).send({message:Message.get("playlist:add:failure")});
+        });
+    }, function(err) {
+        res.status(Status.UNAUTHORIZED).send(err);
+    });
+};
+
+var PlaylistSort = function(req, res) {
+    req.user
+    .getOnePlaylist({id: req.params.id})
+    .then(function(playlist) {
+        if (!playlist) {
+            return res.status(Status.UNAUTHORIZED).send({message:Message.get("playlist:sort:failure")});
+        }
+        playlist.sort(req.user.id, req.body).then(function() {
+            res.status(Status.OK).send({message:Message.get("playlist:sort:success")});
+        }, function() {
+            res.status(Status.UNAUTHORIZED).send({message:Message.get("playlist:sort:failure")});
+        });
+    }, function(err) {
+        res.status(Status.UNAUTHORIZED).send(err);
+    });
+};
+
 var PlayListPut = function(req, res) {
     req.user
     .getOnePlaylist({id: req.params.id})
@@ -66,7 +100,7 @@ var PlaylistGetOne = function(req, res) {
         },
         include: [{
             model: File,
-            as: 'Files'
+            as: 'files'
         }]
     })
     .then(function(playlist) {
@@ -104,7 +138,9 @@ var PlayListController = {
     post    : PlayListPost,
     put     : PlayListPut,
     getOne  : PlaylistGetOne,
-    delete  : PlaylistDelete
+    delete  : PlaylistDelete,
+    add     : PlaylistAdd,
+    sort    : PlaylistSort
 };
 
 module.exports = PlayListController;

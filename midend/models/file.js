@@ -9,6 +9,8 @@ var File = function(sequelize) {
     .define('File', {
         description : Sequelize.STRING,
         encoding    : Sequelize.STRING,
+        name        : Sequelize.STRING,
+        tags        : Sequelize.STRING,
         filename    : Sequelize.STRING,
         mimetype    : Sequelize.STRING,
         originalname: Sequelize.STRING,
@@ -17,7 +19,7 @@ var File = function(sequelize) {
     }, {underscored: true});
 
     var relationships = function() {
-        model.belongsTo(orm.db.Playlist, {constraints: false});
+        model.belongsToMany(orm.db.Playlist, {constraints: false, through: 'PlaylistFile'});
         model.belongsTo(orm.db.User, {constraints: false});
     };
 
