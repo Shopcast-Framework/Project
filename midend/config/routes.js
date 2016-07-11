@@ -60,15 +60,7 @@ var Routes = [
         name: 'music',
         actions: {
             'search' : { verb: 'get', route: '/search/:id' },
-        },
-        middlewares: [
-            {
-                name:   'auth',
-                param: {
-                    roles: [Role.ADMIN, Role.USER]
-                }
-            }
-        ]
+        }
     },
     {
         name: 'playlist',
