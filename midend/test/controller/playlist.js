@@ -1,9 +1,10 @@
-var Status      = require(process.env.NODE_PATH + '/config/status.json'),
-    Context     = require(process.env.NODE_PATH + '/test/context.js'),
-    Message     = require(process.env.NODE_PATH + '/modules/messages'),
-    __playlists = require(process.env.NODE_PATH + '/test/fixtures/playlist.json'),
-    __files     = require(process.env.NODE_PATH + '/test/fixtures/file.json'),
-    Helper      = Context.Helper;
+var Status              = require(process.env.NODE_PATH + '/config/status.json'),
+    Context             = require(process.env.NODE_PATH + '/test/context.js'),
+    Message             = require(process.env.NODE_PATH + '/modules/messages'),
+    __playlists         = require(process.env.NODE_PATH + '/test/fixtures/playlist.json'),
+    __playlist_files    = require(process.env.NODE_PATH + '/test/fixtures/playlist_file.json'),
+    __files             = require(process.env.NODE_PATH + '/test/fixtures/file.json'),
+    Helper              = Context.Helper;
 
 describe('Api playlist controller', function () {
 
@@ -43,7 +44,8 @@ describe('Api playlist controller', function () {
     });
 
     it('[GET] /api/playlist/1', function(done) {
-        var playlist = Helper.build.associate('Files', [__playlists[0]], [[0]], __files);
+        var playlist = Helper.build.associate('files', [__playlists[0]], [[0]], __files);
+        playlist[0].files[0]['PlaylistFile'] = __playlist_files[0];
 
         Context.server
         .get('/api/playlist/1')

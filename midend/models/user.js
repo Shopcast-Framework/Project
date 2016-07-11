@@ -58,6 +58,7 @@ var User = function(sequelize) {
     });
 
     var relationships = function() {
+        model.belongsTo(orm.db.Group, {constraints: false});
         model.hasOne(orm.db.Friend, {constraints: false});
         model.belongsToMany(orm.db.User, {as: 'Friends', through: 'Friend', constraints: false});
         model.hasMany(orm.db.Playlist, {constraints: false});

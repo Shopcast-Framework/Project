@@ -16,15 +16,10 @@ var SessionGet = function(req, res) {
 };
 
 var SessionOption = function(req, res) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'content-type');
     return res.status(Status.OK).send();
 };
 
-//TODO Mettre un middleware pour allow origin
 var SessionPost = function(req, res) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'content-type');
     var strategy = auth.strategy[req.body.strategy];
 
     if (req.user) {
