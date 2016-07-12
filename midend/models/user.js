@@ -2,12 +2,14 @@
 
 var Sequelize   = require('sequelize'),
     jwt         = require('jsonwebtoken'),
-    orm         = require(process.env.NODE_PATH + '/modules/orm');
+    orm         = require(process.env.NODE_PATH + '/modules/orm'),
+    Mailer      = require(process.env.NODE_PATH + '/modules/mailer');
 
 var User = function(sequelize) {
     var model = sequelize
     .define('User', {
         username        : Sequelize.STRING,
+        mail            : Sequelize.STRING,
         description     : Sequelize.STRING,
         age             : Sequelize.STRING,
         sex             : Sequelize.STRING,
@@ -18,6 +20,7 @@ var User = function(sequelize) {
         type            : Sequelize.INTEGER,
         facebookId      : Sequelize.STRING,
         googleId        : Sequelize.STRING,
+        reset_token     : Sequelize.STRING,
         last_connection : Sequelize.DATE
     }, {
         underscored: true,
@@ -25,6 +28,33 @@ var User = function(sequelize) {
             authenticate: function() {
                 this.token = jwt.sign(this.username, '/*986_@$*#[sdaw<!+');
                 this.updateAttributes({last_connection: new Date()});
+            },
+            resetPassword: function(done) {
+                var self = this;
+                self.updateAttributes({
+                    reset_token: jwt.sign(this.username, '/*245_%@$è=mgys<(+')
+                }).then(function(user) {
+                    self = user;
+                    Mailer.send(
+                        self.mail,
+                        Mailer.Template.create(self)
+                    );
+                    done(null);
+                });
+            },
+            updatePassword: function(new_password, done) {
+                var self = this;
+
+                jwt.verify(self.reset_token, '/*245_%@$è=mgys<(+', function(err, decoded) {
+                    if (err) {
+                        return done(err);
+                    }
+                    if (decoded !== self.username) {
+                        return done({message: 'Error: Invalid token'});
+                    }
+                    self.updateAttributes({password: new_password});
+                    return done(null);
+                });
             },
             verify: function(token, done) {
                 var self = this;

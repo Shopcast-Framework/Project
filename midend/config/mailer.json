@@ -1,0 +1,23 @@
+{
+    "production": {
+        "auth": {
+            "user": "",
+            "pass": ""
+        },
+        "reset_url": "http://shopcast.fr/users/new_password"
+    },
+    "development": {
+        "auth": {
+            "user": "",
+            "pass": ""
+        },
+        "reset_url": "localhost:3000/users/new_password"
+    },
+    "test": {
+        "auth": {
+            "user": "",
+            "pass": "",
+            "reset_url": "http://shopcast.fr/users/new_password"
+        }
+    }
+}

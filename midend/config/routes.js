@@ -91,6 +91,10 @@ var Routes = [
     },
     {
         name: 'user',
+        actions: {
+            'reset' : { verb: 'put', route: '/reset_password' },
+            'update' : { verb: 'post', route: '/reset_password' }
+        },
         middlewares: [
             {
                 name: 'auth',

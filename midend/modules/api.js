@@ -22,8 +22,8 @@ function RouteLoader(app) {
             var route = routes[i];
             var controllerInst = require(process.env.NODE_PATH + '/controller' + prefix + route.name);
 
-            self.resource(resourcePrefix, route.name, controllerInst, route.middlewares);
             self.addActions(controllerInst, prefix + route.name, route.actions, route.middlewares);
+            self.resource(resourcePrefix, route.name, controllerInst, route.middlewares);
 
             if (route.sub) {
                 var subResourcePrefix = prefix + route.name + '/:' + route.name + '_id/';

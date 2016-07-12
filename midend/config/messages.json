@@ -11,6 +11,13 @@
     "user:getone:success"       : "User selected with id: %s",
     "user:getone:failure"       : "User selected with id: %s was not found",
     "user:delete:success"       : "User correctly deleted",
+    "user:reset:success"        : "Mail correctly send to user",
+    "user:reset:nouser"         : "Error: This username is actually not in our database",
+    "user:reset:nomail"         : "Error: This username has no mail adress",
+    "user:reset:failure"        : "Error: Can t send mail to user",
+    "user:update:badconfirm"    : "Error: Confirm password different from password",
+    "user:update:success"       : "Password correctly updated",
+    "user:update:failure"       : "Error can't update password",
 
     "session:delete:success"    : "Session correctly deleted",
     "session:post:success"      : "User already logged",

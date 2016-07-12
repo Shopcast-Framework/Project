@@ -6,23 +6,60 @@ var express = require('express'),
 	Rest 	= require('../rest'),
 	menu    = require(__dirname + '/../modules/menu.js')
 
+router.get('/new_password', function(req, res) {
+
+	res.render('users/new_password', {
+		title: 'Shopcast - Users',
+		titleContent: 'New Password',
+		active: '/users',
+		menu: menu.load(req.session.user),
+		query: req.query
+	});
+});
+
+router.post('/new_password', function(req, res) {
+
+	Rest.post('user/reset_password', JSON.stringify(req.body)).then(function(response) {
+		res.redirect('/signin?message=' + response.body.message);
+	}, function(err) {
+		res.redirect('/signin?message=' + err.body.message);
+	});
+
+});
+
+router.get('/reset_password', function(req, res) {
+
+	res.render('users/reset_password', {
+		title: 'Shopcast - Users',
+		titleContent: 'Reset Password',
+		active: '/users',
+		menu: menu.load(req.session.user)
+	});
+});
+
+router.post('/reset_password', function(req, res) {
+
+	Rest.put('user/reset_password', JSON.stringify(req.body)).then(function(response) {
+		res.redirect('/signin?message=' + response.body.message);
+	}, function(err) {
+		res.redirect('/signin?message=' + err.body.message);
+	});
+});
+
 router.post('/', function(req, res) {
 	var promises = [];
 
 	Rest.post('user', JSON.stringify(req.body)).then(function(values) {
 		res.redirect('/users?message=' + response.body.message);
 	}, function(err) {
-		console.log(err);
 		res.redirect('/users?message=' + err.body.message);
 	});
 });
 
 router.post('/:id', function(req, res) {
 	Rest.put('user/' + req.params.id, JSON.stringify(req.body)).then(function(response) {
-		console.log(response);
 		res.redirect('/users?message=' + response.body.message);
 	}, function(err) {
-		console.log(err);
 		res.redirect('/users?message=' + err.body.message);
 	});
 });
