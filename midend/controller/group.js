@@ -24,10 +24,10 @@ var GroupPut = function(req, res) {
                 group     : group
             });
         }, function(err) {
-            res.status(Status.UNAUTHORIZED).send(err);
+            res.status(Status.UNAUTHORIZED).send({message: err.toString()});
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -40,7 +40,7 @@ var GroupGet = function(req, res) {
             groups    : groups
         });
     }, function (err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -53,7 +53,7 @@ var GroupPost = function(req, res) {
             group       : group
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -78,7 +78,7 @@ var GroupGetOne = function(req, res) {
             res.status(Status.UNAUTHORIZED).send({message : Message.get("group:getone:failure")});
         }
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -90,7 +90,7 @@ var GroupDelete = function(req, res) {
     .then(function() {
         res.status(Status.OK).send({message : Message.get("group:delete:success")});
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 

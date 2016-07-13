@@ -14,18 +14,21 @@ describe('Api playlist controller', function () {
     });
 
     beforeEach(function(done) {
-        this.timeout(300);
+        this.timeout(600);
         Context.clean(done);
     });
 
     it('[GET] /api/playlist', function(done) {
+        var playlists = Helper.build.associate('files', [__playlists[0], __playlists[1]], [[0], []], __files);
+        playlists[0].files[0]['PlaylistFile'] = __playlist_files[0];
+
         Context.server
         .get('/api/playlist')
         .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
             message     : Message.get("playlist:get:success"),
-            playlists   : __playlists.slice(0, 2)
+            playlists   : playlists
         }, done);
     });
 

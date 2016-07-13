@@ -12,7 +12,7 @@ describe('Api file controller', function () {
     });
 
     beforeEach(function(done) {
-        this.timeout(300);
+        this.timeout(600);
         Context.clean(done);
     });
 

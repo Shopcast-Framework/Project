@@ -29,7 +29,7 @@ var MonitorAssociate = function(req, res) {
             message : Message.get("monitor:associate:failure")
         });
     }, function(err) {
-        return res.status(Status.UNAUTHORIZED).send(err);
+        return res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     })
 };
 
@@ -51,10 +51,10 @@ var MonitorPut = function(req, res) {
                 monitor     : monitor
             });
         }, function(err) {
-            res.status(Status.UNAUTHORIZED).send(err);
+            res.status(Status.UNAUTHORIZED).send({message: err.toString()});
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -67,7 +67,7 @@ var MonitorGet = function(req, res) {
             monitors    : monitors
         });
     }, function (err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -81,7 +81,7 @@ var MonitorPost = function(req, res) {
             monitor     : monitor
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -98,7 +98,7 @@ var MonitorGetOne = function(req, res) {
             res.status(Status.UNAUTHORIZED).send({message : Message.get("monitor:getone:failure")});
         }
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -110,7 +110,7 @@ var MonitorDelete = function(req, res) {
     .then(function() {
         res.status(Status.OK).send({message : Message.get("monitor:delete:success")});
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 

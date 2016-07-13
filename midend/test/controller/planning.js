@@ -4,6 +4,7 @@ var Status      = require(process.env.NODE_PATH + '/config/status.json'),
     __plannings = require(process.env.NODE_PATH + '/test/fixtures/planning.json'),
     Helper      = Context.Helper;
 
+//TODO test monitor
 describe('Api planning controller', function () {
 
     before(function(done) {
@@ -12,7 +13,7 @@ describe('Api planning controller', function () {
     });
 
     beforeEach(function(done) {
-        this.timeout(300);
+        this.timeout(600);
         Context.clean(done);
     });
 

@@ -7,7 +7,9 @@
         "tags"          : "tag playlist 1",
         "created_at"    : "2016-01-01T00:00:00.000Z",
         "updated_at"    : "2016-01-01T00:00:00.000Z",
-        "user_id"       : 1
+        "user_id"       : 1,
+        "planning_id"   : null,
+        "planning"      : null
     },
     {
         "id"            : 2,
@@ -17,7 +19,9 @@
         "tags"          : "tag playlist 2",
         "created_at"    : "2016-01-01T00:00:00.000Z",
         "updated_at"    : "2016-01-01T00:00:00.000Z",
-        "user_id"       : 1
+        "user_id"       : 1,
+        "planning_id"   : null,
+        "planning"      : null
     },
     {
         "id"            : 3,
@@ -27,6 +31,8 @@
         "tags"          : "tag playlist 3",
         "created_at"    : "2016-01-01T00:00:00.000Z",
         "updated_at"    : "2016-01-01T00:00:00.000Z",
-        "user_id"       : 2
+        "user_id"       : 2,
+        "planning_id"   : null,
+        "planning"      : null
     }
 ]

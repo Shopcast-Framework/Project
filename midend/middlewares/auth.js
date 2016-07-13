@@ -15,7 +15,7 @@ var AuthMiddleWare = function() {
         }
         req.user.verify(req.get('Authorization'), function(err) {
             if (err) {
-                return res.status(Status.UNAUTHORIZED).send(err);
+                return res.status(Status.UNAUTHORIZED).send({message: err.toString()});
             }
             if (roles && roles.indexOf(req.user.role) === -1) {
                 return res.status(Status.UNAUTHORIZED).send({message: Message.get("middleware:auth:badrole")});

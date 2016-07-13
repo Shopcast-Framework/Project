@@ -16,13 +16,13 @@ var UserPut = function(req, res) {
                     user        : user
                 });
             }, function(err) {
-                res.status(Status.UNAUTHORIZED).send(err);
+                res.status(Status.UNAUTHORIZED).send({message: err.toString()});
             });
         } else {
             res.status(Status.UNAUTHORIZED).send({message : Message.get("user:put:failure")});
         }
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -35,7 +35,7 @@ var UserGet = function(req, res) {
             users : users
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -52,7 +52,7 @@ var UserPost = function(req, res) {
             res.status(Status.UNAUTHORIZED).send({message : Message.get("user:post:failure")});
         }
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -71,7 +71,7 @@ var UserGetOne = function(req, res) {
             });
         }
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -83,7 +83,7 @@ var UserDelete = function(req, res) {
     .then(function() {
         res.status(Status.OK).send({message : Message.get("user:delete:success")});
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -101,7 +101,7 @@ var UserUpdatePassword = function(req, res) {
         }
         user.updatePassword(req.body.password, function(err) {
             if (err) {
-                return res.status(Status.UNAUTHORIZED).send(err);
+                return res.status(Status.UNAUTHORIZED).send({message: err.toString()});
             }
             res.status(Status.OK).send({message : Message.get("user:update:success")});
         });
@@ -127,7 +127,7 @@ var UserResetPassword = function(req, res) {
             res.status(Status.OK).send({message : Message.get("user:reset:success")});
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 

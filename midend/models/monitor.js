@@ -11,6 +11,7 @@ var Monitor = function(sequelize) {
     }, {underscored: true});
 
     var relationships = function() {
+        model.hasOne(orm.db.Planning, {constraints: false});
         model.belongsTo(orm.db.User, {constraints: false, as: 'user'});
     };
 

@@ -14,7 +14,6 @@ var Mailer = function() {
     };
 
     self.init = function() {
-        console.log("INIT");
         self.Template = require(process.env.NODE_PATH + '/modules/mailer/template.js');
         self.transport = nodemailer.createTransport(smtpConfig, {
             debug: true

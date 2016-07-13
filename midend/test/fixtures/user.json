@@ -3,6 +3,7 @@
         "id"                : 1,
         "username"          : "username user",
         "description"       : "description user",
+        "mail"              : "testmail1@user.fr",
         "age"               : "42",
         "sex"               : "sexe user",
         "location"          : "location user",
@@ -14,12 +15,14 @@
         "last_connection"   : "2016-01-01T00:00:00.000Z",
         "created_at"        : "2016-01-01T00:00:00.000Z",
         "updated_at"        : "2016-01-01T00:00:00.000Z",
-        "group_id"          : 1
+        "group_id"          : 1,
+        "reset_token"       : null
     },
     {
         "id"                : 2,
         "username"          : "username friend",
         "description"       : "description friend",
+        "mail"              : "testmail2@user.fr",
         "age"               : "84",
         "sex"               : "sexe friend",
         "location"          : "location friend",
@@ -31,12 +34,14 @@
         "last_connection"   : "2016-01-01T00:00:00.000Z",
         "created_at"        : "2016-01-01T00:00:00.000Z",
         "updated_at"        : "2016-01-01T00:00:00.000Z",
-        "group_id"          : 1
+        "group_id"          : 1,
+        "reset_token"       : null
     },
     {
         "id"                : 3,
         "username"          : "username try friend",
         "description"       : "description try friend",
+        "mail"              : "testmail3@user.fr",
         "age"               : "22",
         "sex"               : "sexe friend",
         "location"          : "location friend",
@@ -48,12 +53,14 @@
         "last_connection"   : "2016-01-01T00:00:00.000Z",
         "created_at"        : "2016-01-01T00:00:00.000Z",
         "updated_at"        : "2016-01-01T00:00:00.000Z",
-        "group_id"          : 1
+        "group_id"          : 1,
+        "reset_token"       : null
     },
     {
         "id"                : 4,
         "username"          : "username no friend",
         "description"       : "description no friend",
+        "mail"              : "testmail4@user.fr",
         "age"               : "11",
         "sex"               : "sexe friend",
         "location"          : "location friend",
@@ -65,6 +72,7 @@
         "last_connection"   : "2016-01-01T00:00:00.000Z",
         "created_at"        : "2016-01-01T00:00:00.000Z",
         "updated_at"        : "2016-01-01T00:00:00.000Z",
-        "group_id"          : 1
+        "group_id"          : 1,
+        "reset_token"       : null
     }
 ]

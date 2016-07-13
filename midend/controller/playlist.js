@@ -3,6 +3,7 @@
 var Status      = require(process.env.NODE_PATH + '/config/status.json'),
     orm         = require(process.env.NODE_PATH + '/modules/orm'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
+    Planning    = orm.db.Planning,
     Playlist    = orm.db.Playlist,
     User        = orm.db.User,
     File        = orm.db.File;
@@ -20,7 +21,7 @@ var PlaylistAdd = function(req, res) {
             res.status(Status.UNAUTHORIZED).send({message:Message.get("playlist:add:failure")});
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -37,7 +38,7 @@ var PlaylistSort = function(req, res) {
             res.status(Status.UNAUTHORIZED).send({message:Message.get("playlist:sort:failure")});
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -59,23 +60,31 @@ var PlayListPut = function(req, res) {
                 playlist    : playlist
             });
         }, function(err) {
-            res.status(Status.UNAUTHORIZED).send(err);
+            res.status(Status.UNAUTHORIZED).send({message: err.toString()});
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
 var PlayListGet = function(req, res) {
     req.user
-    .getPlaylists()
+    .getPlaylists({
+        include: [{
+            model: File,
+            as: 'files'
+        }, {
+            model: Planning,
+            as: 'planning'
+        }]
+    })
     .then(function(playlists) {
         res.status(Status.OK).send({
             message     : Message.get("playlist:get:success"),
             playlists   : playlists
         });
     }, function (err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -88,7 +97,7 @@ var PlayListPost = function(req, res) {
             playlist    : playlist
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -101,6 +110,9 @@ var PlaylistGetOne = function(req, res) {
         include: [{
             model: File,
             as: 'files'
+        }, {
+            model: Planning,
+            as: 'planning'
         }]
     })
     .then(function(playlist) {
@@ -113,7 +125,7 @@ var PlaylistGetOne = function(req, res) {
             res.status(Status.UNAUTHORIZED).send({message : Message.get("playlist:getone:failure")});
         }
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -129,7 +141,7 @@ var PlaylistDelete = function(req, res) {
             res.status(Status.UNAUTHORIZED).send({message : Message.get("playlist:delete:failure")});
         }
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 

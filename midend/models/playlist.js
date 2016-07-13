@@ -74,6 +74,7 @@ var Playlist = function(sequelize) {
 
     var relationships = function() {
         model.belongsToMany(orm.db.File, {constraints: false, as: 'files', through: 'PlaylistFile'});
+        model.belongsTo(orm.db.Planning, {constraints: false, as: 'planning'});
         model.belongsTo(orm.db.User, {constraints: false});
     };
 
