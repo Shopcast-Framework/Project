@@ -2,10 +2,8 @@
 
 var GoogleStrategy      = require('passport-google-token').Strategy,
     orm                 = require('../orm'),
+    config              = require(process.env.NODE_PATH + '/config/strategy.json')[process.env.NODE_ENV],
     User                = orm.db.User;
-
-var CLIENT_APP_ID = '553975407563-gupmkgbeuuua4c2fkjgegn973v9g6892.apps.googleusercontent.com';
-var CLIENT_APP_SECRET = 'ZpKkQDqdD7woYFXDX82cXzjv';
 
 var StrategyGoogle = function(app, passport, loginCallback) {
     var self = this;
@@ -13,8 +11,8 @@ var StrategyGoogle = function(app, passport, loginCallback) {
     self.init = function(app, passport) {
 
         var googleConf = {
-            clientID: CLIENT_APP_ID,
-            clientSecret: CLIENT_APP_SECRET
+            clientID: config.google.CLIENT_APP_ID,
+            clientSecret: config.google.CLIENT_APP_SECRET
         };
 
         var authenticate = function(accessToken, refreshToken, profile, done) {
