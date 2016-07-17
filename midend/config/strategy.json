@@ -1,0 +1,22 @@
+{
+    "production": {
+        "facebook"  : {
+            "CLIENT_APP_ID" : "751444924955536",
+            "CLIENT_APP_SECRET" : "ad47df83e16303060d45fe10546fd19b"
+        },
+        "google" : {
+            "CLIENT_APP_ID" : "553975407563-gupmkgbeuuua4c2fkjgegn973v9g6892.apps.googleusercontent.com",
+            "CLIENT_APP_SECRET" : "ZpKkQDqdD7woYFXDX82cXzjv"
+        }
+    },
+    "development": {
+        "facebook"  : {
+            "CLIENT_APP_ID" : "751447004955328",
+            "CLIENT_APP_SECRET" : "ee7d5dc104910ccde27df46651a87e3c"
+        },
+        "google" : {
+            "CLIENT_APP_ID" : "553975407563-gupmkgbeuuua4c2fkjgegn973v9g6892.apps.googleusercontent.com",
+            "CLIENT_APP_SECRET" : "ZpKkQDqdD7woYFXDX82cXzjv"
+        }
+    }
+}

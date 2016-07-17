@@ -2,10 +2,8 @@
 
 var FacebookStrategy    = require('passport-facebook-token'),
     orm                 = require('../orm'),
+    config              = require(process.env.NODE_PATH + '/config/strategy.json')[process.env.NODE_ENV],
     User                = orm.db.User;
-
-var CLIENT_APP_ID = '751447004955328';
-var CLIENT_APP_SECRET = 'ee7d5dc104910ccde27df46651a87e3c';
 
 var StrategyFacebook = function(app, passport, loginCallback) {
     var self = this;
@@ -13,8 +11,8 @@ var StrategyFacebook = function(app, passport, loginCallback) {
     self.init = function(app, passport) {
 
         var facebookConf = {
-            clientID: CLIENT_APP_ID,
-            clientSecret: CLIENT_APP_SECRET
+            clientID: config.facebook.CLIENT_APP_ID,
+            clientSecret: config.facebook.CLIENT_APP_SECRET
         };
 
         var authenticate = function(accessToken, refreshToken, profile, done) {
