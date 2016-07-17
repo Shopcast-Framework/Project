@@ -8,7 +8,7 @@ var gulp    = require('gulp'),
     puts    = function(error, stdout, stderr) { sys.puts(stdout); sys.puts(stderr) };
 
 gulp.task('serve', function() {
-    process.env.NODE_ENV = util.env.env || 'development';
+    process.env.NODE_ENV = util.env.env || 'production';
     process.env.NODE_PATH = __dirname;
     nodemon({
         script: './server.js',
