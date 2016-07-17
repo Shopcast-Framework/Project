@@ -1,8 +1,8 @@
 {
     "production": {
         "facebook"  : {
-            "CLIENT_APP_ID" : "141547426275277",
-            "CLIENT_APP_SECRET" : "ecbcd666fc611f9f1746e9098d239a20"
+            "CLIENT_APP_ID" : "751444924955536",
+            "CLIENT_APP_SECRET" : "ad47df83e16303060d45fe10546fd19b"
         },
         "google" : {
             "CLIENT_APP_ID" : "553975407563-gupmkgbeuuua4c2fkjgegn973v9g6892.apps.googleusercontent.com",
