@@ -1,11 +1,14 @@
 'use strict';
 
-var express = require('express'),
-	router 	= express.Router(),
-	Promise = require('promise'),
-	Rest 	= require('../rest'),
-	menu    = require(__dirname + '/../modules/menu.js')
+var express = require('express');
+var router = express.Router();
+var Promise = require('promise');
+var Rest = require('../rest');
+var menu    = require(__dirname + '/../menu.json');
+var middlewares = require('../middlewares');
+var translate = require('../languages');
 
+<<<<<<< HEAD
 router.get('/new_password', function(req, res) {
 
 	res.render('users/new_password', {
@@ -46,15 +49,14 @@ router.post('/reset_password', function(req, res) {
 	});
 });
 
-router.post('/', function(req, res) {
-	var promises = [];
+router.post('/',middlewares.isLogged, function(req, res) {
 
-	Rest.post('user', JSON.stringify(req.body)).then(function(values) {
+	Rest.post('user', JSON.stringify(req.body)).then(function(response) {
 		res.redirect('/users?message=' + response.body.message);
 	}, function(err) {
 		res.redirect('/users?message=' + err.body.message);
+		console.log(err); 
 	});
-});
 
 router.post('/:id', function(req, res) {
 	Rest.put('user/' + req.params.id, JSON.stringify(req.body)).then(function(response) {
@@ -64,38 +66,62 @@ router.post('/:id', function(req, res) {
 	});
 });
 
-router.get('/:id/delete', function(req, res) {
-	Rest.delete('user/' + req.params.id).then(function() {
-		res.redirect('/signin');
-	});
-});
+router.get('/:id', middlewares.isLogged, middlewares.language, function( req, res ) {
 
-router.get('/:id', function(req, res) {
 	var promises = [];
 
-	promises.push(Rest.get('user/' + req.params.id));
+	promises.push( Rest.get( 'user/' + req.params.id ) );
 
 	Promise.all(promises).then(function(values) {
+
 		var user = values[0].body.user;
 
-		res.render('users/show', {
-			title: 'Shopcast - Users',
-			titleContent: 'Show user',
-			active: '/users',
+		if ( user.avatar == null )
+			user.avatar = "public/images/users/default.png";
+
+		res.render('user/view', {
+			active: '',
+			menu: menu,
 			user: user,
-			menu: menu.load(req.session.user)
+			permission: [ "Administrateur", "Client" ],
+			isLogged: true,
+			isSearchBar: false,
+			session: req.session.user,
+			translate : translate.getWordsByPage( req.cookies.language, "User", { title: user.name, tabTitle: user.name } ),
+			language: req.cookies.language,
 		});
 	}, function(err) {
 		console.log(err);
 	});
 });
 
-router.get('/', function(req, res) {
-	res.render('users/index', {
-		title: 'Shopcast - Users',
-		titleContent: 'Users (20)',
-		active: '/users',
-		menu: menu.load(req.session.user)
+router.get('/', middlewares.isLogged, middlewares.language, function( req, res ) {
+
+	var promises = [];
+
+	promises.push( Rest.get( 'user' ) );
+
+	Promise.all(promises).then(function(values) {
+
+		var users = values[0].body.users;
+		values[0].body.users.forEach(function(element,index,array){
+			if ( users[index].avatar == null )
+				users[index].avatar = "public/images/users/default.png";
+		});
+
+		res.render('user/list', {
+			active: '/users',
+			menu: menu,
+			users: users,
+			permission: [ "Administrateur", "Client"],
+			isLogged: true,
+			isSearchBar: true,
+			session: req.session.user,
+			translate : translate.getWordsByPage( req.cookies.language, "Users", { title: users.length } ),
+			language: req.cookies.language,
+		});
+	}, function(err) {
+		console.log(err);
 	});
 });
 

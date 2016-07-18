@@ -1,13 +1,15 @@
 'use strict';
 
-var express	= require('express'),
-	router	= express.Router(),
-	Promise	= require('promise'),
-	Rest	= require('../rest'),
-	menu	= require(__dirname + '/../modules/menu.js'),
-	upload  = require('multer')({ dest: 'public/uploads/' });
+var express = require( 'express' );
+var router = express.Router();
+var Promise = require( 'promise' );
+var Rest = require('../rest');
+var menu    = require(__dirname + '/../menu.json');
+var middlewares = require('../middlewares');
+var translate = require('../languages');
 
-router.post('/', function(req, res) {
+router.post('/',middlewares.isLogged, function(req, res) {
+
 	Rest.post('playlist', JSON.stringify(req.body)).then(function(response) {
 		console.log(response);
 		res.redirect('/playlists?message=' + response.body.message);
@@ -17,92 +19,79 @@ router.post('/', function(req, res) {
 	});
 });
 
-router.get('/new', function(req, res) {
-	res.render('playlists/new', {
-		title: 'Shopcast - Playlists',
-		titleContent: 'New playlist',
-		active: '/playlists',
-		menu: menu.load(req.session.user)
-	});
+router.post('/:id',middlewares.isLogged, function(req, res) {
+
+    var id = req.params.id;
+
+    Rest.put('playlist/' + id, JSON.stringify(req.body)).then(function(response) {
+        console.log(response);
+        res.redirect('/playlists/' + id + '?message=' + response.body.message);
+    }, function(err) {
+        console.log(err);
+        res.redirect('/playlists/' + id + '?message=' + response.body.message);
+    })
 });
 
-router.post('/delete', function(req, res) {
-	var promises = [];
+router.get('/', middlewares.isLogged, middlewares.language, function( req, res ) {
 
-	for (var i in req.body.playlist) {
-		promises.push(Rest.delete('playlist/' + req.body.playlist[i]));
-	}
-	Promise.all(promises).then(function() {
-		res.redirect('/playlists');
-	});
-});
-
-router.post('/:id/files', upload.any(), function(req, res) {
-
-	var promises = [];
-
-	for (var i in req.files) {
-		promises.push(Rest.post('playlist/' + req.params.id + '/file', JSON.stringify(req.files[i])));
-	}
-	Promise.all(promises).then(function() {
-		res.redirect('/playlists?message=Files correctly upload');
-	}, function(err) {
-		console.log(err);
-		res.redirect('/playlists?message=Files can\'t be upload');
-	});
-});
-
-
-router.post('/:id', function(req, res) {
-	Rest.put('playlist/' + req.params.id, JSON.stringify(req.body)).then(function(response) {
-		console.log(response);
-		res.redirect('/playlists?message=' + response.body.message);
-	}, function(err) {
-		console.log(err);
-		res.redirect('/playlists?message=' + err.body.message);
-	});
-});
-
-router.get('/:id', function(req, res) {
-	var promises = [];
-
-	promises.push(Rest.get('playlist/' + req.params.id));
-
-	Promise.all(promises).then(function(values) {
-		var playlist = values[0].body.playlist;
-
-		console.log(playlist);
-
-		res.render('playlists/show', {
-			title: 'Shopcast - Playlists',
-			titleContent: 'Show playlist',
-			active: '/playlists',
-			playlist: playlist,
-			menu: menu.load(req.session.user)
-		});
-	}, function(err) {
-		console.log(err);
-	});
-});
-
-router.get('/', function(req, res) {
 	var promises = [];
 
 	promises.push(Rest.get('playlist'));
 
 	Promise.all(promises).then(function(values) {
-		var playlists = values[0].body.playlists;
 
-		res.render('playlists/index', {
-			title: 'Shopcast - Playlists',
-			titleContent: 'My playlists (' + playlists.length + ')',
+		var playlists = values[0].body.playlists;
+		values[0].body.playlists.forEach(function(element,index,array){
+			if ( playlists[index].tags != null )
+				playlists[index].tags = element.tags.split(",");
+		});
+
+		res.render('playlists/list', {
 			active: '/playlists',
+			menu: menu,
 			playlists: playlists,
-			menu: menu.load(req.session.user)
+			isLogged: true,
+			isSearchBar: true,
+			session: req.session.user,
+			translate : translate.getWordsByPage( req.cookies.language, "Playlists", { title: playlists.length } ),
+			language: req.cookies.language
 		});
 	}, function(err) {
 		console.log(err);
 	});
+
+});
+
+router.get('/:id', middlewares.isLogged, middlewares.language, function( req, res ) {
+
+	var promises = [];
+    var id = req.params.id;
+
+	promises.push(Rest.get('file'));
+	promises.push(Rest.get('playlist/'+id));
+
+	Promise.all(promises).then(function(values) {
+
+		var files = values[0].body.files;
+		console.log(files);
+		var playlist = values[1].body.playlist;
+        playlist.tags = playlist.tags.split(",");
+
+		res.render('playlists/show', {
+			active: '/playlists',
+			menu: menu,
+			playlist: playlist,
+			files: files,
+			isLogged: true,
+			isSearchBar: false,
+			session: req.session.user,
+			translate : translate.getWordsByPage( req.cookies.language, "Playlist", { title: playlist.name, tabTitle: playlist.name } ),
+			language: req.cookies.language
+		});
+	}, function(err) {
+		console.log(err);
+	});
+
 });
 
 module.exports = router;

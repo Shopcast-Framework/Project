@@ -1,0 +1,93 @@
+{
+  "SignIn": {
+    "title": "Sign into Shopcast",
+    "tabTitle": "Sign in - Shopcast",
+    "connectWith": "You can connect with you e-mail, Facebook or Google account",
+    "username" : "Username",
+    "password" : "password",
+    "byEmail" : "E-mail",
+    "byFacebook" : "connect with Facebook",
+    "byGoogle" : "connect with Google",
+    "youCanChoose" : "Or you can use..."
+  },
+  "Dashboard": {
+    "title": "Dashboard",
+    "tabTitle": "Dashboard - Shopcast"
+  },
+  "Playlists": {
+    "title": "My playlists (%)",
+    "tabTitle": "My playlists - Shopcast",
+    "btnCreate": "Create a new playlist",
+    "newPlaylist": "New playlist",
+    "search" : "Search",
+    "name" : "Name",
+    "description" : "Description",
+    "frequency" : "Frequency",
+    "tags" : "Tags",
+    "btnAdd": "Ajouter",
+    "btnCancel": "Annuler"
+  },
+  "Users": {
+    "title": "Users (%)",
+    "tabTitle": "Users - Shopcast",
+    "btnCreate": "add a new user",
+    "newUser": "Nouvel utilisateur",
+    "search" : "Search",
+    "name" : "Name",
+    "username" : "Username",
+    "email" : "E-mail",
+    "role" : "Role",
+    "lastConnection" : "Last connection",
+    "createdAt" : "Created at",
+    "password": "Password",
+    "roleAdmin": "Administrator",
+    "roleClient": "Client",
+    "whatRole": "What is his role ?",
+    "sendEmail": "Do you want send an email with the credentials ?",
+    "btnAdd": "Add",
+    "btnCancel": "Cancel"
+  },
+  "User": {
+    "title": "%",
+    "tabTitle": "% - Shopcast"
+  },
+  "Files": {
+    "title": "My files (%)",
+    "tabTitle": "My files - Shopcast",
+    "btnCreate": "add a new file",
+    "newFile": "New file",
+    "search" : "Search",
+    "name" : "Name",
+    "nameOriginal" : "Original",
+    "description" : "Description",
+    "type" : "Type",
+    "size" : "Size",
+    "tags" : "Tags",
+    "btnAdd": "Add",
+    "btnCancel": "Cancel"
+  },
+  "Settings": {
+    "title": "Settings",
+    "tabTitle": "Settings - Shopcast",
+    "tabGeneral": "General",
+    "tabTranslate": "Translate"
+  },
+  "Language": {
+    "title": "Langages available",
+    "btn": "Ok",
+    "language": "language",
+    "fr": "French",
+    "en": "English"
+  },
+  "Menu": {
+    "dashboard": "Dashboard",
+    "files": "My files",
+    "playlists": "My playlists",
+    "display": "Display",
+    "explore": "Explore",
+    "settings": "Settings",
+    "users": "Users",
+    "myAccount": "My account",
+    "logout": "Log out"
+  }
+}

@@ -10,7 +10,8 @@ var StrategyLocal = function(app, passport, loginCallback) {
     self.init = function(app, passport) {
         var authenticate = function(username, password, done) {
             User.find({
-                where: {username: username}
+                where: {username: username},
+                attributes: ['id', 'username', 'name', 'password', 'avatar','email']
 	        }).then(function(user) {
                 if (!user) {
                     done({message: 'Error: Could not find user: ' + username});

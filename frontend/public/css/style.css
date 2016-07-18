@@ -7,10 +7,9 @@
 body, html{
 	margin: 0;
 	padding: 0;
-	background-color: #E6E6E6;
+	background-color: #F9F9F9;
 	width: 100%;
 	height: 100%;
-	overflow: hidden
 }
 
 
@@ -21,7 +20,11 @@ body, html{
 *******************************************************************/
 
 #header{
-	padding-bottom: 240px;
+	padding-bottom: 140px;
+}
+
+#header nav{
+	background-color: transparent;
 }
 
 #header .brand-logo{
@@ -46,22 +49,128 @@ body, html{
 }
 
 #header .menu .user{
+	padding: 0;
+	position: relative;
 }
 
-#header .menu .user a{
-	font-size: 15px;
+#header .menu .side-nav{
+	z-index: 1000;
 }
 
-#header .menu .user img{
-	width: 45px;
-	margin-right: 10px;
+#header .menu .side-nav li{
+	padding: 0;
+}
+
+#header .menu .user > a:not(.dont-apply-btn){
+	padding: 0;
+	height: 204px;
+	position: relative;
+}
+
+#header .menu .user .logout{
+	position: absolute;
+	bottom: 15px;
+	right: 15px;
+}
+
+#header .menu .user .avatar{
+	width: 31%;
+	position: absolute;
+	left: 35%;
+	top: 30px;
+	border: 4px solid #FFF;
+}
+
+#header .menu .user .informations{
+	position: absolute;
+	color: #F9F9F9;
+	text-align: center;
+	bottom: 0px;
+	font-size: 16px;
+	font-weight: 500;
+	left: 16px;
+}
+
+#header .menu .user .informations p{
+	margin: 0;
+}
+
+#header .menu .button-collapse{
+	position: fixed;
+	top: 0px;
+	left: 0;
+	z-index: 999;
+	width: 60px;
+	text-align: center;
+}
+
+#header .menu .lock{
+	margin-left: 15px;
+	display: block;
 }
 
 #header .title{
-	font-size: 50px;
+	font-size: 45px;
 	font-weight: 300;
 	text-align: center;
-	padding-top: 30px;
+	padding-top: 5px;
+}
+
+#language-select{
+	width: 120px;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	height: 40px;
+	background-color: #FFF;
+	z-index: 9999
+}
+
+#language-select > a{
+	width: 100%;
+	position: relative;
+	height: 100%;
+}
+
+#language-select span{
+	position: absolute;
+	top: 8px;
+	left: 12px;
+	font-size: 15px;
+	color: #333;
+}
+
+#language-select img{
+	position: absolute;
+	width: 30px;
+	right: 12px;
+	top: 5px;
+}
+
+/*******************************************************************
+********************************************************************
+***************************** Sign in ******************************
+********************************************************************
+*******************************************************************/
+
+#sign-in form{
+	margin-top: 40px;
+}
+
+#sign-in form .btn-valid{
+	margin-top: 20px;
+}
+
+#sign-in .separate{
+	text-align: center;
+	font-size: 30px;
+	font-weight: 300;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+#sign-in .btn-connect .btn{
+	margin: 0 10px;
 }
 
 /*******************************************************************
@@ -71,33 +180,33 @@ body, html{
 *******************************************************************/
 
 #main{
-	width: 80%;
-	margin: -88px auto auto;
-	background-color: #FFF;
-	height: 100%;
+	width: 100%;
+	background-color: transparent;
 }
 
-#main > header{
-	border-bottom: 1px solid #E6E6E6;
-	padding: 27px 30px;
+#main .search-wrapper.fixed{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	left: 0;
+	z-index: 100;
+}
+
+#main header.actions{
+	padding: 40px 0;
 	position: relative;
 	text-align: center;
 }
 
-#main > header .actions{
-	position: absolute;
-	right: 24px;
-	bottom: 20px;
+#main header{
+	text-align: center;
+	padding-top: 40px;
 }
 
-#main > header .actions button{
-	margin: 0 5px;
-}
-
-
-#main > header > h1{
+#main header h4{
 	margin: 0;
 	font-size: 30px;
+	font-weight: 300;
 	width: auto;
 	display: inline-table;
 	color: #3C4B53;
@@ -108,6 +217,381 @@ body, html{
 	padding: 0 25px;
 	padding-bottom: 20px;
 	height: 100%;
-	overflow: auto;
-	margin-bottom: 88px
+	margin-bottom: 50px;
+}
+
+#main .wrapper-content .listing .actions{
+	text-align: center;
+}
+
+#main .wrapper-content .listing .actions .btn-floating{
+	margin:0 5px;
+}
+
+#main .wrapper-content .listing td img{
+	width: 45px;
+}
+
+#main .wrapper-content .listing td .chip{
+	margin: 0 5px; 
+}
+
+#main .wrapper-no-header{
+	margin-top: 40px;
+}
+
+/*******************************************************************
+********************************************************************
+******************************* User *******************************
+********************************************************************
+*******************************************************************/
+
+#user-view .informations-wrapper{
+	position: relative;
+}
+
+#user-view .informations-wrapper h4{
+	color: #333;
+	border-bottom: 1px solid #CCC;
+	font-weight: 300;
+	font-size: 34px;
+	margin: 20px 0;
+}
+
+#user-view .informations-wrapper .btn-edit{
+	position: absolute;
+	top: 10px;
+	right: 11px;
+}
+
+#user-view .informations-wrapper .informations{
+	margin-top: 25px;
+}
+
+#user-view .informations-wrapper .informations .item{
+	width: 100%;
+	font-size: 0;
+	padding: 3px 15px;
+}
+
+#user-view .informations-wrapper .informations .item > div{
+	display: inline-table;
+	width: 50%;
+}
+
+#user-view .informations-wrapper .informations .item .key{
+	font-weight: 500;
+	font-size: 19px;
+	color: #333;
+	text-align: left;
+}
+
+#user-view .informations-wrapper .informations .item .value{
+	font-weight: 300;
+	font-size: 16px;
+	color: #333;
+	text-align: right;
+}
+
+/*******************************************************************
+********************************************************************
+**************************** Playlists *****************************
+********************************************************************
+*******************************************************************/
+
+#playlist  #form-edit .actions{
+    display: none;
+}
+
+#playlist  #form-edit .actions .btn{
+    margin: 0 10px;
+}
+
+#playlist section .title{
+    font-weight: 300;
+    font-size: 50px;
+    padding: 10px 0;
+    border-bottom: 2px solid #CCC;
+    margin: 40px 0 20px 0;
+}
+
+#playlist section .actions{
+    margin: 35px 0;
+}
+
+#playlist section .title .btn {
+    margin-left: 20px;
+}
+
+#playlist .light-box .tabs{
+    background-color: transparent;
+    margin-bottom: 50px;
+}
+
+#playlist .light-box .tabs .tab a{
+	color: rgb(3, 169, 244);
+}
+
+#playlist .light-box .tabs .tab a.active{
+	background-color: rgb(3, 169, 244);
+	color: rgb(255, 255, 255);
+}
+
+#playlist .light-box .tabs .indicator{
+	background-color: rgb(3, 169, 244);
+}
+
+
+/*******************************************************************
+********************************************************************
+***************************** Settings *****************************
+********************************************************************
+*******************************************************************/
+
+#settings #translate .language-list li .collapsible-header div{
+	display: inline-table;
+	width: 50px;
+	text-align: center;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+#settings #translate .language-list li .collapsible-header span{
+	font-size: 16px;
+}
+
+#settings #translate .language-list li .collapsible-header img{
+	width: 30px;
+}
+
+#settings #translate .page-list{
+	margin: 25px auto;
+}
+
+#settings #translate .page-list .collapsible-body form{
+	margin: auto;
+}
+
+/*******************************************************************
+********************************************************************
+**************************** Dashboard *****************************
+********************************************************************
+*******************************************************************/
+
+#dashboard{
+	padding-top: 40px !important;
+	margin-bottom: 100px !important;
+	height: auto !important;
+}
+
+#dashboard .chart-wrapper{
+	text-align: center;
+	padding: 10px;
+}
+
+#dashboard .divider{
+	width: 100%;
+	margin: 50px 0;
+	background-color: transparent;
+	border:none;
+}
+
+#dashboard .table-wrapper{
+	
+}
+
+#dashboard .table-wrapper table th,
+#dashboard .table-wrapper table td{
+	color: #333;
+	font-weight: 500;
+}
+
+#dashboard .table-wrapper table tr.amber td,
+#dashboard .table-wrapper table tr.red td,
+#dashboard .table-wrapper table tr.orange td,
+#dashboard .table-wrapper table tr.green td{
+	color: #FFF;
+}
+
+#dashboard .table-wrapper h4{
+	color: #333;
+	padding-bottom: 30px;
+	font-size: 30px;
+	font-weight: 300
+}
+
+#dashboard .chart-wrapper .header h4{
+	color: #333;
+	padding-bottom: 30px;
+	font-size: 30px;
+	font-weight: 300
+}
+
+#dashboard .chart-wrapper .legends
+{
+	padding-top: 10px;
+}
+
+#dashboard .chart-wrapper .legends .legend {
+	display: inline-block;
+	width: 20%;
+}
+
+#dashboard .chart-wrapper .legends .legend > div{
+	display: inline-block;
+}
+
+#dashboard .chart-wrapper .legends .legend .square{
+	width: 15px;
+	height: 15px;
+}
+
+#dashboard .chart-wrapper .legends .legend .name{
+	font-size: 14px;
+	font-weight: 400;
+	color: #333;
+	margin-left: 10px;
+}
+
+#dashboard .chart-wrapper .legends .legend.ct-series-a .square{
+	background-color: #fdd835;
+}
+
+#dashboard .chart-wrapper .legends .legend.ct-series-b .square{
+	background-color: #ef5350;
+}
+
+#dashboard .chart-wrapper .legends .legend.ct-series-c .square{
+	background-color: #69f0ae;
+}
+
+.ct-chart .ct-label.ct-vertical,
+.ct-chart .ct-label.ct-horizontal{
+  	color: 333;
+  	font-size: 13px;
+}
+
+.ct-chart .ct-grid.ct-vertical,
+.ct-chart .ct-grid.ct-horizontal {
+  	stroke: rgba(51, 51, 51, 0.3);
+  	shape-rendering: auto;
+}
+
+.ct-chart .ct-series.ct-series-a .ct-line {
+  	stroke: #fdd835;
+  	stroke-width: 6px;
+  	stroke-linecap: round;
+}
+
+.ct-chart .ct-series.ct-series-b .ct-line {
+  	stroke: #ef5350;
+  	stroke-width: 6px;
+  	stroke-linecap: round;
+}
+
+.ct-chart .ct-series.ct-series-c .ct-line {
+  stroke: #69f0ae;
+  stroke-width: 6px;
+  stroke-linecap: round;
+}
+
+.ct-chart .ct-series.ct-series-a .ct-bar{
+	stroke: #fdd835;
+  	stroke-width: 40px;
+  	stroke-linecap: butt;
+}
+
+.ct-chart .ct-series.ct-series-b .ct-bar {
+  	stroke: #ef5350;
+  	stroke-width: 40px;
+  	stroke-linecap: butt;
+}
+
+.ct-chart .ct-series.ct-series-c .ct-bar {
+  stroke: #69f0ae;
+  stroke-width: 40px;
+  stroke-linecap: butt;
+}
+
+
+/*******************************************************************
+********************************************************************
+**************************** Light box *****************************
+********************************************************************
+*******************************************************************/
+
+.light-box h4{
+	color: #FFF;
+	font-size: 35px;
+	padding-top: 50px;
+	padding-bottom: 25px;
+	font-weight: 300;
+}
+
+.light-box .modal-content .actions .btn{
+	margin: 0 10px;
+}
+
+#modal-language .listing-countries{
+	text-align: center;
+}
+
+#modal-language .listing-countries .country{
+	display: inline-block;
+	width: 40px;
+	margin: 0 10px;
+}
+
+#modal-language .listing-countries .country img{
+	width: 40px;
+}
+
+
+/***************************************************************************
+****************************************************************************
+************************** Materialize overwrite ***************************
+****************************************************************************
+***************************************************************************/
+
+
+.z-depth-01{
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+
+.modal{
+	max-height: 90%;
+}
+
+.filled-in[type="checkbox"]:checked + label::after, [type="radio"]:checked + label::after{
+    border: 2px solid #03A9F4;
+    background-color: #03A9F4;
+}
+
+.input-field .prefix.active{
+    color: #03A9F4;
+}
+
+.input-field input[type=text]:focus + label, .input-field input[type=password]:focus + label {
+    color: #03A9F4;
+}
+
+.input-field input[type=text]:focus, .input-field input[type=password]:focus {
+    border-bottom: 1px solid #03A9F4;
+}
+
+.dropdown-content li span, .picker__close, .picker__today{
+    color: #03A9F4;
+}
+
+.picker__weekday-display, .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected{
+    background-color: #0277bd;
+}
+
+.picker__day.picker__day--today{
+    color: #0277bd;
+    font-weight: 500;
+}
+
+.picker__date-display{
+    background-color: #03A9F4;
 }

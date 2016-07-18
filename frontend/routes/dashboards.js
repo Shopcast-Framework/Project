@@ -3,15 +3,24 @@
 var express = require('express');
 var router = express.Router();
 var Promise = require('promise');
-var menu    = require(__dirname + '/../modules/menu.js');
+var menu    = require(__dirname + '/../menu.json');
+var middlewares = require('../middlewares');
+var translate = require('../languages');
 
-router.get('/', function(req, res) {
+router.get('/', middlewares.isLogged, middlewares.language, function(req, res){
 
-	res.render('dashboards', {
-		title: 'Shopcast - Dashboard',
-		titleContent:'Dashboard',
-		active: '',
-		menu: menu.load(req.session.user)
+	// console.log('Co successful with token:');
+	// console.log(req.session.user.token);
+	// console.log(req.session.user);
+	
+	res.render('dashboards', { 
+			active: '/dashboards', 
+			menu: menu, 
+			isLogged: true, 
+			isSearchBar: false,
+			session: req.session.user,
+			translate : translate.getWordsByPage( req.cookies.language, "Dashboard" ),
+			language: req.cookies.language
 	});
 
 });

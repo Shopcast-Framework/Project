@@ -7,6 +7,12 @@ var File = function(sequelize) {
 
     var model = sequelize
     .define('File', {
+        id: {
+            type: Sequelize.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        name        : Sequelize.STRING, 
         description : Sequelize.STRING,
         encoding    : Sequelize.STRING,
         name        : Sequelize.STRING,
@@ -15,6 +21,7 @@ var File = function(sequelize) {
         mimetype    : Sequelize.STRING,
         originalname: Sequelize.STRING,
         path        : Sequelize.STRING,
+        tags        : Sequelize.STRING,
         size        : Sequelize.FLOAT
     }, {underscored: true});
 

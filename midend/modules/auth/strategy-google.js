@@ -25,7 +25,10 @@ var StrategyGoogle = function(app, passport, loginCallback) {
                 User
                 .create({
                     username: profile.displayName,
-                    googleId: profile.userID
+                    name: profile.displayName,
+                    avatar: profile._json.picture,
+                    googleId: profile.id,
+                    role: 1
                 })
                 .then(function(user) {
                     console.log('User created');
