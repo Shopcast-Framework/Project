@@ -6,6 +6,10 @@ var gulp = require('gulp'),
 gulp.task('server:start', function() {
     nodemon({
         script: './server.js',
+        ignore: [
+            'public/',
+            'node_modules/'
+        ],
         ext: 'js'
     });
 });

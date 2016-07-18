@@ -4,6 +4,7 @@ var express = require('express'),
     http = require('http'),
     config = require('./config'),
     bodyParser = require('body-parser'),
+    cookieParser = require('cookie-parser'),
     app = express(),
     session = require('express-session'),
     server = http.createServer(app),
@@ -19,6 +20,7 @@ app.listen = function() {
     });
 };
 
+
 app.run = function(){
 
     app.set('view engine', 'jade');
@@ -28,6 +30,7 @@ app.run = function(){
     app.use('/font', express.static(__dirname + '/public/font'));
     app.use('/public', express.static(__dirname + '/public'));
     app.use(bodyParser.urlencoded({extended: true}));
+    app.use(cookieParser());
     app.use(session({ name: 'connect.sid2', secret: 'keyboard cat', resave: true, saveUninitialized: true }));
     app.use(Rest.middleware);
 

@@ -4,10 +4,13 @@ var express = require('express'),
 	router = express.Router(),
 	Promise = require('promise'),
 	Rest	= require('../rest'),
-	menu    = require(__dirname + '/../modules/menu.js'),
-	upload  = require('multer')({ dest: 'public/uploads/' });
+	menu    = require(__dirname + '/../menu.json'),
+	upload  = require('multer')({ dest: 'uploads/' }),
+	middlewares = require('../middlewares'),
+	humanize = require('humanize'),
+	translate = require('../languages');
 
-router.post('/', upload.any(), function(req, res) {
+router.post('/',middlewares.isLogged, upload.any(), function(req, res) {
 
 	var promises = [];
 
@@ -22,58 +25,31 @@ router.post('/', upload.any(), function(req, res) {
 	});
 });
 
-router.get('/new', function(req, res) {
-	res.render('files/new', {
-		title: 'Shopcast - Playlists',
-		titleContent: 'New playlist',
-		active: '/playlists',
-		menu: menu.load(req.session.user)
-	});
-});
+router.get('/', middlewares.isLogged, middlewares.language, function( req, res ) {
 
-router.post('/:id', function(req, res) {
-	console.log(req.body);
-	Rest.put('file/' + req.params.id, JSON.stringify(req.body)).then(function(response) {
-		console.log(response);
-		res.redirect('/files?message=' + response.body.message);
-	}, function(err) {
-		console.log(err);
-		res.redirect('/files?message=' + err.body.message);
-	});
-});
-
-router.get('/:id', function(req, res) {
-	var promises = [];
-
-	promises.push(Rest.get('file/' + req.params.id));
-
-	Promise.all(promises).then(function(values) {
-		var file = values[0].body.file;
-
-		res.render('files/show', {
-			title: 'Shopcast - File',
-			titleContent: 'My file (' + file.filename + ')',
-			active: '/files',
-			file: file,
-			menu: menu.load(req.session.user)
-		});
-	})
-});
-
-router.get('/', function(req, res) {
 	var promises = [];
 
 	promises.push(Rest.get('file'));
 
 	Promise.all(promises).then(function(values) {
+		
 		var files = values[0].body.files;
+		values[0].body.files.forEach(function(element,index,array){
+			if ( files[index].tags != null )
+				files[index].tags = element.tags.split(",");
 
-		res.render('files/index', {
-			title: 'Shopcast - Files',
-			titleContent: 'My files (' + files.length + ')',
+			files[index].size = humanize.filesize(files[index].size);
+		});
+
+		res.render('files', {
 			active: '/files',
+			menu: menu,
 			files: files,
-			menu: menu.load(req.session.user)
+			isLogged: true,
+			isSearchBar: true,
+			session: req.session.user,
+			translate : translate.getWordsByPage( req.cookies.language, "Files", { title: files.length } ),
+			language: req.cookies.language
 		});
 	}, function(err) {
 		console.log(err);

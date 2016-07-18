@@ -1,0 +1,75 @@
+extends ../layout
+
+block content
+	header.actions.container
+		button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="new-element") #{translate.btnCreate}
+			i.material-icons.left add
+	article.wrapper-content.container#users
+		form
+			table.listing
+				thead
+					tr
+						th #
+						//th picture
+						th #{translate.username)
+						th #{translate.name)
+						th #{translate.email)
+						th #{translate.role)
+						th #{translate.lastConnection)
+						th #{translate.createdAt)
+						th
+				tbody
+					each user, index in users
+						tr(data-keywords="#{user.username},#{user.name},#{user.email}")
+							//td 
+								//p
+									//input(type="checkbox" id="line-item-#{index}" name="lines[]")
+									//label(for="line-item-#{index}")
+							td 
+								img(src="#{user.avatar}" class="circle responsive-img")
+							td #{user.username}
+							td #{user.name}
+							td #{user.email}
+							td #{permission[user.role]}
+							td #{user.last_connection}
+							td #{user.created_at}
+							td.actions
+								button(class="light-blue btn-floating waves-effect waves-circle waves-light modal-trigger" data-target="new-element")
+									i.material-icons edit
+								button(class="red btn-floating waves-effect waves-circle waves-light")
+									i.material-icons delete
+	div(id="new-element" class="modal light-box")
+		h4(class="center-align light-blue") #{translate.newUser)
+		div(class="modal-content")
+			form(class="row" action='/users', method='post')
+				div.input-field.col.s12
+					i(class="material-icons prefix") edit
+					input(type='text' name='username' id="username")
+					label(for="username") #{translate.username)
+				div.input-field.col.s12
+					i(class="material-icons prefix") person
+					input(type='text' name='name' id="name")
+					label(for="name") #{translate.name)
+				div.input-field.col.s12
+					i(class="material-icons prefix") email
+					input(type='email' name='email' id="email" class="validate")
+					label(for="email") #{translate.emai)
+				div.input-field.col.s12
+					i(class="material-icons prefix") vpn_key
+					input(type='password' name='userpassword' id="password")
+					label(for="password") #{translate.password)
+				div.input-field.col.s12
+					select(name="role" id="role" class="validate")
+						option(value="" disabled="disabled" selected="selected") #{translate.whatRole)
+						option(value="0") #{translate.roleAdmin)
+						option(value="1") #{translate.roleClient)
+					label(for="role") #{translate.role)
+				div.input-field.col.s12
+					input(type="checkbox" id="send-email" name="send-email")
+					label(for="send-email") #{translate.sendEmail)
+				div.input-field.col.s12.actions.right-align
+					button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") #{translate.btnAdd)
+						i(class="material-icons left") done
+					a(href="#!" class="modal-action modal-close btn btn-large red darken-1 white-text waves-effect waves-light") #{translate.btnCancel)
+						i(class="material-icons left") cancel
+			

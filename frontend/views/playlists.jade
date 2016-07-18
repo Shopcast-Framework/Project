@@ -1,0 +1,61 @@
+extends layout
+
+block content
+	header.actions.container
+			button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="new-element") #{translate.btnCreate}
+				i.material-icons.left add
+	article.wrapper-content.container#playlists
+		form
+			table.listing
+				thead
+					tr
+						th #
+						th #{translate.name}
+						th #{translate.description}
+						th #{translate.frequency}
+						th #{translate.tags}
+						th
+				tbody
+					each playlist, index in playlists
+						tr(data-keywords="#{playlist.name}")
+							td 
+								p
+									input(type="checkbox" id="line-item-#{index}" name="lines[]")
+									label(for="line-item-#{index}")
+							td #{playlist.name}
+							td #{playlist.description}
+							td #{playlist.frequency}
+							td 
+								each tag, index in playlist.tags
+									div.chip #{tag}
+							td.actions
+								button(class="light-blue btn-floating waves-effect waves-circle waves-light modal-trigger" data-target="edit-element")
+									i.material-icons edit
+								button(class="red btn-floating waves-effect waves-circle waves-light")
+									i.material-icons delete
+	div(id="new-element" class="modal light-box")
+		h4(class="center-align light-blue") #{translate.newPlaylist}
+		div(class="modal-content")
+			form(class="row" action='/playlists', method='post')
+				div.input-field.col.s12
+					i(class="material-icons prefix") edit
+					input(type='text' name='name' id="username")
+					label(for="username") #{translate.name}
+				div.input-field.col.s12
+					i(class="material-icons prefix") description
+					input(type='text', name='description' id="description")
+					label(for="description") #{translate.description}
+				div.input-field.col.s12
+					i(class="material-icons prefix") autorenew
+					input(type='text', name='frequency' id="frequency")
+					label(for="frequency") #{translate.frequency}
+				div.input-field.col.s12
+					i(class="material-icons prefix") note
+					input(type='text', name='tags' id="tags")
+					label(for="tags") #{translate.tags}
+				div.input-field.col.s12.actions.right-align
+					button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") #{translate.btnAdd}
+						i(class="material-icons left") done
+					a(href="#!" class="modal-action modal-close btn btn-large red darken-1 white-text waves-effect waves-light") #{translate.btnCancel}
+						i(class="material-icons left") cancel
+			

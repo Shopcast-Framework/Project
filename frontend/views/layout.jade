@@ -3,10 +3,11 @@ html(lang='fr')
 	head
 		meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
 		meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1.0')
-		title= titleTab
+		title #{translate.tabTitle}
 		link(rel='stylesheet', href='http://fonts.googleapis.com/icon?family=Material+Icons')
 		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/materialize.min.css')
-		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/nouislider.min.css')
+		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/magnet.css')
+		link(href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" rel="stylesheet" type="text/css")
 		link(rel='stylesheet', href='/css/style.css')
 		script(type="application/javascript", src="http://momentjs.com/downloads/moment.min.js")
 		script(type='text/javascript', src='/js/jquery-v2.1.1.min.js')
@@ -15,36 +16,61 @@ html(lang='fr')
 
 	body
 		header(class="light-blue" id="header")
-			div.navbar-fixed
-				nav(class="menu" role="navigation")
-					div(class="nav-wrapper light-blue")
-						a(id="logo-container" href="/" class="brand-logo") Logo
-						ul(class="right hide-on-med-and-down")
-							for m in menu
-								if active == m.url
-									li.active
-										a(href="#{m.url}")= m.name
-											i(class="material-icons left")= m.icon
-								else
-									li
-										a(href="#{m.url}")= m.name
-											i(class="material-icons left")= m.icon
-						ul(id="nav-mobile" class="side-nav")
-							for m in menu
-								if active == m.url
-									li.active
-										a(href="#{m.url}")= m.name
-											i(class="material-icons left")= m.icon
-								else
-									li
-										a(href="#{m.url}")= m.name
-											i(class="material-icons left")= m.icon
-						a(href="#" data-activates="nav-mobile" class="button-collapse")
-							i(class="material-icons") menu
-					div.title= title
-		section#main.z-depth-1
+			div
+				nav(class="menu light-blue" role="navigation")
+					div(class="nav-wrapper")
+						if isLogged
+							a(href="!#" data-activates="slide-out" class="button-collapse show-on-large light-blue")
+								i(class="mdi-navigation-menu")
+							ul(class="side-nav" id="slide-out")
+								li.user.light-blue.z-depth-1
+									a(class="valign-wrapper" href="/users/#{session.id}")
+										img(src="#{session.avatar}" class="circle responsive-img avatar z-depth-1")
+										div.informations
+											p #{session.name}
+									a(href="/session/logout" title="#{translate.Menu.logout}" class="red darken-1 btn-floating waves-effect waves-light logout dont-apply-btn")
+										i.material-icons.dont-apply-icon exit_to_app
+								for m in menu
+									if active == m.url
+										li.active
+											a(href="#{m.url}") #{translate.Menu[m.name]}
+												i(class="material-icons left")= m.icon
+									else
+										li
+											a(href="#{m.url}") #{translate.Menu[m.name]}
+												i(class="material-icons left")= m.icon
+						else
+							a(href="#" class="lock")
+								i(class="material-icons left") lock
+					div.title #{translate.title}
+		section#main
+			if isSearchBar
+				article.search-wrapper
+					nav(class="white z-depth-01")
+						div(class="nav-wrapper container row")
+							div(class="input-field col s12")
+								input(aria-invalid="false" id="search" placeholder="#{translate.search}" class="white" type="search")
+								label(for="search")
+									i(class="material-icons grey-text") search
+								i(class="material-icons") close
+				div.substitute
 			block content
-		script(type='text/javascript', src='/js/nouislider.min.js')
+		div#language-select.z-depth-1
+			a(class="waves-effect waves-light modal-trigger" href="#modal-language" title="language")
+				span #{translate.Language.language}
+				img(src="/public/images/countries/#{language}.png")
+		div(id="modal-language" class="modal light-box")
+			h4(class="center-align light-blue") #{translate.Language.title}
+			div(class="modal-content")
+				ul.listing-countries
+					each val, index in translate.listing
+						li.country
+							a(href="?language=#{index}")
+								img(src="#{val}")
+			div(class="modal-footer")
+				a(href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat") #{translate.Language.btn}
+		script(type='text/javascript', src='/js/jquery-v2.1.1.min.js')
 		script(type='text/javascript', src='/js/materialize.min.js')
+		//script(src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js")
 		script(type='text/javascript', src='/js/init.js')
 		block script

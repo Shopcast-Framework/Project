@@ -1,50 +1,44 @@
 [
 	{
-	  "name": "Dashboard",
+	  "name": "dashboard",
 	  "icon": "dashboard",
 	  "url": "/dashboards",
 	  "isActive": true
 	},
 	{
-	  "name": "My Files",
+	  "name": "files",
 	  "icon": "attach_file",
 	  "url": "/files",
 	  "isActive": true
 	},
 	{
-	  "name": "My Playlists",
+	  "name": "playlists",
 	  "icon": "folder",
 	  "url": "/playlists",
 	  "isActive": true
 	},
 	{
-	  "name": "Programmation",
-	  "icon": "folder",
-	  "url": "/plannings",
-	  "isActive": true
-	},
-	{
-	  "name": "Display",
+	  "name": "display",
 	  "icon": "settings_ethernet",
 	  "url": "/display",
 	  "isActive": true
 	},
 	{
-	  "name": "Friends",
-	  "icon": "settings",
-	  "url": "/friends",
+	  "name": "calendar",
+	  "icon": "event",
+	  "url": "/plannings",
+	  "isActive": false
+	},
+	{
+	  "name": "users",
+	  "icon": "person",
+	  "url": "/users",
 	  "isActive": true
 	},
 	{
-	  "name": "Settings",
+	  "name": "settings",
 	  "icon": "settings",
-	  "url": "/users/:user_id",
+	  "url": "/settings",
 	  "isActive": true
-	},
-	{
-		"name": "Logout",
-		"icon": "group",
-		"url": "/session/logout",
-		"isActive": true
 	}
 ]

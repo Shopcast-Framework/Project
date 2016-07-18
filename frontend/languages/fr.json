@@ -1,0 +1,116 @@
+{
+  "SignIn": {
+    "title": "Se connecter à Shopcast",
+    "tabTitle": "Se connecter - Shopcast",
+    "connectWith": "Connecter vous via votre e-mail, Facebook ou Google",
+    "username" : "Nom d'utilisateur",
+    "password" : "Mot de passe",
+    "byEmail" : "via e-mail",
+    "byFacebook" : "connexion via Facebook",
+    "byGoogle" : "connexion via Google",
+    "youCanChoose" : "Ou vous pouvez utiliser..."
+  },
+  "Dashboard": {
+    "title": "Tableau de bord",
+    "tabTitle": "Tableau de bord - Shopcast"
+  },
+  "Playlists": {
+    "title": "Mes listes de lecture (%)",
+    "tabTitle": "Mes listes de lecture - Shopcast",
+    "btnCreate": "Créer une nouvelle liste",
+    "newPlaylist": "Nouvelle liste de lecture",
+    "search" : "Rechercher",
+    "name" : "Nom",
+    "description" : "Description",
+    "frequency" : "Fréquence",
+    "tags" : "Tags",
+    "btnAdd": "Ajouter",
+    "btnCancel": "Annuler"
+  },
+  "Playlist":{
+    "title": "Liste de lecture - %",
+    "tabTitle": "% - Shopcast",
+    "btnEdit": "Modifier",
+    "btnSave": "Sauvegarder",
+    "btnCancel":"Annuler",
+    "btnAddFile": "Ajouter",
+    "titleFiles": "Liste des fichiers",
+    "addFile": "Ajouter un/des fichier(s)",
+    "tabUploadFile": "Téléversement",
+    "tabExistingFile": "Fichiers existant",
+    "btnChooseFile": "Choisir un ou plusieurs fichiers"
+  },
+  "Users": {
+    "title": "Utilisateurs (%)",
+    "tabTitle": "Utilisateurs - Shopcast",
+    "btnCreate": "Ajouter un nouvel utilisateur",
+    "newUser": "Nouvel utilisateur",
+    "search" : "Rechercher",
+    "name" : "Nom",
+    "username" : "Nom d'utilisateur",
+    "email" : "E-mail",
+    "role" : "Rôle",
+    "lastConnection" : "Dernière connexion",
+    "createdAt" : "Membre depuis",
+    "password": "Mot de passe",
+    "roleAdmin": "Administrateur",
+    "roleClient": "Client",
+    "whatRole": "Quel sera son rôle ?",
+    "sendEmail": "Voulez-vous envoyer les identifiants par e-mail ?",
+    "btnAdd": "Ajouter",
+    "btnCancel": "Annuler"
+  },
+  "User": {
+    "title": "%",
+    "tabTitle": "% - Shopcast",
+    "name" : "Nom",
+    "username" : "Nom d'utilisateur",
+    "email" : "E-mail",
+    "role" : "Rôle",
+    "lastConnection" : "Dernière connexion",
+    "createdAt" : "Membre depuis",
+    "shopCreatedAt" : "Crée le",
+    "phone": "Téléphone",
+    "address": "Adresse"
+  },
+  "Files": {
+    "title": "Mes fichiers (%)",
+    "tabTitle": "Mes fichiers - Shopcast",
+    "btnCreate": "Ajouter un nouveau fichier",
+    "newFile": "Nouveau fichier",
+    "search" : "Rechercher",
+    "name" : "Nom",
+    "nameOriginal" : "Original",
+    "description" : "Description",
+    "type" : "Type",
+    "size" : "Poids",
+    "tags" : "Tags",
+    "btnAdd": "Ajouter",
+    "btnCancel": "Annuler"
+  },
+  "Settings": {
+    "title": "Configuration",
+    "tabTitle": "Configuration - Shopcast",
+    "tabGeneral": "Général",
+    "tabTranslate": "Traduction"
+  },
+  "Language": {
+    "title": "Langues disponible",
+    "btn": "Ok",
+    "language": "langue",
+    "fr": "Français",
+    "en": "Anglais"
+  },
+  "Menu": {
+    "dashboard": "Tableau de bord",
+    "files": "Mes fichiers",
+    "playlists": "Mes playlists",
+    "display": "Mes moniteurs",
+    "users": "Utilisateurs",
+    "explore": "Explore",
+    "settings": "Configuration",
+    "myAccount": "Mon compte",
+    "logout": "Déconnexion",
+    "calendar": "Calendrier"
+  }
+}

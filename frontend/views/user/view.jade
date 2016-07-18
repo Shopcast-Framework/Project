@@ -1,0 +1,48 @@
+extends ../layout
+
+block content
+	article.wrapper-content.wrapper-no-header.container.row#user-view
+		div.col.s5.z-depth-1.informations-wrapper
+			h4 Mes informations
+			button(class="amber darken-2 btn-floating waves-effect waves-circle waves-light modal-trigger btn-edit" data-target="new-element")
+				i.material-icons edit
+			ul.informations
+				li.item
+					div.key #{translate.name}
+					div.value #{user.name}
+				li.item
+					div.key #{translate.username}
+					div.value #{user.username}
+				li.item
+					div.key #{translate.email}
+					div.value #{user.email}
+				li.item
+					div.key #{translate.role}
+					div.value #{permission[user.role]}
+				li.item
+					div.key #{translate.lastConnection}
+					div.value #{user.lastConnection}
+				li.item
+					div.key #{translate.createdAt}
+					div.value #{user.createdAt}
+		div.col.s6.offset-s1.z-depth-1.informations-wrapper
+			h4 Ma boutique
+			button(class="amber darken-2 btn-floating waves-effect waves-circle waves-light modal-trigger btn-edit" data-target="new-element")
+				i.material-icons edit
+			ul.informations
+				li.item
+					div.key #{translate.name}
+					div.value Shopcast
+				li.item
+					div.key #{translate.phone}
+					div.value 045 523 89 30
+				li.item
+					div.key #{translate.email}
+					div.value super@shop.com
+				li.item
+					div.key #{translate.shopCreatedAt}
+					div.value 30 janvier 2012
+				li.item
+					div.key #{translate.address}
+					div.value 3 place de la bourse, 75000, Paris
+			

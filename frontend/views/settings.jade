@@ -1,33 +1,32 @@
 extends layout
 
 block content
-	header.title-content
-		h1= titleContent
-		div.actions
-			button(class="blue btn-floating btn-large waves-effect waves-circle waves-light")
-				i.material-icons add
-			button(class="red btn-floating btn-large waves-effect waves-circle waves-light")
-				i.material-icons delete
-	article.wrapper-content#files
-		form
-			table
-				thead
-					tr
-						th #
-						th name
-						th description
-						th type
-						th size
-				tbody
-					each val in [1, 2, 3, 4, 5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
-						tr
-							td 
-								p
-									input(type="checkbox" id="line-item-#{val}" name="lines[]")
-									label(for="line-item-#{val}")
-							td Test
-							td Test est un test de première classe
-							td mp4
-							td 25 mo
-	
-
+	article.wrapper-content.container#settings
+		div.row
+			div.col.s12
+				ul.tabs
+					li(class="tab col s3")
+						a(href="#general") #{translate.tabGeneral}
+					li(class="tab col s3")
+						a(href="#translate") #{translate.tabTranslate}
+			div(id="general" class="col s12") Test 1
+			div(id="translate" class="col s12") 
+				ul(class="collapsible language-list" data-collapsible="accordion")
+					each val, index in allTranslates
+						li
+							div(class="collapsible-header") 
+								div.valign-wrapper
+									img(src="#{translate.listing[index]}" class="valign")
+								span #{translate.Language[index]}
+							div(class="collapsible-body")
+								ul(class="collapsible container page-list" data-collapsible="accordion")
+									each va, inde in val
+										li
+											div(class="collapsible-header") #{inde}
+												i(class="material-icons") filter_drama
+											div(class="collapsible-body")
+												each v, i in va
+													form(class="row container")
+														div.input-field.col.s12
+															input(type='text' name='name' value="#{v}")
+															label(for="username") #{i}
