@@ -21,10 +21,13 @@ var Rest = function() {
                 port: '3001',
                 method: method,
                 headers: {
-                    'content-type': 'application/json',
-                    'cookie': self.cookie
+                    'content-type': 'application/json'
                 }
             };
+
+        if (self.cookie) {
+            options.headers.cookie = self.cookie;
+        }
 
         if (self.user) {
             options.headers.Authorization = self.user.token;
