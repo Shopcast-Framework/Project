@@ -1,9 +1,9 @@
 {
     "production": {
         "database"  : "shopcast",
-        "username"  : "root",
-        "password"  : "",
-        "host"      : "localhost"
+        "username"  : "shopcast",
+        "password"  : "s7fCQvxr9&mKey=.",
+        "host"      : "BDD"
     },
     "development": {
         "database"  : "shopcast",
