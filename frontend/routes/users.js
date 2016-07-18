@@ -8,7 +8,6 @@ var menu    = require(__dirname + '/../menu.json');
 var middlewares = require('../middlewares');
 var translate = require('../languages');
 
-<<<<<<< HEAD
 router.get('/new_password', function(req, res) {
 
 	res.render('users/new_password', {
@@ -57,6 +56,7 @@ router.post('/',middlewares.isLogged, function(req, res) {
 		res.redirect('/users?message=' + err.body.message);
 		console.log(err); 
 	});
+});
 
 router.post('/:id', function(req, res) {
 	Rest.put('user/' + req.params.id, JSON.stringify(req.body)).then(function(response) {
