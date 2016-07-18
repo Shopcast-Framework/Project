@@ -8,15 +8,61 @@ var menu    = require(__dirname + '/../menu.json');
 var middlewares = require('../middlewares');
 var translate = require('../languages');
 
+router.get('/new_password', function(req, res) {
+
+	res.render('users/new_password', {
+		title: 'Shopcast - Users',
+		titleContent: 'New Password',
+		active: '/users',
+		menu: menu.load(req.session.user),
+		query: req.query
+	});
+});
+
+router.post('/new_password', function(req, res) {
+
+	Rest.post('user/reset_password', JSON.stringify(req.body)).then(function(response) {
+		res.redirect('/signin?message=' + response.body.message);
+	}, function(err) {
+		res.redirect('/signin?message=' + err.body.message);
+	});
+
+});
+
+router.get('/reset_password', middlewares.language, function(req, res) {
+
+	res.render('users/reset_password', {
+		title: 'Shopcast - Users',
+		titleContent: 'Reset Password',
+		active: '/users',
+		menu: menu.load(req.session.user)
+	});
+});
+
+router.post('/reset_password', function(req, res) {
+
+	Rest.put('user/reset_password', JSON.stringify(req.body)).then(function(response) {
+		res.redirect('/signin?message=' + response.body.message);
+	}, function(err) {
+		res.redirect('/signin?message=' + err.body.message);
+	});
+});
+
 router.post('/',middlewares.isLogged, function(req, res) {
 
 	Rest.post('user', JSON.stringify(req.body)).then(function(response) {
 		res.redirect('/users?message=' + response.body.message);
 	}, function(err) {
 		console.log(err); 
-		res.redirect('/users?message=' + err.message);
+		res.redirect('/users?message=' + err.body.message);
 	});
 
+router.post('/:id', middlewares.isLogged, function(req, res) {
+	Rest.put('user/' + req.params.id, JSON.stringify(req.body)).then(function(response) {
+		res.redirect('/users?message=' + response.body.message);
+	}, function(err) {
+		res.redirect('/users?message=' + err.body.message);
+	});
 });
 
 router.get('/:id', middlewares.isLogged, middlewares.language, function( req, res ) {

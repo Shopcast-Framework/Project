@@ -14,7 +14,7 @@ var MusicGet = function(req, res) {
             musics  : musics
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -33,7 +33,7 @@ var MusicPost = function(req, res) {
             });
         }
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 

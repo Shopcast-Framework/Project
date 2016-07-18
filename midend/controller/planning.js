@@ -3,6 +3,7 @@
 var Status      = require(process.env.NODE_PATH + '/config/status.json'),
     orm         = require(process.env.NODE_PATH + '/modules/orm'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
+    Monitor     = orm.db.Monitor,
     Planning    = orm.db.Planning;
 
 var PlanningGet = function(req, res) {
@@ -10,7 +11,11 @@ var PlanningGet = function(req, res) {
     .findAll({
         where: {
             user_id: req.user.id
-        }
+        },
+        include: [{
+            model: Monitor,
+            as: 'monitor'
+        }]
     })
     .then(function(plannings) {
         res.status(Status.OK).send({
@@ -18,7 +23,7 @@ var PlanningGet = function(req, res) {
             plannings   : plannings
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -28,7 +33,11 @@ var PlanningGetOne = function(req, res) {
         where: {
             id      : req.params.id,
             user_id : req.user.id
-        }
+        },
+        include: [{
+            model: Monitor,
+            as: 'monitor'
+        }]
     })
     .then(function(planning) {
         if (planning) {
@@ -42,7 +51,7 @@ var PlanningGetOne = function(req, res) {
             })
         }
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 

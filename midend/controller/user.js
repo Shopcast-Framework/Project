@@ -16,13 +16,13 @@ var UserPut = function(req, res) {
                     user        : user
                 });
             }, function(err) {
-                res.status(Status.UNAUTHORIZED).send(err);
+                res.status(Status.UNAUTHORIZED).send({message: err.toString()});
             });
         } else {
             res.status(Status.UNAUTHORIZED).send({message : Message.get("user:put:failure")});
         }
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -35,7 +35,7 @@ var UserGet = function(req, res) {
             users : users
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -52,7 +52,7 @@ var UserPost = function(req, res) {
             res.status(Status.UNAUTHORIZED).send({message : Message.get("user:post:failure")});
         }
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -71,7 +71,7 @@ var UserGetOne = function(req, res) {
             });
         }
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -83,16 +83,62 @@ var UserDelete = function(req, res) {
     .then(function() {
         res.status(Status.OK).send({message : Message.get("user:delete:success")});
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
-}
+};
+
+var UserUpdatePassword = function(req, res) {
+    if (req.body.password !== req.body.confirm_password) {
+        return res.status(Status.UNAUTHORIZED).send({message : Message.get("user:update:badconfirm")});
+    }
+    User.findOne({
+        where: {
+            reset_token: req.body.token
+        }
+    }).then(function(user) {
+        if (!user) {
+            return res.status(Status.UNAUTHORIZED).send({message : Message.get("user:update:failure")});
+        }
+        user.updatePassword(req.body.password, function(err) {
+            if (err) {
+                return res.status(Status.UNAUTHORIZED).send({message: err.toString()});
+            }
+            res.status(Status.OK).send({message : Message.get("user:update:success")});
+        });
+    });
+};
+
+var UserResetPassword = function(req, res) {
+    User.findOne({
+        where: {
+            username: req.body.username
+        }
+    }).then(function(user) {
+        if (!user) {
+            return res.status(Status.UNAUTHORIZED).send({message : Message.get("user:reset:nouser")});
+        }
+        if (!user) {
+            return res.status(Status.UNAUTHORIZED).send({message : Message.get("user:reset:nouser")});
+        }
+        user.resetPassword(function(err) {
+            if (err) {
+                return res.status(Status.UNAUTHORIZED).send({message : Message.get("user:reset:failure")});
+            }
+            res.status(Status.OK).send({message : Message.get("user:reset:success")});
+        });
+    }, function(err) {
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
+    });
+};
 
 var UserController = {
     delete  : UserDelete,
     get     : UserGet,
     post    : UserPost,
     put     : UserPut,
-    getOne  : UserGetOne
+    getOne  : UserGetOne,
+    reset   : UserResetPassword,
+    update  : UserUpdatePassword
 };
 
 module.exports = UserController;

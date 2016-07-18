@@ -4,6 +4,40 @@ var Role = require(process.env.NODE_PATH + '/config/roles.json');
 
 var Routes = [
     {
+        name: 'info'
+    },
+    {
+        name: 'monitor',
+        actions: {
+            'associate' : { verb: 'post', route: '/associate' },
+            'option' : { verb: 'options', route: '/associate' }
+        },
+        middlewares: [
+            {
+                name:   'auth',
+                param: {
+                    roles: [Role.ADMIN, Role.USER]
+                },
+                only: ['get', 'getOne', 'post', 'put', 'delete']
+            },
+            {
+                name:   'cross',
+                only: ['option', 'associate']
+            }
+        ]
+    },
+    {
+        name: 'group',
+        middlewares: [
+            {
+                name:   'auth',
+                param: {
+                    roles: [Role.ADMIN, Role.USER]
+                }
+            }
+        ]
+    },
+    {
         name: 'file',
         middlewares: [
             {
@@ -29,31 +63,14 @@ var Routes = [
         name: 'music',
         actions: {
             'search' : { verb: 'get', route: '/search/:id' },
-        },
-        middlewares: [
-            {
-                name:   'auth',
-                param: {
-                    roles: [Role.ADMIN, Role.USER]
-                }
-            }
-        ]
+        }
     },
     {
         name: 'playlist',
-        sub: [
-            {
-                name: 'file',
-                middlewares: [
-                    {
-                        name:   'auth',
-                        param: {
-                            roles: [Role.ADMIN, Role.USER]
-                        }
-                    }
-                ]
-            }
-        ],
+        actions: {
+            'add' : { verb: 'post', route: '/:id/add' },
+            'sort' : { verb: 'post', route: '/:id/sort' }
+        },
         middlewares: [
             {
                 name:'auth',
@@ -66,11 +83,22 @@ var Routes = [
     {
         name: 'session',
         actions: {
-            'option' : { verb: 'options', route: '/' },
+            'config' : { verb: 'get', route: '/config' },
+            'option' : { verb: 'options', route: '/' }
         },
+        middlewares: [
+            {
+                name:   'cross',
+                only: ['option', 'post']
+            }
+        ]
     },
     {
         name: 'user',
+        actions: {
+            'reset' : { verb: 'put', route: '/reset_password' },
+            'update' : { verb: 'post', route: '/reset_password' }
+        },
         middlewares: [
             {
                 name: 'auth',

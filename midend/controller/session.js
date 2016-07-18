@@ -1,13 +1,21 @@
 'use strict';
 
-var Status      = require(process.env.NODE_PATH + '/config/status.json'),
+var Status  = require(process.env.NODE_PATH + '/config/status.json'),
     auth    = require(process.env.NODE_PATH + '/modules/auth'),
+    config  = require(process.env.NODE_PATH + '/config/strategy.json')[process.env.NODE_ENV],
     Message = require(process.env.NODE_PATH + '/modules/messages');
+
+var SessionConfig = function(req, res) {
+    return res.status(Status.OK).send({
+        message: Message.get("session:config:success"),
+        config: config
+    });
+};
 
 var SessionDelete = function(req, res) {
     req.logout();
     return res.status(Status.OK).send({message: Message.get("session:delete:success")});
-}
+};
 
 var SessionGet = function(req, res) {
     req = res;
@@ -16,15 +24,10 @@ var SessionGet = function(req, res) {
 };
 
 var SessionOption = function(req, res) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'content-type');
     return res.status(Status.OK).send();
 };
 
-//TODO Mettre un middleware pour allow origin
 var SessionPost = function(req, res) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'content-type');
     var strategy = auth.strategy[req.body.strategy];
 
     if (req.user) {
@@ -54,7 +57,8 @@ var SessionController = {
     post    : SessionPost,
     getOne  : SessionGetOne,
     option  : SessionOption,
-    delete  : SessionDelete
+    delete  : SessionDelete,
+    config  : SessionConfig
 };
 
 module.exports = SessionController;

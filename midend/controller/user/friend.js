@@ -30,7 +30,7 @@ var FriendPut = function(req, res) {
             });
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 }
 
@@ -53,7 +53,7 @@ var FriendPost = function(req, res) {
             });
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 

@@ -1,12 +1,20 @@
 {
+    "production": {
+        "database"  : "shopcast",
+        "username"  : "shopcast",
+        "password"  : "s7fCQvxr9&mKey=.",
+        "host"      : "localhost"
+    },
     "development": {
         "database"  : "shopcast",
-        "username"  :"shopcast",
-        "password"  :"s7fCQvxr9&mKey=."
+        "username"  : "shopcast",
+        "password"  : "s7fCQvxr9&mKey=.",
+        "host"      : "localhost"
     },
     "test": {
-        "database"  : "shopcast_test", 
-        "username"  :"shopcast",
-        "password"  :"s7fCQvxr9&mKey=."
+        "database"  : "shopcast_test",
+        "username"  : "shopcast",
+        "password"  : "s7fCQvxr9&mKey=.",
+        "host"      : "localhost"
     }
 }

@@ -18,11 +18,12 @@ var FileGet = function(req, res) {
             files       : files
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
 var FilePost = function(req, res) {
+    req.body.user_id = req.user.id;
     File
     .create(req.body)
     .then(function(file) {
@@ -36,7 +37,7 @@ var FilePost = function(req, res) {
             file    : file
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -59,7 +60,7 @@ var FileGetOne = function(req, res) {
             file        : file
         });
     }, function(err) {
-        res.status(Status.UNAUTHORIZED).send(err);
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
     });
 };
 
@@ -80,7 +81,7 @@ var FilePut = function(req, res) {
                 file        : file
             });
         }, function(err) {
-            res.status(Status.UNAUTHORIZED).send(err);
+            res.status(Status.UNAUTHORIZED).send({message: err.toString()});
         });
     });
 };
