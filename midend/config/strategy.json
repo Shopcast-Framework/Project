@@ -6,7 +6,8 @@
         },
         "google" : {
             "CLIENT_APP_ID" : "553975407563-gupmkgbeuuua4c2fkjgegn973v9g6892.apps.googleusercontent.com",
-            "CLIENT_APP_SECRET" : "ZpKkQDqdD7woYFXDX82cXzjv"
+            "CLIENT_APP_SECRET" : "ZpKkQDqdD7woYFXDX82cXzjv",
+            "callback" : "http://shopcast.fr/session/auth/google/callback"
         }
     },
     "development": {
@@ -16,7 +17,8 @@
         },
         "google" : {
             "CLIENT_APP_ID" : "553975407563-gupmkgbeuuua4c2fkjgegn973v9g6892.apps.googleusercontent.com",
-            "CLIENT_APP_SECRET" : "ZpKkQDqdD7woYFXDX82cXzjv"
+            "CLIENT_APP_SECRET" : "ZpKkQDqdD7woYFXDX82cXzjv",
+            "callback" : "http://127.0.0.1:3000/session/auth/google/callback"
         }
     }
 }

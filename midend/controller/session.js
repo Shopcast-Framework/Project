@@ -1,13 +1,21 @@
 'use strict';
 
-var Status      = require(process.env.NODE_PATH + '/config/status.json'),
+var Status  = require(process.env.NODE_PATH + '/config/status.json'),
     auth    = require(process.env.NODE_PATH + '/modules/auth'),
+    config  = require(process.env.NODE_PATH + '/config/strategy.json')[process.env.NODE_ENV],
     Message = require(process.env.NODE_PATH + '/modules/messages');
+
+var SessionConfig = function(req, res) {
+    return res.status(Status.OK).send({
+        message: Message.get("session:config:success"),
+        config: config
+    });
+};
 
 var SessionDelete = function(req, res) {
     req.logout();
     return res.status(Status.OK).send({message: Message.get("session:delete:success")});
-}
+};
 
 var SessionGet = function(req, res) {
     req = res;
@@ -49,7 +57,8 @@ var SessionController = {
     post    : SessionPost,
     getOne  : SessionGetOne,
     option  : SessionOption,
-    delete  : SessionDelete
+    delete  : SessionDelete,
+    config  : SessionConfig
 };
 
 module.exports = SessionController;

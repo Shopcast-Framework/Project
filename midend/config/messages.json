@@ -22,6 +22,7 @@
     "session:delete:success"    : "Session correctly deleted",
     "session:post:success"      : "User already logged",
     "session:post:failure"      : "Error invalid strategy %s",
+    "session:config:success"    : "Strategy of Shopcast app",
 
     "playlist:put:success"      : "Playlist correctly updated",
     "playlist:put:failure"      : "Error, can't edit the playlist",

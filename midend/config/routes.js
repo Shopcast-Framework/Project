@@ -80,6 +80,7 @@ var Routes = [
     {
         name: 'session',
         actions: {
+            'config' : { verb: 'get', route: '/config' },
             'option' : { verb: 'options', route: '/' }
         },
         middlewares: [
