@@ -4,6 +4,9 @@ var Role = require(process.env.NODE_PATH + '/config/roles.json');
 
 var Routes = [
     {
+        name: 'info'
+    },
+    {
         name: 'monitor',
         actions: {
             'associate' : { verb: 'post', route: '/associate' },
