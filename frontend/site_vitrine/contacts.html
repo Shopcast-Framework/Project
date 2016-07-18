@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Page title -->
+	<title>Shopcast - </title>
+	<!-- Page description -->
+	<meta name="description" content="">
+	<!-- Meta -->
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Favicon  -->
+	<link rel="icon" type="image/png" href="img/favicons/favicon-16x16.png" sizes="16x16">
+	<link rel="icon" type="image/png" href="img/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="img/favicons/favicon-96x96.png" sizes="96x96">
+	<link rel="apple-touch-icon" sizes="57x57" href="img/favicons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="img/favicons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/favicons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="img/favicons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/favicons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="img/favicons/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="img/favicons/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="img/favicons/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon-180x180.png">
+
+	<script src="js/rollbar.js"></script>
+	<link rel="stylesheet" href="css/style.min.css">
+	<link rel="import" href="elements/menu.html">
+	<script src="js/modernizr.js"></script>
+</head>
+
+<body>
+
+	<div class="page js-page ">
+		<!-- Header -->
+		<div class="header header-over large">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-sm-6 col-xs-6">
+						<!-- Logo Image -->
+						<a href="index.html" class="logo-image logo-animated">
+							<img src="img/logos/logo.png" alt="logo">
+						</a>
+						<!-- End of Logo Image -->
+					</div>
+					<div class="col-md-9 col-sm-6 col-xs-6">
+						<!-- Menu -->
+						<div id="menu"></div>
+						<!-- End of Menu -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End of Header -->
+		<!-- Header Back -->
+		<div class="header-back header-back-simple header-back-small">
+			<div class="header-back-container">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<!-- Page Info -->
+							<div class="page-info page-info-simple">
+								<h1 class="page-title">Contacts</h1>
+								<h2 class="page-description">The contact page is much more important than many give it credit. So, it’s extremely important to make sure your contact page delivers in the best way possible.</h2>
+							</div>
+							<!-- End Page Info -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End of Header Back -->
+		<div id="content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-7">
+						<!-- Contacts -->
+						<div class="contacts">
+							<h3 class="contacts-title"> Still have questions? Leave us a message. </h3>
+							<!-- Success Modal -->
+							<div class="contacts-success js-contacts-success">
+								<i class="pe-7s-check"></i>Your message was sent successfully.
+								<br>Thank you!
+							</div>
+							<!-- End of Success Modal -->
+							<form action="php/contact.php" id="js-contact-form">
+								<ul class="contacts-inputs">
+									<li class="contacts-item">
+										<label for="full-name" class="contacts-label">Full Name</label>
+										<!-- This input is required -->
+										<input type="text" name="full-name" id="full-name" class="contacts-input form-control" data-validation="required">
+									</li>
+									<li class="contacts-item">
+										<label for="email" class="contacts-label">Email</label>
+										<!-- This input should be filled with a valid email and it's required -->
+										<input type="text" name="email" id="email" class="contacts-input form-control" data-validation="required email">
+									</li>
+									<li class="contacts-item">
+										<label for="company" class="contacts-label">Company</label>
+										<!-- This input if optional -->
+										<input type="text" name="company" id="company" class="contacts-input form-control">
+									</li>
+									<li class="contacts-item">
+										<label for="website" class="contacts-label">Website</label>
+										<!-- This input should be filled with a valid URL and it's optional -->
+										<input type="text" name="website" id="website" class="contacts-input form-control" data-validation="url" data-validation-optional="true">
+									</li>
+									<li class="contacts-item">
+										<label for="country" class="contacts-label">Country</label>
+										<!-- This input is optional -->
+										<input type="text" name="country" id="country" class="contacts-input form-control">
+									</li>
+									<li class="contacts-item">
+										<label for="message" class="contacts-label">Message</label>
+										<!-- This input is required -->
+										<textarea id="message" name="message" class="contacts-input form-control" data-validation="required"></textarea>
+									</li>
+								</ul>
+								<button class="button green">Send Message</button>
+							</form>
+						</div>
+						<!-- End of Contacts -->
+					</div>
+					<div class="col-md-5">
+						<!-- Contacts info -->
+						<div class="contacts-info">
+							<h4 class="contacts-info-title"> Development team </h4>
+							<p class="contacts-info-description"> We are available 24/24 to help you. </p>
+							<div class="contacts-info-data">
+								<a href="#">support@vsdocs.com</a>
+							</div>
+							<h4 class="contacts-info-title"> Sales team </h4>
+							<p class="contacts-info-description"> Want to become a partner? Great. </p>
+							<div class="contacts-info-data">
+								<a href="#">sales@vsdocs.com</a>
+							</div>
+							<h4 class="contacts-info-title"> Press </h4>
+							<p class="contacts-info-description"> Discover more about VSDocs </p>
+							<div class="contacts-info-data">
+								<a href="#">press@vsdocs.com</a>
+							</div>
+							<h4 class="contacts-info-title"> Say Hi </h4>
+							<p class="contacts-info-description"> Let's drink a coffee together. </p>
+							<div class="contacts-info-data">
+								<a href="#">hi@vsdocs.com</a>
+							</div>
+						</div>
+						<!-- End of Contacts info -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer -->
+		<footer class="js-footer-is-fixed">
+			<!-- Footer Default -->
+			<div class="footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3 col-sm-3 col-xs-12">
+							<div class="footer-logo-wrapper">
+								<!-- Logo Image -->
+								<a href="index.html" class="logo-image ">
+									<img src="img/logos/logo.png" alt="logo">
+								</a>
+								<!-- End of Logo Image -->
+								<!-- Slogan -->
+								<p class="slogan"> Learn.
+									<br>Create.
+									<br>Impress.
+								</p>
+								<!-- End of Slogan -->
+							</div>
+						</div>
+						<div class="col-md-9 col-sm-9 col-xs-12">
+							<div class="footer-wrapper">
+								<!-- Scroll top -->
+								<span class="scroll-top js-scroll-top">
+									<i class="fa fa-angle-up"></i>
+								</span>
+								<!-- End of Scroll top -->
+								<!-- Version -->
+								<div class="docs-version js-docs-version">
+									<span class="docs-current-version js-docs-current-version">v3.5</span>
+									<ul class="js-docs-version-list">
+										<li>
+											<a href="#">1.0</a>
+										</li>
+										<li>
+											<a href="#">1.5</a>
+										</li>
+										<li>
+											<a href="#">2.5</a>
+										</li>
+										<li>
+											<a href="#">3.0</a>
+										</li>
+										<li>
+											<a href="#">3.1</a>
+										</li>
+									</ul>
+								</div>
+								<!-- End of Version -->
+								<!-- Footer Menu -->
+								<ul class="footer-menu helper right">
+									<li>
+										<a href="#"> About us </a>
+									</li>
+									<li>
+										<a href="#"> Privacy Policy </a>
+									</li>
+									<li>
+										<a href="#"> Terms & Condotions </a>
+									</li>
+									<li>
+										<a href="#"> My account </a>
+									</li>
+									<li>
+										<a href="#"> Support service </a>
+									</li>
+								</ul>
+								<!-- End of Footer Menu -->
+								<!-- Copyright -->
+								<p class="copyright helper right">
+									<a href="http://vsart.me">VSArt</a>, all rights reserved. 2015 &copy;
+								</p>
+								<!-- End of Copyright -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End of Footer Default -->
+		</footer>
+		<!-- End of Footer -->
+	</div>
+	<script src="js/all.js"></script>
+	<script src="js/custom.js"></script>
+</body>
+
+</html>

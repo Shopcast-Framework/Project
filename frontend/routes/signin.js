@@ -23,5 +23,6 @@ router.get('/', middlewares.language, function(req, res) {
 	}, function(err) {
 		console.log(err);
 	});
+});
 
 module.exports = router;

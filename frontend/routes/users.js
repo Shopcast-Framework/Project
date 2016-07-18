@@ -56,6 +56,7 @@ router.post('/',middlewares.isLogged, function(req, res) {
 		console.log(err); 
 		res.redirect('/users?message=' + err.body.message);
 	});
+});
 
 router.post('/:id', middlewares.isLogged, function(req, res) {
 	Rest.put('user/' + req.params.id, JSON.stringify(req.body)).then(function(response) {
