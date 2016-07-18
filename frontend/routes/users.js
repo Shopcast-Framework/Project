@@ -29,7 +29,7 @@ router.post('/new_password', function(req, res) {
 
 });
 
-router.get('/reset_password', function(req, res) {
+router.get('/reset_password', middlewares.language, function(req, res) {
 
 	res.render('users/reset_password', {
 		title: 'Shopcast - Users',
@@ -53,12 +53,12 @@ router.post('/',middlewares.isLogged, function(req, res) {
 	Rest.post('user', JSON.stringify(req.body)).then(function(response) {
 		res.redirect('/users?message=' + response.body.message);
 	}, function(err) {
-		res.redirect('/users?message=' + err.body.message);
 		console.log(err); 
+		res.redirect('/users?message=' + err.body.message);
 	});
 });
 
-router.post('/:id', function(req, res) {
+router.post('/:id', middlewares.isLogged, function(req, res) {
 	Rest.put('user/' + req.params.id, JSON.stringify(req.body)).then(function(response) {
 		res.redirect('/users?message=' + response.body.message);
 	}, function(err) {

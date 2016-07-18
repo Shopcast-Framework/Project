@@ -14,6 +14,7 @@ var User = function(sequelize) {
             primaryKey: true
         },
         username        : Sequelize.STRING,
+
         name            : Sequelize.STRING,
         avatar          : Sequelize.STRING,
         email           : Sequelize.STRING,
@@ -24,6 +25,7 @@ var User = function(sequelize) {
         password        : Sequelize.STRING,
         token           : Sequelize.VIRTUAL,
         role            : Sequelize.INTEGER,
+        type            : Sequelize.INTEGER,
         facebookId      : Sequelize.STRING,
         googleId        : Sequelize.STRING,
         reset_token     : Sequelize.STRING,

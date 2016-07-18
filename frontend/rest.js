@@ -24,6 +24,10 @@ var Rest = function() {
                     'content-type': 'application/json'
                 }
             };
+        if (self.cookie) {
+            options.headers.cookie = self.cookie;
+        }
+
         if (self.user) {
             options.headers.Authorization = self.user.token;
         }

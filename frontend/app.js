@@ -29,11 +29,13 @@ app.run = function(){
     app.use('/images', express.static(__dirname + '/public/images'));
     app.use('/font', express.static(__dirname + '/public/font'));
     app.use('/public', express.static(__dirname + '/public'));
+    app.use(express.static(__dirname + '/site_vitrine'));
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(cookieParser());
     app.use(session({ name: 'connect.sid2', secret: 'keyboard cat', resave: true, saveUninitialized: true }));
     app.use(Rest.middleware);
 
+    app.use('/', require('./routes/home'))
     app.use('/dashboards', require('./routes/dashboards'));
     app.use('/monitors', require('./routes/monitors'));
     app.use('/files', require('./routes/files'));
