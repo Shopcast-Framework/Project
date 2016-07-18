@@ -79,6 +79,7 @@
     "group:post:success"        : "Group correctly created",
     "group:getone:success"      : "Monitor selected with id: %s",
     "group:getone:failure"      : "Error can't get this group",
-    "group:delete:success"      : "Group correctly deleted"
+    "group:delete:success"      : "Group correctly deleted",
 
+    "info:get:success"          : "List of last commits on the app"
 }
