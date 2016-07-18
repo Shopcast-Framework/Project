@@ -44,15 +44,17 @@ Router.post('/', function(req, res) {
     });
 });
 
-passport.use(new GoogleStrategy({
-        clientID: '553975407563-gupmkgbeuuua4c2fkjgegn973v9g6892.apps.googleusercontent.com',
-        clientSecret: 'ZpKkQDqdD7woYFXDX82cXzjv',
-        callbackURL: 'http://127.0.0.1:3000/session/auth/google/callback'
-    },
-    function(accessToken, refreshToken, profile, done) {
+Rest.get('session/config').then(function(datas) {
+
+    passport.use(new GoogleStrategy({
+        clientID: datas.config.google.CLIENT_APP_ID,
+        clientSecret: datas.config.google.CLIENT_APP_SECRET,
+        callbackURL: datas.config.google.callback
+    }, function(accessToken, refreshToken, profile, done) {
         return done(accessToken, refreshToken, profile);
-    }
-));
+    }));
+
+});
 
 Router.get('/auth/google',
     passport.authenticate('google', { scope: 'https://www.googleapis.com/auth/plus.login' })
