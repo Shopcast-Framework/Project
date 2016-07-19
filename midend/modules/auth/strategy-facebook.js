@@ -16,7 +16,7 @@ var StrategyFacebook = function(app, passport, loginCallback) {
         };
 
         var authenticate = function(accessToken, refreshToken, profile, done) {
-            User.find({where: {facebookId:profile.userID}})
+            User.find({where: {facebookId:profile.id}})
             .then(function(user) {
                 if (user) {
                     return done(null, user);
