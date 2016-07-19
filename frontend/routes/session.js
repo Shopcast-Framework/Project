@@ -47,9 +47,9 @@ Router.post('/', function(req, res) {
 Rest.get('session/config').then(function(datas) {
 
     passport.use(new GoogleStrategy({
-        clientID: datas.config.google.CLIENT_APP_ID,
-        clientSecret: datas.config.google.CLIENT_APP_SECRET,
-        callbackURL: datas.config.google.callback
+        clientID: datas.body.config.google.CLIENT_APP_ID,
+        clientSecret: datas.body.config.google.CLIENT_APP_SECRET,
+        callbackURL: datas.body.config.google.callback
     }, function(accessToken, refreshToken, profile, done) {
         return done(accessToken, refreshToken, profile);
     }));
