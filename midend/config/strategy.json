@@ -20,5 +20,16 @@
             "CLIENT_APP_SECRET" : "ZpKkQDqdD7woYFXDX82cXzjv",
             "callback" : "http://127.0.0.1:3000/session/auth/google/callback"
         }
+    },
+    "test": {
+        "facebook"  : {
+            "CLIENT_APP_ID" : "751447004955328",
+            "CLIENT_APP_SECRET" : "ee7d5dc104910ccde27df46651a87e3c"
+        },
+        "google" : {
+            "CLIENT_APP_ID" : "553975407563-gupmkgbeuuua4c2fkjgegn973v9g6892.apps.googleusercontent.com",
+            "CLIENT_APP_SECRET" : "ZpKkQDqdD7woYFXDX82cXzjv",
+            "callback" : "http://127.0.0.1:3000/session/auth/google/callback"
+        }
     }
 }
