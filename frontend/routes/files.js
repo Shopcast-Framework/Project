@@ -12,12 +12,12 @@ var express = require('express'),
 
 router.post('/',middlewares.isLogged, upload.any(), function(req, res) {
 
-	var promises = [];
-
-	for (var i in req.files) {
-		promises.push(Rest.post('file', JSON.stringify(req.files[i])));
+	if (req.files && req.files[0]) {
+		var file = req.files[0];
+		for (var k in file) { req.body[k] = file[k]; }
 	}
-	Promise.all(promises).then(function() {
+
+	Rest.post('file', JSON.stringify(req.body)).then(function() {
 		res.redirect('/files?message=Files correctly upload');
 	}, function(err) {
 		console.log(err);
@@ -32,7 +32,7 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 	promises.push(Rest.get('file'));
 
 	Promise.all(promises).then(function(values) {
-		
+
 		var files = values[0].body.files;
 		values[0].body.files.forEach(function(element,index,array){
 			if ( files[index].tags != null )
