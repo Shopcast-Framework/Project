@@ -14,7 +14,6 @@ var User = function(sequelize) {
             primaryKey: true
         },
         username        : Sequelize.STRING,
-
         name            : Sequelize.STRING,
         avatar          : Sequelize.STRING,
         email           : Sequelize.STRING,

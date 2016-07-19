@@ -8,15 +8,13 @@ var File = function(sequelize) {
     var model = sequelize
     .define('File', {
         id: {
-            type: Sequelize.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
+            type            : Sequelize.INTEGER,
+            autoIncrement   : true,
+            primaryKey      : true
         },
-        name        : Sequelize.STRING, 
         description : Sequelize.STRING,
         encoding    : Sequelize.STRING,
         name        : Sequelize.STRING,
-        tags        : Sequelize.STRING,
         filename    : Sequelize.STRING,
         mimetype    : Sequelize.STRING,
         originalname: Sequelize.STRING,
