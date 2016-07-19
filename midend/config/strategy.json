@@ -5,8 +5,8 @@
             "CLIENT_APP_SECRET" : "ad47df83e16303060d45fe10546fd19b"
         },
         "google" : {
-            "CLIENT_APP_ID" : "553975407563-gupmkgbeuuua4c2fkjgegn973v9g6892.apps.googleusercontent.com",
-            "CLIENT_APP_SECRET" : "ZpKkQDqdD7woYFXDX82cXzjv",
+            "CLIENT_APP_ID" : "209117266282-5catlamdn3jeh8kpgaigbhjb8qjbb960.apps.googleusercontent.com",
+            "CLIENT_APP_SECRET" : "FxMYgKVljIaWODX-LBfmWJOG",
             "callback" : "http://shopcast.fr/session/auth/google/callback"
         }
     },
