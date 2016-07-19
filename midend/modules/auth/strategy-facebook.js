@@ -24,7 +24,9 @@ var StrategyFacebook = function(app, passport, loginCallback) {
                 User
                 .create({
                     username: profile.displayName,
-                    facebookId: profile.userID
+                    name: profile.displayName,
+                    avatar: profile.photos[0].value,
+                    facebookId: profile.id
                 })
                 .then(function(user) {
                     return done(null, user);
