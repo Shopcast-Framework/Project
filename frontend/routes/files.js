@@ -47,6 +47,7 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 
 	promises.push(Rest.get('file/' + id));
 	promises.push(Rest.get('playlist'));
+	promises.push(menu.load(req.session.user));
 
 	Promise.all(promises).then(function(values) {
 		
@@ -61,7 +62,7 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 
 		res.render('files/show', {
 			active: 'files',
-			menu: menu.load(req.session.user), 
+			menu: values[2], 
 			file: file,
 			playlists: playlists,
 			isLogged: true,
@@ -81,6 +82,7 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 	var promises = [];
 
 	promises.push(Rest.get('file'));
+	promises.push(menu.load(req.session.user));
 
 	Promise.all(promises).then(function(values) {
 
@@ -94,7 +96,7 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 
 		res.render('files/list', {
 			active: 'files',
-			menu: menu.load(req.session.user), 
+			menu: values[1], 
 			files: files,
 			isLogged: true,
 			isSearchBar: true,

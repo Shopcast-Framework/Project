@@ -4,7 +4,7 @@ var express = require( 'express' );
 var router = express.Router();
 var Promise = require( 'promise' );
 var Rest = require('../rest');
-var menu    = require(__dirname + '/../menu.json');
+var menu    = require(__dirname + '/../modules/menu');
 var middlewares = require('../middlewares');
 var translate = require('../languages');
 
@@ -54,6 +54,7 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 	var promises = [];
 
 	promises.push(Rest.get('playlist'));
+	promises.push(menu.load(req.session.user));
 
 	Promise.all(promises).then(function(values) {
 
@@ -65,7 +66,7 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 
 		res.render('playlists/list', {
 			active: '/playlists',
-			menu: menu,
+			menu: values[1],
 			playlists: playlists,
 			isLogged: true,
 			isSearchBar: true,
@@ -86,6 +87,7 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 
 	promises.push(Rest.get('file'));
 	promises.push(Rest.get('playlist/'+id));
+	promises.push(menu.load(req.session.user));
 
 	Promise.all(promises).then(function(values) {
 
@@ -99,7 +101,7 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 
 		res.render('playlists/show', {
 			active: '/playlists',
-			menu: menu,
+			menu: values[2],
 			playlist: playlist,
 			files: files,
 			isLogged: true,
