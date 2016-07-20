@@ -30,8 +30,8 @@ block content
                         td.actions
                             a(class="light-blue btn-floating waves-effect waves-circle waves-light" href="/playlists/#{playlist.id}")
                                 i.material-icons edit
-                            button(class="red btn-floating waves-effect waves-circle waves-light")
-                                i.material-icons delete
+                            a(class="red darken-2 btn btn-floating waves-effect waves-light" href="/playlists/delete/#{playlist.id}") #{translate.btnDelete}
+                                i.material-icons.left delete
     div(id="new-element" class="modal light-box")
         h4(class="center-align light-blue") #{translate.newPlaylist}
         div(class="modal-content")

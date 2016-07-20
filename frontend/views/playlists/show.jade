@@ -4,6 +4,8 @@ block content
     header.actions.container
         button(class="amber darken-2 btn btn-large waves-effect waves-light modal-edit" data-target="form-edit") #{translate.btnEdit}
             i.material-icons.left edit
+        a(class="red darken-2 btn btn-large waves-effect waves-light" href="/playlists/delete/#{playlist.id}") #{translate.btnDelete}
+            i.material-icons.left delete
     article.wrapper-content#playlist
         section.container
             form(action='/playlists/#{playlist.id}', method='post' id="form-edit")
@@ -53,7 +55,7 @@ block content
                                 td #{file.size}
                                 td
                                     if playlist.filesId.indexOf(file.id) > -1
-                                        a(class="btn btn-floating red darken-2 white-text waves-effect waves-light " href="/playlists/#{playlist.id}/file/delete")
+                                        a(class="btn btn-floating red darken-2 white-text waves-effect waves-light " href="/playlists/#{playlist.id}/file/delete/#{file.id}")
                                             i(class="material-icons left") delete
                                     else
                                         a(class="btn btn-floating amber darken-2 white-text waves-effect waves-light" href="/playlists/#{playlist.id}/file/add/#{file.id}")

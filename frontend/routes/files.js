@@ -25,6 +25,18 @@ router.post('/',middlewares.isLogged, upload.any(), function(req, res) {
 	});
 });
 
+router.post('/:id',middlewares.isLogged, function(req, res) {
+
+    var id = req.params.id;
+
+    Rest.put('file/' + id, JSON.stringify(req.body)).then(function(response) {
+        res.redirect('/files/' + id + '?message=' + response.body.message);
+    }, function(err) {
+        console.log(err);
+        res.redirect('/files/' + id + '?message=' + response.body.message);
+    })
+});
+
 router.get('/delete/:id', middlewares.isLogged, middlewares.language, function( req, res ) {
 
 	var promises = [];
@@ -32,10 +44,28 @@ router.get('/delete/:id', middlewares.isLogged, middlewares.language, function( 
 
 	promises.push(Rest.delete('file/' + id));
 	Promise.all(promises).then(function() {
-		res.redirect('/files?message=File correctly deleted');
+		console.log(res);
+		res.redirect('/files?message=Successfully deleted');
 	}, function(err) {
 		console.log(err);
-		res.redirect('/file/'+id+'?message=File can\'t be deleted');
+		res.redirect('/files?message=An error occured');
+	});
+
+});
+
+router.get('/:id/playlist/add/:id_playlist', middlewares.isLogged, middlewares.language, function( req, res ) {
+
+    var id = req.params.id;
+    var id_playlist = req.params.id_playlist;
+
+    var url = 'playlist/' + id_playlist + '/add';
+
+	Rest.post(url, JSON.stringify([id])).then(function(response) {
+		console.log(response);
+		res.redirect('/files/'+id+'?message=' + response.body.message);
+	}, function(err) {
+		console.log(err);
+		res.redirect('/files/'+id+'?message=' + err.body.message);
 	});
 
 });
@@ -47,11 +77,13 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 
 	promises.push(Rest.get('file/' + id));
 	promises.push(Rest.get('playlist'));
+	promises.push(menu.load(req.session.user));
 
 	Promise.all(promises).then(function(values) {
 		
 		var file = values[0].body.file;
 		file.size = humanize.filesize(file.size);
+		file.playlistsId = [];
 
 		var playlists = values[1].body.playlists;
 		values[1].body.playlists.forEach(function(element,index,array){
@@ -61,7 +93,7 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 
 		res.render('files/show', {
 			active: 'files',
-			menu: menu.load(req.session.user), 
+			menu: values[2], 
 			file: file,
 			playlists: playlists,
 			isLogged: true,
@@ -81,6 +113,7 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 	var promises = [];
 
 	promises.push(Rest.get('file'));
+	promises.push(menu.load(req.session.user));
 
 	Promise.all(promises).then(function(values) {
 
@@ -92,9 +125,11 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 			files[index].size = humanize.filesize(files[index].size);
 		});
 
+		console.log(translate.getWordsByPage( req.cookies.language, "Files", { title: files.length } ));
+
 		res.render('files/list', {
 			active: 'files',
-			menu: menu.load(req.session.user), 
+			menu: values[1], 
 			files: files,
 			isLogged: true,
 			isSearchBar: true,
