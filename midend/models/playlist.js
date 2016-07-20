@@ -9,6 +9,11 @@ var Playlist = function(sequelize) {
 
     var model = sequelize
     .define('Playlist', {
+        id: {
+              type: Sequelize.INTEGER,
+              autoIncrement: true,
+              primaryKey: true
+        },
         name        : Sequelize.STRING,
         description : Sequelize.STRING,
         frequency   : Sequelize.STRING,

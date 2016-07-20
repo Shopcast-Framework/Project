@@ -8,8 +8,15 @@ var Sequelize   = require('sequelize'),
 var User = function(sequelize) {
     var model = sequelize
     .define('User', {
+        id              : {
+            type                  : Sequelize.INTEGER,
+            autoIncrement         : true,
+            primaryKey            : true
+        },
         username        : Sequelize.STRING,
-        mail            : Sequelize.STRING,
+        name            : Sequelize.STRING,
+        avatar          : Sequelize.STRING,
+        email           : Sequelize.STRING,
         description     : Sequelize.STRING,
         age             : Sequelize.STRING,
         sex             : Sequelize.STRING,
