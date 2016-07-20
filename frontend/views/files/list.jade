@@ -32,7 +32,7 @@ block content
 								i.material-icons edit
 							a(class="light-green darken-2 btn-floating waves-effect waves-circle waves-light" data-target="edit-element" href="/monitor/file/#{file.id}" target="_blank")
 								i.material-icons play_arrow
-							button(class="red btn-floating waves-effect waves-circle waves-light")
+							a(class="red btn-floating waves-effect waves-circle waves-light" href="/files/delete/#{file.id}")
 								i.material-icons delete
 	div(id="new-element" class="modal light-box")
 		h4(class="center-align light-blue") #{translate.newFile}

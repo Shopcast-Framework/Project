@@ -18,24 +18,30 @@ var Language = function() {
     }
 
     self.getWordsByPage = function ( language, page, values ) {
-        if ( languages[ language ][ page ] === undefined )
+        var copy = JSON.parse(JSON.stringify(languages));
+
+        if ( copy[ language ][ page ] === undefined )
             return null;
+
+        var tmp = copy[ language ][ page ];
 
     	if ( values !== null && values !== undefined )
     	{
     		for( var val in values ) {
-    			languages[ language ][ page ][ val ] = languages[ language ][ page ][ val ].replace( "%", values[ val ] );
+                console.log(val + " -- " + values[ val ]);
+    			tmp[ val ] = tmp[ val ].replace( "%", values[ val ] );
+                console.log(tmp[ val ]);
     		}
     	}
 
     	// Add languages listing
-    	languages[ language ][ page ].listing = self.listing();
-    	languages[ language ][ page ].Language = languages[ language ][ "Language" ];
+    	tmp.listing = self.listing();
+    	tmp.Language = languages[ language ][ "Language" ];
 
     	// Add menu
-    	languages[ language ][ page ].Menu = languages[ language ][ "Menu" ];
+    	tmp.Menu = languages[ language ][ "Menu" ];
 
-        return languages[ language ][ page ];
+        return tmp;
     };
 
     self.getTranslate = function(){
