@@ -3,7 +3,8 @@
 var Status      = require(process.env.NODE_PATH + '/config/status.json'),
     orm         = require(process.env.NODE_PATH + '/modules/orm'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
-    File        = orm.db.File;
+    File        = orm.db.File,
+    Playlist    = orm.db.Playlist;
 
 var FileGet = function(req, res) {
     File
