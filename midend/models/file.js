@@ -20,7 +20,7 @@ var File = function(sequelize) {
         originalname: Sequelize.STRING,
         path        : Sequelize.STRING,
         tags        : Sequelize.STRING,
-        duration    : Sequelize.STRING,
+        duration    : Sequelize.FLOAT,
         size        : Sequelize.FLOAT
     }, {underscored: true});
 
