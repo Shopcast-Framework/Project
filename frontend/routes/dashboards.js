@@ -10,16 +10,25 @@ var translate = require('../languages');
 
 router.get('/', middlewares.isLogged, middlewares.language, function(req, res){
 
+	var promises = [];
 	// console.log(req.session.user.token);
 	// console.log(req.session.user);
-	res.render('dashboards', { 
+	promises.push(menu.load(req.session.user));
+	
+	Promise.all(promises).then(function(values) {
+
+		res.render('dashboards', { 
 			active: '/dashboards', 
-			menu: menu.load(req.session.user), 
+			menu: values[0], 
 			isLogged: true, 
 			isSearchBar: false,
 			session: req.session.user,
 			translate : translate.getWordsByPage( req.cookies.language, "Dashboard" ),
 			language: req.cookies.language
+	});
+
+	}, function(err) {
+		console.log(err);
 	});
 
 });
