@@ -53,6 +53,9 @@
     "file:delete:success"       : "File correctly deleted",
     "file:delete:failure"       : "Error can't delete the file",
 
+    "filelist:delete:failure"   : "Error can't delete the file",
+    "filelist:delete:success"   : "File successfuly deleted from playlists",
+
     "friend:put:success"        : "Friendship correctly accepted",
     "friend:put:failure"        : "Error can't find user",
     "friend:post:success"       : "Friendship request correctly send",
