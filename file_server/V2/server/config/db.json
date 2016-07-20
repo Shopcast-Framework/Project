@@ -1,0 +1,12 @@
+{
+    "development": {
+        "database"  : "shopcast",
+        "username"  :"shopcast",
+        "password"  :"s7fCQvxr9&mKey=."
+    },
+    "test": {
+        "database"  : "shopcast_test", 
+        "username"  :"shopcast",
+        "password"  :"s7fCQvxr9&mKey=."
+    }
+}

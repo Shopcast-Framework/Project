@@ -1,0 +1,2 @@
+
+xecuting (default): SELECT `id`, `description`, `encoding`, `name`, `tags`, `filename`, `mimetype`, `originalname`, `path`, `size`, `created_at`, `updated_at`, `user_id` FROM `Files` AS `File` WHERE `File`.`user_id` = 1 AND `File`.`filename` = 'SurfingDeath.jpg' AND `File`.`id` = 4;
