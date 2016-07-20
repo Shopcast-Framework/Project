@@ -10,7 +10,12 @@ var FileGet = function(req, res) {
     .findAll({
         where: {
             user_id: req.user.id
-        }
+        },
+        include : [{
+            model     : ormPlaylist,
+            as        : 'playlists',
+            required  : false
+        }]
     })
     .then(function(files) {
         res.status(Status.OK).send({
@@ -87,6 +92,19 @@ var FilePut = function(req, res) {
 };
 
 var FileDelete = function(req, res) {
+    PlaylistFile.destroy({
+        where : {file_id: req.params.id}
+    }).
+    then(function(result) {
+        if (!result) {
+            return res.status(Status.UNAUTHORIZED).send({
+                message : Message.get("playlistfile:delete:failure")
+            })
+        }
+        res.status(Status.OK).send({
+            message : Message.get("playlistfile:delete:success")
+        });
+    });
     File
     .destroy({
         where: {id: req.params.id}
