@@ -10,8 +10,13 @@ var PlaylistFile = function(sequelize) {
         rank   : Sequelize.INTEGER
     }, {underscored: true});
 
+    var relationships = function() {
+        model.belongsTo(orm.db.Playlist, {constraints : false, as : 'playlist'});
+    };
+
     return {
-        definition      : model
+        definition      : model,
+        relationships   : relationships
     };
 };
 
