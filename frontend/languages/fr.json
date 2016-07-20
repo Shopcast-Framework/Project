@@ -82,11 +82,28 @@
     "name" : "Nom",
     "nameOriginal" : "Original",
     "description" : "Description",
+    "mimetype": "Type",
     "type" : "Type",
     "size" : "Poids",
     "tags" : "Tags",
     "btnAdd": "Ajouter",
     "btnCancel": "Annuler"
+  },
+  "File":{
+    "title": "Fichier - %",
+    "tabTitle": "% - Shopcast",
+    "btnEdit": "Modifier",
+    "btnPlay": "Lecture",
+    "name" : "Nom",
+    "originalname" : "Original",
+    "description" : "Description",
+    "type" : "Type",
+    "size" : "Poids",
+    "tags" : "Tags",
+    "btnSave": "Sauvargarder",
+    "btnCancel": "Annuler",
+    "btnDelete": "Supprimer",
+    "titlePlaylists": "Liste des playlists"
   },
   "Settings": {
     "title": "Configuration",

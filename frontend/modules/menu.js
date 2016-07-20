@@ -2,16 +2,22 @@
 
 var menu    = require(__dirname + '/../menu.json')
 
-function MenuLoader(user) {
+module.exports = {
 
-    if (!user) {
+    load: function(user) {
+
+    	var tmp = []
+
+       if (!user) {
         return [];
-    }
-    for (var i in menu) {
-        menu[i].url = menu[i].url.replace(':user_id', user.id);
-    }
+	    }
+	    for (var i in menu) {
+	        if (user.role <= menu[i].access)
+	        	tmp.push(menu[i]);
+	    }
 
-    return menu;
-}
+	    return tmp;
 
-exports.load = MenuLoader;
+    }
+    
+};

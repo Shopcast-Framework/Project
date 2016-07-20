@@ -1,10 +1,32 @@
+var fs = require('fs');
+
 module.exports = {
 
     isLogged: function(req, res, next) {
+
+        // Test logged
         if (req.session.user) {
+            // Test Avatar
+            try{
+                fs.statSync(String(req.session.user.avatar));
+            }catch(err){
+                req.session.user.avatar = "/public/images/users/guerin_f.jpg";
+            }
+
             next();
         } else {
             res.redirect('/signin');
+        }
+    },
+
+    isAdmin: function(req, res, next) {
+
+        // Test logged
+        if (req.session.user) {
+
+            next();
+        } else {
+            res.redirect("/dashboards?message=You can't access this resource");
         }
     },
 

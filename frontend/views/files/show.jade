@@ -1,14 +1,63 @@
 extends ../layout
 
 block content
-	header.title-content
-		h1= titleContent
-		div.actions
-	article.wrapper-content#playlists
-		form(action='/files/#{file.id}' method='post')
-			input(type='text' name='filename' placeholder='Filename' value='#{file.filename}')
-			input(type='text' name='description' placeholder='Description' value='#{file.description}')
-			input(type='submit')
-	video(width="320", height="240", controls)
-		source(src="/#{file.path}", type="video/mp4")
-		|Your browser does not support the video tag.
+    header.actions.container
+        button(class="amber darken-2 btn btn-large waves-effect waves-light modal-edit" data-target="form-edit") #{translate.btnEdit}
+            i.material-icons.left edit
+        a(class="red darken-2 btn btn-large waves-effect waves-light modal-edit" data-target="form-edit" href="/files/delete/#{file.id}") #{translate.btnDelete}
+            i.material-icons.left delete
+        a(class="light-green darken-2 btn btn-large waves-effect waves-light" href="/monitor/file/#{file.id}" target="_blank") #{translate.btnPlay}
+            i.material-icons.left play_arrow
+    article.wrapper-content#playlist
+        section.container
+            form(action='/files/#{file.id}', method='post' id="form-edit" class="row")
+                div.input-field.col.s12
+                    i(class="material-icons prefix") edit
+                    label(for="name") #{translate.name}
+                    input(type='text' name='name' id="name" placeholder='Name' value='#{file.name}' disabled)
+                div.input-field.col.s12
+                    i(class="material-icons prefix") description
+                    label(for="name") #{translate.description}
+                    textarea(name='description' class="materialize-textarea" placeholder='Description' disabled) #{file.description}
+                div.input-field.col.s12
+                    i(class="material-icons prefix") note
+                    label(for="name") #{translate.tags}
+                    input(type='text', name='tags' placeholder='Tags' value='#{file.tags}' disabled)
+                div.input-field.col.s4
+                    i(class="material-icons prefix") info
+                    label(for="originalname") #{translate.originalname}
+                    input(type='text' value='#{file.originalname}' disabled data-disabled="true")
+                div.input-field.col.s4
+                    i(class="material-icons prefix") info
+                    label(for="originalname") #{translate.size}
+                    input(type='text' value='#{file.size}' disabled data-disabled="true")
+                div.input-field.col.s4
+                    i(class="material-icons prefix") info
+                    label(for="originalname") #{translate.mimetype}
+                    input(type='text' value='#{file.mimetype}' disabled data-disabled="true")
+                div.input-field.col.s12.actions.center-align
+                    button(type='submit' class="light-green darken-2 btn btn-large waves-effect waves-light") #{translate.btnSave}
+                        i.material-icons.left done
+                    a(href='/files/#{file.id}' class="red darken-2 btn btn-large waves-effect waves-light modal-edit-cancel") #{translate.btnCancel}
+                        i.material-icons.left cancel
+        section
+            h2.center-align.title #{translate.titlePlaylists}
+                button(class="amber darken-2 btn btn-large btn-floating waves-effect waves-light modal-trigger" data-target="add-playlist")
+                    i.material-icons.left add
+            div.container
+                table
+                    thead
+                        tr
+                            th name
+                            th description
+                            th tags
+                    tbody
+                        each p, index in playlists
+                            tr
+                                td #{p.name}
+                                td #{p.description}
+                                td
+                                    each tag, index in p.tags
+                                        div.chip #{tag}
+block script
+    script(type='text/javascript', src='/js/file.js')

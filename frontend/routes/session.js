@@ -38,6 +38,7 @@ Router.get('/logout', function(req, res) {
 Router.post('/', function(req, res) {
     Rest.post('session', JSON.stringify(req.body))
     .then(function(datas) {
+        console.log(datas);
         onSuccess(req, res, datas);
     }, function(datas) {
         onError(req, res, datas);

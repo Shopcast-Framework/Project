@@ -30,26 +30,35 @@ block content
                         i.material-icons.left cancel
         section
             h2.center-align.title #{translate.titleFiles}
-                button(class="amber darken-2 btn btn-large btn-floating waves-effect waves-light modal-trigger" data-target="add-file")
-                    i.material-icons.left add
+                //button(class="amber darken-2 btn btn-large btn-floating waves-effect waves-light modal-trigger" data-target="add-file")
+                    //i.material-icons.left add
             //div.actions.center-align
             //    button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="add-file") #{translate.btnAddFile}
             //        i.material-icons.left add
             div.container
-                table
+                table.list-elements
                     thead
                         tr
                             th name
                             th description
                             th type
                             th size
+                            th
                     tbody
-                        each file, index in playlist.Files
+                        each file, index in files
                             tr
                                 td #{file.originalname}
                                 td #{file.description}
                                 td #{file.mimetype}
                                 td #{file.size}
+                                td
+                                    if playlist.filesId.indexOf(file.id) > -1
+                                        a(class="btn btn-floating red darken-2 white-text waves-effect waves-light " href="/playlists/#{playlist.id}/file/delete")
+                                            i(class="material-icons left") delete
+                                    else
+                                        a(class="btn btn-floating amber darken-2 white-text waves-effect waves-light" href="/playlists/#{playlist.id}/file/add/#{file.id}")
+                                            i(class="material-icons left") add
+                                    
         div(id="add-file" class="modal light-box")
             h4(class="center-align light-blue") #{translate.addFile}
             div(class="modal-content")
