@@ -32,7 +32,7 @@ var Rest = function() {
             options.headers.Authorization = self.user.token;
         }
 
-        console.log('Je requete sur: ' + options.path);
+        console.log('Je requete sur: ' + options.path + ' [' + method + ']');
         httpRequest = http.request(options, function(res) {
             var datas = {
                 headers: res.headers,

@@ -8,25 +8,24 @@ var File = function(sequelize) {
     var model = sequelize
     .define('File', {
         id: {
-            type: Sequelize.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
+              type            : Sequelize.INTEGER,
+              autoIncrement   : true,
+              primaryKey      : true
         },
-        name        : Sequelize.STRING, 
         description : Sequelize.STRING,
         encoding    : Sequelize.STRING,
         name        : Sequelize.STRING,
-        tags        : Sequelize.STRING,
         filename    : Sequelize.STRING,
         mimetype    : Sequelize.STRING,
         originalname: Sequelize.STRING,
         path        : Sequelize.STRING,
         tags        : Sequelize.STRING,
+        duration    : Sequelize.FLOAT,
         size        : Sequelize.FLOAT
     }, {underscored: true});
 
     var relationships = function() {
-        model.belongsToMany(orm.db.Playlist, {constraints: false, through: 'PlaylistFile'});
+        model.belongsToMany(orm.db.Playlist, {constraints: false, as: 'playlists', through: 'PlaylistFile'});
         model.belongsTo(orm.db.User, {constraints: false});
     };
 

@@ -23,7 +23,7 @@ function RouteLoader(app) {
             var controllerInst = require(process.env.NODE_PATH + '/controller' + prefix + route.name);
 
             self.addActions(controllerInst, prefix + route.name, route.actions, route.middlewares);
-            self.resource(resourcePrefix, route.name, controllerInst, route.middlewares);
+            self.resource(resourcePrefix, route, controllerInst);
 
             if (route.sub) {
                 var subResourcePrefix = prefix + route.name + '/:' + route.name + '_id/';
@@ -48,13 +48,16 @@ function RouteLoader(app) {
         self.api[verb](route, Middlewares.load(action, middlewares), controller[action]);
     };
 
-    self.resource = function(prefix, controllerName, controller, middlewares) {
-        var root = prefix + controllerName;
-        self.route('get', root, controller, 'get', middlewares);
-        self.route('post', root, controller, 'post', middlewares);
-        self.route('get', root + '/:id', controller, 'getOne', middlewares);
-        self.route('put', root + '/:id', controller, 'put', middlewares);
-        self.route('delete', root + '/:id', controller, 'delete', middlewares);
+    self.resource = function(prefix, route, controller) {
+        var root        = prefix + route.name,
+            middlewares = route.middlewares,
+            actions     = route.actions || {};
+
+        if (!actions['get']) { self.route('get', root, controller, 'get', middlewares); }
+        if (!actions['post']) { self.route('post', root, controller, 'post', middlewares); }
+        if (!actions['get']) { self.route('get', root + '/:id', controller, 'getOne', middlewares); }
+        if (!actions['put']) { self.route('put', root + '/:id', controller, 'put', middlewares); }
+        if (!actions['delete']) { self.route('delete', root + '/:id', controller, 'delete', middlewares); }
     };
 
     self.init(app);

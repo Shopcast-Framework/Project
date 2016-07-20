@@ -84,7 +84,8 @@ var Routes = [
         name: 'session',
         actions: {
             'config' : { verb: 'get', route: '/config' },
-            'option' : { verb: 'options', route: '/' }
+            'option' : { verb: 'options', route: '/' },
+            'delete' : { verb: 'delete', route: '/' }
         },
         middlewares: [
             {

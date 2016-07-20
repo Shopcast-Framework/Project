@@ -53,6 +53,9 @@
     "file:delete:success"       : "File correctly deleted",
     "file:delete:failure"       : "Error can't delete the file",
 
+    "filelist:delete:failure"   : "Error can't delete the file",
+    "filelist:delete:success"   : "File successfuly deleted from playlists",
+
     "friend:put:success"        : "Friendship correctly accepted",
     "friend:put:failure"        : "Error can't find user",
     "friend:post:success"       : "Friendship request correctly send",
@@ -79,6 +82,7 @@
     "group:post:success"        : "Group correctly created",
     "group:getone:success"      : "Monitor selected with id: %s",
     "group:getone:failure"      : "Error can't get this group",
-    "group:delete:success"      : "Group correctly deleted"
+    "group:delete:success"      : "Group correctly deleted",
 
+    "info:get:success"          : "List of last commits on the app"
 }

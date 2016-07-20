@@ -16,7 +16,7 @@ var StrategyGoogle = function(app, passport, loginCallback) {
         };
 
         var authenticate = function(accessToken, refreshToken, profile, done) {
-            User.find({where: {googleId:profile.userID}})
+            User.find({where: {googleId:profile.id}})
             .then(function(user) {
                 if (user) {
                     console.log('Authenticated');
