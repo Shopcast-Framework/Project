@@ -15,11 +15,12 @@ var File = function(sequelize) {
         description : Sequelize.STRING,
         encoding    : Sequelize.STRING,
         name        : Sequelize.STRING,
-        tags        : Sequelize.STRING,
         filename    : Sequelize.STRING,
         mimetype    : Sequelize.STRING,
         originalname: Sequelize.STRING,
         path        : Sequelize.STRING,
+        tags        : Sequelize.STRING,
+        duration    : Sequelize.STRING,
         size        : Sequelize.FLOAT
     }, {underscored: true});
 
