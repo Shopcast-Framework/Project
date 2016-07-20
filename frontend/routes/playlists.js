@@ -32,6 +32,23 @@ router.post('/:id',middlewares.isLogged, function(req, res) {
     })
 });
 
+router.get('/:id/file/add/:id_file', middlewares.isLogged, middlewares.language, function( req, res ) {
+
+    var id = req.params.id;
+    var id_file = req.params.id_file;
+
+    var url = 'playlist/' + id + '/add';
+
+	Rest.post(url, JSON.stringify([id_file])).then(function(response) {
+		console.log(response);
+		res.redirect('/playlists/'+id+'?message=' + response.body.message);
+	}, function(err) {
+		console.log(err);
+		res.redirect('/playlists/'+id+'?message=' + err.body.message);
+	});
+
+});
+
 router.get('/', middlewares.isLogged, middlewares.language, function( req, res ) {
 
 	var promises = [];
@@ -73,9 +90,12 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 	Promise.all(promises).then(function(values) {
 
 		var files = values[0].body.files;
-		console.log(files);
 		var playlist = values[1].body.playlist;
-        playlist.tags = playlist.tags.split(",");
+		playlist.filesId = [];
+
+        values[1].body.playlist.files.forEach(function(element,index,array){
+        	playlist.filesId.push(element.id);
+		});
 
 		res.render('playlists/show', {
 			active: '/playlists',

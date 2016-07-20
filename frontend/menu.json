@@ -3,42 +3,49 @@
 	  "name": "dashboard",
 	  "icon": "dashboard",
 	  "url": "/dashboards",
-	  "isActive": true
+	  "isActive": true,
+	  "access": 1
 	},
 	{
 	  "name": "files",
 	  "icon": "attach_file",
 	  "url": "/files",
-	  "isActive": true
+	  "isActive": true,
+	  "access": 1
 	},
 	{
 	  "name": "playlists",
 	  "icon": "folder",
 	  "url": "/playlists",
-	  "isActive": true
+	  "isActive": true,
+	  "access": 1
 	},
 	{
 	  "name": "display",
 	  "icon": "settings_ethernet",
 	  "url": "/display",
-	  "isActive": true
+	  "isActive": true,
+	  "access": 1
 	},
 	{
 	  "name": "calendar",
 	  "icon": "event",
 	  "url": "/plannings",
-	  "isActive": false
+	  "isActive": false,
+	  "access": 1
 	},
 	{
 	  "name": "users",
 	  "icon": "person",
 	  "url": "/users",
-	  "isActive": true
+	  "isActive": true,
+	  "access": 0
 	},
 	{
 	  "name": "settings",
 	  "icon": "settings",
 	  "url": "/settings",
-	  "isActive": true
+	  "isActive": true,
+	  "access": 0
 	}
 ]

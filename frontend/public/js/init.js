@@ -21,11 +21,13 @@
 	$( ".modal-edit" ).click(function() {
 		var form = $( this ).data( "target" );
 		$("#" + form + " input, #" + form + " textarea").each(function(){
-			$( this ).prop( "disabled", false );
+			console.log($( this ).data("disabled"));
+			if ($( this ).data("disabled") != true)
+				$( this ).prop( "disabled", false );
 		});
 
 		$( "#" + form + " .actions" ).show();
-        $( "header button" ).hide();
+        $( "header.actions .btn" ).hide();
 	});
 
     $( ".modal-edit-cancel" ).click(function() {

@@ -3,19 +3,18 @@
 var express = require('express');
 var router = express.Router();
 var Promise = require('promise');
-var menu    = require(__dirname + '/../menu.json');
+/*var menu    = require(__dirname + '/../menu.json');*/
+var menu    = require(__dirname + '/../modules/menu');
 var middlewares = require('../middlewares');
 var translate = require('../languages');
 
 router.get('/', middlewares.isLogged, middlewares.language, function(req, res){
 
-	// console.log('Co successful with token:');
 	// console.log(req.session.user.token);
 	// console.log(req.session.user);
-	
 	res.render('dashboards', { 
 			active: '/dashboards', 
-			menu: menu, 
+			menu: menu.load(req.session.user), 
 			isLogged: true, 
 			isSearchBar: false,
 			session: req.session.user,

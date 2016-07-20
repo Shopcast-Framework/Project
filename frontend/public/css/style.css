@@ -71,6 +71,14 @@ body, html{
 	position: absolute;
 	bottom: 15px;
 	right: 15px;
+	height: 37px;
+	padding: 0;
+}
+
+#header .menu .user .logout i{
+	font-size: 1.5rem;
+	position: absolute;
+	top: -15px;
 }
 
 #header .menu .user .avatar{
@@ -238,6 +246,10 @@ body, html{
 
 #main .wrapper-no-header{
 	margin-top: 40px;
+}
+
+#main header.actions .btn{
+	margin:0 10px;
 }
 
 /*******************************************************************
