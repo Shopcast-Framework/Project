@@ -142,6 +142,20 @@
     "created_at": "Ajouté le",
     "updated_at": "Modifié le"
   },
+  "Monitor":{
+    "title": "Moniteur - %",
+    "tabTitle": "% - Shopcast",
+    "btnEdit": "Modifier",
+    "name" : "Nom",
+    "originalname" : "Original",
+    "description" : "Description",
+    "type" : "Type",
+    "size" : "Poids",
+    "tags" : "Tags",
+    "btnSave": "Sauvargarder",
+    "btnCancel": "Annuler",
+    "btnDelete": "Supprimer"
+  },
   "Settings": {
     "title": "Configuration",
     "tabTitle": "Configuration - Shopcast",

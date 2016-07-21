@@ -28,7 +28,7 @@ router.post('/:id',middlewares.isLogged, function(req, res) {
         res.redirect('/playlists/' + id + '?message=' + response.body.message);
     }, function(err) {
         console.log(err);
-        res.redirect('/playlists/' + id + '?message=' + response.body.message);
+        res.redirect('/playlists/' + id + '?message=' + err.body.message);
     })
 });
 
@@ -38,12 +38,11 @@ router.get('/delete/:id', middlewares.isLogged, function( req, res ) {
 	var id = req.params.id;
 
 	promises.push(Rest.delete('playlist/' + id));
-	Promise.all(promises).then(function() {
-		console.log(res.body);
-		res.redirect('/playlists?message=Successfully deleted');
+	Promise.all(promises).then(function(response) {
+		res.redirect('/playlists?message=' + response[0].body.message);
 	}, function(err) {
 		console.log(err);
-		res.redirect('/playlists?message=An error occured');
+		res.redirect('/playlists?message=' + err.body.message);
 	});
 
 });

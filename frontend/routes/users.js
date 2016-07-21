@@ -74,12 +74,12 @@ router.get('/delete/:id', middlewares.isLogged, function( req, res ) {
 	var id = req.params.id;
 
 	promises.push(Rest.delete('user/' + id));
-	Promise.all(promises).then(function() {
+	Promise.all(promises).then(function(response) {
 		console.log(res.body);
-		res.redirect('/users?message=Successfully deleted');
+		res.redirect('/users?message=' + response[0].body.message);
 	}, function(err) {
 		console.log(err);
-		res.redirect('/users?message=An error occured');
+		res.redirect('/users?message=' + err.body.message);
 	});
 
 });

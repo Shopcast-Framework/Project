@@ -22,11 +22,11 @@ router.post('/',middlewares.isLogged, upload.any(), function(req, res) {
                 }
 	}
 
-	Rest.post('file', JSON.stringify(req.body)).then(function() {
-			res.redirect('/files?message=Files correctly upload');
+	Rest.post('file', JSON.stringify(req.body)).then(function(response) {
+			res.redirect('/files?message=' + response.body.message);
 		}, function(err) {
 		    console.log(err);
-		    res.redirect('/files?message=Files can\'t be upload');
+		    res.redirect('/files?message=' + err.body.message);
 	});
 
         /*probe(file.path, function(err, probeData) {
@@ -67,12 +67,12 @@ router.get('/delete/:id', middlewares.isLogged, middlewares.language, function( 
 	var id = req.params.id;
 
 	promises.push(Rest.delete('file/' + id));
-	Promise.all(promises).then(function() {
+	Promise.all(promises).then(function(response) {
 		console.log(res);
-		res.redirect('/files?message=Successfully deleted');
+		res.redirect('/files?message=' + response[0].body.message );
 	}, function(err) {
 		console.log(err);
-		res.redirect('/files?message=An error occured');
+		res.redirect('/files?message=' + err.body.message);
 	});
 
 });

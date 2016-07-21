@@ -23,7 +23,7 @@ block content
                         td.actions
                             a(class="light-blue btn-floating waves-effect waves-circle waves-light" href="/monitors/#{monitor.id}")
                                 i.material-icons edit
-                            a(class="red darken-2 btn btn-floating waves-effect waves-light" href="/monitors/delete/#{monitor.id}") #{translate.btnDelete}
+                            a(class="red darken-2 btn btn-floating waves-effect waves-light" href="/monitors/delete/#{monitor.id}")
                                 i.material-icons.left delete
     div(id="new-element" class="modal light-box")
         h4(class="center-align light-blue") #{translate.newMonitor}
@@ -35,7 +35,7 @@ block content
                     label(for="name") #{translate.name}
                 div.input-field.col.s12
                     i(class="material-icons prefix") edit
-                    input(type='text' name='name' id="uid")
+                    input(type='text' name='uid' id="uid")
                     label(for="uid") #{translate.uid}
                 div.input-field.col.s12.actions.center-align
                     button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") #{translate.btnAdd}

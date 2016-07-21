@@ -11,7 +11,7 @@ block content
             form(action='/users/#{user.id}', method='post' id="form-edit" class="row")
                 div.input-field.col.s12
                     i(class="material-icons prefix") edit
-                    label(for="name") #{translate.username}
+                    label(for="username") #{translate.username}
                     input(type='text' name='username' id="username" placeholder='#{translate.username}' value='#{user.username}' disabled)
                 div.input-field.col.s12
                     i(class="material-icons prefix") edit

@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+    header.actions.container
+        button(class="amber darken-2 btn btn-large waves-effect waves-light modal-edit" data-target="form-edit") #{translate.btnEdit}
+            i.material-icons.left edit
+        a(class="red darken-2 btn btn-large waves-effect waves-light" href="/monitors/delete/#{monitor.id}") #{translate.btnDelete}
+            i.material-icons.left delete
+    article.wrapper-content#playlist
+        section.container
+            form(action='/monitors/#{monitor.id}', method='post' id="form-edit" class="row")
+                div.input-field.col.s12
+                    i(class="material-icons prefix") edit
+                    label(for="name") #{translate.name}
+                    input(type='text' name='name' id="name" placeholder='#{translate.name}' value='#{monitor.name}' disabled)
+                div.input-field.col.s12
+                    i(class="material-icons prefix") edit
+                    label(for="uid") #{translate.uid}
+                    input(type='text' name='uid' id="uid" placeholder='#{translate.uid}' value='#{monitor.uid}' disabled)
+                div.input-field.col.s12.actions.center-align
+                    button(type='submit' class="light-green darken-2 btn btn-large waves-effect waves-light") #{translate.btnSave}
+                        i.material-icons.left done
+                    a(href='/monitors/#{monitor.id}' class="red darken-2 btn btn-large waves-effect waves-light modal-edit-cancel") #{translate.btnCancel}
+                        i.material-icons.left cancel

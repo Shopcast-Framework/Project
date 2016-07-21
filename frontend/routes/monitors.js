@@ -8,13 +8,30 @@ var express	= require('express'),
 	middlewares = require('../middlewares'),
 	translate = require('../languages');
 
-router.post('/', function(req, res) {
-    Rest.post('monitor', JSON.stringify(req.body)).then(function(res) {
-        res.redirect('/monitors?message='+res.body.message);
+router.post('/', middlewares.isLogged, middlewares.language, function(req, res) {
+
+    Rest.post('monitor', JSON.stringify(req.body)).then(function(response) {
+        res.redirect('/monitors?message='+response.body.message);
     }, function(err) {
         res.redirect('/monitors?message='+err.body.message);
     });
-})
+
+});
+
+router.get('/delete/:id', middlewares.isLogged, function( req, res ) {
+
+	var promises = [];
+	var id = req.params.id;
+
+	promises.push(Rest.delete('monitor/' + id));
+	Promise.all(promises).then(function(response) {
+		res.redirect('/monitors?message=' + response[0].body.message);
+	}, function(err) {
+		console.log(err);
+		res.redirect('/monitors?message=' + err.body.message);
+	});
+
+});
 
 router.get('/:id', middlewares.isLogged, middlewares.language, function( req, res ) {
 
@@ -25,7 +42,7 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 
 	Promise.all(promises).then(function(values) {
 
-		var users = values[0].body.monitor;
+		var monitor = values[0].body.monitor;
 
 		res.render('monitors/show', {
 			active: 'monitors',
@@ -34,7 +51,7 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 			isLogged: true,
 			isSearchBar: false,
 			session: req.session.user,
-			translate : translate.getWordsByPage( req.cookies.language, "Monitor", { title: monitor.name} ),
+			translate : translate.getWordsByPage( req.cookies.language, "Monitor", { title: monitor.name, tabTitle: monitor.name } ),
 			language: req.cookies.language,
 		});
 	}, function(err) {
@@ -45,7 +62,7 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 router.get('/', middlewares.isLogged, middlewares.language, function( req, res ) {
 
 	var promises = [];
-
+	
 	promises.push( Rest.get( 'monitor' ) );
 	promises.push(menu.load(req.session.user));
 
