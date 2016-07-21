@@ -43,6 +43,11 @@
     "planning:get:success"      : "List of plannings",
     "planning:getone:success"   : "Planning of id: %s",
     "planning:getone:failure"   : "Error can't find planning",
+    "planning:put:success"      : "Planning correctly updated",
+    "planning:put:failure"      : "Error, can't edit the planning",
+    "planning:post:success"     : "Planning successfully created",
+    "planning:delete:success"   : "Planning correctly deleted",
+    "planning:delete:failure"   : "Error no planning deleted",
 
     "file:get:success"          : "List of files",
     "file:post:success"         : "File successfully created",

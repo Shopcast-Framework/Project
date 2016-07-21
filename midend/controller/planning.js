@@ -55,9 +55,66 @@ var PlanningGetOne = function(req, res) {
     });
 };
 
+var PlanningDelete = function(req, res) {
+    req.user
+    .getOnePlanning({id: req.params.id})
+    .then(function(planning) {
+        if (planning) {
+            planning.destroy().then(function() {
+                res.status(Status.OK).send({message : Message.get("planning:delete:success")});
+            });
+        } else {
+            res.status(Status.UNAUTHORIZED).send({message : Message.get("planning:delete:failure")});
+        }
+    }, function(err) {
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
+    });
+};
+
+var PlanningPut = function(req, res) {
+    req.user
+    .getOnePlanning({id: req.params.id})
+    .then(function(planning) {
+        if (!planning) {
+            return res.status(Status.UNAUTHORIZED).send({message:Message.get("planning:put:failure")})
+        }
+        planning
+        .updateAttributes(req.body)
+        .then(function(planning) {
+            if (!planning) {
+                return res.status(Status.UNAUTHORIZED).send({message:Message.get("planning:put:failure")})
+            }
+            res.status(Status.OK).send({
+                message     : Message.get("planning:put:success"),
+                planning    : planning
+            });
+        }, function(err) {
+            res.status(Status.UNAUTHORIZED).send({message: err.toString()});
+        });
+    }, function(err) {
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
+    });
+};
+
+var PlanningPost = function(req, res) {
+    req.user
+    .createPlanning(req.body)
+    .then(function(planning) {
+        res.status(Status.OK).send({
+            message     : Message.get("planning:post:success"),
+            planning    : planning
+        });
+    }, function(err) {
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
+    });
+};
+
 var PlanningController = {
     get     : PlanningGet,
-    getOne  : PlanningGetOne
+    getOne  : PlanningGetOne,
+    post    : PlanningPost,
+    put     : PlanningPut,
+    delete  : PlanningDelete
 };
 
 module.exports = PlanningController;
