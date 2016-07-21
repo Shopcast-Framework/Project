@@ -69,7 +69,7 @@ var Routes = [
         name: 'playlist',
         actions: {
             'add' : { verb: 'post', route: '/:id/add' },
-            'sub' : { verb: 'delete', route: '/:id/sub' },
+            'sub' : { verb: 'delete', route: '/:id/delete/:file_id' },
             'sort' : { verb: 'post', route: '/:id/sort' }
         },
         middlewares: [

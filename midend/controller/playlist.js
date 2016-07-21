@@ -10,6 +10,7 @@ var Status      = require(process.env.NODE_PATH + '/config/status.json'),
     File        = orm.db.File;
 
 var PlaylistAdd = function(req, res) {
+    console.log(req);
     req.user
     .getOnePlaylist({id: req.params.id}, {include:[{model:File, as: 'files'}]})
     .then(function(playlist) {
@@ -27,12 +28,11 @@ var PlaylistAdd = function(req, res) {
 };
 
 var PlaylistSub = function(req, res) {
-    controle.log('DEEEELETE')
     PlaylistFile
     .destroy({
         where : {
             playlist_id : req.params.id,
-            file_id     : req.body.ids
+            file_id     : req.params.file_id
         },
         force : true
     })
