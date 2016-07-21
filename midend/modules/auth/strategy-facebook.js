@@ -16,7 +16,9 @@ var StrategyFacebook = function(app, passport, loginCallback) {
         };
 
         var authenticate = function(accessToken, refreshToken, profile, done) {
-            User.find({where: {facebookId:profile.id}})
+            User.find({
+                where: {facebookId:profile.id}
+            })
             .then(function(user) {
                 if (user) {
                     return done(null, user);
@@ -26,7 +28,8 @@ var StrategyFacebook = function(app, passport, loginCallback) {
                     username: profile.displayName,
                     name: profile.displayName,
                     avatar: profile.photos[0].value,
-                    facebookId: profile.id
+                    facebookId: profile.id,
+                    role: 1
                 })
                 .then(function(user) {
                     return done(null, user);

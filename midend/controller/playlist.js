@@ -28,6 +28,7 @@ var PlaylistAdd = function(req, res) {
 };
 
 var PlaylistSub = function(req, res) {
+    console.log('0-0-0-0-08734658923045878902-30874928402');
     PlaylistFile
     .destroy({
         where : {
@@ -37,6 +38,7 @@ var PlaylistSub = function(req, res) {
         force : true
     })
     .then(function(result) {
+        console.log(result);
         if (!result) {
             return res.status(Status.UNAUTHORIZED).send({
                 message : Message.get("playlist:sub:failure")
