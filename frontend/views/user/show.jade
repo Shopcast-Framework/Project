@@ -9,40 +9,45 @@ block content
     article.wrapper-content#playlist
         section.container
             form(action='/users/#{user.id}', method='post' id="form-edit" class="row")
-                div.input-field.col.s4
+                div.input-field.col.s12
                     i(class="material-icons prefix") edit
                     label(for="name") #{translate.username}
                     input(type='text' name='username' id="username" placeholder='#{translate.username}' value='#{user.username}' disabled)
-                div.input-field.col.s4
+                div.input-field.col.s12
                     i(class="material-icons prefix") edit
                     label(for="name") #{translate.name}
                     input(type='text' name='name' id="name" placeholder='#{translate.name}' value='#{user.name}' disabled)
-                div.input-field.col.s4
+                div.input-field.col.s12
                     i(class="material-icons prefix") email
                     label(for="name") #{translate.email}
                     input(type='text' name='email' id="email" placeholder='#{translate.email}' value='#{user.email}' disabled)
-                div.input-field.col.s4
+                //if user.role == 0
+	                //div.input-field.col.s12
+	                    //select(name="role"
+	                        //option(value="0") #{translate.administrator}
+	                        //option(value="1") #{translate.client}
+	                    //label(for="name") #{translate.role}
+                div.input-field.col.s12
                     i(class="material-icons prefix") phone
                     label(for="name") #{translate.phone}
                     input(type='text' name='phone' id="phone" placeholder='#{translate.phone}' value='#{user.phone}' disabled)
-                div.input-field.col.s4
+                div.input-field.col.s12
                     i(class="material-icons prefix") location
                     label(for="name") #{translate.location}
                     input(type='text' name='location' id="location" placeholder='#{translate.location}' value='#{user.location}' disabled)
-                div.input-field.col.s4
+                div.input-field.col.s12
                     i(class="material-icons prefix") phone
                     label(for="name") #{translate.age}
                     input(type='number' name='age' id="age" placeholder='#{translate.age}' value='#{user.age}' disabled)
-                div.input-field.col.s6
-                    select(name="role")
-                        option(value="0") #{translate.administrator}
-                        option(value="1") #{translate.client}
-                    label(for="name") #{translate.role}
-                div.input-field.col.s6
+                div.input-field.col.s12
                     select(name="sex")
-                        option(value="0") #{translate.man}
-                        option(value="1") #{translate.woman}
-                    label(for="name") #{translate.role}
+                    	if user.sex == 0
+                        	option(value="0" selected) #{translate.man}
+                        	option(value="1") #{translate.woman}
+                      	else if user.sex == 1
+                        	option(value="0") #{translate.man}
+                        	option(value="1" selected) #{translate.woman}
+                    label(for="name") #{translate.sex}
                 div.input-field.col.s12.actions.center-align
                     button(type='submit' class="light-green darken-2 btn btn-large waves-effect waves-light") #{translate.btnSave}
                         i.material-icons.left done
