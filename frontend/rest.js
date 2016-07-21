@@ -13,6 +13,7 @@ var Rest = function() {
     };
 
     self.call = function(method, resource, body) {
+        
         var defer = Q.defer(),
             httpRequest,
             options = {

@@ -142,8 +142,6 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 			files[index].size = humanize.filesize(files[index].size);
 		});
 
-		console.log(translate.getWordsByPage( req.cookies.language, "Files", { title: files.length } ));
-
 		res.render('files/list', {
 			active: 'files',
 			menu: values[1], 

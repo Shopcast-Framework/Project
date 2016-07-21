@@ -7,6 +7,7 @@ var Rest = require('../rest');
 var menu    = require(__dirname + '/../modules/menu');
 var middlewares = require('../middlewares');
 var translate = require('../languages');
+var humanize = require('humanize');
 
 router.post('/', middlewares.isLogged, function(req, res) {
 
@@ -69,14 +70,14 @@ router.get('/:id/file/delete/:id_file', middlewares.isLogged, middlewares.langua
     var id = req.params.id;
     var id_file = req.params.id_file;
 
-    var url = 'playlist/' + id + '/sub';
+    var url = 'playlist/' + id + '/delete/' + id_file;
 
 	Rest.delete(url, JSON.stringify({ids:[id_file]})).then(function(response) {
 		console.log(response);
-		res.redirect('/playlists/'+id+'?message=' + response.body.message);
+		res.redirect('/playlists?message=Successfully deleted');
 	}, function(err) {
 		console.log(err);
-		res.redirect('/playlists/'+id+'?message=' + err.body.message);
+		res.redirect('/playlists/'+id+'?message=An error occured');
 	});
 
 });
@@ -126,6 +127,10 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 		var files = values[0].body.files;
 		var playlist = values[1].body.playlist;
 		playlist.filesId = [];
+
+		values[0].body.files.forEach(function(element,index,array){
+			files[index].size = humanize.filesize(files[index].size);
+		});
 
         values[1].body.playlist.files.forEach(function(element,index,array){
         	playlist.filesId.push(element.id);

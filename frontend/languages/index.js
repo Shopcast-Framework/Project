@@ -28,9 +28,7 @@ var Language = function() {
     	if ( values !== null && values !== undefined )
     	{
     		for( var val in values ) {
-                console.log(val + " -- " + values[ val ]);
     			tmp[ val ] = tmp[ val ].replace( "%", values[ val ] );
-                console.log(tmp[ val ]);
     		}
     	}
 
