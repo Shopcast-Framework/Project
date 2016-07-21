@@ -5,8 +5,11 @@ var express = require('express'),
 	Promise = require('promise'),
 	Rest	= require('../rest'),
 	menu    = require(__dirname + '/../modules/menu'),
-	upload  = require('multer')({ dest: 'uploads/' }),
+	upload  = require('multer')({
+          dest              : 'uploads/'
+        }),
 	middlewares = require('../middlewares'),
+        probe     = require('node-ffprobe'), 
 	humanize = require('humanize'),
 	translate = require('../languages');
 
@@ -14,15 +17,31 @@ router.post('/',middlewares.isLogged, upload.any(), function(req, res) {
 
 	if (req.files && req.files[0]) {
 		var file = req.files[0];
-		for (var k in file) { req.body[k] = file[k]; }
+		for (var k in file) {
+                  req.body[k] = file[k];
+                  console.log(k + '   ' + req.body[k]);
+                }
 	}
 
-	Rest.post('file', JSON.stringify(req.body)).then(function() {
-		res.redirect('/files?message=Files correctly upload');
-	}, function(err) {
-		console.log(err);
-		res.redirect('/files?message=Files can\'t be upload');
-	});
+        probe(file.path, function(err, probeData) {
+            var duration = 0;
+
+            if (probeData && probeData.format) {
+                duration = probeData.format.duration;
+            }
+            if (req.files && req.files[0]) {
+                req.body['duration'] = duration;
+                console.log(duration);
+            }
+
+	    Rest.post('file', JSON.stringify(req.body)).then(function() {
+	    	res.redirect('/files?message=Files correctly upload');
+	    }, function(err) {
+	    	console.log(err);
+	    	res.redirect('/files?message=Files can\'t be upload');
+	    });
+
+        });
 });
 
 router.post('/:id',middlewares.isLogged, function(req, res) {

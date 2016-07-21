@@ -28,10 +28,7 @@ var SessionOption = function(req, res) {
 };
 
 var SessionPost = function(req, res) {
-    console.log(req.body);
     var strategy = auth.strategy[req.body.strategy];
-    console.log(req.user);
-    console.log(strategy);
 
     if (req.user) {
         req.user.authenticate();
