@@ -4,7 +4,7 @@ var express = require('express');
 var router = express.Router();
 var Promise = require('promise');
 var Rest = require('../rest');
-var menu    = require(__dirname + '/../menu.json');
+var menu    = require(__dirname + '/../modules/menu');
 var middlewares = require('../middlewares');
 var translate = require('../languages');
 
@@ -59,11 +59,29 @@ router.post('/',middlewares.isLogged, function(req, res) {
 });
 
 router.post('/:id', middlewares.isLogged, function(req, res) {
-	Rest.put('user/' + req.params.id, JSON.stringify(req.body)).then(function(response) {
-		res.redirect('/users?message=' + response.body.message);
+	var id = req.params.id;
+
+	Rest.put('user/' + id, JSON.stringify(req.body)).then(function(response) {
+		res.redirect('/users/'+id+'?message=' + response.body.message);
 	}, function(err) {
-		res.redirect('/users?message=' + err.body.message);
+		res.redirect('/users/'+id+'?message=' + err.body.message);
 	});
+});
+
+router.get('/delete/:id', middlewares.isLogged, function( req, res ) {
+
+	var promises = [];
+	var id = req.params.id;
+
+	promises.push(Rest.delete('user/' + id));
+	Promise.all(promises).then(function() {
+		console.log(res.body);
+		res.redirect('/users?message=Successfully deleted');
+	}, function(err) {
+		console.log(err);
+		res.redirect('/users?message=An error occured');
+	});
+
 });
 
 router.get('/:id', middlewares.isLogged, middlewares.language, function( req, res ) {
@@ -71,6 +89,7 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 	var promises = [];
 
 	promises.push( Rest.get( 'user/' + req.params.id ) );
+	promises.push(menu.load(req.session.user));
 
 	Promise.all(promises).then(function(values) {
 
@@ -79,9 +98,9 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 		if ( user.avatar == null )
 			user.avatar = "public/images/users/default.png";
 
-		res.render('user/view', {
+		res.render('user/show', {
 			active: '',
-			menu: menu,
+			menu: values[1],
 			user: user,
 			permission: [ "Administrateur", "Client" ],
 			isLogged: true,
@@ -100,6 +119,7 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 	var promises = [];
 
 	promises.push( Rest.get( 'user' ) );
+	promises.push(menu.load(req.session.user));
 
 	Promise.all(promises).then(function(values) {
 
@@ -111,7 +131,7 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 
 		res.render('user/list', {
 			active: '/users',
-			menu: menu,
+			menu: values[1],
 			users: users,
 			permission: [ "Administrateur", "Client"],
 			isLogged: true,
