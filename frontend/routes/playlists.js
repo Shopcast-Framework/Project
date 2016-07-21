@@ -70,7 +70,7 @@ router.get('/:id/file/delete/:id_file', middlewares.isLogged, middlewares.langua
     var id = req.params.id;
     var id_file = req.params.id_file;
 
-    var url = 'playlist/' + id + '/delete/' + id_file;
+    var url = 'playlist/' + id + '/sub/' + id_file;
 
 	Rest.delete(url, JSON.stringify({ids:[id_file]})).then(function(response) {
 		console.log(response);
