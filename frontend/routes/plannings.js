@@ -4,37 +4,47 @@ var express = require('express'),
 	router = express.Router(),
 	Promise = require('promise'),
 	Rest	= require('../rest'),
-	menu    = require(__dirname + '/../modules/menu.js');
+	menu    = require(__dirname + '/../modules/menu'),
+    middlewares = require('../middlewares'),
+    translate = require('../languages');
 
-router.get('/:id', function(req, res) {
+router.get('/:id', middlewares.isLogged, middlewares.language, function(req, res) {
     var promises = [];
 
     promises.push(Rest.get('planning/' + req.params.id));
+    promises.push(menu.load(req.session.user));
 
     Promise.all(promises).then(function(values) {
         console.log(values[0].body.planning);
         res.render('plannings/show', {
-            title: 'Shopcast - Plannings',
-            titleContent: 'Plannings',
             active: '/plannings',
+            menu: values[1],
             planning: values[0].body.planning,
-            menu: menu.load(req.session.user)
+            isLogged: true,
+            isSearchBar: true,
+            session: req.session.user,
+            translate : translate.getWordsByPage( req.cookies.language, "Plannings" ),
+            language: req.cookies.language
         });
     });
 });
 
-router.get('/', function(req, res) {
+router.get('/', middlewares.isLogged, middlewares.language, function(req, res) {
     var promises = [];
 
     promises.push(Rest.get('planning'));
+    promises.push(menu.load(req.session.user));
 
     Promise.all(promises).then(function(values) {
     	res.render('plannings/index', {
-    		title: 'Shopcast - Plannings',
-    		titleContent: 'Plannings',
     		active: '/plannings',
+            menu: values[1],
             plannings: values[0].body.plannings,
-    		menu: menu.load(req.session.user)
+            isLogged: true,
+            isSearchBar: false,
+            session: req.session.user,
+            translate : translate.getWordsByPage( req.cookies.language, "Plannings" ),
+            language: req.cookies.language
     	});
     });
 });

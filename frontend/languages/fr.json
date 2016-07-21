@@ -105,6 +105,10 @@
     "btnDelete": "Supprimer",
     "titlePlaylists": "Liste des playlists"
   },
+  "Plannings": {
+    "title": "Calendrier",
+    "tabTitle": "Calendrier - Shopcast"
+  },
   "Settings": {
     "title": "Configuration",
     "tabTitle": "Configuration - Shopcast",

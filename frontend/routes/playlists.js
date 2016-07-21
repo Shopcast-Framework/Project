@@ -8,7 +8,7 @@ var menu    = require(__dirname + '/../modules/menu');
 var middlewares = require('../middlewares');
 var translate = require('../languages');
 
-router.post('/',middlewares.isLogged, function(req, res) {
+router.post('/', middlewares.isLogged, function(req, res) {
 
 	Rest.post('playlist', JSON.stringify(req.body)).then(function(response) {
 		console.log(response);
