@@ -21,7 +21,6 @@
 	$( ".modal-edit" ).click(function() {
 		var form = $( this ).data( "target" );
 		$("#" + form + " input, #" + form + " textarea").each(function(){
-			console.log($( this ).data("disabled"));
 			if ($( this ).data("disabled") != true)
 				$( this ).prop( "disabled", false );
 		});

@@ -31,7 +31,7 @@ router.post('/:id',middlewares.isLogged, function(req, res) {
     })
 });
 
-router.get('/delete/:id', middlewares.isLogged, middlewares.language, function( req, res ) {
+router.get('/delete/:id', middlewares.isLogged, function( req, res ) {
 
 	var promises = [];
 	var id = req.params.id;
@@ -69,9 +69,9 @@ router.get('/:id/file/delete/:id_file', middlewares.isLogged, middlewares.langua
     var id = req.params.id;
     var id_file = req.params.id_file;
 
-    var url = 'playlist/' + id + '/delete';
+    var url = 'playlist/' + id + '/sub';
 
-	Rest.delete(url, JSON.stringify([id_file])).then(function(response) {
+	Rest.delete(url, JSON.stringify({ids:[id_file]})).then(function(response) {
 		console.log(response);
 		res.redirect('/playlists/'+id+'?message=' + response.body.message);
 	}, function(err) {

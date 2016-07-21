@@ -34,9 +34,9 @@ block content
 							td #{user.last_connection}
 							td #{user.created_at}
 							td.actions
-								button(class="light-blue btn-floating waves-effect waves-circle waves-light modal-trigger" data-target="new-element")
+								a(class="light-blue btn-floating waves-effect waves-circle waves-light" href="/users/#{user.id}")
 									i.material-icons edit
-								button(class="red btn-floating waves-effect waves-circle waves-light")
+								a(class="red btn-floating waves-effect waves-circle waves-light" href="/users/delete/#{user.id}")
 									i.material-icons delete
 	div(id="new-element" class="modal light-box")
 		h4(class="center-align light-blue") #{translate.newUser)

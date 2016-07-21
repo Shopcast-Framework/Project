@@ -34,6 +34,7 @@
     "btnSave": "Sauvegarder",
     "btnCancel":"Annuler",
     "btnAddFile": "Ajouter",
+    "btnDelete": "Supprimer",
     "titleFiles": "Liste des fichiers",
     "addFile": "Ajouter un/des fichier(s)",
     "tabUploadFile": "Téléversement",
@@ -71,7 +72,13 @@
     "createdAt" : "Membre depuis",
     "shopCreatedAt" : "Crée le",
     "phone": "Téléphone",
-    "address": "Adresse"
+    "address": "Adresse",
+    "btnEdit": "Modifier",
+    "btnDelete": "Supprimer",
+    "btnSave": "Sauvargarder",
+    "btnCancel": "Annuler",
+    "administrator": "Administrateur",
+    "client": "Client"
   },
   "Files": {
     "title": "Mes fichiers (%)",
