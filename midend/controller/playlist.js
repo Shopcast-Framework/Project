@@ -28,7 +28,6 @@ var PlaylistAdd = function(req, res) {
 };
 
 var PlaylistSub = function(req, res) {
-    console.log('0-0-0-0-08734658923045878902-30874928402');
     PlaylistFile
     .destroy({
         where : {
