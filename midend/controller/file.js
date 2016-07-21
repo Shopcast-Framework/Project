@@ -12,7 +12,7 @@ var FileGet = function(req, res) {
             user_id: req.user.id
         },
         include : [{
-            model     : ormPlaylist,
+            model     : Playlist,
             as        : 'playlists',
             required  : false
         }]
