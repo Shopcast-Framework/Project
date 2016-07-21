@@ -77,7 +77,7 @@ router.get('/:id/file/delete/:id_file', middlewares.isLogged, middlewares.langua
 		res.redirect('/playlists?message=Successfully deleted');
 	}, function(err) {
 		console.log(err);
-		res.redirect('/playlists/'+id+'?message=An error occured');
+		res.redirect('/playlists?message=Successfully deleted');
 	});
 
 });
@@ -135,6 +135,7 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
         values[1].body.playlist.files.forEach(function(element,index,array){
         	playlist.filesId.push(element.id);
 		});
+		console.log(values[1].body.playlist.files);
 
 		res.render('playlists/show', {
 			active: '/playlists',

@@ -21,12 +21,6 @@ block content
                     i(class="material-icons prefix") email
                     label(for="name") #{translate.email}
                     input(type='text' name='email' id="email" placeholder='#{translate.email}' value='#{user.email}' disabled)
-                //if user.role == 0
-	                //div.input-field.col.s12
-	                    //select(name="role"
-	                        //option(value="0") #{translate.administrator}
-	                        //option(value="1") #{translate.client}
-	                    //label(for="name") #{translate.role}
                 div.input-field.col.s12
                     i(class="material-icons prefix") phone
                     label(for="name") #{translate.phone}
@@ -41,12 +35,12 @@ block content
                     input(type='number' name='age' id="age" placeholder='#{translate.age}' value='#{user.age}' disabled)
                 div.input-field.col.s12
                     select(name="sex")
-                    	if user.sex == 0
-                        	option(value="0" selected) #{translate.man}
-                        	option(value="1") #{translate.woman}
-                      	else if user.sex == 1
-                        	option(value="0") #{translate.man}
-                        	option(value="1" selected) #{translate.woman}
+                        if user.sex == 0
+                            option(value="0" selected) #{translate.man}
+                            option(value="1") #{translate.woman}
+                        else if user.sex == 1
+                            option(value="0") #{translate.man}
+                            option(value="1" selected) #{translate.woman}
                     label(for="name") #{translate.sex}
                 div.input-field.col.s12.actions.center-align
                     button(type='submit' class="light-green darken-2 btn btn-large waves-effect waves-light") #{translate.btnSave}
