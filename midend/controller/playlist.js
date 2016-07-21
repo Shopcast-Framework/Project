@@ -5,10 +5,12 @@ var Status      = require(process.env.NODE_PATH + '/config/status.json'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
     Planning    = orm.db.Planning,
     Playlist    = orm.db.Playlist,
+    PlaylistFile    = orm.db.PlaylistFile,
     User        = orm.db.User,
     File        = orm.db.File;
 
 var PlaylistAdd = function(req, res) {
+    console.log(req);
     req.user
     .getOnePlaylist({id: req.params.id}, {include:[{model:File, as: 'files'}]})
     .then(function(playlist) {
@@ -30,17 +32,18 @@ var PlaylistSub = function(req, res) {
     .destroy({
         where : {
             playlist_id : req.params.id,
-            file_id     : req.body.ids
-        }
+            file_id     : req.params.file_id
+        },
+        force : true
     })
     .then(function(result) {
         if (!result) {
             return res.status(Status.UNAUTHORIZED).send({
-                message : Message.get("playlist:sub:success")
+                message : Message.get("playlist:sub:failure")
             });
         }
         res.status(Status.OK).send({
-            message : Message.get("playlist:sub:failure")
+            message : Message.get("playlist:sub:success")
         });
     }, function(err) {
         res.status(Status.UNAUTHORIZED).send({message: err.toString()});
