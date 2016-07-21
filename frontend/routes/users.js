@@ -99,7 +99,7 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 			user.avatar = "public/images/users/default.png";
 
 		res.render('user/show', {
-			active: '',
+			active: '/users',
 			menu: values[1],
 			user: user,
 			permission: [ "Administrateur", "Client" ],

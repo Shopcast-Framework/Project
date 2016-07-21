@@ -1,0 +1,44 @@
+extends ../layout
+
+block content
+    header.actions.container
+        button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="new-element") #{translate.btnCreate}
+            i.material-icons.left add
+    article.wrapper-content.container#monitors
+        table.listing
+            thead
+                tr
+                    th #{translate.name}
+                    th #{translate.uid}
+                    th #{translate.created_at}
+                    th #{translate.updated_at}
+                    th
+            tbody
+                each monitor, index in monitors
+                    tr(data-keywords="#{monitor.name}")
+                        td #{monitor.name}
+                        td #{monitor.uid}
+                        td #{monitor.created_at}
+                        td #{monitor.updated_at}
+                        td.actions
+                            a(class="light-blue btn-floating waves-effect waves-circle waves-light" href="/monitors/#{monitor.id}")
+                                i.material-icons edit
+                            a(class="red darken-2 btn btn-floating waves-effect waves-light" href="/monitors/delete/#{monitor.id}") #{translate.btnDelete}
+                                i.material-icons.left delete
+    div(id="new-element" class="modal light-box")
+        h4(class="center-align light-blue") #{translate.newMonitor}
+        div(class="modal-content")
+            form(class="row" action='/monitors', method='post')
+                div.input-field.col.s12
+                    i(class="material-icons prefix") edit
+                    input(type='text' name='name' id="name")
+                    label(for="name") #{translate.name}
+                div.input-field.col.s12
+                    i(class="material-icons prefix") edit
+                    input(type='text' name='name' id="uid")
+                    label(for="uid") #{translate.uid}
+                div.input-field.col.s12.actions.center-align
+                    button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") #{translate.btnAdd}
+                        i(class="material-icons left") done
+                    a(href="#!" class="modal-action modal-close btn btn-large red darken-1 white-text waves-effect waves-light") #{translate.btnCancel}
+                        i(class="material-icons left") cancel

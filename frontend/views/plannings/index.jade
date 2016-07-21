@@ -1,21 +1,24 @@
 extends ../layout
 
 block content
-	#calendar
 	header.title-content
-		div.actions
-	article.wrapper-content#files
-		table
-			thead
-				tr
-					th edit
-					th title
-			tbody
-				each planning in plannings
-					tr
-						td
-							a(href="/plannings/#{planning.id}") Edit
-						td
-							"#{ planning.title }"
+		div.actions.container
+			button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="new-event") #{translate.btnAdd}
+				i.material-icons.left add
+	article
+		#calendar
+	div(id="new-event" class="modal light-box")
+		h4(class="center-align light-blue") #{translate.newPlaylist}
+		div(class="modal-content")
+			form(class="row" action='/playlists', method='post')
+				div.input-field.col.s6
+					i(class="material-icons prefix") edit
+					input(type='text' name='name' id="name")
+					label(for="name") #{translate.name}
+				div.input-field.col.s12.actions.right-align
+					button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") #{translate.btnAdd}
+						i(class="material-icons left") done
+					a(href="#!" class="modal-action modal-close btn btn-large red darken-1 white-text waves-effect waves-light") #{translate.btnCancel}
+						i(class="material-icons left") cancel
 block script
 	script(type='text/javascript', src='/js/calendar.js')

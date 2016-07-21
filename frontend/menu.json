@@ -23,7 +23,7 @@
 	{
 	  "name": "display",
 	  "icon": "settings_ethernet",
-	  "url": "/display",
+	  "url": "/monitors",
 	  "isActive": true,
 	  "access": 1
 	},

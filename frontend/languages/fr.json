@@ -127,7 +127,20 @@
   },
   "Plannings": {
     "title": "Calendrier",
-    "tabTitle": "Calendrier - Shopcast"
+    "tabTitle": "Calendrier - Shopcast",
+    "btnAdd": "Ajouter une nouvelle date"
+  },
+  "Monitors": {
+    "title": "Mes moniteurs (%)",
+    "tabTitle": "Moniteurs - Shopcast",
+    "btnCreate": "Ajouter un moniteur",
+    "btnDelete": "Supprimer",
+    "btnAdd": "Ajouter",
+    "btnCancel": "Annuler",
+    "name": "Nom",
+    "uid": "ID du moniteur",
+    "created_at": "Ajouté le",
+    "updated_at": "Modifié le"
   },
   "Settings": {
     "title": "Configuration",

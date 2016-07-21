@@ -353,6 +353,10 @@ body, html{
 	background-color: rgb(3, 169, 244);
 }
 
+#playlist .list-files{
+	margin-bottom: 50px;
+}
+
 #playlist .list-files .actions-header .btn-save{
 	
 }
@@ -627,4 +631,20 @@ body, html{
 
 .picker__date-display{
     background-color: #03A9F4;
+}
+
+/*******************************************************************
+********************************************************************
+**************************** Light box *****************************
+********************************************************************
+*******************************************************************/
+
+#calendar{
+	width: 90%;
+	margin: 50px auto;
+}
+
+#calendar .fc-toolbar h2{
+	color:#333;
+	font-size: 40px;
 }
