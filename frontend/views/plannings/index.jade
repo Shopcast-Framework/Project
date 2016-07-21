@@ -1,8 +1,8 @@
 extends ../layout
 
 block content
+	#calendar
 	header.title-content
-		h1= titleContent
 		div.actions
 	article.wrapper-content#files
 		table
@@ -17,3 +17,5 @@ block content
 							a(href="/plannings/#{planning.id}") Edit
 						td
 							"#{ planning.title }"
+block script
+	script(type='text/javascript', src='/js/calendar.js')

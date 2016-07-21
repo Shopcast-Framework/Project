@@ -6,14 +6,9 @@ html(lang='fr')
 		title #{translate.tabTitle}
 		link(rel='stylesheet', href='http://fonts.googleapis.com/icon?family=Material+Icons')
 		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/materialize.min.css')
-		link(rel='stylesheet', type='text/css', media='screen,projection', href='/css/magnet.css')
 		link(href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" rel="stylesheet" type="text/css")
-		link(rel='stylesheet', href='/css/style.css')
-		script(type="application/javascript", src="http://momentjs.com/downloads/moment.min.js")
-		script(type='text/javascript', src='/js/jquery-v2.1.1.min.js')
-		script(type="text/javascript", src="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.7.0/fullcalendar.min.js")
 		link(rel="stylesheet", type="text/css", href="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.7.0/fullcalendar.min.css")
-
+		link(rel='stylesheet', href='/css/style.css')
 	body
 		header(class="light-blue" id="header")
 			div
@@ -69,8 +64,12 @@ html(lang='fr')
 								img(src="#{val}")
 			div(class="modal-footer")
 				a(href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat") #{translate.Language.btn}
+
 		script(type='text/javascript', src='/js/jquery-v2.1.1.min.js')
+		script(type="application/javascript", src="http://momentjs.com/downloads/moment.min.js")
+		script(type="text/javascript", src="http://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.7.0/fullcalendar.min.js")
 		script(type='text/javascript', src='/js/materialize.min.js')
 		//script(src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js")
 		script(type='text/javascript', src='/js/init.js')
+
 		block script
