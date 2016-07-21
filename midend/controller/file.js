@@ -3,7 +3,9 @@
 var Status      = require(process.env.NODE_PATH + '/config/status.json'),
     orm         = require(process.env.NODE_PATH + '/modules/orm'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
+    probe       = require('node-ffprobe'),
     File        = orm.db.File,
+    PlaylistFile    = orm.db.PlaylistFile,
     Playlist    = orm.db.Playlist;
 
 var FileGet = function(req, res) {
@@ -93,34 +95,21 @@ var FilePut = function(req, res) {
 };
 
 var FileDelete = function(req, res) {
-    PlaylistFile.destroy({
-        where : {file_id: req.params.id}
-    }).
-    then(function(result) {
-        if (!result) {
-            return res.status(Status.UNAUTHORIZED).send({
-                message : Message.get("playlistfile:delete:failure")
-            })
-        }
-        res.status(Status.OK).send({
-            message : Message.get("playlistfile:delete:success")
+       File
+        .destroy({
+            where: {id: req.params.id}
+        })
+        .then(function(result) {
+            if (!result) {
+                return res.status(Status.UNAUTHORIZED).send({
+                    message : Message.get("file:delete:failure")
+                })
+            }
+            res.status(Status.OK).send({
+                message : Message.get("file:delete:success")
+            });
         });
-    });
-    File
-    .destroy({
-        where: {id: req.params.id}
-    })
-    .then(function(result) {
-        if (!result) {
-            return res.status(Status.UNAUTHORIZED).send({
-                message : Message.get("file:delete:failure")
-            })
-        }
-        res.status(Status.OK).send({
-            message : Message.get("file:delete:success")
-        });
-    });
-};
+    };
 
 var FileController = {
     delete  : FileDelete,
