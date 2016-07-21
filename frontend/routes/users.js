@@ -31,11 +31,12 @@ router.post('/new_password', function(req, res) {
 
 router.get('/reset_password', middlewares.language, function(req, res) {
 
-	res.render('users/reset_password', {
-		title: 'Shopcast - Users',
-		titleContent: 'Reset Password',
+	res.render('user/reset_password', {
 		active: '/users',
-		menu: menu.load(req.session.user)
+		isLogged: false,
+		isSearchBar: false,
+		translate : translate.getWordsByPage( req.cookies.language, "User", {title: "Mot de passe oublié", tabTitle: "Mot de passe oublié"} ),
+		language: req.cookies.language,
 	});
 });
 

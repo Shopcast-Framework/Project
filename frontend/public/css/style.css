@@ -648,3 +648,8 @@ body, html{
 	color:#333;
 	font-size: 40px;
 }
+
+#new-event.light-box{
+	height: 90%;
+	top: 5% !important;
+}
