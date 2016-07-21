@@ -25,6 +25,28 @@ var PlaylistAdd = function(req, res) {
     });
 };
 
+var PlaylistSub = function(req, res) {
+    PlaylistFile
+    .destroy({
+        where : {
+            playlist_id : req.params.id,
+            file_id     : req.params.file_id
+        }
+    })
+    .then(function(result) {
+        if (!result) {
+            return res.status(Status.UNAUTHORIZED).send({
+                message : Message.get("playlist:sub:success")
+            });
+        }
+        res.status(Status.OK).send({
+            message : Message.get("playlist:sub:failure")
+        });
+    }, function(err) {
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
+    });
+};
+
 var PlaylistSort = function(req, res) {
     req.user
     .getOnePlaylist({id: req.params.id})
@@ -152,6 +174,7 @@ var PlayListController = {
     getOne  : PlaylistGetOne,
     delete  : PlaylistDelete,
     add     : PlaylistAdd,
+    sub     : PlaylistSub,
     sort    : PlaylistSort
 };
 
