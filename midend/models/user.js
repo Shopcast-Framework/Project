@@ -18,6 +18,7 @@ var User = function(sequelize) {
         avatar          : Sequelize.STRING,
         email           : Sequelize.STRING,
         description     : Sequelize.STRING,
+        phone           : Sequelize.INTEGER,
         age             : Sequelize.STRING,
         sex             : Sequelize.STRING,
         location        : Sequelize.STRING,
