@@ -33,7 +33,8 @@ var PlaylistSub = function(req, res) {
         where : {
             playlist_id : req.params.id,
             file_id     : req.body.ids
-        }
+        },
+        force : true
     })
     .then(function(result) {
         if (!result) {
