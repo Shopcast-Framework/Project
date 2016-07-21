@@ -16,7 +16,7 @@ var Planning = function(sequelize) {
     var relationships = function() {
         model.belongsTo(orm.db.Monitor, {constraints: false, as: 'monitor'});
         model.belongsTo(orm.db.User, {constraints: false});
-        model.belongsTo(orm.db.Playlist, {constraints: false});
+        model.belongsTo(orm.db.Playlist, {constraints: false, as: 'playlist'});
     };
 
     return {
