@@ -30,7 +30,7 @@ var PlaylistSub = function(req, res) {
     .destroy({
         where : {
             playlist_id : req.params.id,
-            file_id     : req.params.file_id
+            file_id     : req.body.ids
         }
     })
     .then(function(result) {
