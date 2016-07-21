@@ -6,6 +6,15 @@
 	$(".dropdown-button").dropdown();
 	$('select').material_select();
 	$('ul.tabs').tabs();
+	$('.datepicker').pickadate({
+	    selectMonths: true, // Creates a dropdown to control month
+	    selectYears: 7, // Creates a dropdown of 15 years to control year
+	    format: "yyyy-mm-dd"
+	  });
+	$('.timepicker').pickatime({
+		format: 'HH:i',
+		interval: 15
+	});
 
 	// Sortable
 	$( ".sortable" ).sortable({

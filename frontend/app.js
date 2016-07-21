@@ -41,7 +41,7 @@ app.run = function(){
     app.use('/files', require('./routes/files'));
     app.use('/friends', require('./routes/friends'));
     app.use('/playlists', require('./routes/playlists'));
-    app.use('/plannings', require('./routes/plannings'));
+    app.use('/calendar', require('./routes/calendar'));
     app.use('/users', require('./routes/users'));
     app.use('/signin', require('./routes/signin'));
     app.use('/session', require('./routes/session'));

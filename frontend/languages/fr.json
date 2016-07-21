@@ -8,7 +8,8 @@
     "byEmail" : "via e-mail",
     "byFacebook" : "connexion via Facebook",
     "byGoogle" : "connexion via Google",
-    "youCanChoose" : "Ou vous pouvez utiliser..."
+    "youCanChoose" : "Ou vous pouvez utiliser...",
+    "resetPassword": "Mot de passe oublié ?"
   },
   "Dashboard": {
     "title": "Tableau de bord",
@@ -128,7 +129,15 @@
   "Plannings": {
     "title": "Calendrier",
     "tabTitle": "Calendrier - Shopcast",
-    "btnAdd": "Ajouter une nouvelle date"
+    "btnCreate": "Ajouter une nouvelle date",
+    "newEvent": "Nouvel évènement",
+    "btnAdd": "Ajouter",
+    "btnCancel": "Annuler",
+    "titleForm": "Titre",
+    "range_start": "Date de début",
+    "range_end": "Date de fin",
+    "whatPlaylist": "Quelle playlist associer ?",
+    "whatMonitor": "Quel moniteur associer ?"
   },
   "Monitors": {
     "title": "Mes moniteurs (%)",

@@ -3,22 +3,68 @@ extends ../layout
 block content
 	header.title-content
 		div.actions.container
-			button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="new-event") #{translate.btnAdd}
+			button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="new-event") #{translate.btnCreate}
 				i.material-icons.left add
 	article
 		#calendar
-	div(id="new-event" class="modal light-box")
-		h4(class="center-align light-blue") #{translate.newPlaylist}
+	div(id="new-event" class="modal light-box light-box-event")
+		h4(class="center-align light-blue") #{translate.newEvent}
 		div(class="modal-content")
-			form(class="row" action='/playlists', method='post')
-				div.input-field.col.s6
+			form(class="row" action='/calendar', method='post')
+				div.input-field.col.s12
 					i(class="material-icons prefix") edit
-					input(type='text' name='name' id="name")
-					label(for="name") #{translate.name}
-				div.input-field.col.s12.actions.right-align
+					input(type='text' name='title' id="title")
+					label(for="title") #{translate.titleForm}
+				div.input-field.col.s12
+					i(class="material-icons prefix") date_range
+					input(type='date' name='range_start' id="range_start" class="datepicker" placeholder="#{translate.range_start}")
+					//label(for="range_start") #{translate.range_start}
+				div.input-field.col.s12
+					i(class="material-icons prefix") date_range
+					input(type='date' name='range_end' id="range_end" class="datepicker" placeholder="#{translate.range_end}")
+					//label(for="range_end") #{translate.range_end}
+				div.input-field.col.s12
+					i(class="material-icons prefix") start_at
+					input(type='date' name='start_at' id="start_at" class="timepicker" placeholder="#{translate.start_at}")
+					//label(for="range_end") #{translate.start_at}
+				div.input-field.col.s6
+					select(name="playlist_id" id="playlist_id")
+						option(value="" disabled="disabled" selected="selected") #{translate.whatPlaylist)
+						each playlist, index in playlists
+							option(value="#{playlist.id}") #{playlist.name}
+				div.input-field.col.s6
+					select(name="monitor_id" id="monitor_id")
+						option(value="" disabled="disabled" selected="selected") #{translate.whatMonitor)
+						each monitor, index in monitors
+							option(value="#{monitor.id}") #{monitor.name} - #{monitor.uid}
+					label(for="role") #{translate.role)
+				div.input-field.col.s12.actions.center-align
 					button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") #{translate.btnAdd}
 						i(class="material-icons left") done
 					a(href="#!" class="modal-action modal-close btn btn-large red darken-1 white-text waves-effect waves-light") #{translate.btnCancel}
 						i(class="material-icons left") cancel
 block script
-	script(type='text/javascript', src='/js/calendar.js')
+	//script(type='text/javascript', src='/js/calendar.js')
+	script.
+		var local_events =!{JSON.stringify(events)};
+		(function($){
+			$('#calendar').fullCalendar({
+		        header: { 
+		        	left: 'today, prev, next',
+		        	center: 'title',
+		        	right: 'month, agendaWeek, agendaDay' 
+		        }, 
+		        events: local_events,
+		        eventClick: function(calEvent, jsEvent, view) {
+
+			        //alert('Event: ' + calEvent.title);
+			        //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+			        //alert('View: ' + view.name);
+			        console.log(calEvent)
+
+
+			    }
+				
+		    })
+
+		})(jQuery); // end of jQuery name space

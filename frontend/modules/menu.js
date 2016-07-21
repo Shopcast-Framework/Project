@@ -14,7 +14,7 @@ module.exports = {
 
 	    for (var i in menu) {
 	    	
-	        if (user.role <= menu[i].access)
+	        if (user.role <= menu[i].access && menu[i].isActive)
 	        	tmp.push(menu[i]);
 	    }
 

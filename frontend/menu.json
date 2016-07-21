@@ -30,8 +30,8 @@
 	{
 	  "name": "calendar",
 	  "icon": "event",
-	  "url": "/plannings",
-	  "isActive": false,
+	  "url": "/calendar",
+	  "isActive": true,
 	  "access": 1
 	},
 	{
@@ -45,7 +45,7 @@
 	  "name": "settings",
 	  "icon": "settings",
 	  "url": "/settings",
-	  "isActive": true,
+	  "isActive": false,
 	  "access": 0
 	}
 ]

@@ -10,7 +10,7 @@ module.exports = {
             try{
                 fs.statSync(String(req.session.user.avatar));
             }catch(err){
-                req.session.user.avatar = "/public/images/users/guerin_f.jpg";
+                req.session.user.avatar = "/public/images/users/default_h.png";
             }
 
             next();
