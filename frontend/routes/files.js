@@ -19,19 +19,17 @@ router.post('/',middlewares.isLogged, upload.any(), function(req, res) {
 		var file = req.files[0];
 		for (var k in file) {
                   req.body[k] = file[k];
-                  console.log(k + '   ' + req.body[k]);
                 }
 	}
 
         probe(file.path, function(err, probeData) {
             var duration = 0;
 
-            if (probeData && probeData.format) {
+            if (probeData && probeData.format && !isNaN(probeData.format.duration)) {
                 duration = probeData.format.duration;
             }
             if (req.files && req.files[0]) {
                 req.body['duration'] = duration;
-                console.log(duration);
             }
 
 	    Rest.post('file', JSON.stringify(req.body)).then(function() {
