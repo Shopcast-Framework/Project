@@ -48,6 +48,40 @@ router.get('/delete/:id', middlewares.isLogged, function( req, res ) {
 
 });
 
+router.post('/:id/file/add/', middlewares.isLogged, middlewares.language, function( req, res ) {
+
+    var id = req.params.id;
+    var ids = req.body;
+    console.log(ids);
+
+    var url = 'playlist/' + id + '/add';
+
+	Rest.post(url, JSON.stringify(ids.files)).then(function(response) {
+		console.log(response);
+		res.redirect('/playlists/'+id+'?message=' + response.body.message);
+	}, function(err) {
+		console.log(err);
+		res.redirect('/playlists/'+id+'?message=' + err.body.message);
+	});
+
+});
+
+router.post('/:id/file/sort/', middlewares.isLogged, middlewares.language, function( req, res ) {
+
+    var id = req.params.id;
+    var files = req.body;
+
+    var url = 'playlist/' + id + '/sort';
+
+	Rest.post(url, JSON.stringify(files.ids)).then(function(response) {
+		res.send(response.body);
+	}, function(err) {
+		console.log(err);
+		res.send(err.body);
+	});
+
+});
+
 router.get('/:id/file/add/:id_file', middlewares.isLogged, middlewares.language, function( req, res ) {
 
     var id = req.params.id;
@@ -134,8 +168,8 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 
         values[1].body.playlist.files.forEach(function(element,index,array){
         	playlist.filesId.push(element.id);
+        	playlist.files[index].size = humanize.filesize(playlist.files[index].size);
 		});
-		console.log(values[1].body.playlist.files);
 
 		res.render('playlists/show', {
 			active: '/playlists',

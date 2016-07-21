@@ -9,7 +9,7 @@ var express = require('express'),
           dest              : 'uploads/'
         }),
 	middlewares = require('../middlewares'),
-        probe     = require('node-ffprobe'), 
+    probe     = require('node-ffprobe'), 
 	humanize = require('humanize'),
 	translate = require('../languages');
 
@@ -22,7 +22,14 @@ router.post('/',middlewares.isLogged, upload.any(), function(req, res) {
                 }
 	}
 
-        probe(file.path, function(err, probeData) {
+	Rest.post('file', JSON.stringify(req.body)).then(function() {
+			res.redirect('/files?message=Files correctly upload');
+		}, function(err) {
+		    console.log(err);
+		    res.redirect('/files?message=Files can\'t be upload');
+	});
+
+        /*probe(file.path, function(err, probeData) {
             var duration = 0;
 
             if (probeData && probeData.format && !isNaN(probeData.format.duration)) {
@@ -32,14 +39,14 @@ router.post('/',middlewares.isLogged, upload.any(), function(req, res) {
                 req.body['duration'] = duration;
             }
 
-	    Rest.post('file', JSON.stringify(req.body)).then(function() {
-	    	res.redirect('/files?message=Files correctly upload');
-	    }, function(err) {
-	    	console.log(err);
-	    	res.redirect('/files?message=Files can\'t be upload');
-	    });
+		    Rest.post('file', JSON.stringify(req.body)).then(function() {
+		    	res.redirect('/files?message=Files correctly upload');
+		    }, function(err) {
+		    	console.log(err);
+		    	res.redirect('/files?message=Files can\'t be upload');
+		    });
 
-        });
+        });*/
 });
 
 router.post('/:id',middlewares.isLogged, function(req, res) {

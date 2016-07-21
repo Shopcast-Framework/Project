@@ -19,49 +19,88 @@ block content
                 //    input(type='text', name='frequency', placeholder='Frequency' value='#{playlist.frequency}')
                 div.input-field.col.s12
                     i(class="material-icons prefix") description
-                    label(for="name") #{translate.name}
+                    label(for="name") #{translate.description}
                     textarea(name='description' class="materialize-textarea" placeholder='Description' disabled) #{playlist.description}
                 div.input-field.col.s12
                     i(class="material-icons prefix") note
-                    label(for="name") #{translate.name}
+                    label(for="name") #{translate.tags}
                     input(type='text', name='tags' placeholder='Tags' value='#{playlist.tags}' disabled)
                 div.input-field.col.s12.actions.center-align
                     button(type='submit' class="green darken-2 btn btn-large waves-effect waves-light") #{translate.btnSave}
                         i.material-icons.left done
                     a(href='/playlists/#{playlist.id}' class="red darken-2 btn btn-large waves-effect waves-light modal-edit-cancel") #{translate.btnCancel}
                         i.material-icons.left cancel
-        section
-            h2.center-align.title #{translate.titleFiles}
-                //button(class="amber darken-2 btn btn-large btn-floating waves-effect waves-light modal-trigger" data-target="add-file")
-                    //i.material-icons.left add
+        section.list-files
+            h2.center-align.title #{translate.titleFilesPlaylist}
+                button(class="amber darken-2 btn btn-large btn-floating waves-effect waves-light modal-trigger" data-target="add-file")
+                    i.material-icons.left add
             //div.actions.center-align
             //    button(class="amber darken-2 btn btn-large waves-effect waves-light modal-trigger" data-target="add-file") #{translate.btnAddFile}
             //        i.material-icons.left add
             div.container
-                table.list-elements
-                    thead
-                        tr
-                            th name
-                            th description
-                            th type
-                            th size
-                            th
-                    tbody
-                        each file, index in files
+                form(action="/playlists/#{playlist.id}/file/sort" method="post" class="form-sort-file")
+                    div.actions-header
+                        button(type="submit" class="light-green btn btn-large waves-effect waves-light btn-save disabled" disabled) #{translate.btnSavePosition}
+                            i.material-icons.left done
+                    table.list-elements
+                        thead
                             tr
-                                td #{file.name}
-                                td #{file.description}
-                                td #{file.mimetype}
-                                td #{file.size}
-                                td
-                                    if playlist.filesId.indexOf(file.id) > -1
-                                        a(class="btn btn-floating red darken-2 white-text waves-effect waves-light " href="/playlists/#{playlist.id}/file/delete/#{file.id}")
-                                            i(class="material-icons left") delete
-                                    else
-                                        a(class="btn btn-floating amber darken-2 white-text waves-effect waves-light" href="/playlists/#{playlist.id}/file/add/#{file.id}")
-                                            i(class="material-icons left") add
-                                    
+                                th #{translate.rank}
+                                th #{translate.name}
+                                th #{translate.originalname}
+                                th #{translate.description}
+                                th #{translate.type}
+                                th #{translate.size}
+                                th
+                        tbody.sortable
+                            each file, index in playlist.files
+                                tr(class="sortable-item" data-rank="#{file.PlaylistFile.rank}" data-id="#{file.id}")
+                                    td.rank #{file.PlaylistFile.rank}
+                                    td #{file.name}
+                                    td #{file.originalname}
+                                    td #{file.description}
+                                    td #{file.mimetype}
+                                    td #{file.size}
+                                    td
+                                        if playlist.filesId.indexOf(file.id) > -1
+                                            a(class="btn btn-floating red darken-2 white-text waves-effect waves-light " href="/playlists/#{playlist.id}/file/delete/#{file.id}")
+                                                i(class="material-icons left") delete
+                                        else
+                                            a(class="btn btn-floating amber darken-2 white-text waves-effect waves-light" href="/playlists/#{playlist.id}/file/add/#{file.id}")
+                                                i(class="material-icons left") add
+                    
         div(id="add-file" class="modal light-box")
+            h4(class="center-align light-blue") #{translate.addFile}
+            div(class="modal-content")
+                div.row
+                    div(class="col s12")
+                        form(action='/playlists/#{playlist.id}/file/add' method="post" class="container")
+                            table
+                                thead
+                                    tr
+                                        th #
+                                        th name
+                                        th description
+                                        th type
+                                        th size
+                                tbody
+                                    each file, index in files
+                                        if playlist.filesId.indexOf(file.id) == -1
+                                            tr
+                                                td
+                                                    p
+                                                        input(type="checkbox" id="file-item-#{index}" name="files[]" value="#{file.id}")
+                                                        label(for="file-item-#{index}")
+                                                td #{file.originalname}
+                                                td #{file.description}
+                                                td #{file.mimetype}
+                                                td #{file.size}
+                            div.input-field.col.s12.actions.center-align
+                                button(type="submit" class="btn btn-large amber darken-1 white-text waves-effect waves-light") #{translate.btnAddFile}
+                                    i(class="material-icons left") done
+                                a(href="#!" class="modal-action modal-close btn btn-large red darken-1 white-text waves-effect waves-light") #{translate.btnCancel}
+                                    i(class="material-icons left") cancel                
+        div(id="add-file-hold" class="modal light-box")
             h4(class="center-align light-blue") #{translate.addFile}
             div(class="modal-content")
                 div.row

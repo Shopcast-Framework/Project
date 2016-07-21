@@ -353,6 +353,27 @@ body, html{
 	background-color: rgb(3, 169, 244);
 }
 
+#playlist .list-files .actions-header .btn-save{
+	
+}
+
+#playlist .list-files .actions-header{
+	text-align: center;
+	margin: 40px auto;
+}
+
+#playlist .list-files .sortable .sortable-item{
+	cursor: grab;
+}
+
+#playlist .list-files .sortable .sortable-item.ui-sortable-helper{
+	background-color: #03A9F4;
+}
+
+#playlist .list-files .sortable .sortable-item.ui-sortable-helper td{
+	color:#FFF;
+}
+
 
 /*******************************************************************
 ********************************************************************
