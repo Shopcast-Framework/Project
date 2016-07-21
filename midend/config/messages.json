@@ -34,8 +34,11 @@
     "playlist:delete:failure"   : "Error no playlist deleted",
     "playlist:add:success"      : "Files correctly added",
     "playlist:add:failure"      : "Error: Can't add file to the playlist",
-    "playlist:sort:success"      : "Files correctly sorted",
-    "playlist:sort:failure"      : "Error: Can't sort file of the playlist",
+    "playlist:sort:success"     : "Files correctly sorted",
+    "playlist:sort:failure"     : "Error: Can't sort file of the playlist",
+    "playlist::sub::success"    : "Files successfully deleted from playlist",
+    "playlist::sub::failure"    : "Error: Could not delete file from playlist",
+
 
     "planning:get:success"      : "List of plannings",
     "planning:getone:success"   : "Planning of id: %s",
