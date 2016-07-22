@@ -15,17 +15,16 @@ var AuthMiddleWare = function() {
         if (!req.user) {
             if (req.headers.reauth) {
                 var auth_body = JSON.parse(req.headers.reauth);
-                req.body = auth_body;
-                req.body.reauth = true;
+                req.body.reauth = auth_body;
               
-                if (req.body.strategy != 'local') {
+                if (req.body.reauth.strategy != 'local') {
                     return res.status(301).send({
                         message     : Message.get("session:post:failure", req.body.strategy)
                     });
                 }
 
                 User.find({
-                    where : {username: req.body.username, password : req.body.password}
+                    where : {username: req.body.reauth.username, password : req.body.reauth.password}
                 }).then(function(user) {
                     if (!user) {
                         res.status(Status.UNAUTHORIZED).send({
