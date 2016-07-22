@@ -189,7 +189,7 @@ var UserController = {
     reset   : UserResetPassword,
     update  : UserUpdatePassword,
     block   : UserBlock,
-    unblock : UserBlock
+    unblock : UserUnblock
 };
 
 module.exports = UserController;
