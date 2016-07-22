@@ -13,7 +13,6 @@ var AuthMiddleWare = function() {
     self.run = function(req, res, next) {
         var roles = this && this.roles;
         if (!req.user) {
-            console.log('Well shit');
             if (req.headers.reauth) {
                 var auth_body = JSON.parse(req.headers.reauth);
                 req.body = auth_body;
@@ -33,6 +32,7 @@ var AuthMiddleWare = function() {
                           message: Message.get('middleware:auth:failure')
                         });
                     } else {
+                        console.log('mobile bypass');
                         req.user = user;
                         next();
                         return ;

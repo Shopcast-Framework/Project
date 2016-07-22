@@ -121,6 +121,17 @@ var Routes = [
                         }
                     }
                 ]
+            },
+            {
+                name: 'block',
+                middlewares: [
+                    {
+                        name:   'auth',
+                        param: {
+                            roles: [Role.ADMIN, Role.USER]
+                        }
+                    }
+                ]
             }
         ],
     }
