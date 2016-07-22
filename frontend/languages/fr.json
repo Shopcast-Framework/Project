@@ -86,6 +86,7 @@
     "location": "Adresse",
     "age": "Age",
     "sex": "Sexe",
+    "sexDefault": "Je suis",
     "man": "Homme",
     "woman": "Femme",
     "btnEdit": "Modifier",

@@ -44,6 +44,10 @@ block content
                         else if user.sex == 1
                             option(value="0") #{translate.man}
                             option(value="1" selected) #{translate.woman}
+                        else
+                            option(value="" disabled selected="selected") #{translate.sexDefault}
+                            option(value="0") #{translate.man}
+                            option(value="1" selected) #{translate.woman}
                     label(for="name") #{translate.sex}
                 div.input-field.col.s12.actions.center-align
                     button(type='submit' class="light-green darken-2 btn btn-large waves-effect waves-light") #{translate.btnSave}
