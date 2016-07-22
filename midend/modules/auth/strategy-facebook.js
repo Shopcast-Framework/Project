@@ -41,7 +41,6 @@ var StrategyFacebook = function(app, passport, loginCallback) {
     };
 
     self.authenticate = function(req, res) {
-        console.log(req.body);
         passport.authenticate('facebook-token', loginCallback(req, res))(req, res);
     };
 

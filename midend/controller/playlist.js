@@ -10,7 +10,6 @@ var Status      = require(process.env.NODE_PATH + '/config/status.json'),
     File        = orm.db.File;
 
 var PlaylistAdd = function(req, res) {
-    console.log(req);
     req.user
     .getOnePlaylist({
         id: req.params.id

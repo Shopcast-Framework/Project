@@ -102,6 +102,7 @@ var User = function(sequelize) {
         model.hasMany(orm.db.Playlist, {constraints: false});
         model.hasMany(orm.db.File, {constraints: false});
         model.hasMany(orm.db.Planning, {constraints: false});
+        model.belongsToMany(orm.db.User, {constraints: false, as: 'blocks', through : 'Block'});
     };
 
     return {

@@ -34,11 +34,14 @@ var Rest = function() {
         }
 
         console.log('Je requete sur: ' + options.path + ' [' + method + ']');
+        console.log(options);
+        console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=');
         httpRequest = http.request(options, function(res) {
             var datas = {
                 headers: res.headers,
                 body: ''
             };
+            console.log(datas.headers);
 
             res.setEncoding('utf8');
             res.on('data', function(data) {
