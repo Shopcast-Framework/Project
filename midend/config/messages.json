@@ -59,11 +59,11 @@
     "file:getone:success"       : "File selected with id %s",
     "file:getone:failure"       : "File selected with id %s was not found",
 
-    "file:get:success"          : "List of files",
     "file:put:success"          : "File correctly updated",
     "file:put:failure"          : "Error can't find file",
     "file:delete:success"       : "File correctly deleted",
     "file:delete:failure"       : "Error can't delete the file",
+    "file:wrongtype"            : "FileType not supported",
 
     "filelist:delete:failure"   : "Error can't delete the file",
     "filelist:delete:success"   : "File successfuly deleted from playlists",

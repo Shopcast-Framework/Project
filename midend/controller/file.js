@@ -31,7 +31,17 @@ var FileGet = function(req, res) {
 };
 
 var FilePost = function(req, res) {
+    var acceptedformats = [
+        'image/png',
+        'image/jpeg',
+        'application/octet-stream'
+    ];
     req.body.user_id = req.user.id;
+    if (acceptedformats.indexOf(req.body.mimetype) == -1) {
+            return res.status(Status.UNAUTHORIZED).send({
+                message: Message.get("file:wrongtype")
+            });
+    }
     File
     .create(req.body)
     .then(function(file) {
