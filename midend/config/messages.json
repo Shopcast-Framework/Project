@@ -18,6 +18,10 @@
     "user:update:badconfirm"    : "Error: Confirm password different from password",
     "user:update:success"       : "Password correctly updated",
     "user:update:failure"       : "Error can't update password",
+    "user::block::success"      : "User has been blocked",
+    "user::block::failure"      : "User could not be blocked",
+    "user::unblock::success"    : "User no longer blocked",
+    "user::unblock::failure"    : "User could not be unblocked",
 
     "session:delete:success"    : "Session correctly deleted",
     "session:post:success"      : "User already logged",
