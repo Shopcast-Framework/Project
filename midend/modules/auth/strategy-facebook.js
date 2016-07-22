@@ -29,7 +29,8 @@ var StrategyFacebook = function(app, passport, loginCallback) {
                     name: profile.displayName,
                     avatar: profile.photos[0].value,
                     facebookId: profile.id,
-                    role: 1
+                    role: 1,
+                    sex: null
                 })
                 .then(function(user) {
                     return done(null, user);
