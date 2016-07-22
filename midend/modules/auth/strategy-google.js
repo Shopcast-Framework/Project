@@ -30,7 +30,8 @@ var StrategyGoogle = function(app, passport, loginCallback) {
                     name: profile.displayName,
                     avatar: profile._json.picture,
                     googleId: profile.id,
-                    role: 1
+                    role: 1,
+                    sex: null
                 })
                 .then(function(user) {
                     console.log('User created');
