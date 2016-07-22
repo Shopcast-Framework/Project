@@ -43,7 +43,6 @@ var StrategyGoogle = function(app, passport, loginCallback) {
     };
 
     self.authenticate = function(req, res) {
-        console.log(req.body);
         passport.authenticate('google-token', loginCallback(req, res))(req, res);
     };
 

@@ -8,6 +8,8 @@ var AuthMiddleWare = function() {
 
     self.run = function(req, res, next) {
         var roles = this && this.roles;
+        console.log('-=-=-=-=-=-=-=-=');
+        console.log(reqi.headers);
         if (!req.user) {
             return res.status(Status.UNAUTHORIZED).send({
                 message: Message.get('middleware:auth:failure')

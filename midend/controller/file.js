@@ -9,7 +9,6 @@ var Status      = require(process.env.NODE_PATH + '/config/status.json'),
     Playlist    = orm.db.Playlist;
 
 var FileGet = function(req, res) {
-    console.log(req);
     File
     .findAll({
         where: {
