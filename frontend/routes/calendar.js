@@ -63,6 +63,8 @@ router.get('/', middlewares.isLogged, middlewares.language, function(req, res) {
             events.push(tmp);
         });
 
+        console.log(values[0].body.plannings);
+
     	res.render('plannings/index', {
     		active: '/plannings',
             menu: values[3],

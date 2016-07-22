@@ -54,6 +54,7 @@
     "title": "Utilisateurs (%)",
     "tabTitle": "Utilisateurs - Shopcast",
     "btnCreate": "Ajouter un nouvel utilisateur",
+    "btnBlock": "Bloquer",
     "newUser": "Nouvel utilisateur",
     "search" : "Rechercher",
     "name" : "Nom",
@@ -91,6 +92,8 @@
     "btnDelete": "Supprimer",
     "btnSave": "Sauvargarder",
     "btnCancel": "Annuler",
+    "btnBlock": "Bloquer",
+    "btnDeBlock": "Débloquer",
     "administrator": "Administrateur",
     "client": "Client"
   },
@@ -132,6 +135,7 @@
     "btnCreate": "Ajouter une nouvelle date",
     "newEvent": "Nouvel évènement",
     "btnAdd": "Ajouter",
+    "search" : "Rechercher",
     "btnCancel": "Annuler",
     "titleForm": "Titre",
     "range_start": "Date de début",
@@ -144,6 +148,7 @@
     "tabTitle": "Moniteurs - Shopcast",
     "btnCreate": "Ajouter un moniteur",
     "btnDelete": "Supprimer",
+    "search" : "Rechercher",
     "btnAdd": "Ajouter",
     "btnCancel": "Annuler",
     "name": "Nom",
@@ -163,6 +168,8 @@
     "tags" : "Tags",
     "btnSave": "Sauvargarder",
     "btnCancel": "Annuler",
+    "btnReturn": "Retour",
+    "cantLoadVideo": "Impossible de lire la video",
     "btnDelete": "Supprimer"
   },
   "Settings": {
