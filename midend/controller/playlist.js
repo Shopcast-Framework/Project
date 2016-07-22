@@ -101,8 +101,6 @@ var PlayListPut = function(req, res) {
 };
 
 var PlayListGet = function(req, res) {
-    console.log(req.headers);
-    console.log(req.user);
     req.user
     .getPlaylists({
         include: [{
