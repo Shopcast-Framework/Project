@@ -59,12 +59,18 @@ block content
 					i(class="material-icons prefix") vpn_key
 					input(type='password' name='userpassword' id="password")
 					label(for="password") #{translate.password)
-				div.input-field.col.s12
+				div.input-field.col.s6
 					select(name="role" id="role" class="validate")
 						option(value="" disabled="disabled" selected="selected") #{translate.whatRole)
 						option(value="0") #{translate.roleAdmin)
 						option(value="1") #{translate.roleClient)
 					label(for="role") #{translate.role)
+				div.input-field.col.s6
+					select(name="sex" id="sex" class="validate")
+						option(value="" disabled="disabled" selected="selected") #{translate.whatSex)
+						option(value="0") #{translate.man)
+						option(value="1") #{translate.woman)
+					label(for="sex") #{translate.sex)
 				//div.input-field.col.s12
 					//input(type="checkbox" id="send-email" name="send-email")
 					//label(for="send-email") #{translate.sendEmail)
