@@ -34,7 +34,8 @@ var FilePost = function(req, res) {
     var acceptedformats = [
         'image/png',
         'image/jpeg',
-        'application/octet-stream'
+        'application/octet-stream',
+        'video/webm'
     ];
     req.body.user_id = req.user.id;
     if (acceptedformats.indexOf(req.body.mimetype) == -1) {
