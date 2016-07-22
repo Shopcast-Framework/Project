@@ -85,6 +85,26 @@ router.get('/delete/:id', middlewares.isLogged, function( req, res ) {
 
 });
 
+router.get('/block/:id', middlewares.isLogged, function(req, res) {
+	var id = req.params.id;
+
+	Rest.put('user/block' + id).then(function(response) {
+		res.redirect('/users/'+id+'?message=' + response.body.message);
+	}, function(err) {
+		res.redirect('/users/'+id+'?message=' + err.body.message);
+	});
+});
+
+router.get('/unblock/:id', middlewares.isLogged, function(req, res) {
+	var id = req.params.id;
+
+	Rest.put('user/unblock' + id).then(function(response) {
+		res.redirect('/users/'+id+'?message=' + response.body.message);
+	}, function(err) {
+		res.redirect('/users/'+id+'?message=' + err.body.message);
+	});
+});
+
 router.get('/:id', middlewares.isLogged, middlewares.language, function( req, res ) {
 
 	var promises = [];
@@ -127,7 +147,10 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 		var users = values[0].body.users;
 		values[0].body.users.forEach(function(element,index,array){
 			if ( users[index].avatar == null )
-				users[index].avatar = "public/images/users/default.png";
+				if (users[index].sex == 0)
+					users[index].avatar = "public/images/users/default_h.png";
+				else
+					users[index].avatar = "public/images/users/default_f.png";
 		});
 
 		res.render('user/list', {

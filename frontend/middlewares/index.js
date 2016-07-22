@@ -10,7 +10,11 @@ module.exports = {
             try{
                 fs.statSync(String(req.session.user.avatar));
             }catch(err){
-                req.session.user.avatar = "/public/images/users/default_h.png";
+                console.log(req.session.user);
+                if (req.session.user.sex == 0)
+                    req.session.user.avatar = "/public/images/users/default_h.png";
+                else
+                    req.session.user.avatar = "/public/images/users/default_f.png";
             }
 
             next();
