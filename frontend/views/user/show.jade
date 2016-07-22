@@ -4,14 +4,15 @@ block content
     header.actions.container
         button(class="amber darken-2 btn btn-large waves-effect waves-light modal-edit" data-target="form-edit") #{translate.btnEdit}
             i.material-icons.left edit
-        if (user.role == -1)
-            a(class="light-green btn btn-large waves-effect waves-light" href="/users/unblock/#{user.id}") #{translate.btnDeBlock}
-                i.material-icons.left done
-        else
-            a(class="light-green btn btn-large waves-effect waves-light" href="/users/block/#{user.id}") #{translate.btnBlock}
-                i.material-icons.left block
-        a(class="red darken-2 btn btn-large waves-effect waves-light" href="/users/delete/#{user.id}") #{translate.btnDelete}
-            i.material-icons.left delete
+        if (me.id != user.id)
+            if (user.role == -1)
+                a(class="light-green btn btn-large waves-effect waves-light" href="/users/unblock/#{user.id}") #{translate.btnDeBlock}
+                    i.material-icons.left done
+            else
+                a(class="light-green btn btn-large waves-effect waves-light" href="/users/block/#{user.id}") #{translate.btnBlock}
+                    i.material-icons.left block
+            a(class="red darken-2 btn btn-large waves-effect waves-light" href="/users/delete/#{user.id}") #{translate.btnDelete}
+                i.material-icons.left delete
     article.wrapper-content#playlist
         section.container
             form(action='/users/#{user.id}', method='post' id="form-edit" class="row")

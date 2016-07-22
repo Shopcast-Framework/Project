@@ -88,7 +88,7 @@ router.get('/delete/:id', middlewares.isLogged, function( req, res ) {
 router.get('/block/:id', middlewares.isLogged, function(req, res) {
 	var id = req.params.id;
 
-	Rest.put('user/block' + id).then(function(response) {
+	Rest.put('user/block/' + id).then(function(response) {
 		res.redirect('/users/'+id+'?message=' + response.body.message);
 	}, function(err) {
 		res.redirect('/users/'+id+'?message=' + err.body.message);
@@ -98,7 +98,7 @@ router.get('/block/:id', middlewares.isLogged, function(req, res) {
 router.get('/unblock/:id', middlewares.isLogged, function(req, res) {
 	var id = req.params.id;
 
-	Rest.put('user/unblock' + id).then(function(response) {
+	Rest.put('user/unblock/' + id).then(function(response) {
 		res.redirect('/users/'+id+'?message=' + response.body.message);
 	}, function(err) {
 		res.redirect('/users/'+id+'?message=' + err.body.message);
@@ -123,6 +123,7 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 			active: '/users',
 			menu: values[1],
 			user: user,
+			me: req.session.user,
 			permission: [ "Administrateur", "Client" ],
 			isLogged: true,
 			isSearchBar: false,
@@ -157,6 +158,7 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 			active: '/users',
 			menu: values[1],
 			users: users,
+			me: req.session.user,
 			permission: [ "Administrateur", "Client"],
 			isLogged: true,
 			isSearchBar: true,

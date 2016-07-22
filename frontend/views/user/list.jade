@@ -36,8 +36,9 @@ block content
 							td.actions
 								a(class="light-blue btn-floating waves-effect waves-circle waves-light" href="/users/#{user.id}")
 									i.material-icons edit
-								a(class="red btn-floating waves-effect waves-circle waves-light" href="/users/delete/#{user.id}")
-									i.material-icons delete
+								if (me.id != user.id)
+									a(class="red btn-floating waves-effect waves-circle waves-light" href="/users/delete/#{user.id}")
+										i.material-icons delete
 	div(id="new-element" class="modal light-box")
 		h4(class="center-align light-blue") #{translate.newUser)
 		div(class="modal-content")
