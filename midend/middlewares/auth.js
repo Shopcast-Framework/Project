@@ -1,13 +1,15 @@
 'use strict';
 
-var Status      = require(process.env.NODE_PATH + '/config/status.json'),
-    Message = require(process.env.NODE_PATH + '/modules/messages');
+var Status          = require(process.env.NODE_PATH + '/config/status.json'),
+    Message         = require(process.env.NODE_PATH + '/modules/messages'),
+    Auth            = require(process.env.NODE_PATH + '/modules/auth');
 
 var AuthMiddleWare = function() {
     var self = this;
 
-    self.run = function(req, res, next) {
+    self.run = [Auth.strategy.bearer.authenticate, function(req, res, next) {
         var roles = this && this.roles;
+
         if (!req.user) {
             return res.status(Status.UNAUTHORIZED).send({
                 message: Message.get('middleware:auth:failure')
@@ -22,7 +24,7 @@ var AuthMiddleWare = function() {
             }
             next();
         });
-    };
+    }];
 };
 
 module.exports = {

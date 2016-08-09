@@ -1,7 +1,7 @@
 'use strict';
 
 var GoogleStrategy      = require('passport-google-token').Strategy,
-    orm                 = require('../orm'),
+    orm                 = require(process.env.NODE_PATH + '/modules/orm'),
     config              = require(process.env.NODE_PATH + '/config/strategy.json')[process.env.NODE_ENV],
     User                = orm.db.User;
 

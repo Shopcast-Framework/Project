@@ -40,7 +40,15 @@ var MiddlewaresLoader = function() {
             name = descriptor.name;
             param = descriptor.param;
             if (self.only(descriptor, action) && self.middlewares[name]) {
-                middlewares.push(self.middlewares[name].run.bind(param));
+                var middleware = self.middlewares[name].run;
+
+                if (typeof(middleware) == 'function') {
+                    middlewares.push(middleware.bind(param));
+                } else {
+                    for (var i in middleware) {
+                        middlewares.push(middleware[i].bind(param));
+                    }
+                }
             }
         }
         return middlewares;
