@@ -1,7 +1,7 @@
 'use strict';
 
 var LocalStrategy   = require('passport-local').Strategy,
-            orm     = require('../orm'),
+            orm     = require(process.env.NODE_PATH + '/modules/orm'),
             User    = orm.db.User;
 
 var StrategyLocal = function(app, passport, loginCallback) {

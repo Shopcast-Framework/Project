@@ -8,9 +8,7 @@ var Authentificator = function(app) {
     var self = this;
 
     self.init = function(app) {
-        app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
         app.use(passport.initialize());
-        app.use(passport.session());
 
         passport.serializeUser(self.serializeUser);
         passport.deserializeUser(self.deserializeUser);
@@ -54,7 +52,8 @@ var Authentificator = function(app) {
         self.strategy = {
             'local' : require('./strategy-local').load(app, passport, self.login),
             'facebook' : require('./strategy-facebook').load(app, passport, self.login),
-            'google' : require('./strategy-google').load(app, passport, self.login)
+            'google' : require('./strategy-google').load(app, passport, self.login),
+            'bearer' : require('./strategy-bearer').load(app, passport)
         };
     };
 

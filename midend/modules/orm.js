@@ -1,6 +1,7 @@
 'use strict';
 
 var Sequelize   = require('sequelize'),
+    Q           = require('q'),
     path        = require('path'),
     fs          = require('fs'),
     config      = require(process.env.NODE_PATH + '/config/db.json')[process.env.NODE_ENV];
@@ -11,6 +12,7 @@ if (config == undefined) {
 
 var Orm = function() {
     var self = this;
+    var defer = Q.defer();
 
     self.init = function() {
         var relationships = [],
@@ -23,6 +25,7 @@ var Orm = function() {
                 fs.writeFile(process.env.NODE_PATH + '/logs/sql.log', "\n");
             }
         });
+
         self.db = {};
 
         fs
@@ -38,11 +41,11 @@ var Orm = function() {
             relationships[i]();
         }
 
-        self.sequelize.sync();
+        self.sequelize.sync().then(defer.resolve, defer.reject);
     };
 
     self.init();
-    return self;
+    return defer.promise;
 };
 
 exports.load = Orm;

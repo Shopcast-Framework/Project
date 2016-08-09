@@ -13,7 +13,7 @@ var Rest = function() {
     };
 
     self.call = function(method, resource, body) {
-        
+
         var defer = Q.defer(),
             httpRequest,
             options = {
@@ -30,7 +30,7 @@ var Rest = function() {
         }
 
         if (self.user) {
-            options.headers.Authorization = self.user.token;
+            options.headers.Authorization = 'Bearer ' + self.user.token;
         }
 
         console.log('Je requete sur: ' + options.path + ' [' + method + ']');
