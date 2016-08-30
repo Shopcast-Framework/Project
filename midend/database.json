@@ -1,0 +1,24 @@
+{
+    "defaultEnv": "production",
+    "production": {
+        "driver"    : "mysql",
+        "database"  : "shopcast",
+        "user"      : "shopcast",
+        "password"  : "s7fCQvxr9&mKey=.",
+        "host"      : "BDD"
+    },
+    "development": {
+        "driver"    : "mysql",
+        "database"  : "shopcast",
+        "user"      : "shopcast",
+        "password"  : "s7fCQvxr9&mKey=.",
+        "host"      : "localhost"
+    },
+    "test": {
+        "driver"    : "mysql",
+        "database"  : "shopcast_test",
+        "user"      : "shopcast",
+        "password"  : "s7fCQvxr9&mKey=.",
+        "host"      : "localhost"
+    }
+}
