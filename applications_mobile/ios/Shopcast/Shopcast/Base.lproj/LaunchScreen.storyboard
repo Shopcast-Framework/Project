@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--SplashScreen-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController title="SplashScreen" id="01J-lp-oVM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
+                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="enf-mE-pdI">
+                                <rect key="frame" x="240" y="170" width="120" height="59"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="7CA-ei-e5p"/>
+                                    <constraint firstAttribute="width" constant="120" id="dFr-XH-5up"/>
+                                    <constraint firstAttribute="height" constant="59" id="jl8-7P-Uuj"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="450" id="nFn-7F-YYd"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="7CA-ei-e5p"/>
+                                        <exclude reference="nFn-7F-YYd"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shopcast" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFy-gJ-cVU">
+                                <rect key="frame" x="245" y="518" width="110" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <color key="textColor" red="0.36323822346553791" green="0.50826379846870107" blue="0.53010471204188481" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="0.33490141132830603" green="0.4841497946204113" blue="0.63563481675392675" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90130440749999996" green="0.97081743089999994" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="enf-mE-pdI" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="150" id="KrN-QY-0mb"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="kFy-gJ-cVU" secondAttribute="bottom" constant="50" id="az0-u5-sEi"/>
+                            <constraint firstItem="kFy-gJ-cVU" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="dyR-2o-b4M"/>
+                            <constraint firstItem="enf-mE-pdI" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="tve-Zk-ydU"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="51" y="365"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logo" width="120" height="59"/>
+    </resources>
+</document>
