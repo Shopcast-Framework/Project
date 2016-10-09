@@ -1,65 +1,56 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Dashboard Controller-->
-        <scene sceneID="ahq-Za-al2">
-            <objects>
-                <viewController id="hEO-Pb-Cao" customClass="DashboardController" customModule="Shopcast" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="VHq-wZ-DAh"/>
-                        <viewControllerLayoutGuide type="bottom" id="k0T-cG-7lB"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="64t-Uy-xqc">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SQQ-6G-UEt">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                <items>
-                                    <navigationItem title="Dashboard" id="Fna-BH-q86"/>
-                                </items>
-                            </navigationBar>
-                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ip8-4B-ma1">
-                                <rect key="frame" x="0.0" y="551" width="600" height="49"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <items/>
-                            </tabBar>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ox7-We-qqC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="440" y="-300"/>
-        </scene>
-        <!--Item 2-->
+        <!--Playlists-->
         <scene sceneID="Qfj-bq-9Ru">
             <objects>
-                <viewController id="oos-2S-KIe" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1Ao-Rc-3rn"/>
-                        <viewControllerLayoutGuide type="bottom" id="rNX-yf-abd"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="cBX-qJ-meh">
+                <viewController id="oos-2S-KIe" customClass="PlaylistController" customModule="Shopcast" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="eXs-K8-qic">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="dAz-7a-bUn"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistCell" id="HaJ-yB-iB1" customClass="UIPlaylistCell" customModule="Shopcast" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HaJ-yB-iB1" id="EUy-h4-O3l">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFG-2y-TzQ">
+                                            <rect key="frame" x="8" y="8" width="584" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="JFG-2y-TzQ" firstAttribute="top" secondItem="EUy-h4-O3l" secondAttribute="topMargin" id="K7P-kf-De1"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="JFG-2y-TzQ" secondAttribute="trailing" id="M0L-pk-LFh"/>
+                                        <constraint firstItem="JFG-2y-TzQ" firstAttribute="leading" secondItem="EUy-h4-O3l" secondAttribute="leadingMargin" id="W8p-FB-1J9"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="JFG-2y-TzQ" id="4om-f4-YVI"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Playlists" image="Playlist" selectedImage="Playlist" id="dAz-7a-bUn"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WQQ-Re-aP2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2005" y="30"/>
+            <point key="canvasLocation" x="1233" y="42"/>
         </scene>
-        <!--Item 1-->
+        <!--Dashboard-->
         <scene sceneID="ziK-hh-3SS">
             <objects>
-                <viewController id="vnj-vG-Pbu" sceneMemberID="viewController">
+                <viewController id="vnj-vG-Pbu" customClass="DashboardController" customModule="Shopcast" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pCX-bT-1sl"/>
                         <viewControllerLayoutGuide type="bottom" id="Anx-fT-Vdr"/>
@@ -67,18 +58,18 @@
                     <view key="view" contentMode="scaleToFill" id="G3i-EI-Jdw">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.90130440749999996" green="0.97081743089999994" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="TYU-Ks-vzA"/>
+                    <tabBarItem key="tabBarItem" title="Dashboard" image="Dashboard" id="TYU-Ks-vzA"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Idk-Ji-HSC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2005" y="-631"/>
+            <point key="canvasLocation" x="1233" y="-665"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tabbar Controller-->
         <scene sceneID="vPp-2d-8EJ">
             <objects>
-                <tabBarController storyboardIdentifier="tabBar" id="h85-rs-d0u" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBarController" id="h85-rs-d0u" customClass="TabbarController" customModule="Shopcast" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="sag-qg-UZN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -91,7 +82,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CP0-IV-Dnu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1185" y="-300"/>
+            <point key="canvasLocation" x="398" y="-300"/>
         </scene>
         <!--Signin Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -118,7 +109,7 @@
                                                     <constraint firstAttribute="height" constant="21" id="jgV-gA-Zvz"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9zV-74-jpu">
@@ -188,7 +179,7 @@
                     <connections>
                         <outlet property="passwordTextField" destination="GgM-7r-kOi" id="sEf-2i-MvB"/>
                         <outlet property="usernameTextField" destination="9zV-74-jpu" id="jFI-gp-ftX"/>
-                        <segue destination="hEO-Pb-Cao" kind="show" identifier="dashboardSegue" id="hYQ-dK-iR8"/>
+                        <segue destination="h85-rs-d0u" kind="show" identifier="dashboardSegue" id="RVk-iZ-GGp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -197,4 +188,8 @@
             <point key="canvasLocation" x="-273" y="-300"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Dashboard" width="25" height="25"/>
+        <image name="Playlist" width="25" height="25"/>
+    </resources>
 </document>
