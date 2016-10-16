@@ -20,7 +20,7 @@ describe('Api group controller', function () {
     it('[GET] /api/group', function(done) {
         Context.server
         .get('/api/group')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
             message     : Message.get("group:get:success"),
@@ -33,7 +33,7 @@ describe('Api group controller', function () {
 
         Context.server
         .get('/api/group/1')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
             message     : Message.get("group:getone:success", 1),
@@ -44,7 +44,7 @@ describe('Api group controller', function () {
     it('[GET] /api/group/2', function(done) {
         Context.server
         .get('/api/group/2')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.UNAUTHORIZED, {
             message : Message.get("group:getone:failure")
@@ -54,7 +54,7 @@ describe('Api group controller', function () {
     it('[GET] /api/group/999', function(done) {
         Context.server
         .get('/api/group/999')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.UNAUTHORIZED, {
             message : Message.get("group:getone:failure")

@@ -1,6 +1,7 @@
 var Status              = require(process.env.NODE_PATH + '/config/status.json'),
     Context             = require(process.env.NODE_PATH + '/test/context.js'),
     Message             = require(process.env.NODE_PATH + '/modules/messages'),
+    __plannings         = require(process.env.NODE_PATH + '/test/fixtures/planning.json'),
     __playlists         = require(process.env.NODE_PATH + '/test/fixtures/playlist.json'),
     __playlist_files    = require(process.env.NODE_PATH + '/test/fixtures/playlist_file.json'),
     __files             = require(process.env.NODE_PATH + '/test/fixtures/file.json'),
@@ -19,12 +20,13 @@ describe('Api playlist controller', function () {
     });
 
     it('[GET] /api/playlist', function(done) {
-        var playlists = Helper.build.associate('files', [__playlists[0], __playlists[1]], [[0], []], __files);
-        playlists[0].files[0]['PlaylistFile'] = __playlist_files[0];
+        var files = Helper.build.associate('PlaylistFile', __files, [[0], [], []], __playlist_files)
+        var playlists = Helper.build.associate('files', [__playlists[0], __playlists[1]], [[0], []], files);
+        playlists = Helper.build.associate('plannings', playlists, [[0, 1], []], __plannings);
 
         Context.server
         .get('/api/playlist')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
             message     : Message.get("playlist:get:success"),
@@ -37,7 +39,7 @@ describe('Api playlist controller', function () {
 
         Context.server
         .post('/api/playlist')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .send(newPlaylist)
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
@@ -47,12 +49,13 @@ describe('Api playlist controller', function () {
     });
 
     it('[GET] /api/playlist/1', function(done) {
-        var playlist = Helper.build.associate('files', [__playlists[0]], [[0]], __files);
-        playlist[0].files[0]['PlaylistFile'] = __playlist_files[0];
+        var files = Helper.build.associate('PlaylistFile', __files, [[0], [], []], __playlist_files)
+        var playlists = Helper.build.associate('plannings', [__playlists[0]], [[0, 1]], __plannings);
+        var playlist = Helper.build.associate('files', playlists, [[0]], files);
 
         Context.server
         .get('/api/playlist/1')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
             message     : Message.get("playlist:getone:success", 1),
@@ -63,7 +66,7 @@ describe('Api playlist controller', function () {
     it('[GET] /api/playlist/999 (Invalid id)', function(done) {
         Context.server
         .get('/api/playlist/999')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.UNAUTHORIZED, {
             message     : Message.get("playlist:getone:failure")
@@ -75,7 +78,7 @@ describe('Api playlist controller', function () {
 
         Context.server
         .put('/api/playlist/1')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .send(editPlaylist)
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
@@ -89,7 +92,7 @@ describe('Api playlist controller', function () {
 
         Context.server
         .put('/api/playlist/999')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .send(editPlaylist)
         .expect(Helper.date.truncate)
         .expect(Status.UNAUTHORIZED, {
@@ -100,7 +103,7 @@ describe('Api playlist controller', function () {
     it('[DELETE] /api/playlist/1', function(done) {
         Context.server
         .del('/api/playlist/1')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
             message : Message.get("playlist:delete:success")
@@ -110,7 +113,7 @@ describe('Api playlist controller', function () {
     it('[DELETE] /api/playlist/999', function(done) {
         Context.server
         .del('/api/playlist/999')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.UNAUTHORIZED, {
             message : Message.get("playlist:delete:failure")

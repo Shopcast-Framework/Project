@@ -18,7 +18,20 @@ var DatabaseCleaner = function(orm) {
         self.orm = orm
     };
 
-    self.clean = function() {
+    self.keepAuthToken = function(blob, options) {
+        blob[0].token = options.token;
+        return blob;
+    };
+
+    self.getBlob = function(fileName, options) {
+      var blob = require(path.join(__dirname, 'fixtures', fileName));
+      if (fileName === 'user.json') {
+          return self.keepAuthToken(blob, options);
+      }
+      return blob;
+    }
+
+    self.clean = function(options) {
         var bulks = [];
         var files = fs.readdirSync(path.join(__dirname, 'fixtures'));
         files.forEach(function(fileName) {
@@ -30,7 +43,7 @@ var DatabaseCleaner = function(orm) {
             var bulk = self.orm.db[
                 CamelCase(path.basename(fileName, '.json'))
             ].bulkCreate(
-                require(path.join(__dirname, 'fixtures', fileName))
+                self.getBlob(fileName, options)
             );
             bulks.push(bulk);
         });

@@ -11,6 +11,10 @@ import Foundation
 class Request {
     
     let apiUrl : String = "http://localhost:3001/api/"
+    
+    func getAuthToken() -> String? {
+        return nil
+    }
 
     func exec(type: String, action: String, body: Dictionary<String, String>?, callback: (AnyObject?) -> Bool) {
         let requestUrl = apiUrl + action
@@ -25,6 +29,9 @@ class Request {
         }
         let request = NSMutableURLRequest(URL: url)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        if let user: User = User.loadUser() {
+            request.addValue("Bearer " + user.token, forHTTPHeaderField: "Authorization")
+        }
         request.HTTPMethod = type
         
         if (type == "POST") {
@@ -41,8 +48,17 @@ class Request {
             (data: NSData?, response: NSURLResponse?, error: NSError?) in
             // this is where the completion handler code goes
             do {
-                let response = try NSJSONSerialization.JSONObjectWithData(data!, options:[])
-                callback(response)
+                if let httpResponse = response as? NSHTTPURLResponse {
+                    if (httpResponse.statusCode != 200) {
+                        print("Error: \(error)")
+                        callback(nil)
+                    } else {
+                        let response = try NSJSONSerialization.JSONObjectWithData(data!, options:[])
+                        callback(response)
+                    }
+                } else {
+                    print("Error: \(error)")
+                }
             }
             catch {
                 print("Error: \(error)")

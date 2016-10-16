@@ -1,5 +1,5 @@
 //
-//  DashboardController.swift
+//  TabbarController.swift
 //  Shopcast
 //
 //  Created by chafiol on 18/09/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DashboardController: UIViewController {
+class TabbarController: UITabBarController {
     
-
+    
 }

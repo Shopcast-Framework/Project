@@ -16,21 +16,33 @@ class SigninController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        NSOperationQueue.mainQueue().addOperationWithBlock {
+            if let _: User = User.loadUser() {
+                self.performSegueWithIdentifier("dashboardSegue", sender:self)
+            }
+            
+        }
+    }
+
     func loginCallback(response : AnyObject?) -> Bool {
 
         if (response!["user"]! == nil && response!["message"]! != nil) {
-            print("Error")
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 let ctrl = ErrorController(
                     message: response!["message"] as! String
                 )
-
                 ctrl.addOkButton()
                 ctrl.display(self)
             }
         }
         
         if (response!["user"]! != nil) {
+
+            User(
+                token: response!["user"]!!["token"] as! String
+            ).save()
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 self.performSegueWithIdentifier("dashboardSegue", sender:self)
             }
