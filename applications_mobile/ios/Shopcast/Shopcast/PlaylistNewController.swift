@@ -31,6 +31,12 @@ class PlaylistNewController: UIViewController {
         ], callback: playlistEditCallback)
     }
     
+    @IBAction func back(send: AnyObject) {
+        NSOperationQueue.mainQueue().addOperationWithBlock {
+            self.dismissViewControllerAnimated(true, completion: nil);
+        }        
+    }
+    
     func playlistEditCallback(response : AnyObject?) -> Bool {
         
         if (response == nil) {
@@ -44,7 +50,7 @@ class PlaylistNewController: UIViewController {
             return false;
         }
         
-        if (response!["playlists"]! == nil && response!["message"]! != nil) {
+        if (response!["playlist"]! == nil && response!["message"]! != nil) {
             NSOperationQueue.mainQueue().addOperationWithBlock {
                 let ctrl = ErrorController(
                     message: response!["message"] as! String
@@ -55,7 +61,7 @@ class PlaylistNewController: UIViewController {
             return false
         }
         NSOperationQueue.mainQueue().addOperationWithBlock {
-            self.performSegueWithIdentifier("dashboardSegue", sender:self)
+            self.dismissViewControllerAnimated(true, completion: nil);
         }
         return true
     }

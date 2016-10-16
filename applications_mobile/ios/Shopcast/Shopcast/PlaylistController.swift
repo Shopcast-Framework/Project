@@ -8,19 +8,40 @@
 
 import UIKit
 
-class PlaylistController: UITableViewController {
+class PlaylistController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var requester : Request = Request()
     
     // MARK: Properties
+    
+    @IBOutlet var tableView: UITableView!
+    
     var playlists = [Playlist]()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         requester.get("playlist", callback: playlistCallback)
     }
     
     func playlistCallback(response : AnyObject?) -> Bool {
+   
+        if (response == nil) {
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                let ctrl = ErrorController(
+                    message: "Error: Response is nil"
+                )
+                ctrl.addOkButton()
+                ctrl.display(self)
+            }
+            return false;
+        }
         
         if (response!["playlists"]! == nil && response!["message"]! != nil) {
             NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -40,25 +61,23 @@ class PlaylistController: UITableViewController {
             }
         }
         NSOperationQueue.mainQueue().addOperationWithBlock {
+            print("reload data")
             self.tableView.reloadData()
         }
         return true
     }
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.playlists.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return playlists.count
-    }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "PlaylistCell"
-        let playlist = playlists[indexPath.row]
+        let playlist = self.playlists[indexPath.row]
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! UIPlaylistCell
-        cell.nameLabel.text = playlist.name
+        print(playlist.name)
+        cell.nameLabel?.text = playlist.name
         return cell
     }
 }

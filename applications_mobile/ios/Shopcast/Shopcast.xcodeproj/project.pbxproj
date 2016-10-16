@@ -17,6 +17,7 @@
 		3E6C4BF61D8F06C100DDC18A /* ErrorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6C4BF51D8F06C100DDC18A /* ErrorController.swift */; };
 		3E6C4BF81D8F354A00DDC18A /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6C4BF71D8F354A00DDC18A /* DashboardController.swift */; };
 		3E6C4BFA1D8F3E8B00DDC18A /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6C4BF91D8F3E8B00DDC18A /* TabbarController.swift */; };
+		3E7FD5E21DB3A4BA00EED335 /* PlaylistNewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7FD5E11DB3A4BA00EED335 /* PlaylistNewController.swift */; };
 		3E809A3F1D91A861008CB27D /* PlaylistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E809A3E1D91A861008CB27D /* PlaylistController.swift */; };
 		3E809A431D91B314008CB27D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E809A421D91B314008CB27D /* User.swift */; };
 		3EE8A62F1DA9DB2D005BCB14 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8A62E1DA9DB2D005BCB14 /* Cell.swift */; };
@@ -48,6 +49,7 @@
 		3E6C4BF51D8F06C100DDC18A /* ErrorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorController.swift; sourceTree = "<group>"; };
 		3E6C4BF71D8F354A00DDC18A /* DashboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
 		3E6C4BF91D8F3E8B00DDC18A /* TabbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
+		3E7FD5E11DB3A4BA00EED335 /* PlaylistNewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistNewController.swift; sourceTree = "<group>"; };
 		3E809A3E1D91A861008CB27D /* PlaylistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistController.swift; sourceTree = "<group>"; };
 		3E809A421D91B314008CB27D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3EE8A62E1DA9DB2D005BCB14 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				3E6C4BF71D8F354A00DDC18A /* DashboardController.swift */,
 				3E809A3E1D91A861008CB27D /* PlaylistController.swift */,
 				3E6C4BF91D8F3E8B00DDC18A /* TabbarController.swift */,
+				3E7FD5E11DB3A4BA00EED335 /* PlaylistNewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E6C4BF61D8F06C100DDC18A /* ErrorController.swift in Sources */,
+				3E7FD5E21DB3A4BA00EED335 /* PlaylistNewController.swift in Sources */,
 				3E6C4BFA1D8F3E8B00DDC18A /* TabbarController.swift in Sources */,
 				3EE8A62F1DA9DB2D005BCB14 /* Cell.swift in Sources */,
 				3E2D86511D5CBBA70003CF43 /* SigninController.swift in Sources */,
