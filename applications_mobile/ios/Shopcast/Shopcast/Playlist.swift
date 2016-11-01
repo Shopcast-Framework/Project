@@ -15,7 +15,7 @@ class Playlist {
         name = _name
     }
     
-    static func parse(blob: AnyObject) -> Playlist {
+    static func parse(_ blob: AnyObject) -> Playlist {
         return Playlist(_name: blob["name"] as! String)
     }
 }

@@ -18,40 +18,60 @@ class SigninController: UIViewController {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        NSOperationQueue.mainQueue().addOperationWithBlock {
+        OperationQueue.main.addOperation {
             if let _: User = User.loadUser() {
-                self.performSegueWithIdentifier("dashboardSegue", sender:self)
+                self.performSegue(withIdentifier: "dashboardSegue", sender:self)
             }
             
         }
     }
 
-    func loginCallback(response : AnyObject?) -> Bool {
+    func loginCallback(_ response : AnyObject?) -> Void {
+        
+        if (response == nil) {
+            print("Error can't connect to server")
+            return
+        }
 
         if (response!["user"]! == nil && response!["message"]! != nil) {
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 let ctrl = ErrorController(
                     message: response!["message"] as! String
                 )
                 ctrl.addOkButton()
                 ctrl.display(self)
             }
+            return
         }
         
-        if (response!["user"]! != nil) {
-
-            User(
-                token: response!["user"]!!["token"] as! String
-            ).save()
-            NSOperationQueue.mainQueue().addOperationWithBlock {
-                self.performSegueWithIdentifier("dashboardSegue", sender:self)
-            }
+        guard let user = response!["user"] as? [String: Any] else {
+            let ctrl = ErrorController(
+                message: response!["message"] as! String
+            )
+            ctrl.addOkButton()
+            ctrl.display(self)
+            return
         }
-        return true
+        
+        guard let token = user["token"] as? String else {
+            let ctrl = ErrorController(
+                message: response!["message"] as! String
+            )
+            ctrl.addOkButton()
+            ctrl.display(self)
+            return
+        }
+
+        User(
+            token: token
+        ).save()
+        OperationQueue.main.addOperation {
+            self.performSegue(withIdentifier: "dashboardSegue", sender:self)
+        }
     }
     
     // MARK: Actions
-    @IBAction func signIn(sender: UIButton) {
+    @IBAction func signIn(_ sender: UIButton) {
         requester.post("session", body: [
             "strategy" : "local", "username" : usernameTextField.text!, "password" : passwordTextField.text!
         ], callback: loginCallback)

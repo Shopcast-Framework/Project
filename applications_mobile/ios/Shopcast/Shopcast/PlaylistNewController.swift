@@ -22,7 +22,7 @@ class PlaylistNewController: UIViewController {
         super.init(coder: aDecoder)
     }
 
-    @IBAction func save(sender: AnyObject) {
+    @IBAction func save(_ sender: AnyObject) {
         requester.post("playlist", body: [
             "name" : nameField.text!,
             "description" : descriptionField.text!,
@@ -31,39 +31,38 @@ class PlaylistNewController: UIViewController {
         ], callback: playlistEditCallback)
     }
     
-    @IBAction func back(send: AnyObject) {
-        NSOperationQueue.mainQueue().addOperationWithBlock {
-            self.dismissViewControllerAnimated(true, completion: nil);
+    @IBAction func back(_ send: AnyObject) {
+        OperationQueue.main.addOperation {
+            self.dismiss(animated: true, completion: nil);
         }        
     }
     
-    func playlistEditCallback(response : AnyObject?) -> Bool {
+    func playlistEditCallback(_ response : AnyObject?) -> Void {
         
         if (response == nil) {
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 let ctrl = ErrorController(
                     message: "Error: Response is nil"
                 )
                 ctrl.addOkButton()
                 ctrl.display(self)
             }
-            return false;
+            return
         }
         
         if (response!["playlist"]! == nil && response!["message"]! != nil) {
-            NSOperationQueue.mainQueue().addOperationWithBlock {
+            OperationQueue.main.addOperation {
                 let ctrl = ErrorController(
                     message: response!["message"] as! String
                 )
                 ctrl.addOkButton()
                 ctrl.display(self)
             }
-            return false
+            return
         }
-        NSOperationQueue.mainQueue().addOperationWithBlock {
-            self.dismissViewControllerAnimated(true, completion: nil);
+        OperationQueue.main.addOperation {
+            self.dismiss(animated: true, completion: nil);
         }
-        return true
     }
     
 }

@@ -14,8 +14,8 @@ class User: NSObject, NSCoding {
     
     // MARK: Archiving path
     
-    static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-    static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("shopcast")
+    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("shopcast")
     
     // MARK: Types
     
@@ -34,25 +34,25 @@ class User: NSObject, NSCoding {
     
     // MARK: NSCoding
 
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(token, forKey: PropertyKey.tokenKey)
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(token, forKey: PropertyKey.tokenKey)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
         self.init(
-            token: aDecoder.decodeObjectForKey(PropertyKey.tokenKey) as! String
+            token: aDecoder.decodeObject(forKey: PropertyKey.tokenKey) as! String
         )
     }
     
     func save() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject([self], toFile: User.ArchiveURL.path!)
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject([self], toFile: User.ArchiveURL.path)
         if !isSuccessfulSave {
             print("Failed to save meals...")
         }
     }
     
     static func loadUser() -> User? {
-        if let users: [User] = NSKeyedUnarchiver.unarchiveObjectWithFile(User.ArchiveURL.path!) as! [User]? {
+        if let users: [User] = NSKeyedUnarchiver.unarchiveObject(withFile: User.ArchiveURL.path) as! [User]? {
             return users[0]
         }
         return nil
