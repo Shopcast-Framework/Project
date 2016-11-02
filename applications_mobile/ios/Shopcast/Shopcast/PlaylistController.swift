@@ -79,6 +79,20 @@ class PlaylistController: UIViewController, UITableViewDelegate, UITableViewData
         cell.nameLabel?.text = playlist.name
         return cell
     }
+   
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "playlistShowSegue", sender:self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "playlistShowSegue")
+        {
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                let upcoming: PlaylistShowController = segue.destination as! PlaylistShowController
+                upcoming.playlist = playlists[indexPath.row]
+            }
+        }
+    }
 }
 
 

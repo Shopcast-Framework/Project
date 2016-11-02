@@ -40,7 +40,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2QB-1Y-ivv" id="rKP-Og-dik">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUf-9a-DFQ">
@@ -57,6 +57,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameLabel" destination="WUf-9a-DFQ" id="AUH-1T-7bc"/>
+                                            <segue destination="p8Q-ZU-BXs" kind="show" identifier="playlistShowSegue" id="3YQ-7U-1v6"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -81,6 +82,63 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WQQ-Re-aP2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1232.5" y="37.5"/>
+        </scene>
+        <!--Playlist Show Controller-->
+        <scene sceneID="Rrx-T0-sBf">
+            <objects>
+                <viewController id="p8Q-ZU-BXs" customClass="PlaylistShowController" customModule="Shopcast" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8ec-3h-eGg"/>
+                        <viewControllerLayoutGuide type="bottom" id="3UV-b2-OMy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7fX-5T-281">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0k-HQ-GON">
+                                <items>
+                                    <navigationItem title="Title" id="6hs-60-Tay">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="Yvw-TL-b7V">
+                                            <connections>
+                                                <segue destination="oos-2S-KIe" kind="show" id="BQZ-OD-WjB"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="39f-5U-K6l">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wo-22-mri">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KaZ-33-5ll">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90130440749999996" green="0.97081743089999994" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="39f-5U-K6l" firstAttribute="top" secondItem="i0k-HQ-GON" secondAttribute="bottom" constant="20" id="4oV-3E-2Q9"/>
+                            <constraint firstAttribute="trailing" secondItem="i0k-HQ-GON" secondAttribute="trailing" id="5tK-33-24O"/>
+                            <constraint firstItem="i0k-HQ-GON" firstAttribute="top" secondItem="8ec-3h-eGg" secondAttribute="bottom" constant="20" id="iHN-qi-qMW"/>
+                            <constraint firstItem="i0k-HQ-GON" firstAttribute="leading" secondItem="7fX-5T-281" secondAttribute="leading" id="ixP-5L-Vtr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="39f-5U-K6l" secondAttribute="trailing" id="kCZ-Zl-GJ0"/>
+                            <constraint firstItem="39f-5U-K6l" firstAttribute="leading" secondItem="7fX-5T-281" secondAttribute="leadingMargin" id="u1w-y3-olr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="_description" destination="KaZ-33-5ll" id="UP3-an-mAh"/>
+                        <outlet property="_name" destination="9wo-22-mri" id="3TJ-Yc-Xny"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1c0-XH-brA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2022" y="37"/>
         </scene>
         <!--Playlist New Controller-->
         <scene sceneID="shU-jR-77w">
@@ -291,4 +349,7 @@
         <image name="Dashboard" width="25" height="25"/>
         <image name="Playlist" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="BQZ-OD-WjB"/>
+    </inferredMetricsTieBreakers>
 </document>
