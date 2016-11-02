@@ -17,6 +17,7 @@
 		3E6C4BF61D8F06C100DDC18A /* ErrorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6C4BF51D8F06C100DDC18A /* ErrorController.swift */; };
 		3E6C4BF81D8F354A00DDC18A /* DashboardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6C4BF71D8F354A00DDC18A /* DashboardController.swift */; };
 		3E6C4BFA1D8F3E8B00DDC18A /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6C4BF91D8F3E8B00DDC18A /* TabbarController.swift */; };
+		3E71070E1DCA731C00304A04 /* PlaylistShowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E71070D1DCA731C00304A04 /* PlaylistShowController.swift */; };
 		3E7FD5E21DB3A4BA00EED335 /* PlaylistNewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7FD5E11DB3A4BA00EED335 /* PlaylistNewController.swift */; };
 		3E809A3F1D91A861008CB27D /* PlaylistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E809A3E1D91A861008CB27D /* PlaylistController.swift */; };
 		3E809A431D91B314008CB27D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E809A421D91B314008CB27D /* User.swift */; };
@@ -49,6 +50,7 @@
 		3E6C4BF51D8F06C100DDC18A /* ErrorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorController.swift; sourceTree = "<group>"; };
 		3E6C4BF71D8F354A00DDC18A /* DashboardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardController.swift; sourceTree = "<group>"; };
 		3E6C4BF91D8F3E8B00DDC18A /* TabbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
+		3E71070D1DCA731C00304A04 /* PlaylistShowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistShowController.swift; sourceTree = "<group>"; };
 		3E7FD5E11DB3A4BA00EED335 /* PlaylistNewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistNewController.swift; sourceTree = "<group>"; };
 		3E809A3E1D91A861008CB27D /* PlaylistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistController.swift; sourceTree = "<group>"; };
 		3E809A421D91B314008CB27D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				3E809A3E1D91A861008CB27D /* PlaylistController.swift */,
 				3E6C4BF91D8F3E8B00DDC18A /* TabbarController.swift */,
 				3E7FD5E11DB3A4BA00EED335 /* PlaylistNewController.swift */,
+				3E71070D1DCA731C00304A04 /* PlaylistShowController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				3E2D864F1D5CBBA70003CF43 /* AppDelegate.swift in Sources */,
 				3EE8A6331DA9DE0E005BCB14 /* Playlist.swift in Sources */,
 				3E809A3F1D91A861008CB27D /* PlaylistController.swift in Sources */,
+				3E71070E1DCA731C00304A04 /* PlaylistShowController.swift in Sources */,
 				3E809A431D91B314008CB27D /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
