@@ -97,7 +97,7 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0k-HQ-GON">
                                 <items>
-                                    <navigationItem title="Title" id="6hs-60-Tay">
+                                    <navigationItem title="Playlist" id="6hs-60-Tay">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="Yvw-TL-b7V">
                                             <connections>
                                                 <segue destination="oos-2S-KIe" kind="show" id="BQZ-OD-WjB"/>
@@ -120,15 +120,33 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H4l-j4-CU3">
+                                <state key="normal" title="Take a picture"/>
+                                <connections>
+                                    <action selector="takePhoto:" destination="p8Q-ZU-BXs" eventType="touchUpInside" id="3LP-lO-NNj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLE-jp-ewE">
+                                <state key="normal" title="Select a picture"/>
+                                <connections>
+                                    <action selector="selectPictureAction:" destination="p8Q-ZU-BXs" eventType="touchUpInside" id="Wx5-6w-iWr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90130440749999996" green="0.97081743089999994" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="fLE-jp-ewE" secondAttribute="trailing" id="2OH-t7-QSZ"/>
                             <constraint firstItem="39f-5U-K6l" firstAttribute="top" secondItem="i0k-HQ-GON" secondAttribute="bottom" constant="20" id="4oV-3E-2Q9"/>
                             <constraint firstAttribute="trailing" secondItem="i0k-HQ-GON" secondAttribute="trailing" id="5tK-33-24O"/>
+                            <constraint firstItem="fLE-jp-ewE" firstAttribute="leading" secondItem="7fX-5T-281" secondAttribute="leading" id="Aub-JD-CkV"/>
+                            <constraint firstItem="3UV-b2-OMy" firstAttribute="top" secondItem="fLE-jp-ewE" secondAttribute="bottom" id="Vpz-tW-xmH"/>
                             <constraint firstItem="i0k-HQ-GON" firstAttribute="top" secondItem="8ec-3h-eGg" secondAttribute="bottom" constant="20" id="iHN-qi-qMW"/>
                             <constraint firstItem="i0k-HQ-GON" firstAttribute="leading" secondItem="7fX-5T-281" secondAttribute="leading" id="ixP-5L-Vtr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="39f-5U-K6l" secondAttribute="trailing" id="kCZ-Zl-GJ0"/>
+                            <constraint firstAttribute="trailing" secondItem="H4l-j4-CU3" secondAttribute="trailing" id="lFB-Fa-0OH"/>
+                            <constraint firstItem="fLE-jp-ewE" firstAttribute="top" secondItem="H4l-j4-CU3" secondAttribute="bottom" constant="8" id="qnE-oA-kE3"/>
                             <constraint firstItem="39f-5U-K6l" firstAttribute="leading" secondItem="7fX-5T-281" secondAttribute="leadingMargin" id="u1w-y3-olr"/>
+                            <constraint firstItem="H4l-j4-CU3" firstAttribute="leading" secondItem="7fX-5T-281" secondAttribute="leading" id="xBb-H1-anU"/>
                         </constraints>
                     </view>
                     <connections>
