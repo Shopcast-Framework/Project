@@ -9,44 +9,25 @@ var express = require('express'),
           dest              : 'uploads/'
         }),
 	middlewares = require('../middlewares'),
-    probe     = require('node-ffprobe'), 
+    probe     = require('node-ffprobe'),
 	humanize = require('humanize'),
 	translate = require('../languages');
 
 router.post('/',middlewares.isLogged, upload.any(), function(req, res) {
 
-	if (req.files && req.files[0]) {
-		var file = req.files[0];
-		for (var k in file) {
-                  req.body[k] = file[k];
-                }
-	}
+    // if (req.files && req.files[0]) {
+    //     var file = req.files[0];
+    //     for (var k in file) {
+    //         req.body[k] = file[k];
+    //     }
+    // }
 
-	Rest.post('file', JSON.stringify(req.body)).then(function() {
-		    	res.redirect('/files?message=Files correctly upload');
-		    }, function(err) {
-		    	console.log(err);
-		    	res.redirect('/files?message=Files can\'t be upload');
-		    });
-        /*probe(file.path, function(err, probeData) {
-            var duration = 0;
-
-            if (probeData && probeData.format && !isNaN(probeData.format.duration)) {
-                duration = probeData.format.duration;
-            }
-            if (req.files && req.files[0]) {
-                req.body['duration'] = duration;
-            }
-            req.body['duration'] = duration;
-
-		    Rest.post('file', JSON.stringify(req.body)).then(function() {
-		    	res.redirect('/files?message=Files correctly upload');
-		    }, function(err) {
-		    	console.log(err);
-		    	res.redirect('/files?message=Files can\'t be upload');
-		    });
-
-        });*/
+    Rest.post('file', JSON.stringify(req.files)).then(function() {
+        res.redirect('/files?message=Files correctly upload');
+    }, function(err) {
+        console.log(err);
+        res.redirect('/files?message=Files can\'t be upload');
+    });
 });
 
 router.post('/:id',middlewares.isLogged, function(req, res) {
@@ -104,7 +85,7 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 	promises.push(menu.load(req.session.user));
 
 	Promise.all(promises).then(function(values) {
-		
+
 		var file = values[0].body.file;
 		file.size = humanize.filesize(file.size);
 		file.playlistsId = [];
@@ -117,7 +98,7 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 
 		res.render('files/show', {
 			active: 'files',
-			menu: values[2], 
+			menu: values[2],
 			file: file,
 			playlists: playlists,
 			isLogged: true,
@@ -151,7 +132,7 @@ router.get('/', middlewares.isLogged, middlewares.language, function( req, res )
 
 		res.render('files/list', {
 			active: 'files',
-			menu: values[1], 
+			menu: values[1],
 			files: files,
 			isLogged: true,
 			isSearchBar: true,

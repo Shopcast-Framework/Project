@@ -9,18 +9,18 @@ var Routes = [
     {
         name: 'monitor',
         sub: [
-          {
-              name: 'playlist',
-              only: ['get']
-              // middlewares: [
-              //     {
-              //         name:   'auth',
-              //         param: {
-              //             roles: [Role.ADMIN, Role.USER]
-              //         }
-              //     }
-              // ]
-          },
+            {
+                name: 'playlist',
+                only: ['get']
+                    // middlewares: [
+                    //     {
+                    //         name:   'auth',
+                    //         param: {
+                    //             roles: [Role.ADMIN, Role.USER]
+                    //         }
+                    //     }
+                    // ]
+                },
         ],
         actions: {
             'associate' : { verb: 'post', route: '/associate' },

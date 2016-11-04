@@ -31,23 +31,22 @@ var FileGet = function(req, res) {
 };
 
 var FilePost = function(req, res) {
-    req.body.user_id = req.user.id;
-    if (Format.indexOf(req.body.mimetype) == -1) {
-        return res.status(Status.UNAUTHORIZED).send({
-            message: Message.get("file:post:wrongtype")
-        });
-    }
-    File
-    .create(req.body)
-    .then(function(file) {
-        if (file == null) {
+    var files = []
+    for (var i in req.body) {
+        var file = req.body[i]
+        file.user_id = req.user.id;
+        if (Format.indexOf(file.mimetype) == -1) {
             return res.status(Status.UNAUTHORIZED).send({
-                message: Message.get("file:post:failure")
+                message: Message.get("file:post:wrongtype")
             });
         }
-        res.status(Status.OK).send({
-            message : Message.get("file:post:success"),
-            file    : file
+        files.push(file)
+    }
+    File
+    .bulkCreate(files)
+    .then(function() {
+        return res.status(Status.UNAUTHORIZED).send({
+            message: Message.get("file:post:failure")
         });
     }, function(err) {
         res.status(Status.UNAUTHORIZED).send({message: err.toString()});
