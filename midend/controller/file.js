@@ -1,7 +1,6 @@
 'use strict';
 
 var Status      = require(process.env.NODE_PATH + '/config/status.json'),
-    Format      = require(process.env.NODE_PATH + '/config/file/format.json'),
     orm         = require(process.env.NODE_PATH + '/modules/orm'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
     File        = orm.db.File,
@@ -31,22 +30,14 @@ var FileGet = function(req, res) {
 };
 
 var FilePost = function(req, res) {
-    var files = []
-    for (var i in req.body) {
-        var file = req.body[i]
-        file.user_id = req.user.id;
-        if (Format.indexOf(file.mimetype) == -1) {
-            return res.status(Status.UNAUTHORIZED).send({
-                message: Message.get("file:post:wrongtype")
-            });
-        }
-        files.push(file)
-    }
+    var file = req.body
+    file.user_id = req.user.id;
     File
-    .bulkCreate(files)
-    .then(function() {
-        return res.status(Status.UNAUTHORIZED).send({
-            message: Message.get("file:post:failure")
+    .upload(file)
+    .then(function(file) {
+        return res.status(Status.OK).send({
+            message: Message.get("file:post:success"),
+            file: file
         });
     }, function(err) {
         res.status(Status.UNAUTHORIZED).send({message: err.toString()});

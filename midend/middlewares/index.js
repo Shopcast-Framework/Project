@@ -5,8 +5,13 @@ var path        = require('path'),
 
 var UseModules = function(app) {
     app.use(require('cookie-parser')());
-    app.use(require('body-parser').json());
 };
+
+var Default = function(middlewares) {
+    return {
+        bodyparser : require(path.join(process.env.NODE_PATH, '/middlewares/bodyparser')).object
+    }
+}
 
 var MiddlewaresLoader = function() {
     var self = this;
@@ -32,6 +37,7 @@ var MiddlewaresLoader = function() {
     };
 
     self.load = function(action, descriptors) {
+        var defaults = Default();
         var middlewares = [];
         var name, param;
         for (var i in descriptors) {
@@ -41,6 +47,7 @@ var MiddlewaresLoader = function() {
             param = descriptor.param;
             if (self.only(descriptor, action) && self.middlewares[name]) {
                 var middleware = self.middlewares[name].run;
+                delete defaults[name]
 
                 if (typeof(middleware) == 'function') {
                     middlewares.push(middleware.bind(param));
@@ -50,6 +57,9 @@ var MiddlewaresLoader = function() {
                     }
                 }
             }
+        }
+        for (var i in defaults) {
+            middlewares.push(defaults[i].run)
         }
         return middlewares;
     };

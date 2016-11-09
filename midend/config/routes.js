@@ -44,7 +44,7 @@ var Routes = [
         name: 'group',
         middlewares: [
             {
-                name:   'auth',
+                name: 'auth',
                 param: {
                     roles: [Role.ADMIN, Role.USER]
                 }
@@ -66,7 +66,7 @@ var Routes = [
         name: 'planning',
         middlewares: [
             {
-                name:   'auth',
+                name: 'auth',
                 param: {
                     roles: [Role.ADMIN, Role.USER]
                 }
@@ -76,7 +76,7 @@ var Routes = [
     {
         name: 'music',
         actions: {
-            'search' : { verb: 'get', route: '/search/:id' },
+            'search': { verb: 'get', route: '/search/:id' },
         }
     },
     {
