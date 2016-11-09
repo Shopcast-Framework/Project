@@ -37,14 +37,13 @@ router.get('/display/:id', middlewares.isLogged, middlewares.language, function(
 
 	var promises = [];
 	var id = req.params.id;
-	
+
 	promises.push(Rest.get( 'file/' + req.params.id ) );
 	promises.push(menu.load(req.session.user));
 
 	Promise.all(promises).then(function(values) {
 
 		var file = values[0].body.file;
-		file.realPath = "/uploads/" + file.filename; 
 		if (file.mimetype.indexOf("video") != -1)
 			file.type = "video";
 		else if (file.mimetype.indexOf("image") != -1)
@@ -96,7 +95,7 @@ router.get('/:id', middlewares.isLogged, middlewares.language, function( req, re
 router.get('/', middlewares.isLogged, middlewares.language, function( req, res ) {
 
 	var promises = [];
-	
+
 	promises.push( Rest.get( 'monitor' ) );
 	promises.push(menu.load(req.session.user));
 

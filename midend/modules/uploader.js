@@ -50,9 +50,19 @@ var Uploader = function() {
             if (err) {
                 return defer.reject(err)
             }
-            defer.resolve(filePath, fileName)
+            defer.resolve({path: filePath, name: fileName});
         });
         return defer.promise;
+    }
+
+    self.convert = function(data) {
+        switch (data && data.type) {
+            case 'Buffer':
+                return Buffer.from(data.data);
+            default:
+                return data.data;
+        }
+        return null;
     }
 
     return self;

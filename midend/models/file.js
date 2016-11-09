@@ -32,9 +32,11 @@ var File = function(sequelize) {
             return Q.reject(new Error(Message.get("file:post:wrongtype")));
         }
         var defer = Q.defer();
-        Uploader.upload(file.data).then(function(path, filename) {
-            file.path = path;
-            file.filename = filename
+        var data = Uploader.convert(file.data);
+        Uploader.upload(data).then(function(uploadedFile) {
+            file.size = file.data.length;
+            file.path = uploadedFile.path;
+            file.filename = uploadedFile.name;
             model.create(file).then(defer.resolve, defer.reject);
         });
         return defer.promise;

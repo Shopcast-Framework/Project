@@ -1,37 +1,48 @@
 'use strict';
 
-var express = require('express'),
-	router = express.Router(),
-	Promise = require('promise'),
-	Rest	= require('../rest'),
-	menu    = require(__dirname + '/../modules/menu'),
-	upload  = require('multer')({
-          dest              : 'uploads/'
-        }),
-	middlewares = require('../middlewares'),
-    probe     = require('node-ffprobe'),
-	humanize = require('humanize'),
-	translate = require('../languages');
+var express     = require('express'),
+    router      = express.Router(),
+    Promise     = require('promise'),
+    Busboy      = require('busboy'),
+    Rest        = require('../rest'),
+    menu        = require(__dirname + '/../modules/menu'),
+    middlewares = require('../middlewares'),
+    humanize    = require('humanize'),
+    translate   = require('../languages');
 
-router.post('/',middlewares.isLogged, upload.any(), function(req, res) {
-
-    // if (req.files && req.files[0]) {
-    //     var file = req.files[0];
-    //     for (var k in file) {
-    //         req.body[k] = file[k];
-    //     }
-    // }
-
-    Rest.post('file', JSON.stringify(req.files)).then(function() {
-        res.redirect('/files?message=Files correctly upload');
-    }, function(err) {
-        console.log(err);
-        res.redirect('/files?message=Files can\'t be upload');
+router.post('/', middlewares.isLogged, function(req, res) {
+    var body = {};
+    var busboy = new Busboy({ headers: req.headers });
+    busboy.on('field', function(name, value) {
+        body[name] = value;
     });
+    busboy.on('file', function(fieldname, fileStream, filename, encoding, mimetype) {
+        body["mimetype"] = mimetype;
+        body["encoding"] = encoding;
+        body["originalname"] = filename;
+        var buff = [];
+        fileStream.on('data', function(chunk) {
+            buff.push(chunk);
+        });
+        fileStream.on('end', function() {
+            body["data"] = Buffer.concat(buff);
+        });
+    });
+    busboy.on('finish', function() {
+        Rest.post('file', JSON.stringify(body, function (key, value) {
+            return value instanceof Buffer ? value.toString('base64') : value;
+        }))
+        .then(function(data) {
+            res.redirect('/files?message=Files correctly upload');
+        }, function(err) {
+            console.log(err);
+            res.redirect('/files?message=Files can\'t be upload');
+        });
+    });
+    req.pipe(busboy);
 });
 
-router.post('/:id',middlewares.isLogged, function(req, res) {
-
+router.post('/:id', middlewares.isLogged, function(req, res) {
     var id = req.params.id;
 
     Rest.put('file/' + id, JSON.stringify(req.body)).then(function(response) {
@@ -43,23 +54,19 @@ router.post('/:id',middlewares.isLogged, function(req, res) {
 });
 
 router.get('/delete/:id', middlewares.isLogged, middlewares.language, function( req, res ) {
-
 	var promises = [];
 	var id = req.params.id;
 
 	promises.push(Rest.delete('file/' + id));
 	Promise.all(promises).then(function(response) {
-		console.log(res);
 		res.redirect('/files?message=' + response[0].body.message );
 	}, function(err) {
 		console.log(err);
 		res.redirect('/files?message=' + err.body.message);
 	});
-
 });
 
 router.get('/:id/playlist/add/:id_playlist', middlewares.isLogged, middlewares.language, function( req, res ) {
-
     var id = req.params.id;
     var id_playlist = req.params.id_playlist;
 
@@ -72,11 +79,9 @@ router.get('/:id/playlist/add/:id_playlist', middlewares.isLogged, middlewares.l
 		console.log(err);
 		res.redirect('/files/'+id+'?message=' + err.body.message);
 	});
-
 });
 
 router.get('/:id', middlewares.isLogged, middlewares.language, function( req, res ) {
-
 	var promises = [];
 	var id = req.params.id;
 
