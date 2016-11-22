@@ -1,34 +1,22 @@
 <resources>
-    <string name="app_name">ShopCastAndroid</string>
-
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">Wrong password or email adress</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="title_activity_main">ShopCast</string>
+    <string name="app_name">shopcast v3</string>
+    <string name="URL">http://api.shopcast.fr</string>
+    <string name="title_activity_dashboard">DashboardActivity</string>
+    <string-array name="items">
+        <item>Item 1</item>
+        <item>Item 2</item>
+        <item>Item 3</item>
+        <item>Item 4</item>
+        <item>Item 5</item>
+        <item>Item 6</item>
+    </string-array>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="no_playlist"> No playlist are avaible.</string>
-    <string name="not_avaible"> This service is unavaible for the moment.</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <!-- API -->
-    <string name="URL_API">http://localhost:3001/api/</string>
-
-    <!-- GOOGLE SIGN IN -->
-    <string name="signed_in_fmt">Just logged with Google</string>
-    <string name="title_activity_simple_xyplot">SimpleXYPlotActivity</string>
 </resources>

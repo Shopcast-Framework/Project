@@ -4,6 +4,7 @@ var Status      = require(process.env.NODE_PATH + '/config/status.json'),
     orm         = require(process.env.NODE_PATH + '/modules/orm'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
     Monitor     = orm.db.Monitor,
+    Playlist    = orm.db.Playlist,
     Planning    = orm.db.Planning;
 
 var PlanningGet = function(req, res) {
@@ -15,6 +16,9 @@ var PlanningGet = function(req, res) {
         include: [{
             model: Monitor,
             as: 'monitor'
+        }, {
+            model : Playlist,
+            as: 'playlist'
         }]
     })
     .then(function(plannings) {

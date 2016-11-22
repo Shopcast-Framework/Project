@@ -1,11 +1,11 @@
 'use strict';
 
 var Status      = require(process.env.NODE_PATH + '/config/status.json'),
+    Format      = require(process.env.NODE_PATH + '/config/file/format.json'),
     orm         = require(process.env.NODE_PATH + '/modules/orm'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
-    probe       = require('node-ffprobe'),
     File        = orm.db.File,
-    PlaylistFile    = orm.db.PlaylistFile,
+    PlaylistFile= orm.db.PlaylistFile,
     Playlist    = orm.db.Playlist;
 
 var FileGet = function(req, res) {
@@ -32,6 +32,11 @@ var FileGet = function(req, res) {
 
 var FilePost = function(req, res) {
     req.body.user_id = req.user.id;
+    if (Format.indexOf(req.body.mimetype) == -1) {
+        return res.status(Status.UNAUTHORIZED).send({
+            message: Message.get("file:post:wrongtype")
+        });
+    }
     File
     .create(req.body)
     .then(function(file) {

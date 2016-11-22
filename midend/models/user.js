@@ -23,7 +23,7 @@ var User = function(sequelize) {
         sex             : Sequelize.STRING,
         location        : Sequelize.STRING,
         password        : Sequelize.STRING,
-        token           : Sequelize.VIRTUAL,
+        token           : Sequelize.STRING,
         role            : Sequelize.INTEGER,
         type            : Sequelize.INTEGER,
         facebookId      : Sequelize.STRING,
@@ -35,7 +35,7 @@ var User = function(sequelize) {
         instanceMethods: {
             authenticate: function() {
                 this.token = jwt.sign(this.username, '/*986_@$*#[sdaw<!+');
-                this.updateAttributes({last_connection: new Date()});
+                this.updateAttributes({token: this.token, last_connection: new Date()});
             },
             resetPassword: function(done) {
                 var self = this;
@@ -66,6 +66,8 @@ var User = function(sequelize) {
             },
             verify: function(token, done) {
                 var self = this;
+
+                token = token.substr("Bearer ".length);
                 jwt.verify(token, '/*986_@$*#[sdaw<!+', function(err, decoded) {
                     if (err) {
                         return done(err);
@@ -102,6 +104,7 @@ var User = function(sequelize) {
         model.hasMany(orm.db.Playlist, {constraints: false});
         model.hasMany(orm.db.File, {constraints: false});
         model.hasMany(orm.db.Planning, {constraints: false});
+        model.belongsToMany(orm.db.User, {constraints: false, as: 'blocks', through : 'Block'});
     };
 
     return {

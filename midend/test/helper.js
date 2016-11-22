@@ -38,6 +38,16 @@ var BuilderHelper = function(orm) {
         self.orm = orm;
     };
 
+    self.form = function(originalDatas, options) {
+        var datas = Clone(originalDatas);
+        for (var k in options) {
+          for (var i in datas) {
+            datas[i][k] = options[k]
+          }
+        }
+        return datas;
+    };
+
     self.new = function(name, datas, attrs) {
         var model = self.orm.db[name],
             newobj = {

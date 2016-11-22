@@ -22,13 +22,12 @@ router.post('/',middlewares.isLogged, upload.any(), function(req, res) {
                 }
 	}
 
-	Rest.post('file', JSON.stringify(req.body)).then(function(response) {
-			res.redirect('/files?message=' + response.body.message);
-		}, function(err) {
-		    console.log(err);
-		    res.redirect('/files?message=' + err.body.message);
-	});
-
+	Rest.post('file', JSON.stringify(req.body)).then(function() {
+		    	res.redirect('/files?message=Files correctly upload');
+		    }, function(err) {
+		    	console.log(err);
+		    	res.redirect('/files?message=Files can\'t be upload');
+		    });
         /*probe(file.path, function(err, probeData) {
             var duration = 0;
 
@@ -38,6 +37,7 @@ router.post('/',middlewares.isLogged, upload.any(), function(req, res) {
             if (req.files && req.files[0]) {
                 req.body['duration'] = duration;
             }
+            req.body['duration'] = duration;
 
 		    Rest.post('file', JSON.stringify(req.body)).then(function() {
 		    	res.redirect('/files?message=Files correctly upload');

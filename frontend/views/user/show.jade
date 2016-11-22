@@ -4,8 +4,15 @@ block content
     header.actions.container
         button(class="amber darken-2 btn btn-large waves-effect waves-light modal-edit" data-target="form-edit") #{translate.btnEdit}
             i.material-icons.left edit
-        a(class="red darken-2 btn btn-large waves-effect waves-light" href="/users/delete/#{user.id}") #{translate.btnDelete}
-            i.material-icons.left delete
+        if (me.id != user.id)
+            if (user.role == -1)
+                a(class="light-green btn btn-large waves-effect waves-light" href="/users/unblock/#{user.id}") #{translate.btnDeBlock}
+                    i.material-icons.left done
+            else
+                a(class="light-green btn btn-large waves-effect waves-light" href="/users/block/#{user.id}") #{translate.btnBlock}
+                    i.material-icons.left block
+            a(class="red darken-2 btn btn-large waves-effect waves-light" href="/users/delete/#{user.id}") #{translate.btnDelete}
+                i.material-icons.left delete
     article.wrapper-content#playlist
         section.container
             form(action='/users/#{user.id}', method='post' id="form-edit" class="row")
@@ -26,11 +33,7 @@ block content
                     label(for="name") #{translate.phone}
                     input(type='text' name='phone' id="phone" placeholder='#{translate.phone}' value='#{user.phone}' disabled)
                 div.input-field.col.s12
-                    i(class="material-icons prefix") location
-                    label(for="name") #{translate.location}
-                    input(type='text' name='location' id="location" placeholder='#{translate.location}' value='#{user.location}' disabled)
-                div.input-field.col.s12
-                    i(class="material-icons prefix") phone
+                    i(class="material-icons prefix") info
                     label(for="name") #{translate.age}
                     input(type='number' name='age' id="age" placeholder='#{translate.age}' value='#{user.age}' disabled)
                 div.input-field.col.s12
@@ -39,6 +42,10 @@ block content
                             option(value="0" selected) #{translate.man}
                             option(value="1") #{translate.woman}
                         else if user.sex == 1
+                            option(value="0") #{translate.man}
+                            option(value="1" selected) #{translate.woman}
+                        else
+                            option(value="" disabled selected="selected") #{translate.sexDefault}
                             option(value="0") #{translate.man}
                             option(value="1" selected) #{translate.woman}
                     label(for="name") #{translate.sex}

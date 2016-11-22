@@ -5,6 +5,55 @@ var Status      = require(process.env.NODE_PATH + '/config/status.json'),
     Message = require(process.env.NODE_PATH + '/modules/messages'),
     User    = orm.db.User;
 
+var UserBlock = function(req, res) {
+    User
+    .findById(req.params.id)
+    .then(function(user) {
+        if (user && user.role == 1) {
+            user.updateAttributes({
+                role : -1
+            }).then(function(user) {
+                res.status(Status.OK).send({
+                    message     : Message.get("user:block:success"),
+                    user        : user
+                });
+            }, function(err) {
+                res.status(Status.UNAUTHORIZED).send({message: err.toString()});
+            });
+        } else {
+            res.status(Status.UNAUTHORIZED).send({message : Message.get("user:block:failure")});
+        }
+    }, function(err) {
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
+    });
+};
+
+var UserUnblock = function(req, res) {
+    User
+    .findById(req.params.id)
+    .then(function(user) {
+        if (user && user.role == -1) {
+            user.updateAttributes({
+                role : 1
+            }).then(function(user) {
+                res.status(Status.OK).send({
+                    message     : Message.get("user:unblock:success"),
+                    user        : user
+                });
+            }, function(err) {
+                res.status(Status.UNAUTHORIZED).send({message: err.toString()});
+            });
+        } else {
+            res.status(Status.UNAUTHORIZED).send({message : Message.get("user:unblock:failure")});
+        }
+    }, function(err) {
+        res.status(Status.UNAUTHORIZED).send({message: err.toString()});
+    });
+
+};
+
+
+
 var UserPut = function(req, res) {
     User
     .findById(req.params.id)
@@ -138,7 +187,9 @@ var UserController = {
     put     : UserPut,
     getOne  : UserGetOne,
     reset   : UserResetPassword,
-    update  : UserUpdatePassword
+    update  : UserUpdatePassword,
+    block   : UserBlock,
+    unblock : UserUnblock
 };
 
 module.exports = UserController;

@@ -99,7 +99,9 @@ var Routes = [
         name: 'user',
         actions: {
             'reset' : { verb: 'put', route: '/reset_password' },
-            'update' : { verb: 'post', route: '/reset_password' }
+            'update' : { verb: 'post', route: '/reset_password' },
+            'block' : { verb: 'put', route: '/block/:id' },
+            'unblock' : { verb: 'put', route: '/unblock/:id' }
         },
         middlewares: [
             {
@@ -113,6 +115,17 @@ var Routes = [
         sub: [
             {
                 name: 'friend',
+                middlewares: [
+                    {
+                        name:   'auth',
+                        param: {
+                            roles: [Role.ADMIN, Role.USER]
+                        }
+                    }
+                ]
+            },
+            {
+                name: 'block',
                 middlewares: [
                     {
                         name:   'auth',

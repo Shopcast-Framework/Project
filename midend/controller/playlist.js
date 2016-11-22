@@ -10,9 +10,16 @@ var Status      = require(process.env.NODE_PATH + '/config/status.json'),
     File        = orm.db.File;
 
 var PlaylistAdd = function(req, res) {
-    console.log(req);
     req.user
-    .getOnePlaylist({id: req.params.id}, {include:[{model:File, as: 'files'}]})
+    .getOnePlaylist({
+        id: req.params.id
+    }, {
+        include : [{
+            model : File,
+            as: 'files',
+            order : ['rank', 'ASC']
+        }]
+    })
     .then(function(playlist) {
         if (!playlist) {
             return res.status(Status.UNAUTHORIZED).send({message:Message.get("playlist:add:failure")});
@@ -101,7 +108,7 @@ var PlayListGet = function(req, res) {
             as: 'files'
         }, {
             model: Planning,
-            as: 'planning'
+            as: 'plannings'
         }]
     })
     .then(function(playlists) {
@@ -138,7 +145,7 @@ var PlaylistGetOne = function(req, res) {
             as: 'files'
         }, {
             model: Planning,
-            as: 'planning'
+            as: 'plannings'
         }]
     })
     .then(function(playlist) {

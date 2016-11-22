@@ -43,6 +43,39 @@ router.post('/:id',middlewares.isLogged, function(req, res) {
 		console.log(err);
 		res.redirect('/monitors/' + id + '?message=' + response.body.message);
 	})
+
+router.get('/display/:id', middlewares.isLogged, middlewares.language, function( req, res ) {
+
+	var promises = [];
+	var id = req.params.id;
+	
+	promises.push(Rest.get( 'file/' + req.params.id ) );
+	promises.push(menu.load(req.session.user));
+
+	Promise.all(promises).then(function(values) {
+
+		var file = values[0].body.file;
+		file.realPath = "/uploads/" + file.filename; 
+		if (file.mimetype.indexOf("video") != -1)
+			file.type = "video";
+		else if (file.mimetype.indexOf("image") != -1)
+			file.type = "image";
+		else
+			file.type = "other";
+
+		res.render('monitors/display', {
+			active: '/monitors',
+			menu: values[1],
+			file: file,
+			isLogged: true,
+			isSearchBar: false,
+			session: req.session.user,
+			translate : translate.getWordsByPage( req.cookies.language, "Monitor", { title: file.name, tabTitle: file.name } ),
+			language: req.cookies.language,
+		});
+	}, function(err) {
+		console.log(err);
+	});
 });
 
 router.get('/:id', middlewares.isLogged, middlewares.language, function( req, res ) {

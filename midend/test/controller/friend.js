@@ -26,7 +26,7 @@ describe('Api friend controller', function () {
 
         Context.server
         .get('/api/user/1/friend')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
             message: Message.get("friend:get:success"),
@@ -37,7 +37,7 @@ describe('Api friend controller', function () {
     it('[GET] /api/user/999/friend (Invalid user)', function(done) {
         Context.server
         .get('/api/user/999/friend')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.UNAUTHORIZED, {
             message: Message.get("friend:get:failure")
@@ -47,7 +47,7 @@ describe('Api friend controller', function () {
     it('[POST] /api/user/1/friend', function(done) {
         Context.server
         .post('/api/user/1/friend')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .send({ friend_id: 3 })
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
@@ -58,7 +58,7 @@ describe('Api friend controller', function () {
     it('[POST] /api/user/999/friend (Invalid id)', function(done) {
         Context.server
         .post('/api/user/999/friend')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .send({ friend_id: 3 })
         .expect(Helper.date.truncate)
         .expect(Status.UNAUTHORIZED, {
@@ -69,7 +69,7 @@ describe('Api friend controller', function () {
     it('[POST] /api/user/1/friend (Invalid friend id)', function(done) {
         Context.server
         .post('/api/user/1/friend')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .send({ friend_id: 999 })
         .expect(Helper.date.truncate)
         .expect(Status.UNAUTHORIZED, {
@@ -80,7 +80,7 @@ describe('Api friend controller', function () {
     it('[PUT] /api/user/1/friend/4', function(done) {
         Context.server
         .put('/api/user/1/friend/4')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .send({ accepted: true })
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
@@ -91,7 +91,7 @@ describe('Api friend controller', function () {
     it('[PUT] /api/user/999/friend/4 (Invalid user id)', function(done) {
         Context.server
         .put('/api/user/999/friend/4')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .send({ accepted: true })
         .expect(Helper.date.truncate)
         .expect(Status.UNAUTHORIZED, {
@@ -102,7 +102,7 @@ describe('Api friend controller', function () {
     it('[PUT] /api/user/1/friend/999 (Invalid id)', function(done) {
         Context.server
         .put('/api/user/1/friend/999')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .send({ accepted: true })
         .expect(Helper.date.truncate)
         .expect(Status.UNAUTHORIZED, {

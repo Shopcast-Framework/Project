@@ -18,6 +18,10 @@
     "user:update:badconfirm"    : "Error: Confirm password different from password",
     "user:update:success"       : "Password correctly updated",
     "user:update:failure"       : "Error can't update password",
+    "user::block::success"      : "User has been blocked",
+    "user::block::failure"      : "User could not be blocked",
+    "user::unblock::success"    : "User no longer blocked",
+    "user::unblock::failure"    : "User could not be unblocked",
 
     "session:delete:success"    : "Session correctly deleted",
     "session:post:success"      : "User already logged",
@@ -52,10 +56,10 @@
     "file:get:success"          : "List of files",
     "file:post:success"         : "File successfully created",
     "file:post:failure"         : "Error can't create file",
+    "file:post:wrongtype"       : "FileType not supported",
     "file:getone:success"       : "File selected with id %s",
     "file:getone:failure"       : "File selected with id %s was not found",
 
-    "file:get:success"          : "List of files",
     "file:put:success"          : "File correctly updated",
     "file:put:failure"          : "Error can't find file",
     "file:delete:success"       : "File correctly deleted",
@@ -70,6 +74,13 @@
     "friend:post:failure"       : "Error can't find user",
     "friend:get:success"        : "List of friends",
     "friend:get:failure"        : "Error : Can't find user",
+
+    "block:post:success"        : "User successfully blocked",
+    "block:post:failure"        : "Error can't find user",
+    "block:delete:success"      : "Block lifted",
+    "block:delete:failure"      : "Coud not deblock",
+    "block:get:success"         : "Block list",
+    "block:get:failure"         : "Error : Can't find user",
 
     "middleware:auth:failure"   : "Error: Need to authenticate",
     "middleware:auth:badrole"   : "Error: Permission do not allow to access this ressource",

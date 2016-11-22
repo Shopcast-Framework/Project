@@ -1,7 +1,7 @@
 'use strict';
 
 var FacebookStrategy    = require('passport-facebook-token'),
-    orm                 = require('../orm'),
+    orm                 = require(process.env.NODE_PATH + '/modules/orm'),
     config              = require(process.env.NODE_PATH + '/config/strategy.json')[process.env.NODE_ENV],
     User                = orm.db.User;
 
@@ -29,7 +29,8 @@ var StrategyFacebook = function(app, passport, loginCallback) {
                     name: profile.displayName,
                     avatar: profile.photos[0].value,
                     facebookId: profile.id,
-                    role: 1
+                    role: 1,
+                    sex: null
                 })
                 .then(function(user) {
                     return done(null, user);
@@ -41,7 +42,6 @@ var StrategyFacebook = function(app, passport, loginCallback) {
     };
 
     self.authenticate = function(req, res) {
-        console.log(req.body);
         passport.authenticate('facebook-token', loginCallback(req, res))(req, res);
     };
 

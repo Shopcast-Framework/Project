@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#d6d7d7"
+    tools:context="com.example.maxime.shopcastv3.DashboardActivity">
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/playlistNav"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:layout_alignTop="@+id/pictureNav"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/mediaNav"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/remoteNav"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:layout_alignTop="@+id/mediaNav"
+        android:layout_toRightOf="@+id/mediaNav"
+        android:layout_toEndOf="@+id/mediaNav"
+        android:layout_marginLeft="53dp"
+        android:layout_marginStart="53dp" />
+
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/pictureNav"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/playlistNav"
+        android:layout_toStartOf="@+id/playlistNav"
+        android:layout_marginRight="44dp"
+        android:layout_marginEnd="44dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Remote control"
+        android:id="@+id/textViewRemote"
+        android:textAlignment="center"
+        android:layout_above="@+id/remoteNav"
+        android:layout_alignLeft="@+id/remoteNav"
+        android:layout_alignStart="@+id/remoteNav"
+        android:layout_alignRight="@+id/remoteNav"
+        android:layout_alignEnd="@+id/remoteNav"
+        android:layout_alignTop="@+id/textViewMedia" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="My playlist"
+        android:id="@+id/textView2"
+        android:textAlignment="center"
+        android:layout_above="@+id/playlistNav"
+        android:layout_toRightOf="@+id/pictureNav"
+        android:layout_toEndOf="@+id/pictureNav" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="My medias"
+        android:id="@+id/textViewMedia"
+        android:textAlignment="center"
+        android:layout_above="@+id/mediaNav"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/remoteNav"
+        android:layout_toStartOf="@+id/remoteNav" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Take a picture"
+        android:id="@+id/textViewPicture"
+        android:textAlignment="center"
+        android:layout_above="@+id/pictureNav"
+        android:layout_alignLeft="@+id/pictureNav"
+        android:layout_alignStart="@+id/pictureNav"
+        android:layout_alignRight="@+id/pictureNav"
+        android:layout_alignEnd="@+id/pictureNav" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/comingSoonDashboard"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="71dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Under developpement"
+        android:id="@+id/textView5"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

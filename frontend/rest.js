@@ -13,7 +13,7 @@ var Rest = function() {
     };
 
     self.call = function(method, resource, body) {
-        
+
         var defer = Q.defer(),
             httpRequest,
             options = {
@@ -30,15 +30,18 @@ var Rest = function() {
         }
 
         if (self.user) {
-            options.headers.Authorization = self.user.token;
+            options.headers.Authorization = 'Bearer ' + self.user.token;
         }
 
         console.log('Je requete sur: ' + options.path + ' [' + method + ']');
+        console.log(options);
+        console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=');
         httpRequest = http.request(options, function(res) {
             var datas = {
                 headers: res.headers,
                 body: ''
             };
+            console.log(datas.headers);
 
             res.setEncoding('utf8');
             res.on('data', function(data) {

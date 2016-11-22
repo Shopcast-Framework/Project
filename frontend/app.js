@@ -29,6 +29,7 @@ app.run = function(){
     app.use('/images', express.static(__dirname + '/public/images'));
     app.use('/font', express.static(__dirname + '/public/font'));
     app.use('/public', express.static(__dirname + '/public'));
+    app.use('/uploads', express.static(__dirname + '/uploads'));
     app.use(express.static(__dirname + '/site_vitrine'));
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(cookieParser());

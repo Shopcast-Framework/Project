@@ -1,7 +1,7 @@
 'use strict';
 
 var GoogleStrategy      = require('passport-google-token').Strategy,
-    orm                 = require('../orm'),
+    orm                 = require(process.env.NODE_PATH + '/modules/orm'),
     config              = require(process.env.NODE_PATH + '/config/strategy.json')[process.env.NODE_ENV],
     User                = orm.db.User;
 
@@ -30,7 +30,8 @@ var StrategyGoogle = function(app, passport, loginCallback) {
                     name: profile.displayName,
                     avatar: profile._json.picture,
                     googleId: profile.id,
-                    role: 1
+                    role: 1,
+                    sex: null
                 })
                 .then(function(user) {
                     console.log('User created');
@@ -43,7 +44,6 @@ var StrategyGoogle = function(app, passport, loginCallback) {
     };
 
     self.authenticate = function(req, res) {
-        console.log(req.body);
         passport.authenticate('google-token', loginCallback(req, res))(req, res);
     };
 
