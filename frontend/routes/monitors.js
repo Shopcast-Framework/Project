@@ -33,6 +33,17 @@ router.get('/delete/:id', middlewares.isLogged, function( req, res ) {
 
 });
 
+router.post('/:id',middlewares.isLogged, function(req, res) {
+
+	var id = req.params.id;
+
+	Rest.put('monitor/' + id, JSON.stringify(req.body)).then(function(response) {
+		res.redirect('/monitors/' + id + '?message=' + response.body.message);
+	}, function(err) {
+		console.log(err);
+		res.redirect('/monitors/' + id + '?message=' + response.body.message);
+	})
+
 router.get('/display/:id', middlewares.isLogged, middlewares.language, function( req, res ) {
 
 	var promises = [];
@@ -76,6 +87,8 @@ router.post('/:id',middlewares.isLogged, function(req, res) {
 		res.redirect('/monitors/' + id + '?message=' + response.body.message);
 	})
 
+=======
+>>>>>>> guerin_f
 });
 
 router.get('/:id', middlewares.isLogged, middlewares.language, function( req, res ) {
