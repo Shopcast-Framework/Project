@@ -1,0 +1,17 @@
+{
+  "name": "Shopcast",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Guerin_f",
+  "main": "app/index.js",
+  "scripts": {
+    "start": "electron app"
+  },
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^1.4.1",
+    "electron-connect": "^0.6.0",
+    "electron-packager-interactive": "0.0.7",
+    "gulp": "^3.9.1"
+  }
+}
