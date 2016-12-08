@@ -7,8 +7,56 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#d6d7d7"
     tools:context="com.example.maxime.shopcastv3.DashboardActivity">
+
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="150dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/imageView3"
+                android:src="@drawable/monitor"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Connected monitors"
+                android:id="@+id/titleMonitorDashBoard"
+                android:layout_alignTop="@+id/imageView3"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="32dp"
+                android:layout_marginEnd="32dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="0"
+                android:id="@+id/numberConnectedMonitor"
+                android:layout_alignBottom="@+id/imageView3"
+                android:layout_alignLeft="@+id/titleMonitorDashBoard"
+                android:layout_alignStart="@+id/titleMonitorDashBoard"
+                android:layout_marginLeft="81dp"
+                android:layout_marginStart="81dp" />
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
 
     <ImageButton
         android:layout_width="50dp"
@@ -73,7 +121,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="My playlist"
+        android:text="Playlist"
         android:id="@+id/textView2"
         android:textAlignment="center"
         android:layout_above="@+id/playlistNav"
@@ -84,7 +132,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="My medias"
+        android:text="Medias"
         android:id="@+id/textViewMedia"
         android:textAlignment="center"
         android:layout_above="@+id/mediaNav"
@@ -97,7 +145,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Take a picture"
+        android:text="Picture"
         android:id="@+id/textViewPicture"
         android:textAlignment="center"
         android:layout_above="@+id/pictureNav"
@@ -107,19 +155,12 @@
         android:layout_alignEnd="@+id/pictureNav" />
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/comingSoonDashboard"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="71dp" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Under developpement"
-        android:id="@+id/textView5"
+        android:id="@+id/imageView2"
+        android:src="@drawable/dashboard"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_toRightOf="@+id/textViewMedia"
+        android:layout_toEndOf="@+id/textViewMedia" />
+
 </RelativeLayout>

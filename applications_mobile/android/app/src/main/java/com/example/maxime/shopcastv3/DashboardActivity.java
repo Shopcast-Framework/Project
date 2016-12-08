@@ -24,10 +24,7 @@ public class DashboardActivity extends AppCompatActivity {
 
 
         Bundle extras = getIntent().getExtras();
-
-        mComingSoon = (ImageView) findViewById(R.id.comingSoonDashboard);
-        mComingSoon.setImageResource(R.drawable.no_avaible);
-
+        
         mUserInfo.setToken(extras.get("token").toString());
         mUserInfo.setUserName(extras.get("username").toString());
 

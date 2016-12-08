@@ -15,9 +15,8 @@
             android:textColor="@android:color/black"
             android:textSize="14dp"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_alignBottom="@+id/delete_btn_file" />
+            android:layout_toRightOf="@+id/iconImage"
+            android:layout_toEndOf="@+id/iconImage" />
 
 
         <Button
@@ -37,9 +36,19 @@
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/type_file"
-            android:layout_below="@+id/title"
-            android:layout_alignLeft="@+id/title"
-            android:layout_alignStart="@+id/title" />
+            android:layout_below="@+id/delete_btn_file"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iconImage"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/type_file"
+            android:layout_toLeftOf="@+id/type_file" />
 
 
     </RelativeLayout>

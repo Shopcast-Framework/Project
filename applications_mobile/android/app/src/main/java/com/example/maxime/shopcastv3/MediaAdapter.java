@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -74,12 +75,29 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
     public static class MediaViewHolder extends RecyclerView.ViewHolder {
         protected TextView _mediaName;
         protected TextView _typeMedia;
+        protected ImageView _iconView;
 
 
         public MediaViewHolder(View v) {
             super(v);
             _mediaName = (TextView) v.findViewById(R.id.title);
             _typeMedia = (TextView) v.findViewById(R.id.type_file);
+            _iconView = (ImageView) v.findViewById(R.id.iconImage);
+
+
+            switch (_typeMedia.toString()) {
+                case "MP3" :
+                    _iconView.setImageResource(R.drawable.music_player);
+                    break;
+                case "MP4":
+                    _iconView.setImageResource(R.drawable.play_button);
+                    break;
+                default:
+                    _iconView.setImageResource(R.drawable.file);
+                    break;
+
+            }
+
 
         }
     }
