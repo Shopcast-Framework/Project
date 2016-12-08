@@ -1,0 +1,8 @@
+{
+  "INIT": "home.html",
+  "wait": "waiting.html",
+  "REGISTERED": "registered.html",
+  "UNREGISTERED": "unregistered.html",
+  "playing": "player.html",
+  "NOINTERNET": "no_internet.html"
+}

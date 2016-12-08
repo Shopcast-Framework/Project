@@ -18,7 +18,9 @@
         "created_at"        : "2016-01-01T00:00:00.000Z",
         "updated_at"        : "2016-01-01T00:00:00.000Z",
         "group_id"          : 1,
-        "reset_token"       : null
+        "reset_token"       : null,
+        "phone"             : "0632333435",
+        "token"             : null
     },
     {
         "id"                : 2,
@@ -39,7 +41,9 @@
         "created_at"        : "2016-01-01T00:00:00.000Z",
         "updated_at"        : "2016-01-01T00:00:00.000Z",
         "group_id"          : 1,
-        "reset_token"       : null
+        "reset_token"       : null,
+        "phone"             : "0632333435",
+        "token"             : null
     },
     {
         "id"                : 3,
@@ -60,7 +64,9 @@
         "created_at"        : "2016-01-01T00:00:00.000Z",
         "updated_at"        : "2016-01-01T00:00:00.000Z",
         "group_id"          : 1,
-        "reset_token"       : null
+        "reset_token"       : null,
+        "phone"             : "0632333435",
+        "token"             : null
     },
     {
         "id"                : 4,
@@ -81,6 +87,8 @@
         "created_at"        : "2016-01-01T00:00:00.000Z",
         "updated_at"        : "2016-01-01T00:00:00.000Z",
         "group_id"          : 1,
-        "reset_token"       : null
+        "reset_token"       : null,
+        "phone"             : "0632333435",
+        "token"             : null
     }
 ]

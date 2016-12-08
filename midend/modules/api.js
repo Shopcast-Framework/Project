@@ -14,6 +14,7 @@ function RouteLoader(app) {
 
         self.createRoutes('/', '/', Routes);
 
+        app.use('/cdn', Express.static('upload'))
         app.use('/api', self.api);
     };
 

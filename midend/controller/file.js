@@ -3,9 +3,8 @@
 var Status      = require(process.env.NODE_PATH + '/config/status.json'),
     orm         = require(process.env.NODE_PATH + '/modules/orm'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
-    probe       = require('node-ffprobe'),
     File        = orm.db.File,
-    PlaylistFile    = orm.db.PlaylistFile,
+    PlaylistFile= orm.db.PlaylistFile,
     Playlist    = orm.db.Playlist;
 
 var FileGet = function(req, res) {
@@ -31,29 +30,14 @@ var FileGet = function(req, res) {
 };
 
 var FilePost = function(req, res) {
-    var acceptedformats = [
-        'image/png',
-        'image/jpeg',
-        'application/octet-stream',
-        'video/webm'
-    ];
-    req.body.user_id = req.user.id;
-    if (acceptedformats.indexOf(req.body.mimetype) == -1) {
-            return res.status(Status.UNAUTHORIZED).send({
-                message: Message.get("file:wrongtype")
-            });
-    }
+    var file = req.body
+    file.user_id = req.user.id;
     File
-    .create(req.body)
+    .upload(file)
     .then(function(file) {
-        if (file == null) {
-            return res.status(Status.UNAUTHORIZED).send({
-                message: Message.get("file:post:failure")
-            });
-        }
-        res.status(Status.OK).send({
-            message : Message.get("file:post:success"),
-            file    : file
+        return res.status(Status.OK).send({
+            message: Message.get("file:post:success"),
+            file: file
         });
     }, function(err) {
         res.status(Status.UNAUTHORIZED).send({message: err.toString()});

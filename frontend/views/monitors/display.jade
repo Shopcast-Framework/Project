@@ -1,14 +1,14 @@
 extends ../layout
 
 block content
-    header.actions.container
-        a(class="amber darken-2 btn btn-large waves-effect waves-light" href="/files") #{translate.btnReturn}
-            i.material-icons.left arrow_back
-    article.wrapper-content#video
-        section.container
-            if file.type == "video"
-                video(controls="controls" id="video-player")
-                    source(src="#{file.realPath}" type="#{file.mimetype}") 
-                    #{translate.cantLoadVideo}
-            else if file.type == "image"
-                img(src="#{file.realPath}" id="image-player")
+	header.actions.container
+		a(class="amber darken-2 btn btn-large waves-effect waves-light" href="/files") #{translate.btnReturn}
+			i.material-icons.left arrow_back
+	article.wrapper-content#video
+		section.container
+			if file.type == "video"
+				video(controls="controls" id="video-player")
+					source(src="http://localhost:3001/cdn/#{file.path}" type="#{file.mimetype}") 
+					#{translate.cantLoadVideo}
+			else if file.type == "image"
+				img(src="#{file.realPath}" id="image-player")

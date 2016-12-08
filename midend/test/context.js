@@ -14,10 +14,18 @@ var Context = function() {
         self.authentified = false;
     };
 
+    self.header = function() {
+        var header = { 'Content-Type' : 'application/json' }
+        if (self.token) {
+          header.Authorization = 'Bearer ' + self.token;
+        }
+        return header;
+    };
+
     self.__auth = function(done) {
         var currentUser = __users[0];
 
-        self.Cleaner.clean().then(function() {
+        self.Cleaner.clean({}).then(function() {
             self.cleaned = true;
             self.server
             .post('/api/session')
@@ -43,7 +51,7 @@ var Context = function() {
 
     self.clean = function(done) {
         if (!self.cleaned) {
-            self.Cleaner.clean().then(done);
+            self.Cleaner.clean({token: self.token}).then(done);
         } else {
             done();
         }

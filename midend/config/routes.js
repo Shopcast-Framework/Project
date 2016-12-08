@@ -8,6 +8,20 @@ var Routes = [
     },
     {
         name: 'monitor',
+        sub: [
+            {
+                name: 'playlist',
+                only: ['get']
+                    // middlewares: [
+                    //     {
+                    //         name:   'auth',
+                    //         param: {
+                    //             roles: [Role.ADMIN, Role.USER]
+                    //         }
+                    //     }
+                    // ]
+                },
+        ],
         actions: {
             'associate' : { verb: 'post', route: '/associate' },
             'option' : { verb: 'options', route: '/associate' }
@@ -30,7 +44,7 @@ var Routes = [
         name: 'group',
         middlewares: [
             {
-                name:   'auth',
+                name: 'auth',
                 param: {
                     roles: [Role.ADMIN, Role.USER]
                 }
@@ -52,7 +66,7 @@ var Routes = [
         name: 'planning',
         middlewares: [
             {
-                name:   'auth',
+                name: 'auth',
                 param: {
                     roles: [Role.ADMIN, Role.USER]
                 }
@@ -62,7 +76,7 @@ var Routes = [
     {
         name: 'music',
         actions: {
-            'search' : { verb: 'get', route: '/search/:id' },
+            'search': { verb: 'get', route: '/search/:id' },
         }
     },
     {

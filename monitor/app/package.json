@@ -1,0 +1,24 @@
+{
+  "name": "shopcast",
+  "version": "1.0.0",
+  "description": "Manage your advertising",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "Shopcast",
+    "Advertising"
+  ],
+  "author": "Guerin_f",
+  "license": "CC0-1.0",
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "electron-settings": "^2.2.2",
+    "is-online": "^5.1.2",
+    "jquery": "^3.1.1",
+    "request": "^2.76.0",
+    "setinterval-plus": "^1.0.2",
+    "shortid": "^2.2.6"
+  }
+}

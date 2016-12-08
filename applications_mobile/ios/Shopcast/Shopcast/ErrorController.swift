@@ -16,18 +16,18 @@ class ErrorController {
         controller = UIAlertController(
             title: "Error",
             message: message,
-            preferredStyle: .Alert
+            preferredStyle: .alert
         )
     }
     
     func addOkButton() {
         controller.addAction(
-            UIAlertAction(title: "Ok", style: .Cancel) { (_) in }
+            UIAlertAction(title: "Ok", style: .cancel) { (_) in }
         )
     }
     
-    func display(mainController : UIViewController) {
-        mainController.presentViewController(controller, animated: true) {}
+    func display(_ mainController : UIViewController) {
+        mainController.present(controller, animated: true) {}
     }
 
 }

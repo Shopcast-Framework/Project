@@ -2,6 +2,8 @@ var Status      = require(process.env.NODE_PATH + '/config/status.json'),
     Context     = require(process.env.NODE_PATH + '/test/context.js'),
     Message     = require(process.env.NODE_PATH + '/modules/messages'),
     __files     = require(process.env.NODE_PATH + '/test/fixtures/file.json'),
+    __playlists = require(process.env.NODE_PATH + '/test/fixtures/playlist.json'),
+    __playlist_files = require(process.env.NODE_PATH + '/test/fixtures/playlist_file.json'),
     Helper      = Context.Helper;
 
 describe('Api file controller', function () {
@@ -17,22 +19,33 @@ describe('Api file controller', function () {
     });
 
     it('[GET] /api/file', function(done) {
+        var playlists = Helper.build.associate(
+            'PlaylistFile',
+            __playlists, [[0], [], []],
+            __playlist_files
+        )
+        var files = Helper.build.associate(
+            'playlists',
+            __files.slice(0, 2), [[0], []],
+            playlists
+          );
+
         Context.server
         .get('/api/file')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
             message     : Message.get("file:get:success"),
-            files       : __files.slice(0, 2)
+            files       : files
         }, done);
     });
 
     it('[POST] /api/file', function(done) {
-        var newFile = Helper.build.new('File', __files[__files.length - 1], {user_id: 1});
+        var newFile = Helper.build.new('File', __files[__files.length - 1], {user_id: 1, mimetype: "video/webm"});
 
         Context.server
         .post('/api/file')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .send(newFile)
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
@@ -44,7 +57,7 @@ describe('Api file controller', function () {
     it('[GET] /api/file/1', function(done) {
         Context.server
         .get('/api/file/1')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
             message     : Message.get("file:getone:success", 1),
@@ -55,7 +68,7 @@ describe('Api file controller', function () {
     it('[GET] /api/file/999 (Invalid id)', function(done) {
         Context.server
         .get('/api/file/999')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.UNAUTHORIZED, {
             message     : Message.get("file:getone:failure", 1)
@@ -67,7 +80,7 @@ describe('Api file controller', function () {
 
         Context.server
         .put('/api/file/1')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .send(editFile)
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
@@ -81,7 +94,7 @@ describe('Api file controller', function () {
 
         Context.server
         .put('/api/file/999')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .send(editFile)
         .expect(Helper.date.truncate)
         .expect(Status.UNAUTHORIZED, {
@@ -92,7 +105,7 @@ describe('Api file controller', function () {
     it('[DELETE] /api/file/1', function(done) {
         Context.server
         .del('/api/file/1')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
             message : Message.get("file:delete:success")
@@ -102,7 +115,7 @@ describe('Api file controller', function () {
     it('[DELETE] /api/file/999', function(done) {
         Context.server
         .del('/api/file/999')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.UNAUTHORIZED, {
             message : Message.get("file:delete:failure")

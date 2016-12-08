@@ -108,7 +108,7 @@ var PlayListGet = function(req, res) {
             as: 'files'
         }, {
             model: Planning,
-            as: 'planning'
+            as: 'plannings'
         }]
     })
     .then(function(playlists) {
@@ -145,7 +145,7 @@ var PlaylistGetOne = function(req, res) {
             as: 'files'
         }, {
             model: Planning,
-            as: 'planning'
+            as: 'plannings'
         }]
     })
     .then(function(playlist) {

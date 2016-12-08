@@ -19,7 +19,7 @@ describe('Api user controller', function () {
     it('[GET] /api/user', function(done) {
         Context.server
         .get('/api/user')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
             message : Message.get("user:get:success"),
@@ -30,7 +30,7 @@ describe('Api user controller', function () {
     it('[GET] /api/user/1', function(done) {
         Context.server
         .get('/api/user/1')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
             message : Message.get("user:getone:success", 1),
@@ -41,7 +41,7 @@ describe('Api user controller', function () {
     it('[GET] /api/user/999 (Invalid id)', function(done) {
         Context.server
         .get('/api/user/999')
-        .set({'Content-Type' : 'application/json', 'Authorization': Context.token})
+        .set(Context.header())
         .expect(Helper.date.truncate)
         .expect(Status.UNAUTHORIZED, {
             message : Message.get("user:getone:failure", 999)

@@ -12,19 +12,17 @@ var Rest = function() {
         next();
     };
 
-    self.call = function(method, resource, body) {
-
-        var defer = Q.defer(),
-            httpRequest,
-            options = {
-                hostname: 'localhost',
-                path: '/api/' + resource,
-                port: '3001',
-                method: method,
-                headers: {
-                    'content-type': 'application/json'
-                }
-            };
+    self._options = function(method, resource, headers) {
+        var options = {
+            host: 'localhost',
+            hostname: 'localhost',
+            path: '/api/' + resource,
+            port: '3001',
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            }
+        };
         if (self.cookie) {
             options.headers.cookie = self.cookie;
         }
@@ -32,22 +30,28 @@ var Rest = function() {
         if (self.user) {
             options.headers.Authorization = 'Bearer ' + self.user.token;
         }
+        if (headers) {
+            for (var k in headers) {
+                options.headers[k] = headers[k];
+            }
+        }
+        return options;
+    }
 
-        console.log('Je requete sur: ' + options.path + ' [' + method + ']');
-        console.log(options);
-        console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=');
+    self.call = function(method, resource, body, headers) {
+        var defer = Q.defer(),
+            httpRequest,
+            options = self._options(method, resource, headers);
+
         httpRequest = http.request(options, function(res) {
             var datas = {
                 headers: res.headers,
                 body: ''
             };
-            console.log(datas.headers);
-
             res.setEncoding('utf8');
             res.on('data', function(data) {
                 datas.body += data;
             });
-
             res.on('end', function() {
                 try {
                     datas.body = JSON.parse(datas.body);
@@ -76,19 +80,19 @@ var Rest = function() {
         return defer.promise;
     };
 
-    self.get = function(resource) {
+    self.get = function(resource, headers) {
         return self.call('get', resource);
     };
 
-    self.post = function(resource, body) {
+    self.post = function(resource, body, headers) {
         return self.call('post', resource, body);
     };
 
-    self.put = function(resource, body) {
+    self.put = function(resource, body, headers) {
         return self.call('put', resource, body);
     };
 
-    self.delete = function(resource, body) {
+    self.delete = function(resource, body, headers) {
         return self.call('delete', resource, body);
     };
 
