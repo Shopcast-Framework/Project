@@ -155,7 +155,7 @@ var PlaylistGetOne = function(req, res) {
                 playlist    : playlist
             });
         } else {
-            res.status(Status.UNAUTHORIZED).send({message : Message.get("playlist:getone:failure")});
+            res.status(Status.UNAUTHORIZED).send({message : Message.get("playlist:getone:failure", req.params.id)});
         }
     }, function(err) {
         res.status(Status.UNAUTHORIZED).send({message: err.toString()});
