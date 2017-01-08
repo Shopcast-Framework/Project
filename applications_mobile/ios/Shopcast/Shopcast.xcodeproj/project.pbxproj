@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E07A3FB1E228B2D0010CB3A /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E07A3FA1E228B2D0010CB3A /* File.swift */; };
+		3E07A3FD1E228C7B0010CB3A /* FileShowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E07A3FC1E228C7B0010CB3A /* FileShowController.swift */; };
+		3E07A4001E229D280010CB3A /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E07A3FF1E229D280010CB3A /* FileCell.swift */; };
 		3E2D864F1D5CBBA70003CF43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2D864E1D5CBBA70003CF43 /* AppDelegate.swift */; };
 		3E2D86511D5CBBA70003CF43 /* SigninController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2D86501D5CBBA70003CF43 /* SigninController.swift */; };
 		3E2D86541D5CBBA70003CF43 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E2D86521D5CBBA70003CF43 /* Main.storyboard */; };
@@ -22,7 +25,7 @@
 		3E7FD5E21DB3A4BA00EED335 /* PlaylistNewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7FD5E11DB3A4BA00EED335 /* PlaylistNewController.swift */; };
 		3E809A3F1D91A861008CB27D /* PlaylistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E809A3E1D91A861008CB27D /* PlaylistController.swift */; };
 		3E809A431D91B314008CB27D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E809A421D91B314008CB27D /* User.swift */; };
-		3EE8A62F1DA9DB2D005BCB14 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8A62E1DA9DB2D005BCB14 /* Cell.swift */; };
+		3EE8A62F1DA9DB2D005BCB14 /* PlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8A62E1DA9DB2D005BCB14 /* PlaylistCell.swift */; };
 		3EE8A6331DA9DE0E005BCB14 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE8A6321DA9DE0E005BCB14 /* Playlist.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E07A3FA1E228B2D0010CB3A /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		3E07A3FC1E228C7B0010CB3A /* FileShowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileShowController.swift; sourceTree = "<group>"; };
+		3E07A3FF1E229D280010CB3A /* FileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
 		3E2D864B1D5CBBA60003CF43 /* Shopcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shopcast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E2D864E1D5CBBA70003CF43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E2D86501D5CBBA70003CF43 /* SigninController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninController.swift; sourceTree = "<group>"; };
@@ -56,7 +62,7 @@
 		3E7FD5E11DB3A4BA00EED335 /* PlaylistNewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistNewController.swift; sourceTree = "<group>"; };
 		3E809A3E1D91A861008CB27D /* PlaylistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistController.swift; sourceTree = "<group>"; };
 		3E809A421D91B314008CB27D /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		3EE8A62E1DA9DB2D005BCB14 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		3EE8A62E1DA9DB2D005BCB14 /* PlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistCell.swift; sourceTree = "<group>"; };
 		3EE8A6321DA9DE0E005BCB14 /* Playlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +84,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E07A3FE1E229CE20010CB3A /* File */ = {
+			isa = PBXGroup;
+			children = (
+				3E07A3FF1E229D280010CB3A /* FileCell.swift */,
+			);
+			name = File;
+			sourceTree = "<group>";
+		};
 		3E2D86421D5CBBA60003CF43 = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +113,7 @@
 		3E2D864D1D5CBBA60003CF43 /* Shopcast */ = {
 			isa = PBXGroup;
 			children = (
+				3E07A3FE1E229CE20010CB3A /* File */,
 				3EE8A62D1DA9DB03005BCB14 /* Playlist */,
 				3E6C4BF41D8F06B000DDC18A /* Modules */,
 				3EE341911D8DC54A00DCD7E4 /* Controllers */,
@@ -126,6 +141,7 @@
 				3E809A421D91B314008CB27D /* User.swift */,
 				3E483D821D75F22E0055573F /* Request.swift */,
 				3EE8A6321DA9DE0E005BCB14 /* Playlist.swift */,
+				3E07A3FA1E228B2D0010CB3A /* File.swift */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -141,6 +157,7 @@
 				3E7FD5E11DB3A4BA00EED335 /* PlaylistNewController.swift */,
 				3E71070D1DCA731C00304A04 /* PlaylistShowController.swift */,
 				3E470B9D1DCCCB9300AD5F3F /* ImagePickerController.swift */,
+				3E07A3FC1E228C7B0010CB3A /* FileShowController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -148,7 +165,7 @@
 		3EE8A62D1DA9DB03005BCB14 /* Playlist */ = {
 			isa = PBXGroup;
 			children = (
-				3EE8A62E1DA9DB2D005BCB14 /* Cell.swift */,
+				3EE8A62E1DA9DB2D005BCB14 /* PlaylistCell.swift */,
 			);
 			name = Playlist;
 			sourceTree = "<group>";
@@ -260,11 +277,14 @@
 				3E6C4BF61D8F06C100DDC18A /* ErrorController.swift in Sources */,
 				3E7FD5E21DB3A4BA00EED335 /* PlaylistNewController.swift in Sources */,
 				3E6C4BFA1D8F3E8B00DDC18A /* TabbarController.swift in Sources */,
-				3EE8A62F1DA9DB2D005BCB14 /* Cell.swift in Sources */,
+				3E07A3FD1E228C7B0010CB3A /* FileShowController.swift in Sources */,
+				3EE8A62F1DA9DB2D005BCB14 /* PlaylistCell.swift in Sources */,
 				3E2D86511D5CBBA70003CF43 /* SigninController.swift in Sources */,
 				3E6C4BF81D8F354A00DDC18A /* DashboardController.swift in Sources */,
 				3E483D831D75F22E0055573F /* Request.swift in Sources */,
+				3E07A4001E229D280010CB3A /* FileCell.swift in Sources */,
 				3E2D864F1D5CBBA70003CF43 /* AppDelegate.swift in Sources */,
+				3E07A3FB1E228B2D0010CB3A /* File.swift in Sources */,
 				3EE8A6331DA9DE0E005BCB14 /* Playlist.swift in Sources */,
 				3E809A3F1D91A861008CB27D /* PlaylistController.swift in Sources */,
 				3E71070E1DCA731C00304A04 /* PlaylistShowController.swift in Sources */,
