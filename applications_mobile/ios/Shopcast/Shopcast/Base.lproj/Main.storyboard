@@ -174,6 +174,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameLabel" destination="YU1-c6-bXx" id="5V5-bz-Y5i"/>
+                                            <segue destination="t8i-BS-rs0" kind="show" identifier="fileShowSegue" id="jWZ-I6-sGx"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -210,6 +211,67 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1c0-XH-brA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2157.5999999999999" y="-279.31034482758622"/>
+        </scene>
+        <!--File Show Controller-->
+        <scene sceneID="MLE-jN-hwf">
+            <objects>
+                <viewController id="t8i-BS-rs0" customClass="FileShowController" customModule="Shopcast" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wNz-GA-YMg"/>
+                        <viewControllerLayoutGuide type="bottom" id="SRr-aj-xIx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lSV-wT-25h" customClass="UIFileSjo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dEj-vS-qm5">
+                                <items>
+                                    <navigationItem title="File" id="eko-bg-xeu"/>
+                                </items>
+                            </navigationBar>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MfX-hH-mAb">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7UI-V8-8Ck">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7s0-TC-4cV">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWa-Fk-VkM">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40q-CS-PoX">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="MfX-hH-mAb" secondAttribute="trailing" id="AKn-cd-e3y"/>
+                            <constraint firstAttribute="trailing" secondItem="dEj-vS-qm5" secondAttribute="trailing" id="Ao8-yr-yct"/>
+                            <constraint firstItem="dEj-vS-qm5" firstAttribute="leading" secondItem="lSV-wT-25h" secondAttribute="leading" id="KCy-6J-CWC"/>
+                            <constraint firstItem="MfX-hH-mAb" firstAttribute="leading" secondItem="lSV-wT-25h" secondAttribute="leadingMargin" id="sei-an-CeK"/>
+                            <constraint firstItem="MfX-hH-mAb" firstAttribute="top" secondItem="dEj-vS-qm5" secondAttribute="bottom" constant="20" id="wKZ-Ot-1uJ"/>
+                            <constraint firstItem="dEj-vS-qm5" firstAttribute="top" secondItem="wNz-GA-YMg" secondAttribute="bottom" constant="20" id="xA9-7O-GlK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="_description" destination="40q-CS-PoX" id="yaz-sF-2pY"/>
+                        <outlet property="_name" destination="7s0-TC-4cV" id="jeY-Mc-zFb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k9w-Lb-GPN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2980" y="-279"/>
         </scene>
         <!--Playlist New Controller-->
         <scene sceneID="shU-jR-77w">
