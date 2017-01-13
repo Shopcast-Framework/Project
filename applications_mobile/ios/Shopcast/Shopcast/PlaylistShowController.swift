@@ -8,12 +8,17 @@
 
 import UIKit
 
-class PlaylistShowController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PlaylistShowController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     var playlist : Playlist?
 
     let picker = UIImagePickerController()
+    
+    var requester : Request = Request()
+    
+    var files = [File]()
 
     // MARK: Properties
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var _name: UILabel!
     @IBOutlet weak var _description: UILabel!
     
@@ -39,7 +44,13 @@ class PlaylistShowController: UIViewController, UIImagePickerControllerDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        picker.delegate = self
+        self.picker.delegate = self
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        if playlist != nil {
+            print("JE GET SUR PLAYLIST")
+            requester.get("playlist/\((playlist?.id)!)", callback: fileCallback)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -67,4 +78,82 @@ class PlaylistShowController: UIViewController, UIImagePickerControllerDelegate,
         }
         dismiss(animated:true, completion: nil)
     }
+    
+    func fileCallback(_ response : AnyObject?) -> Void {
+        
+        print("JAI UNE REPONSE SUR FILECALLBACK")
+        if (response == nil) {
+            OperationQueue.main.addOperation {
+                let ctrl = ErrorController(
+                    message: "Error: Response is nil"
+                )
+                ctrl.addOkButton()
+                ctrl.display(self)
+            }
+            return
+        }
+        
+        if (response!["playlist"]! == nil && response!["message"]! != nil) {
+            OperationQueue.main.addOperation {
+                let ctrl = ErrorController(
+                    message: response!["message"] as! String
+                )
+                ctrl.addOkButton()
+                ctrl.display(self)
+            }
+        }
+        let _files = (response!["playlist"]! as AnyObject!)["files"]!
+        if (_files == nil && response!["message"]! != nil) {
+            OperationQueue.main.addOperation {
+                let ctrl = ErrorController(
+                    message: response!["message"] as! String
+                )
+                ctrl.addOkButton()
+                ctrl.display(self)
+            }
+        }
+        
+        
+        if let __files: Array<AnyObject> = _files as? Array<AnyObject> {
+            for _file in __files {
+                print(_file)
+                files += [File.parse(_file)]
+            }
+        }
+        OperationQueue.main.addOperation {
+            print("reload data")
+            self.tableView.reloadData()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.files.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellIdentifier = "FileCell"
+        let file = self.files[(indexPath as NSIndexPath).row]
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! UIFileCell
+        print(file.name)
+        cell.nameLabel?.text = file.name
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "fileShowSegue", sender:self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "fileShowSegue")
+        {
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                let upcoming: FileShowController = segue.destination as! FileShowController
+                upcoming.file = files[indexPath.row]
+            }
+        }
+    }
 }
+
+
+
