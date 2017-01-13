@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -50,6 +51,8 @@ public class LoginActivty extends AppCompatActivity {
     private EditText _password;
     private UserInfo _userinfo; //used to transport datas
     private ProgressBar _progress;
+    Context context;
+    int backButtonCount = 0;
 
 
     @Override
@@ -65,6 +68,7 @@ public class LoginActivty extends AppCompatActivity {
 
         _userinfo = new UserInfo();
 
+        context = this.getApplicationContext();
         mImageView = (ImageView) findViewById(R.id.imgLogo);
         mImageView.setImageResource(R.drawable.logo_test);
         final Button loginButton = (Button) findViewById(R.id.loginbutton);
@@ -99,6 +103,23 @@ public class LoginActivty extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        if(backButtonCount >= 1)
+        {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
+            backButtonCount++;
+        }
+    }
+
     private Boolean checkCredentials() {
         // basic check
 
@@ -111,6 +132,9 @@ public class LoginActivty extends AppCompatActivity {
 
     private void attemptLogin() throws UnsupportedEncodingException, JSONException {
 
+
+        Intent myIntent = new Intent(LoginActivty.this, DashboardActivity.class);
+        LoginActivty.this.startActivity(myIntent);
 
         if (this.checkCredentials() == false)
             return ;
@@ -144,9 +168,16 @@ public class LoginActivty extends AppCompatActivity {
             }
 
             @Override
+            public void onFailure(int i, Header[] header, String str, Throwable throwable) {
+                Toast toast = Toast.makeText(context, "Error: Cannot log in ", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+            @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
-                Log.d("LoginF", errorResponse.toString());
+
+                Log.d("LoginF", "Login failed");
                 loginFailed();
             }
 

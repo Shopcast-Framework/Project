@@ -1,9 +1,13 @@
 package com.example.maxime.shopcastv3;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,11 +18,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -39,14 +45,32 @@ import java.util.Map;
 import cz.msebera.android.httpclient.Header;
 
 public class MediaActivity extends AppCompatActivity {
-    private UserInfo _userinfo = new UserInfo();
+    private UserInfo mUserInfo = new UserInfo();
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Button mUploadButton;
     private int PICK_IMAGE_REQUEST = 1;
     private List<Media> _media = new ArrayList<Media>();
+    Context context;
+    int backButtonCount = 0;
 
+    @Override
+    public void onBackPressed()
+    {
+        if(backButtonCount >= 1)
+        {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
+            backButtonCount++;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,24 +79,79 @@ public class MediaActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-        _userinfo.setToken(extras.get("token").toString());
-        _userinfo.setUserName(extras.get("username").toString());
+//        _userinfo.setToken(extras.get("token").toString());
+ //       _userinfo.setUserName(extras.get("username").toString());
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view_media);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
 
+        context = this.getApplicationContext();
         getMedia();
 
-        mUploadButton = (Button) findViewById(R.id.upload_file_btn);
-        mUploadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadFile();
-            }
-        });
 
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.bottomNavigation);
+
+        bottomNavigationView.getMenu().getItem(0).setChecked(false);
+        bottomNavigationView.getMenu().getItem(2).setChecked(true);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Media");
+        toolbar.setTitleTextColor(0xFFFFFFFF);
+
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.action_playlist:
+                                Intent myIntent = new Intent(MediaActivity.this, PlaylistActivity.class);
+                                myIntent.putExtra("token", mUserInfo.getToken());
+                                myIntent.putExtra("username", mUserInfo.getUsername());
+                                MediaActivity.this.startActivity(myIntent);
+                                MediaActivity.this.overridePendingTransition(0,0);
+                                break;
+                            case R.id.action_media:
+                                break;
+                            case R.id.action_upload:
+                                myIntent = new Intent(MediaActivity.this, UploadPictures.class);
+                                myIntent.putExtra("token", mUserInfo.getToken());
+                                myIntent.putExtra("username", mUserInfo.getUsername());
+                                MediaActivity.this.startActivity(myIntent);
+                                MediaActivity.this.overridePendingTransition(0,0);
+                                break;
+                            case R.id.action_dashboard:
+                                myIntent = new Intent(MediaActivity.this, DashboardActivity.class);
+                                myIntent.putExtra("token", mUserInfo.getToken());
+                                myIntent.putExtra("username", mUserInfo.getUsername());
+                                MediaActivity.this.startActivity(myIntent);
+                                MediaActivity.this.overridePendingTransition(0,0);
+                                break;
+                        }
+                        return true;
+                    }
+                });
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_media, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_upload:
+                uploadFile();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void uploadFile() {
@@ -115,7 +194,7 @@ public class MediaActivity extends AppCompatActivity {
             mRecyclerView.setLayoutManager(mLayoutManager);
 
             // specify an adapter (see also next example)
-            mAdapter = new MediaAdapter(this, _media, _userinfo);
+            mAdapter = new MediaAdapter(this, _media, mUserInfo);
             mRecyclerView.setAdapter(mAdapter);
         }
     }
@@ -124,14 +203,18 @@ public class MediaActivity extends AppCompatActivity {
 
         int i = 0;
 
-        while (i != response.length()) {
-
-            Media media = new Media(response.getJSONObject(i).get("name").toString(), response.getJSONObject(i).get("mimetype").toString());
+        while (i != 10) {
+            Media mediat = new Media("test", "MP3");
+            mediat.setDesc("This is a description and I enjoy to write it because of my new keyboard");
+            mediat.setOriginalName("lol.mp3");
+            mediat.setID("id");
+            mediat.setSize("250mo");
+           /* Media media = new Media(response.getJSONObject(i).get("name").toString(), response.getJSONObject(i).get("mimetype").toString());
             media.setDesc(response.getJSONObject(i).get("description").toString());
             media.setOriginalName(response.getJSONObject(i).get("originalname").toString());
             media.setID(response.getJSONObject(i).get("id").toString());
-            media.setSize(response.getJSONObject(i).get("size").toString());
-            _media.add(media);
+            media.setSize(response.getJSONObject(i).get("size").toString()); */
+            _media.add(mediat);
             i++;
         }
        return _media;
@@ -139,7 +222,14 @@ public class MediaActivity extends AppCompatActivity {
 
     private void getMedia() {
 
-            Requester.get("file", _userinfo.getToken(), new JsonHttpResponseHandler() {
+        try {
+            _media = parseMedia(new JSONArray());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        createView();
+        return ;
+       /* Requester.get("file", mUserInfo.getToken(), new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     Log.d("Media", response.toString());
@@ -151,13 +241,20 @@ public class MediaActivity extends AppCompatActivity {
                     createView();
                 }
 
+                    @Override
+            public void onFailure(int i, Header[] header, String str, Throwable throwable) {
+                Toast toast = Toast.makeText(context, "Error: Cannot get medias list", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+
+
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                     super.onFailure(statusCode, headers, throwable, errorResponse);
                     Log.d("LoginF", errorResponse.toString());
                 }
 
-            });
+            });*/
         }
 
 }

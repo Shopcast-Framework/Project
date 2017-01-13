@@ -19,11 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PlaylistActivity" />
+        <activity android:name=".PlaylistActivity"/>
         <activity android:name=".PlaylistDetailActivity" />
         <activity android:name=".MediaActivity" />
         <activity android:name=".UploadPictures" />
-        <activity android:name=".RemoteActivity" />
+        <activity android:name=".RemoteActivity"/>
         <activity android:name=".ControlActivity" />
         <activity android:name=".DashboardActivity"></activity>
     </application>

@@ -17,8 +17,8 @@ public class ControlActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         _device = (Device) getIntent().getSerializableExtra("Myclass");
-        _userinfo.setToken(extras.get("token").toString());
-        _userinfo.setUserName(extras.get("username").toString());
+//        _userinfo.setToken(extras.get("token").toString());
+//        _userinfo.setUserName(extras.get("username").toString());
 
         mImageView = (ImageView) findViewById(R.id.comingSoon);
         mImageView.setImageResource(R.drawable.no_avaible);

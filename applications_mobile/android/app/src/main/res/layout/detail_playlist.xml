@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="150dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cardviewMedia"
+    android:minHeight="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardUseCompatPadding="true">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -11,24 +17,24 @@
             android:id="@+id/title_media"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
-            android:text="NAME"
-            android:gravity="center_vertical"
-            android:textColor="@android:color/black"
-            android:textSize="14dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_toRightOf="@+id/playlisticon"
-            android:layout_toEndOf="@+id/playlisticon" />
+            android:text="media name"
 
-        <ImageView
-            android:layout_width="150dp"
+            android:gravity="center_vertical"
+            android:textColor="#212121"
+            android:textSize="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toStartOf="@+id/checkBox" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/playlisticon"
-            android:src="@drawable/playlist"
+            android:id="@+id/checkBox"
+            android:checked="false"
             android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp" />
 
 
     </RelativeLayout>
