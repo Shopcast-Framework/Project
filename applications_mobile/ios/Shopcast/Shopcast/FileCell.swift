@@ -12,4 +12,6 @@ class UIFileCell: UITableViewCell {
     
     // MARK: Properties
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var iconLabel: UILabel!
+    @IBOutlet weak var nextLabel: UILabel!
 }
