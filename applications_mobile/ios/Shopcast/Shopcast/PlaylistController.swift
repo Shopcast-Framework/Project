@@ -77,6 +77,13 @@ class PlaylistController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! UIPlaylistCell
         print(playlist.name)
         cell.nameLabel?.text = playlist.name
+        cell.descLabel?.text = playlist.description
+        
+        cell.iconLabel?.font = UIFont(name: "FontAwesome", size: 24)
+        cell.iconLabel?.text = String(format: "%C", 0xF152)
+
+        cell.nextLabel?.font = UIFont(name: "FontAwesome", size: 24)
+        cell.nextLabel?.text = String(format: "%C", 0xF105)
         return cell
     }
    
