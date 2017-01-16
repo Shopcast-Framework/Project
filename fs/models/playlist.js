@@ -9,6 +9,11 @@ var Playlist = function(sequelize) {
 
     var model = sequelize
     .define('Playlist', {
+        id: {
+              type: Sequelize.INTEGER,
+              autoIncrement: true,
+              primaryKey: true
+        },
         name        : Sequelize.STRING,
         description : Sequelize.STRING,
         frequency   : Sequelize.STRING,
@@ -74,7 +79,7 @@ var Playlist = function(sequelize) {
 
     var relationships = function() {
         model.belongsToMany(orm.db.File, {constraints: false, as: 'files', through: 'PlaylistFile'});
-        model.hasMany(orm.db.Planning);
+        model.hasMany(orm.db.Planning, {constraints: false, as: 'plannings'});
         model.belongsTo(orm.db.User, {constraints: false});
     };
 
