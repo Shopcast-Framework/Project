@@ -24,7 +24,7 @@ var PlaylistAdd = function(req, res) {
         if (!playlist) {
             return res.status(Status.UNAUTHORIZED).send({message:Message.get("playlist:add:failure")});
         }
-        playlist.add(req.user.id, req.body).then(function() {
+        playlist.add(req.user.id, req.body.files).then(function() {
             res.status(Status.OK).send({message:Message.get("playlist:add:success")});
         }, function() {
             res.status(Status.UNAUTHORIZED).send({message:Message.get("playlist:add:failure")});

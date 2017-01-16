@@ -137,6 +137,12 @@ class PlaylistShowController: UIViewController, UIImagePickerControllerDelegate,
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! UIFileCell
         print(file.name)
         cell.nameLabel?.text = file.name
+
+        cell.iconLabel?.font = UIFont(name: "FontAwesome", size: 24)
+        cell.iconLabel?.text = String(format: "%C", 0xF1C8)
+
+        cell.nextLabel?.font = UIFont(name: "FontAwesome", size: 24)
+        cell.nextLabel?.text = String(format: "%C", 0xF105)
         return cell
     }
     

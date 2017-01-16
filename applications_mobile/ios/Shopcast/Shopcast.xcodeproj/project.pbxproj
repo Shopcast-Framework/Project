@@ -16,6 +16,7 @@
 		3E2D86561D5CBBA70003CF43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E2D86551D5CBBA70003CF43 /* Assets.xcassets */; };
 		3E2D86591D5CBBA70003CF43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E2D86571D5CBBA70003CF43 /* LaunchScreen.storyboard */; };
 		3E2D86641D5CBBA70003CF43 /* ShopcastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2D86631D5CBBA70003CF43 /* ShopcastTests.swift */; };
+		3E350F5D1E26E6E70016357D /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3E350F5C1E26E6E70016357D /* fontawesome-webfont.ttf */; };
 		3E470B9E1DCCCB9300AD5F3F /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E470B9D1DCCCB9300AD5F3F /* ImagePickerController.swift */; };
 		3E483D831D75F22E0055573F /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E483D821D75F22E0055573F /* Request.swift */; };
 		3E6C4BF61D8F06C100DDC18A /* ErrorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6C4BF51D8F06C100DDC18A /* ErrorController.swift */; };
@@ -53,6 +54,7 @@
 		3E2D865F1D5CBBA70003CF43 /* ShopcastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShopcastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E2D86631D5CBBA70003CF43 /* ShopcastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopcastTests.swift; sourceTree = "<group>"; };
 		3E2D86651D5CBBA70003CF43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E350F5C1E26E6E70016357D /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "fontawesome-webfont.ttf"; path = "../../../../../../../Desktop/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		3E470B9D1DCCCB9300AD5F3F /* ImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
 		3E483D821D75F22E0055573F /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		3E6C4BF51D8F06C100DDC18A /* ErrorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				3E2D86551D5CBBA70003CF43 /* Assets.xcassets */,
 				3E2D86571D5CBBA70003CF43 /* LaunchScreen.storyboard */,
 				3E2D86521D5CBBA70003CF43 /* Main.storyboard */,
+				3E350F5C1E26E6E70016357D /* fontawesome-webfont.ttf */,
 				3E2D865A1D5CBBA70003CF43 /* Info.plist */,
 			);
 			path = Shopcast;
@@ -254,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E2D86591D5CBBA70003CF43 /* LaunchScreen.storyboard in Resources */,
+				3E350F5D1E26E6E70016357D /* fontawesome-webfont.ttf in Resources */,
 				3E2D86561D5CBBA70003CF43 /* Assets.xcassets in Resources */,
 				3E2D86541D5CBBA70003CF43 /* Main.storyboard in Resources */,
 			);
