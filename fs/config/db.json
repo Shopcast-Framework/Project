@@ -3,18 +3,18 @@
         "database"  : "shopcast",
         "username"  : "shopcast",
         "password"  : "s7fCQvxr9&mKey=.",
-        "host"      : "localhost"
+        "host"      : "BDD"
     },
     "development": {
         "database"  : "shopcast",
         "username"  : "shopcast",
         "password"  : "s7fCQvxr9&mKey=.",
-        "host"      : "localhost"
+        "host"      : "BDD"
     },
     "test": {
         "database"  : "shopcast_test",
         "username"  : "shopcast",
         "password"  : "s7fCQvxr9&mKey=.",
-        "host"      : "localhost"
+        "host"      : "BDD"
     }
 }
