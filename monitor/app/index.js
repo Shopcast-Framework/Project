@@ -17,7 +17,8 @@ function createWindow () {
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'views/index.html'),
+    //pathname: path.join(__dirname, 'files/search-iso.webm'),
+    pathname: path.join(__dirname, 'views/player_final.html'),
     protocol: 'file:',
     slashes: true
   }));

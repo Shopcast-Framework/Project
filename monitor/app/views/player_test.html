@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+  <title>Test Video.js</title>
+  <script src="../bower_components/video.js/dist/video.min.js"></script>
+  <link href="../bower_components/video.js/dist/video-js.min.css" rel="stylesheet">
+</head>
+<body>
+  <div id="testdiv"></div>
+  <video id="video-player" class="video-js vjs-default-skin" width="1280" height="720%"  controls  data-setup='{ "controls": true, "autoplay": false }' >
+        <source src="../files/search-iso.webm" type='video/webm'>
+
+        <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgra    ding to a web browser that <a href="http://videojs.com/html5-video-support/" target="_bl    ank">supports HTML5 video</a></p>
+  </video>
+  
+  <script>
+      var playerOptions = {
+          'controls': true,
+          'preload': false
+      } 
+      videojs("video-player", playerOptions).ready(function () {
+          var vid = this;
+          /*
+          vid.on("ended", function(){
+          alert ("I have triggered");*/
+          vid.poster('../files/img.png');
+      vid.posterImage.show();
+      vid.bigPlayButton.show();
+      vid.currentTime(0);
+        /*});*/
+      }); 
+  </script>
+  <p>
+  GOD DAMNIT
+  </p>
+</body>
+</html>

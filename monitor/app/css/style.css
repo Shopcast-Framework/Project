@@ -26,3 +26,6 @@ html, body{
     font-size: 35px;
     font-weight: 400;
 }
+
+.video-js.vjs-default-skin .vjs-big-play-button { display: none; }
+
