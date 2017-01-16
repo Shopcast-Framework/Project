@@ -38,7 +38,7 @@
                                 <color key="highlightedColor" red="0.33490141132830603" green="0.4841497946204113" blue="0.63563481675392675" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.57270265170000001" green="0.69372528359999996" blue="0.71692843260000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.86024641219999998" green="0.91283284890000005" blue="0.93497478960000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="enf-mE-pdI" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="150" id="KrN-QY-0mb"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="kFy-gJ-cVU" secondAttribute="bottom" constant="50" id="az0-u5-sEi"/>
