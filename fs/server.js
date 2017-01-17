@@ -32,6 +32,17 @@ server.on('connection', function(client) {
         switch (meta.event) {
             // Here we have the different commands
 
+            // Client requests information about a playlist // playlist_id
+            case 'playlistinfo':
+                if (true || client.data.is_identified) {
+                    console.log('[CHECK] : Client id : ' + client_data.user_id);
+                    video.playlist(client, stream, meta);
+                }
+                else {
+                    console.log('[ERR] Client not identified');
+                }
+                break ;
+	
             // Client requests the timetable for a date // from, to, last_update
             case 'timetable':
                 if (true || client.data.is_identified) {
@@ -42,6 +53,7 @@ server.on('connection', function(client) {
                     console.log('[ERR] Client not identified');
                 }
                 break ;
+	
 
             // List available videos
             // It is a test command that will be replaced

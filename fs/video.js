@@ -18,14 +18,55 @@ list          : list,
 		request       : request,
 		upload        : upload,
 		monitor_login : monitor_login,
-		timetable     : timetable
+		timetable     : timetable,
+		playlist      : playlistInfo
 };
+
+function playlistInfo(client, stream, meta) {
+	console.log('Command [PLAYLIST] [USER ID :' + meta.client_data.user_id +' ]: ');
+	console.log(ormPlaylist);
+	console.log(ormPlaylistFiles);
+	console.log(meta);
+
+
+	ormPlaylist.findOne({
+		where : {
+			id : meta.playlist_id
+		}
+	}).then(function (playlist) {
+		if (!playlist)
+			return ;
+		var dataToSend = {
+			event : 'playlistinfoback',
+			playlist_id : meta.playlist_id,
+			playlist_name : playlist.dataValues.name,
+			playlist_desc : playlist.dataValues.description,
+			playlist_tags : playlist.dataValues.tags,
+			playlist_files : []
+		};
+		ormPlaylistFiles.findAll({
+			where : {
+				playlist_id : meta.playlist_id
+			}
+		}).then(function(files) {
+			for (var i = 0; i < files.length; i++) {
+				dataToSend.playlist_files.push(files[i].dataValues.file_id);
+			}
+			console.log(dataToSend);
+			client.send({}, dataToSend);
+
+		}, function (err) {
+		});
+	}, function (err) {
+		// handsome error handling there
+	});	
+	
+}
 
 function timetable(client, stream, meta) {
 	console.log('Command [TIMETABLE] [USER ID :' + meta.client_data.user_id +' ]: ');
 	console.log(ormPlanning);
 	console.log(ormPlaylist);
-	console.log(ormPlaylistFiles);
 
 	from = new Date(meta.from);
 	to = new Date(meta.to);
@@ -68,76 +109,8 @@ function timetable(client, stream, meta) {
 		client.send({}, dataToSend);
 	}, function(err) {
 	});
+}
 
-
-
-
-/*
-   ormPlaylist.findAll({
-where : {
-user_id : meta.client_data.user_id
-},
-include : [/*{
-model : ormFile,
-as : 'files',
-required : true,
-order : ['rank', 'ASC']
-},
-{
-model       : ormPlanning,
-required    : true,
-where : {
-monitor_id : meta.client_data.monitor_id/*,
-range_end : {
-gte : from
-},
-range_start : {
-lte : to
-}
-}
-}
-]
-}
-).then(function(plannings) {
-//gerer le cas unique
-console.log('PLANNING, result ?');
-console.log(plannings);
-plannings.forEach(function(plan) {
-var dataToSend = {
-event : 'playlist',
-play_id : plan.id,
-files : [],
-planning : []
-};
-console.log('planning id : ' + plan.id);
-for (var i = 0, len = plan.files.length; i < len; i++) {
-dataToSend.files[dataToSend.files.length] = {
-rank : i,
-file_id : plan.files[i].dataValues.id,
-filename : plan.files[i].filename,
-file_time : 5 * 60 //plan.files[i]
-};
-}
-for (var i = 0, len = plan.Plannings.length; i < len; i++) {
-var tmpend = plan.Plannings[i].dataValues.range_end;
-if (tmpend > to)
-tmpend = to;
-dataToSend.planning[dataToSend.planning.length] = {
-planning_id : plan.Plannings[i].dataValues.id,
-start : plan.Plannings[i].dataValues.range_start,
-end : tmpend,
-timestart : plan.Plannings[i].dataValues.start_at
-};
-}
-console.log(dataToSend);
-client.send({}, dataToSend);
-stream.end();
-});
-}, function(err) {
-});*/
-
-
-}
 
 function list(stream, meta) {
 	console.log('Command [LIST] [USER ID :' + meta.client_data.user_id +' ]: ');
