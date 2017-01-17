@@ -58,7 +58,7 @@ var Uploader = function() {
     self.convert = function(data) {
         switch (data && data.type) {
             case 'Buffer':
-                return Buffer.from(data.data);
+                return new Buffer(data.data); // Buffer.from(data.data); syntax depreciated
             default:
                 return data.data;
         }
