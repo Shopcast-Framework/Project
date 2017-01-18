@@ -1,0 +1,210 @@
+<link href="../bower_components/video.js/dist/video-js.min.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<script src="../bower_components/video.js/dist/video.min.js"></script>
+<script src="../bower_components/videojs-playlist/dist/videojs-playlist.js"></script>
+<script>
+  videojs.options.flash.swf = "../bower_components/video.js/dist/video-js.swf"
+</script>
+<video id="shopcast_player" class="video-js vjs-default-skin"
+                            width="640" height="264">
+  
+     
+  <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+</video>
+
+<script>
+// From video-jsDEL
+    var playerOptions = {
+        "controls" : true,
+        "autoplay" : true,
+        "preload"  : true,
+    }
+    
+    function generationStatics(filesData) {
+        // Calculate avg
+        // Calculate median
+        var stats = {};
+
+        return stats;
+    }
+
+    function updateProbability(filesData, cnt, statistics) {
+
+        // Duration coeffitient
+        var SHORT_COEF = 1.2;
+        var MED_COEF = 1.0;
+        var LONG_COEF = 0.6;
+        var IMG_COEF = 1.8
+
+        // Sometimes better to reset the variables...
+
+        // avoid repetition
+        var unit = 1.0 / filesData.length;
+        for (var i = 0; i < filesData.length; i++) {
+            if (i != cnt) {
+                var coef = MED_COEF;
+                if (false) {
+                    coef = SHORT_COEF;
+                } else if (false) {
+                    coef = LONG_COEF;
+                } else if (false) {
+                    coef = IMG_COEF;
+                }
+                filesData[i].probability += unit * coef;
+            }
+        }
+        normalizeProbability(filesData);
+    }
+    
+    function findRightProbability(filesData, drawnNum, stats) {
+        var cnt = 0;
+        var chosenFile = filesData[0];
+
+        if (drawnNum < 0) {
+            drawnNum = 0.0;
+        }
+        if (drawnNum > 1.0) {
+            drawnNum = 1.0;
+        }
+        while (drawnNum > 0) {
+            if (cnt >= filesData) {
+                cnt = 0;
+            }
+            drawnNum -= filesData[cnt].probability;
+            if (drawnNum > 0) {
+                cnt += 1;
+            }
+        }
+        chosenFile = filesData[cnt];
+        updateProbability(filesData, cnt, stats);
+        return chosenFile;
+    }
+
+    function normalizeProbability(filesData) {
+        var norm = 0.0
+        for (var i = 0; i < filesData.length; i++) {
+            norm += filesData[i].probability
+        }
+        for (var i = 0; i < filesData.length; i++) {
+            filesData[i].probability /= norm;
+        }
+    }
+
+    function createPlaylistTimetable(from, to, filesData) {
+        /// currently a simple loop
+        // TODO : 
+        // Init all variables [Progress]
+        // Timeduration for this timetable ? [OK] - IN SECONDS
+        // Simple playlist for time duration [OK]
+        // Need to return estimated time to finish timetable [etimatedFinishTime]
+        // Probability shuffle, simple [OK]
+        // Probability shuffle, avoid repetition
+        // Probability shuffle, avoid lengthy repetition
+        // Probability shuffle, add tag factor
+        
+        console.log('[WRKON] Init all variables');
+        console.log('[WRKON] time difference from to - OK');
+        var timeLeft = Math.ceil((to.getTime() - from.getTime()) / 1000);
+        console.log(timeLeft);
+        var timeTable = [];
+        var stats = generationStatics(filesData);
+
+        console.log(timeLeft);
+        console.log('[WRKON] loop to add time');
+        while (timeLeft > 0) {
+            // Normalize probability
+            normalizeProbability(filesData);
+            var file = findRightProbability(filesData, Math.random(), stats);
+
+            timeTable.push(file);
+            timeLeft -= file.duration;
+            console.log('[WRKON] PLAYLIST : added ' + file.src + ' ( ' + file.duration + ' )');
+        }
+        var estimatedFinishTime = new Date(to.getTime() - timeLeft);
+        return timeTable
+    }
+    
+    function playerAction(player, playerPlaylist, cnt) {
+          console.log(cnt);
+          if (cnt >= playerPlaylist.length) {
+              return 0;
+          }
+          if (playerPlaylist[cnt].type.indexOf('image') == -1) {
+              player.src(playerPlaylist[cnt]);
+              player.play();
+              return 0;
+          } else {
+              console.log('GOD DAMMIT');
+              //player.bigPlayButton.show(false);
+              player.poster(playerPlaylist[cnt].poster);
+              player.currentTime(0);
+              player.posterImage.show(true);
+              setTimeout(function() {
+                  playerAction(player, playerPlaylist, cnt + 1);
+              }, playerPlaylist[cnt].duration * 1000);
+              return 1;
+          }
+    }
+
+    
+    var playerPlaylist = [{
+          src: '../files/search-iso.webm',
+          type: 'video/webm',
+          duration: 44,
+          probability: 1
+    }, {
+          src: '../files/nope.webm',
+          type: 'image/webm',
+          probability: 1,
+          poster: '../files/img.png',
+          duration: 30
+    }/*, {
+          src: '../files/1.mp4',
+          type: 'video/mp4',
+          duration: 204,
+          probability: 1
+    }, {
+          src: '../files/2.mp4',
+          type: 'video/mp4',
+          duration: 147,
+          probability: 1
+    }, {
+          src: '../files/3.mp4',
+          type: 'video/mp4',
+          duration: 92,
+          probability: 1
+    }, {
+          src: '../files/4.mp4',
+          type: 'video/mp4',
+          duration : 138,
+          probability: 1
+    }*/];
+    var a = new Date();
+    var b = new Date(a.getTime() + 300000);
+    console.log(playerPlaylist[0].duration);
+
+    playerPlaylist = createPlaylistTimetable(a, b, playerPlaylist);
+
+    var player = videojs("shopcast_player", playerOptions, function(){
+        var cnt = 0; 
+        // Player (this) is initialized and ready.
+
+        console.log('Good to go !');
+        playerAction(this, playerPlaylist, cnt);
+
+
+        this.on('ended', function() {
+            cnt = cnt + 1;
+            if (cnt >= playerPlaylist.length) {
+              console.log('safety bit');
+              cnt = 0;
+              /// Will need to stop start the new playlist calculation
+              /// currently simple repeat
+              /// also, a stack system would be smarter but wutevr
+            }
+            cnt += playerAction(this, playerPlaylist, cnt);
+        });
+    });
+</script>
+
+

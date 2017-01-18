@@ -48,7 +48,6 @@ class PlaylistShowController: UIViewController, UIImagePickerControllerDelegate,
         self.tableView.delegate = self
         self.tableView.dataSource = self
         if playlist != nil {
-            print("JE GET SUR PLAYLIST")
             requester.get("playlist/\((playlist?.id)!)", callback: fileCallback)
         }
     }
@@ -80,8 +79,6 @@ class PlaylistShowController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func fileCallback(_ response : AnyObject?) -> Void {
-        
-        print("JAI UNE REPONSE SUR FILECALLBACK")
         if (response == nil) {
             OperationQueue.main.addOperation {
                 let ctrl = ErrorController(
@@ -113,15 +110,12 @@ class PlaylistShowController: UIViewController, UIImagePickerControllerDelegate,
             }
         }
         
-        
         if let __files: Array<AnyObject> = _files as? Array<AnyObject> {
             for _file in __files {
-                print(_file)
                 files += [File.parse(_file)]
             }
         }
         OperationQueue.main.addOperation {
-            print("reload data")
             self.tableView.reloadData()
         }
     }
@@ -135,8 +129,13 @@ class PlaylistShowController: UIViewController, UIImagePickerControllerDelegate,
         let file = self.files[(indexPath as NSIndexPath).row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! UIFileCell
-        print(file.name)
         cell.nameLabel?.text = file.name
+
+        cell.iconLabel?.font = UIFont(name: "FontAwesome", size: 24)
+        cell.iconLabel?.text = String(format: "%C", 0xF1C8)
+
+        cell.nextLabel?.font = UIFont(name: "FontAwesome", size: 24)
+        cell.nextLabel?.text = String(format: "%C", 0xF105)
         return cell
     }
     
@@ -144,6 +143,14 @@ class PlaylistShowController: UIViewController, UIImagePickerControllerDelegate,
         self.performSegue(withIdentifier: "fileShowSegue", sender:self)
     }
     
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "fileShowSegue")
         {
@@ -151,6 +158,11 @@ class PlaylistShowController: UIViewController, UIImagePickerControllerDelegate,
                 let upcoming: FileShowController = segue.destination as! FileShowController
                 upcoming.file = files[indexPath.row]
             }
+        }
+        if (segue.identifier == "playlistAddFileSegue")
+        {
+            let upcoming: PlaylistAddFileController = segue.destination as! PlaylistAddFileController
+            upcoming.playlist = playlist
         }
     }
 }

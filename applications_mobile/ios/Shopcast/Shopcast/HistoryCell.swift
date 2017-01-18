@@ -8,11 +8,10 @@
 
 import UIKit
 
-class UIPlaylistCell: UITableViewCell {
-
+class UIHistoryCell: UITableViewCell {
+    
     // MARK: Properties
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var iconLabel: UILabel!
-    @IBOutlet weak var nextLabel: UILabel!
-    @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
 }

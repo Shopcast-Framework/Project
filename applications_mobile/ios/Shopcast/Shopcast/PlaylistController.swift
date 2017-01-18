@@ -27,11 +27,13 @@ class PlaylistController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         requester.get("playlist", callback: playlistCallback)
     }
     
     func playlistCallback(_ response : AnyObject?) -> Void {
-   
         if (response == nil) {
             OperationQueue.main.addOperation {
                 let ctrl = ErrorController(
@@ -53,15 +55,14 @@ class PlaylistController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
             
+        playlists.removeAll()
         if let _playlists: Array<AnyObject> = response!["playlists"] as? Array<AnyObject> {
             
             for _playlist in _playlists {
-                print(_playlist)
                 playlists += [Playlist.parse(_playlist)]
             }
         }
         OperationQueue.main.addOperation {
-            print("reload data")
             self.tableView.reloadData()
         }
     }
@@ -75,8 +76,14 @@ class PlaylistController: UIViewController, UITableViewDelegate, UITableViewData
         let playlist = self.playlists[(indexPath as NSIndexPath).row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! UIPlaylistCell
-        print(playlist.name)
         cell.nameLabel?.text = playlist.name
+        cell.descLabel?.text = playlist.description
+        
+        cell.iconLabel?.font = UIFont(name: "FontAwesome", size: 24)
+        cell.iconLabel?.text = String(format: "%C", 0xF152)
+
+        cell.nextLabel?.font = UIFont(name: "FontAwesome", size: 24)
+        cell.nextLabel?.text = String(format: "%C", 0xF105)
         return cell
     }
    

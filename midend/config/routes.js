@@ -150,6 +150,17 @@ var Routes = [
                 ]
             }
         ],
+    },
+    {
+        name: 'history',
+        middlewares: [
+            {
+                name: 'auth',
+                param: {
+                    roles: [Role.ADMIN, Role.USER]
+                }
+            }
+        ]
     }
 ];
 

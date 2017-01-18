@@ -42,7 +42,8 @@ router.post('/:id',middlewares.isLogged, function(req, res) {
 	}, function(err) {
 		console.log(err);
 		res.redirect('/monitors/' + id + '?message=' + response.body.message);
-	})
+	});
+});
 
 router.get('/display/:id', middlewares.isLogged, middlewares.language, function( req, res ) {
 
@@ -75,6 +76,7 @@ router.get('/display/:id', middlewares.isLogged, middlewares.language, function(
 	}, function(err) {
 		console.log(err);
 	});
+});
 
 router.post('/:id',middlewares.isLogged, function(req, res) {
 
@@ -85,10 +87,8 @@ router.post('/:id',middlewares.isLogged, function(req, res) {
 	}, function(err) {
 		console.log(err);
 		res.redirect('/monitors/' + id + '?message=' + response.body.message);
-	})
+	});
 
-=======
->>>>>>> guerin_f
 });
 
 router.get('/:id', middlewares.isLogged, middlewares.language, function( req, res ) {

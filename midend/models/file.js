@@ -2,6 +2,7 @@
 
 var Sequelize   = require('sequelize'),
     Format      = require(process.env.NODE_PATH + '/config/file/format.json'),
+    Message     = require(process.env.NODE_PATH + '/modules/messages'),
     Q           = require('q'),
     Uploader    = require(process.env.NODE_PATH + '/modules/uploader'),
     orm         = require(process.env.NODE_PATH + '/modules/orm');

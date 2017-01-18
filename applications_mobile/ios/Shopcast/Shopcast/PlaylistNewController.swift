@@ -24,10 +24,10 @@ class PlaylistNewController: UIViewController {
 
     @IBAction func save(_ sender: AnyObject) {
         requester.post("playlist", body: [
-            "name" : nameField.text!,
-            "description" : descriptionField.text!,
-            "frequency" : frequencyField.text!,
-            "tagField" : tagField.text!
+            "name" : nameField.text! as AnyObject,
+            "description" : descriptionField.text! as AnyObject,
+            "frequency" : frequencyField.text! as AnyObject,
+            "tagField" : tagField.text! as AnyObject
         ], callback: playlistEditCallback)
     }
     

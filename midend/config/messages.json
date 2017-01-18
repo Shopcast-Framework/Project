@@ -103,5 +103,7 @@
     "group:getone:failure"      : "Error can't get this group",
     "group:delete:success"      : "Group correctly deleted",
 
+    "history:get:success"         : "List of history",
+
     "info:get:success"          : "List of last commits on the app"
 }
