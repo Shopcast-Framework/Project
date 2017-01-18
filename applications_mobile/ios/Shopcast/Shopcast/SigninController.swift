@@ -73,7 +73,7 @@ class SigninController: UIViewController {
     // MARK: Actions
     @IBAction func signIn(_ sender: UIButton) {
         requester.post("session", body: [
-            "strategy" : "local", "username" : usernameTextField.text!, "password" : passwordTextField.text!
+            "strategy" : "local" as AnyObject, "username" : usernameTextField.text! as AnyObject, "password" : passwordTextField.text! as AnyObject
         ], callback: loginCallback)
     }
 
