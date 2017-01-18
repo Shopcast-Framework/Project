@@ -5,25 +5,25 @@
     <item
         android:id="@+id/action_dashboard"
         android:enabled="true"
-        android:icon="@drawable/dashboard_icon"
+        android:icon="@drawable/pie_chart"
         android:title="Dashboard"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_playlist"
         android:enabled="true"
-        android:icon="@drawable/list_icon"
+        android:icon="@drawable/playlisticon"
         android:title="Playlist"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_media"
         android:enabled="true"
-        android:icon="@drawable/ic_menu_slideshow"
+        android:icon="@drawable/archive"
         android:title="Media"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_upload"
         android:enabled="true"
-        android:icon="@drawable/ic_menu_send"
+        android:icon="@drawable/picture"
         android:title="Upload"
         app:showAsAction="ifRoom" />
 

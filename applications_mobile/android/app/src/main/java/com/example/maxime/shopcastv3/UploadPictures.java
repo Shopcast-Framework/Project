@@ -1,15 +1,20 @@
 package com.example.maxime.shopcastv3;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.media.Image;
+import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,6 +31,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,35 +62,42 @@ public class UploadPictures extends AppCompatActivity {
 
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_upload, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_picture:
+                dispatchTakePictureIntent();
+                return true;
+            case R.id.action_send:
+                dispatchTakePictureIntent();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_pictures);
 
         Bundle extras = getIntent().getExtras();
 
-//        _userinfo.setToken(extras.get("token").toString());
-//        _userinfo.setUserName(extras.get("username").toString());
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Upload Picture");
+        toolbar.setTitleTextColor(0xFFFFFFFF);
+
+        mUserInfo.setToken(extras.get("token").toString());
+        mUserInfo.setUserName(extras.get("username").toString());
         mPreview = (ImageView) findViewById(R.id.previewImage);
         // here set the by default
-        mImageButton = (ImageButton) findViewById(R.id.buttonTakePicture);
-
-        mImageButton.setImageResource(R.drawable.ic_menu_camera);
-
-        mImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // check if there is camera
-                if (detectCamera() == false) {
-                    // error message
-                }
-                // take picture
-                dispatchTakePictureIntent();
-                //uploadPicture();
-            }
-        });
-
-        mUploadButton = (ImageButton) findViewById(R.id.uploadButton);
-        mUploadButton.setImageResource(R.drawable.upload_icon);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottomNavigation);
@@ -106,7 +119,7 @@ public class UploadPictures extends AppCompatActivity {
                                 UploadPictures.this.overridePendingTransition(0,0);
                                 break;
                             case R.id.action_media:
-                                myIntent = new Intent(UploadPictures.this, UploadPictures.class);
+                                myIntent = new Intent(UploadPictures.this, MediaActivity.class);
                                 myIntent.putExtra("token", mUserInfo.getToken());
                                 myIntent.putExtra("username", mUserInfo.getUsername());
                                 UploadPictures.this.startActivity(myIntent);
@@ -139,13 +152,37 @@ public class UploadPictures extends AppCompatActivity {
         }
     }
 
-
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 200) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+            else {
+                Toast toast = Toast.makeText(this.getApplicationContext(), "Error: You don't have permission to take picture.", Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
     }
+
+
+    private void dispatchTakePictureIntent() {
+        if (checkSelfPermission(Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, 200);
+        } else {
+            Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+            startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+        }
+
+    }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -1,8 +1,10 @@
 package com.example.maxime.shopcastv3;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.IdRes;
@@ -12,8 +14,10 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -23,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -43,6 +48,7 @@ import java.util.List;
 import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.entity.StringEntity;
 
 public class MediaActivity extends AppCompatActivity {
     private UserInfo mUserInfo = new UserInfo();
@@ -79,8 +85,8 @@ public class MediaActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-//        _userinfo.setToken(extras.get("token").toString());
- //       _userinfo.setUserName(extras.get("username").toString());
+        mUserInfo.setToken(extras.get("token").toString());
+        mUserInfo.setUserName(extras.get("username").toString());
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view_media);
 
@@ -100,7 +106,7 @@ public class MediaActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Media");
-        toolbar.setTitleTextColor(0xFFFFFFFF);
+        toolbar.setTitleTextColor(Color.parseColor("#03A9F4"));
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
@@ -164,18 +170,57 @@ public class MediaActivity extends AppCompatActivity {
 
     }
 
+    private StringEntity getEntity(Bitmap bmp, Uri uri) {
+        JSONObject jsonObject = new JSONObject();
+        final String[] name = new String[1];
+
+        try {
+            jsonObject.put("name",  uri.toString().substring(uri.toString().lastIndexOf("/")+1 ) + "Android");
+            jsonObject.put("encoding", "7bit");
+            jsonObject.put("description", "Upload From android device");
+            jsonObject.put("mimetype", "image/png");
+            jsonObject.put("originalname", uri.toString().substring(uri.toString().lastIndexOf("/")+1));
+            jsonObject.put("duration", null);
+            jsonObject.put("data", bmp.toString());
+            jsonObject.put("tag", "latence");
+            jsonObject.put("size", String.valueOf(bmp.getByteCount()));
+            StringEntity entity = new StringEntity(jsonObject.toString());
+            return entity;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        Log.d("coucou", "here");
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
             Uri uri = data.getData();
 
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                // send picture to the server here
+                StringEntity entity = getEntity(bitmap, uri);
+                if (entity == null) {
+                    Toast toast = Toast.makeText(context, "Cannot convert file", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                Requester.post(this.getApplicationContext(), mUserInfo.getToken(), "file", entity, "application/json", new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            Toast toast = Toast.makeText(context, "Succefully uploaded", Toast.LENGTH_SHORT);
+                            toast.show();
+                    }
 
+                    @Override
+                    public void onFailure(int i, Header[] header, String str, Throwable throwable) {
+                        Toast toast = Toast.makeText(context, "Error: Cannot create playlist", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -203,18 +248,14 @@ public class MediaActivity extends AppCompatActivity {
 
         int i = 0;
 
-        while (i != 10) {
-            Media mediat = new Media("test", "MP3");
-            mediat.setDesc("This is a description and I enjoy to write it because of my new keyboard");
-            mediat.setOriginalName("lol.mp3");
-            mediat.setID("id");
-            mediat.setSize("250mo");
-           /* Media media = new Media(response.getJSONObject(i).get("name").toString(), response.getJSONObject(i).get("mimetype").toString());
+        while (i != response.length()) {
+
+            Media media = new Media(response.getJSONObject(i).get("name").toString(), response.getJSONObject(i).get("mimetype").toString());
             media.setDesc(response.getJSONObject(i).get("description").toString());
             media.setOriginalName(response.getJSONObject(i).get("originalname").toString());
             media.setID(response.getJSONObject(i).get("id").toString());
-            media.setSize(response.getJSONObject(i).get("size").toString()); */
-            _media.add(mediat);
+            media.setSize(response.getJSONObject(i).get("size").toString());
+            _media.add(media);
             i++;
         }
        return _media;
@@ -222,14 +263,8 @@ public class MediaActivity extends AppCompatActivity {
 
     private void getMedia() {
 
-        try {
-            _media = parseMedia(new JSONArray());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        createView();
-        return ;
-       /* Requester.get("file", mUserInfo.getToken(), new JsonHttpResponseHandler() {
+
+       Requester.get("file", mUserInfo.getToken(), new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     Log.d("Media", response.toString());
@@ -254,7 +289,7 @@ public class MediaActivity extends AppCompatActivity {
                     Log.d("LoginF", errorResponse.toString());
                 }
 
-            });*/
+            });
         }
 
 }

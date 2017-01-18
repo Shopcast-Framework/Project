@@ -56,7 +56,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
             mediaViewHolder.expandableLayout.setVisibility(View.GONE);
         }
 
-        mediaViewHolder._mediaName.setText(media.getOriginalName());
+        mediaViewHolder._mediaName.setText(media.getName());
         Log.d("desc", media.getDesc());
         mediaViewHolder._desc.setText(media.getDesc());
     }

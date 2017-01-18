@@ -32,6 +32,11 @@ public class Requester {
         client.post(context, getAbsoluteUrl(relativeUrl), entity, contentType, responseHandler);
     }
 
+    public static void addFilePlaylist(Context context, String token, String relativeUrl, StringEntity entity, String contentType, AsyncHttpResponseHandler responseHandler) {
+        client.addHeader("Authorization", "Bearer " + token);
+        client.addHeader("Content-Type", "application/json");
+        client.post(context, getAbsoluteUrl(relativeUrl), entity, contentType, responseHandler);
+    }
 
     public static void postLogin(Context context, String relativeUrl, StringEntity entity, String contentType, AsyncHttpResponseHandler responseHandler) {
         client.setEnableRedirects(true);

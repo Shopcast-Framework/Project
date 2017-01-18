@@ -4,6 +4,9 @@
     android:layout_height="wrap_content"
     android:id="@+id/cardviewMedia"
     android:minHeight="130dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardUseCompatPadding="true">
 
@@ -18,8 +21,8 @@
             android:text="NAME"
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:textColor="#212121"
             android:textSize="25sp"
+            android:textColor="#5677fc"
             android:layout_alignParentTop="true"
             android:layout_toStartOf="@+id/delete_btn_file"
             android:fontFamily="@string/abc_font_family_title_material" />
@@ -30,6 +33,7 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="DELETE"
+            android:textColor="#e51c23"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_alignTop="@+id/expan_btn_file"
             android:layout_alignParentRight="true"
@@ -41,6 +45,7 @@
             android:layout_width="120dp"
             android:layout_height="50dp"
             android:text="DESCRIPTION"
+            android:textColor="#03A9F4"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_below="@+id/title"
             android:layout_toLeftOf="@+id/delete_btn_file"

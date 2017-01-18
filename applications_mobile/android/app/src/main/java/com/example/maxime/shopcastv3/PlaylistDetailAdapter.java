@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class PlaylistDetailAdapter extends RecyclerView.Adapter<PlaylistDetailAd
         } else {
             playlistDetailViewHolder.isSelected.setEnabled(false);
         }
+        playlistDetailViewHolder._mediaName.setText(media.getName());
     }
 
     @Override
@@ -51,19 +53,25 @@ public class PlaylistDetailAdapter extends RecyclerView.Adapter<PlaylistDetailAd
         View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.detail_playlist, viewGroup, false);
         final PlaylistDetailViewHolder playlistDetailViewHolder = new PlaylistDetailViewHolder(itemView);
 
-        playlistDetailViewHolder.isSelected.setOnClickListener(new View.OnClickListener() {
+        playlistDetailViewHolder.isSelected.setEnabled(true);
+        playlistDetailViewHolder.isSelected.setClickable(true);
+
+        playlistDetailViewHolder._mediaName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (v.getId() == playlistDetailViewHolder.isSelected.getId()) {
-                    if (playlistDetailViewHolder.isSelected.isEnabled()) {
+                    if (playlistDetailViewHolder.isSelected.isChecked()) {
                         isSelected.set(playlistDetailViewHolder.getAdapterPosition(), false);
+                        playlistDetailViewHolder.isSelected.setChecked(false);
                     } else {
                         isSelected.set(playlistDetailViewHolder.getAdapterPosition(), true);
+                        playlistDetailViewHolder.isSelected.setChecked(true);
+
                     }
-                }
             }
 
+
         });
+
         return playlistDetailViewHolder;
     }
 

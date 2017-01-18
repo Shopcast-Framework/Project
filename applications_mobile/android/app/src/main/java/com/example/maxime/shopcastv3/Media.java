@@ -1,11 +1,12 @@
 package com.example.maxime.shopcastv3;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Maxime on 24/08/16.
  */
-public class Media {
+public class Media implements Serializable {
     private String _name;
     private String _type;
     private String _desc;

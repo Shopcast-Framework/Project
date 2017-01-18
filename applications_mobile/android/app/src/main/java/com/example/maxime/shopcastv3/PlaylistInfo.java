@@ -13,6 +13,14 @@ public class PlaylistInfo implements Serializable {
     private List<Media> _medias = new ArrayList<Media>();
     private String _id;
     private String _userId;
+    private String _description;
+
+
+    public String getDescription() { return _description; }
+
+    public void setDescription(String desc) {
+        _description = desc;
+    }
 
     public String getUserId() { return _userId; }
 
@@ -28,25 +36,7 @@ public class PlaylistInfo implements Serializable {
     public void setID(String id) {
 
         _id = id;
-        /* Requester.get("file", mUserInfo.getToken(), new JsonHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    Log.d("Media", response.toString());
-                    try {
-                        _media = parseMedia(response.getJSONArray("files"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    createView();
-                }
 
-                @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                    super.onFailure(statusCode, headers, throwable, errorResponse);
-                    Log.d("LoginF", errorResponse.toString());
-                }
-
-            });*/
     }
 
     public void setName(String name) { _name = name;}

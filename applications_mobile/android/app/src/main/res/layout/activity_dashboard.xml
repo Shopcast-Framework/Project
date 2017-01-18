@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fdfdf7"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background"
     tools:context="com.example.maxime.shopcastv3.DashboardActivity">
 
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,8 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="#FFFFFF"
-        app:itemTextColor="#FFFFFF"
+        app:itemIconTint="@color/colorPrimaryDark"
+        app:itemTextColor="@color/colorPrimaryDark"
         app:menu="@menu/bottom_navigation_main" />
 
 
@@ -47,10 +47,11 @@
         android:paddingTop="15dp"
         android:paddingRight="25dp"
         android:paddingBottom="15dp"
-        android:layout_alignTop="@+id/mediaNumber"
-        android:layout_centerHorizontal="true"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp" />
+        android:layout_marginRight="40dp"
+        android:layout_below="@+id/welcomeText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -82,16 +83,16 @@
         android:paddingTop="15dp"
         android:paddingRight="25dp"
         android:paddingBottom="15dp"
-        android:layout_marginTop="61dp"
-        android:layout_below="@+id/welcomeText"
+        android:layout_above="@+id/titleMedia"
         android:layout_toEndOf="@+id/monitorNumber" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="10dp"
         android:text="Welcome User !"
-        android:textColor="#212121"
+        android:textColor="#3f51b5"
         android:id="@+id/welcomeText"
         android:layout_below="@+id/view"
         android:layout_centerHorizontal="true"
@@ -105,16 +106,18 @@
         android:id="@+id/playlistTitle"
         android:layout_below="@+id/playlistNumber"
         android:layout_alignLeft="@+id/playlistNumber"
-        android:layout_alignStart="@+id/playlistNumber" />
+        android:layout_alignStart="@+id/playlistNumber"
+        android:textColor="@color/colorPrimaryDark" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Monitors"
+        android:text="History"
         android:id="@+id/titleMonitor"
         android:layout_alignTop="@+id/playlistTitle"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorPrimaryDark" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -124,6 +127,9 @@
         android:id="@+id/titleMedia"
         android:layout_alignTop="@+id/titleMonitor"
         android:layout_alignLeft="@+id/mediaNumber"
-        android:layout_alignStart="@+id/mediaNumber" />
+        android:layout_alignStart="@+id/mediaNumber"
+        android:textColorHint="@color/colorPrimaryDark"
+        android:textColorHighlight="@color/colorAccent"
+        android:textColor="@color/colorPrimaryDark" />
 
 </RelativeLayout>

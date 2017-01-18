@@ -2,6 +2,7 @@ package com.example.maxime.shopcastv3;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,14 +21,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.entity.StringEntity;
 
 public class PlaylistDetailActivity extends AppCompatActivity {
     private TextView mplaylistName;
-    private UserInfo _userinfo;
+    private UserInfo _userinfo  = new UserInfo();;
     private TextView mdescription;
     private TextView msize;
     private PlaylistInfo _playlist;
@@ -62,18 +67,19 @@ public class PlaylistDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playlist_detail);
 
-        //        _userinfo.setToken(extras.get("token").toString());
-        //       _userinfo.setUserName(extras.get("username").toString());
+
+        Bundle extras = getIntent().getExtras();
+        _userinfo.setToken(extras.get("token").toString());
+        _userinfo.setUserName(extras.get("username").toString());
 
         _playlist = (PlaylistInfo) getIntent().getSerializableExtra("Myclass");
         isModify = (boolean) getIntent().getSerializableExtra("isModify");
-
         context = this.getApplicationContext();
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Select Files");
-        toolbar.setTitleTextColor(0xFFFFFFFF);
+        toolbar.setTitleTextColor(Color.parseColor("#03A9F4"));
 
 
         Log.d("debug", String.valueOf(isModify));
@@ -90,7 +96,7 @@ public class PlaylistDetailActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean applyAction() {
+    private boolean applyAction() throws UnsupportedEncodingException {
          List<Boolean> isSelected;
         PlaylistDetailAdapter adapter = (PlaylistDetailAdapter) mAdapter;
         isSelected = adapter.getSelectedList();
@@ -106,10 +112,13 @@ public class PlaylistDetailActivity extends AppCompatActivity {
     }
 
     private void deleteSelectedFile(List<Boolean> list) {
+        List<Media> tmp = _playlist.getMedia();
         int i = 0;
-        while (i != _playlist.getMedia().size()) {
+        if (_playlist.getMedia().size() <= 0)
+            return ;
+        while (i < _playlist.getMedia().size()) {
             if (list.get(i) == true) {
-                Requester.delete("file/" + _playlist.getMedia().get(i).getID(), _userinfo.getToken(), new JsonHttpResponseHandler() {
+                Requester.delete("playlist/" + _playlist.getId() + "/sub/" + _playlist.getMedia().get(i).getID(), _userinfo.getToken(), new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.d("DELETE", response.toString());
@@ -128,14 +137,61 @@ public class PlaylistDetailActivity extends AppCompatActivity {
                         Log.d("FAILURE", Integer.toString(statusCode));
                     }
                 });
-                _playlist.getMedia().remove(i);
+                tmp.remove(i);
             }
             i++;
         }
+        _playlist.setMedia(tmp);
     }
 
-    private void addSelectedFile(List<Boolean> list) {
-        // here do the add
+
+    private void addSelectedFile(List<Boolean> list) throws UnsupportedEncodingException {
+        int i = 0;
+        final List<Boolean> listbool = list;
+        ArrayList<String> ids = new ArrayList<String>();
+        while (i < _media.size()) {
+            if (list.get(i) == true) {
+                ids.add(String.valueOf(_media.get(i).getID()));
+            }
+            i++;
+        }
+        if (ids.size() <= 0){
+            return ;
+        }
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("files", new JSONArray(ids));
+                Log.d("resp", jsonObject.toString());
+                final StringEntity entity = new StringEntity(jsonObject.toString());
+                Requester.addFilePlaylist(this.getApplicationContext(), _userinfo.getToken(),  "playlist/" + _playlist.getId() + "/add", entity, "application/json", new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        Toast toast = Toast.makeText(context, "Succefully Created", Toast.LENGTH_SHORT);
+                        toast.show();
+                        int i = 0;
+                        List<Media> tmp = _playlist.getMedia();
+                        while (i != _media.size()) {
+                            if (listbool.get(i) == true) {
+                                tmp.add(_media.get(i));
+                            }
+                            i++;
+                        }
+                        _playlist.setMedia(tmp);
+                        _media = _playlist.getMedia();
+                        mAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(int i, Header[] header, String str, Throwable throwable) {
+                        Toast toast = Toast.makeText(context, "Error: Cannot create playlist", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
     }
 
     @Override
@@ -143,7 +199,11 @@ public class PlaylistDetailActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.applyAction:
                 Log.d("testing", "this is a test");
-                applyAction();
+                try {
+                    applyAction();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -160,22 +220,24 @@ public class PlaylistDetailActivity extends AppCompatActivity {
             media.setID(response.getJSONObject(i).get("id").toString());
             media.setSize(response.getJSONObject(i).get("size").toString());
             _media.add(media);
+            Log.d("AZERTY", media.toString());
             i++;
         }
         return _media;
     }
 
     private void getAllMedia() {
-         Requester.get("file", _userinfo.getToken(), new JsonHttpResponseHandler() {
+        Requester.get("file", _userinfo.getToken(), new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     Log.d("Media", response.toString());
                     try {
                         _media = parseMedia(response.getJSONArray("files"));
+                        setRecyclerView(_media);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    setRecyclerView(_media);
                 }
 
                 @Override

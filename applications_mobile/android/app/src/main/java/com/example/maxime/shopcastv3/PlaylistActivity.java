@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -83,14 +84,14 @@ public class PlaylistActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-  //      _userinfo.setToken(extras.get("token").toString());
-   //     _userinfo.setUserName(extras.get("username").toString());
+       mUserInfo.setToken(extras.get("token").toString());
+       mUserInfo.setUserName(extras.get("username").toString());
 
         context = this.getApplicationContext();
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Playlists");
-        toolbar.setTitleTextColor(0xFFFFFFFF);
+        toolbar.setTitleTextColor(Color.parseColor("#03A9F4"));
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottomNavigation);
 
@@ -198,6 +199,7 @@ public class PlaylistActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(context, "Error: Cannot create Playlist", Toast.LENGTH_SHORT);
                     toast.show();
                 }
+                if (playlistInfos.size() > 1)
                 mAdapter.notifyDataSetChanged();
 
             }
@@ -229,7 +231,7 @@ public class PlaylistActivity extends AppCompatActivity {
     // method to call api
     private void getPlaylist() {
 
-     /*   Requester.get("playlist", mUserInfo.getToken(), new JsonHttpResponseHandler() {
+        Requester.get("playlist", mUserInfo.getToken(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
@@ -246,39 +248,38 @@ public class PlaylistActivity extends AppCompatActivity {
                 toast.show();
             }
 
-        });*/
+        });
 
-       // playlistInfos = parsePlaylist(response.getJSONArray("playlists"));
-        try {
-            playlistInfos = parsePlaylist(new JSONArray());
-        } catch (JSONException e) {
-            e.printStackTrace();
+    }
+
+    private List<Media> setMedia(JSONArray files) throws JSONException {
+        List<Media> list = new ArrayList<Media>();
+        int i = 0;
+        while (i != files.length()) {
+            Media media = new Media(files.getJSONObject(i).get("name").toString(), files.getJSONObject(i).get("mimetype").toString());
+            media.setDesc(files.getJSONObject(i).get("description").toString());
+            media.setOriginalName(files.getJSONObject(i).get("originalname").toString());
+            media.setID(files.getJSONObject(i).get("id").toString());
+            media.setSize(files.getJSONObject(i).get("size").toString());
+            list.add(media);
+            i++;
         }
-        createView();
-
+        return list;
     }
 
     private List<PlaylistInfo> parsePlaylist(JSONArray response) throws JSONException {
         int i = 0;
 
-/*
+
         while (i != response.length()) {
-*/
 
-            while (i != 10) {
-
-            PlaylistInfo playlist = new PlaylistInfo("TestPlaylist");
-            playlist.setID(String.valueOf(i));
-            playlist.setUserId("1");
-            playlistInfos.add(playlist);
-            i++;
-            /*
             PlaylistInfo playlist = new PlaylistInfo(response.getJSONObject(i).get("name").toString());
             playlist.setID(response.getJSONObject(i).get("id").toString());
             playlist.setUserId(response.getJSONObject(i).get("user_id").toString());
-            // add medias list
+            playlist.setDescription(response.getJSONObject(i).get("description").toString());
+            playlist.setMedia(setMedia(response.getJSONObject(i).getJSONArray("files")));
             playlistInfos.add(playlist);
-            i++;*/
+            i++;
         }
         Log.d("Playlistparse", Integer.toString(playlistInfos.size()));
         return playlistInfos;

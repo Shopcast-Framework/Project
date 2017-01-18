@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -32,6 +33,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -45,7 +47,9 @@ public class DashboardActivity extends AppCompatActivity {
     private TextView mMonitorNumber;
     private UserInfo mUserInfo = new UserInfo();
     private CardView mCardView;
+    private List<Pair<String, Integer>> mediasTypes;
     Context context;
+
     int backButtonCount = 0;
 
     private ImageView mComingSoon;
@@ -58,16 +62,15 @@ public class DashboardActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-//        mUserInfo.setToken(extras.get("token").toString());
-//        mUserInfo.setUserName(extras.get("username").toString());
+       mUserInfo.setToken(extras.get("token").toString());
+       mUserInfo.setUserName(extras.get("username").toString());
 
         mCardView = (CardView) findViewById(R.id.view);
 
+
+
         mCardView.setRadius(25);
         mCardView.setCardElevation(15);
-
-        // delete this line, for testing
-        mUserInfo.setUserName("Maxime Manzano");
 
         TextView welcomeTitle = (TextView) findViewById(R.id.welcomeText);
         welcomeTitle.setText("Welcome " + mUserInfo.getUsername() + " !");
@@ -75,11 +78,42 @@ public class DashboardActivity extends AppCompatActivity {
         context = this.getApplicationContext();
 
         initBottomNavigationView();
-        initChart();
-       // setIndicator();
+        setIndicator();
 
 
 
+    }
+
+    private int isTypeExist(String type) {
+        int i = 0;
+
+        while (i != mediasTypes.size()) {
+            if (mediasTypes.get(i).first.equals(type)) {
+                return (i);
+            }
+            i++;
+        }
+        return -1;
+    }
+
+    private void countMediaByType(JSONArray files) throws JSONException {
+        mediasTypes = new ArrayList<Pair<String, Integer>>();
+        int i = 0;
+
+        while (i != files.length()) {
+          String type = files.getJSONObject(i).get("mimetype").toString();
+            int index = isTypeExist(type);
+            if (index != -1) {
+                int number = mediasTypes.get(index).second + 1;
+                Pair<String, Integer> pairing = new Pair<String, Integer>(type, number);
+                mediasTypes.set(index, pairing);
+            } else {
+                int number = 1;
+                Pair<String, Integer> pairing = new Pair<String, Integer>(type, number);
+                mediasTypes.add(pairing);
+            }
+            i++;
+        }
 
     }
 
@@ -89,6 +123,8 @@ public class DashboardActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.d("Media", response.toString());
                 try {
+                    countMediaByType(response.getJSONArray("files"));
+                    initChart();
                     mMediaNumber.setText(String.valueOf(response.getJSONArray("files").length()));
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -99,6 +135,7 @@ public class DashboardActivity extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 Log.d("LoginF", errorResponse.toString());
+                getMediaNumber();
             }
 
         });
@@ -110,7 +147,7 @@ public class DashboardActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.d("Media", response.toString());
                 try {
-                    mPlaylistNumber.setText(String.valueOf(response.getJSONArray("playlists")));
+                    mPlaylistNumber.setText(String.valueOf(response.getJSONArray("playlists").length()));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -142,13 +179,13 @@ public class DashboardActivity extends AppCompatActivity {
         }
     }
 
-    private void getMonitorNumber() {
-        Requester.get("monitor", mUserInfo.getToken(), new JsonHttpResponseHandler() {
+    private void getHistory() {
+        Requester.get("history", mUserInfo.getToken(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.d("Media", response.toString());
                 try {
-                    mMonitorNumber.setText(String.valueOf(response.getJSONArray("monitors")));
+                    mMonitorNumber.setText(String.valueOf(response.getJSONArray("history").length()));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -176,7 +213,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         getMediaNumber();
         getPlaylistNumber();
-        getMonitorNumber();
+        getHistory();
 
         if (mMonitorNumber.getText() != null && mPlaylistNumber.getText() != null &&  mMonitorNumber.getText() != null)
             return true;
@@ -187,6 +224,7 @@ public class DashboardActivity extends AppCompatActivity {
     public boolean initBottomNavigationView() {
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottomNavigation);
+
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
@@ -242,20 +280,26 @@ public class DashboardActivity extends AppCompatActivity {
         return true;
     }
 
+    private int getPercentage(int filenb, int total) {
+        if (total == 1) {
+            return 100;
+        }
+        return total / filenb * 100;
+    }
+
 
     private ArrayList<PieEntry> setYValues() {
         ArrayList<PieEntry> values = new ArrayList<PieEntry>();
 
         // set Real data
 
-        values.add(0, new PieEntry(10, "MP3"));
-        values.add(1, new PieEntry(30, "MP4"));
-        values.add(2, new PieEntry(40, "MKV"));
-        values.add(3, new PieEntry(10, "JPEG"));
-        values.add(4, new PieEntry(10, "BMP"));
+        int i = 0;
 
+        while (i != mediasTypes.size()) {
+            values.add(i, new PieEntry(getPercentage(mediasTypes.get(i).second, mediasTypes.size()), mediasTypes.get(i).first));
+            i++;
+        }
         return values;
-
     }
 
     private PieData setPieData() {

@@ -132,10 +132,6 @@ public class LoginActivty extends AppCompatActivity {
 
     private void attemptLogin() throws UnsupportedEncodingException, JSONException {
 
-
-        Intent myIntent = new Intent(LoginActivty.this, DashboardActivity.class);
-        LoginActivty.this.startActivity(myIntent);
-
         if (this.checkCredentials() == false)
             return ;
 

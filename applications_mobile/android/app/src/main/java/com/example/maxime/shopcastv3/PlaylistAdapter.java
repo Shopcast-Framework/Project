@@ -49,6 +49,15 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
 
         isExpand = new ArrayList<>(mDataset.size());
         for(int i = 0; i < mDataset.size(); i++){
+            Log.d("here", "lol");
+            isExpand.add(false);
+        }
+    }
+
+    private void resetIsExpand() {
+        isExpand = new ArrayList<>(mDataset.size());
+        for(int i = 0; i < mDataset.size(); i++){
+            Log.d("here", "agaaaain");
             isExpand.add(false);
         }
     }
@@ -62,6 +71,9 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
     public void onBindViewHolder(PlaylistViewHolder playlistViewHolder, int i) {
         PlaylistInfo pi = mDataset.get(i);
 
+        if (mDataset.size() != isExpand.size()) {
+            resetIsExpand();
+        }
         if(isExpand.get(i)) {
             TransitionManager.beginDelayedTransition(playlistViewHolder.expandableLayout);
             playlistViewHolder.expandableLayout.setVisibility(View.VISIBLE);
@@ -71,6 +83,9 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
         }
 
         playlistViewHolder._playlistName.setText(pi.getName());
+        if (pi.getDescription() != null)
+            playlistViewHolder._desc.setText(pi.getDescription());
+
         Log.d("Playlist", pi.getName());
     }
 
@@ -100,6 +115,8 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
 
         });
 
+
+
         final Button modify = (Button) itemView.findViewById(R.id.modifyBtn);
         modify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +126,19 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistAdapter.Playli
                 intent.putExtra("username", mUserInfo.getUsername());
                 intent.putExtra("Myclass", mDataset.get(playlistViewHolder.getAdapterPosition()));
                 intent.putExtra("isModify", true);
+                mContext.startActivity(intent);
+            }
+        });
+
+        final Button add = (Button) itemView.findViewById(R.id.addBtn);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, PlaylistDetailActivity.class);
+                intent.putExtra("token", mUserInfo.getToken());
+                intent.putExtra("username", mUserInfo.getUsername());
+                intent.putExtra("Myclass", mDataset.get(playlistViewHolder.getAdapterPosition()));
+                intent.putExtra("isModify", false);
                 mContext.startActivity(intent);
             }
         });
