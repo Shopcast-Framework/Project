@@ -57,7 +57,6 @@ class DashboardController: UIViewController, UITableViewDelegate, UITableViewDat
         if let _histories: Array<AnyObject> = response!["history"] as? Array<AnyObject> {
             
             for _history in _histories {
-                print(_history)
                 histories += [History.parse(_history)]
             }
         }

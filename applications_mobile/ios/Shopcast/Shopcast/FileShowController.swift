@@ -9,6 +9,7 @@
 import UIKit
 
 class FileShowController: UIViewController {
+    var playlist : Playlist?
     var file : File?
     
     // MARK: Properties

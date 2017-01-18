@@ -10,6 +10,8 @@
 		3E07A3FB1E228B2D0010CB3A /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E07A3FA1E228B2D0010CB3A /* File.swift */; };
 		3E07A3FD1E228C7B0010CB3A /* FileShowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E07A3FC1E228C7B0010CB3A /* FileShowController.swift */; };
 		3E07A4001E229D280010CB3A /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E07A3FF1E229D280010CB3A /* FileCell.swift */; };
+		3E0B7C911E301A79008A6106 /* SuccessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0B7C901E301A79008A6106 /* SuccessController.swift */; };
+		3E0B7C931E3020F0008A6106 /* PlaylistAddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0B7C921E3020F0008A6106 /* PlaylistAddController.swift */; };
 		3E1367561E2C335600A647ED /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1367551E2C335600A647ED /* HistoryCell.swift */; };
 		3E1367581E2C388C00A647ED /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1367571E2C388C00A647ED /* History.swift */; };
 		3E13675E1E2C5A6F00A647ED /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E13675D1E2C5A6F00A647ED /* Date.swift */; };
@@ -47,6 +49,8 @@
 		3E07A3FA1E228B2D0010CB3A /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		3E07A3FC1E228C7B0010CB3A /* FileShowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileShowController.swift; sourceTree = "<group>"; };
 		3E07A3FF1E229D280010CB3A /* FileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
+		3E0B7C901E301A79008A6106 /* SuccessController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessController.swift; sourceTree = "<group>"; };
+		3E0B7C921E3020F0008A6106 /* PlaylistAddController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistAddController.swift; sourceTree = "<group>"; };
 		3E1367551E2C335600A647ED /* HistoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		3E1367571E2C388C00A647ED /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		3E13675D1E2C5A6F00A647ED /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
@@ -170,6 +174,8 @@
 				3E71070D1DCA731C00304A04 /* PlaylistShowController.swift */,
 				3E470B9D1DCCCB9300AD5F3F /* ImagePickerController.swift */,
 				3E07A3FC1E228C7B0010CB3A /* FileShowController.swift */,
+				3E0B7C901E301A79008A6106 /* SuccessController.swift */,
+				3E0B7C921E3020F0008A6106 /* PlaylistAddController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -286,9 +292,11 @@
 				3E07A3FD1E228C7B0010CB3A /* FileShowController.swift in Sources */,
 				3EE8A62F1DA9DB2D005BCB14 /* PlaylistCell.swift in Sources */,
 				3E1367561E2C335600A647ED /* HistoryCell.swift in Sources */,
+				3E0B7C931E3020F0008A6106 /* PlaylistAddController.swift in Sources */,
 				3E2D86511D5CBBA70003CF43 /* SigninController.swift in Sources */,
 				3E6C4BF81D8F354A00DDC18A /* DashboardController.swift in Sources */,
 				3E483D831D75F22E0055573F /* Request.swift in Sources */,
+				3E0B7C911E301A79008A6106 /* SuccessController.swift in Sources */,
 				3E07A4001E229D280010CB3A /* FileCell.swift in Sources */,
 				3E2D864F1D5CBBA70003CF43 /* AppDelegate.swift in Sources */,
 				3E07A3FB1E228B2D0010CB3A /* File.swift in Sources */,

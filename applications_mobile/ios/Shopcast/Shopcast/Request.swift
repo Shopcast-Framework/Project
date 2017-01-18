@@ -16,7 +16,7 @@ class Request {
         return nil
     }
 
-    func exec(_ type: String, action: String, body: Dictionary<String, String>?, callback: @escaping (AnyObject?) -> Void) {
+    func exec(_ type: String, action: String, body: Dictionary<String, AnyObject>?, callback: @escaping (AnyObject?) -> Void) {
         let requestUrl = apiUrl + action
         let session = URLSession.shared
         
@@ -78,7 +78,7 @@ class Request {
         exec("GET", action: action, body: nil, callback: callback)
     }
     
-    func post(_ action: String, body: Dictionary<String, String>?, callback: @escaping (AnyObject?) -> Void) {
+    func post(_ action: String, body: Dictionary<String, AnyObject>?, callback: @escaping (AnyObject?) -> Void) {
         exec("POST", action: action, body: body, callback: callback)
     }
 }
