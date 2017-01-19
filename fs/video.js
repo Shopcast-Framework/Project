@@ -1,5 +1,5 @@
 var fs = require('fs');
-var uploadPath = __dirname + '/../uploads';
+var uploadPath = '/home/dev/Project/midend/upload/';
 
 // Import orm, will be upgraded
 // Temporary settings about the user id
@@ -123,33 +123,42 @@ function list(stream, meta) {
 
 function request(client, meta) {
 	// need add checks
-	var filename = uploadPath + '/' + meta.name;
-	console.log('Command [REQUEST] [USER_ID : ' + meta.client_data.user_id + ' ]' + filename);
+	console.log(meta);
+	console.log('Command [REQUEST] [USER_ID : ' + meta.client_data.user_id + ' ]' + meta.file_id);
 
 	ormFile.findOne({
-where : {
-user_id   : meta.client_data.user_id,
-filename  : meta.name,
-id        : meta.file_id
-}
-}).then(function (fileToSend) {
+	where : {
+		user_id   : meta.client_data.user_id,
+		id        : meta.file_id
+	}
+	}).then(function (fileToSend) {
 
 	if (!fileToSend) {
-	console.log('[ERR] File ' + meta.name +' does not exist or no access');
-	return ;
+		console.log('[ERR] File ' + meta.file_id +' does not exist or no access');
+		return ;
 	}
 	console.log('[USER HAS ACCESS]' + fileToSend.filename);
+	console.log('[USER HAS ACCESS]' + fileToSend.path);
+	console.log('[USER HAS ACCESS]' + uploadPath);
+	console.log('[USER HAS ACCESS]' + uploadPath + fileToSend.path);
+	
 
 	// Need to export this to another function 'download'
-	var file = fs.createReadStream(uploadPath + '/' + fileToSend.filename);
+	var file = fs.createReadStream(uploadPath + fileToSend.path);
 	var data = {
-name    : meta.name,
-file_id : meta.file_id,
-size    : file.size,
-type    : file.type
-}
-data.event = 'download'
-client.send(file, data);
+		name    : fileToSend.name,
+		file_id : meta.file_id,
+		file_data : {
+			id : meta.file_id,
+			size    : file.size,
+			type    : fileToSend.type,
+			tags	: fileToSend.tags,
+			duration	: fileToSend.duration
+		}
+	}
+	data.event = 'download'
+	console.log(data);
+	client.send(file, data);
 
 }, function (err) {
 console.log('[DB] Access unauthorized.');
