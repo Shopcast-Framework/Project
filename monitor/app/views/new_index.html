@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <title>Shopcast</title>
+
+      <!-- <link rel="stylesheet" href="../bower_components/materialize/bin/materialize.css"> -->
+      <link rel="stylesheet" href="../css/style.css">
+  </head>
+  <body>
+    <div id="app">
+    </div>
+  </body>
+
+  <script>
+    //require('./../src/main.js');
+    var $ = require('jquery');
+    const routine = require('../src/routine.js');
+    const remote = require('electron').remote;
+
+ 
+    var playerPlaylist = [{
+          src: '../files/search-iso.webm',
+          type: 'video/webm',
+          duration: 44,
+          probability: 1
+    }, {
+          src: '../files/1.mp4',
+          type: 'video/mp4',
+          duration: 204,
+          probability: 1
+    }, {
+          src: '../files/2.mp4',
+          type: 'video/mp4',
+          duration: 147,
+          probability: 1
+    }, {
+          src: '../files/3.mp4',
+          type: 'video/mp4',
+          duration: 92,
+          probability: 1
+    }, {
+          src: '../files/4.mp4',
+          type: 'video/mp4',
+          duration : 138,
+          probability: 1
+    }];
+
+
+    remote.getGlobal('playlist').toPlay = playerPlaylist;
+    var until = routine.calculateUntil();
+
+    console.log(until);
+    remote.getGlobal('playlist').until = until;
+    //require('electron-connect').client.create();
+  </script>
+  <!--<script src="../bower_components/jquery/dist/jquery.min.js"></script>-->
+  <!-- <script src="../bower_components/materialize/bin/materialize.js"></script> -->
+
+  <p> Indentity information </p>
+
+  <p> Update </p>
+
+  <p> <a href="./player_final.html"> Play </a> </p>
+
+
+</html>

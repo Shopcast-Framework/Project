@@ -28,6 +28,10 @@ global.monitor = {
     files : files,
     playlists : playlists
 }
+global.playlist = { 
+    toPlay : [],
+    until : new Date()
+}
 
 
 
@@ -42,7 +46,7 @@ function createWindow () {
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
     //pathname: path.join(__dirname, 'files/search-iso.webm'),
-    pathname: path.join(__dirname, 'views/player_final.html'),
+   pathname: path.join(__dirname, 'views/new_index.html'),
     protocol: 'file:',
     slashes: true
   }));

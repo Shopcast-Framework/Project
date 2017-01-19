@@ -2,6 +2,7 @@ const remote = require('electron').remote;
 const fs = require('fs');
 const DataFile = './savedata.json';
 const FileFolder = 'files'
+const moment = require('moment');
 
 var identity = remote.getGlobal('monitor').identity;
 var client = remote.getGlobal('monitor').client;
@@ -9,42 +10,49 @@ var planning = remote.getGlobal('monitor').planning;
 var files = remote.getGlobal('monitor').files;
 var playlists = remote.getGlobal('monitor').playlists;
 
+// Goddamn this is a lot of work
+
 module.exports = {
+  checkPlanning : checkPlanning, // (from, to)
+  retrievePlanning : retrievePlanning, /// (from, to)
+  checkPlanningStatus : checkPlanningStatus,
+  checkPlaylists : checkPlaylists,
+  downloadNewPlaylists : downloadNewPlaylists,
+  checkLocalFiles : checkLocalFiles,
+  downloadNewFiles : downloadNewFiles,
+  loadData  : loadData,
+  saveData : saveData,
+  calculateUntil : calculateUntil
 };
 
-/*
- * files.toDownload = [
- *    {
- *        id : ---,
- *        tags :,
- *        type:
- *        duration
- *        status : downloading/not/failed
- *    }
- * ]
- * files.local = [
- *    {
- *        id :,
- *        filename,
- *        type,
- *        tags
- *        duration
- *        }
- * ]
- *
- *
- *
- */
+function calculateUntil() {
+    var day = new Date();
+    var today = new Date();
+    var max = new Date();
+    day.setHours(0);
+    day.setMinutes(0);
+    day.setSeconds(0);
+    day.setMilliseconds(0);
+    max.setHours(23);
+    max.setMinutes(59);
+    max.setSeconds(59);
+    max.setMilliseconds(999);
 
-/// THINGS TO DO
-//
-// Delete useless
-// Launch a player.html with playlist
-// Retrieve files by priority (preferable with its own page)
-// Download data (have a page for downloading stuff)
-// Identify monitor (splash screen)
-//
-//
+    if (planning && planning[day]) {
+        var j = 0;
+        while (j < planning[day].timetable.length) {
+            var at = moment(planning[day].timetable[j].start_at, 'HH:mm:ss').toDate();
+            today.setHours(at.getHours());
+            today.setMinutes(at.getMinutes());
+            today.setSeconds(at.getSeconds());
+            if (today.getTime() > Date.now().getTime) {
+                return today;
+            } 
+        }
+    } else {
+        return max;
+    }
+}
 
 function saveData() {
     var tmpbool = client.data.is_identified;
@@ -56,7 +64,7 @@ function saveData() {
           waitPlannings : client.waitPlannings,
           waitFiles     : client.waitFiles,
           readyFiles    : client.readyFiles
-        }
+        },
         files : files,
         planning : planning,
         playlists : playlists,
@@ -68,7 +76,7 @@ function saveData() {
 
 function loadData() {
     saveData();
-    if (fs.existsSync(__dirname + '/' + DataFile) {
+    if (fs.existsSync(__dirname + '/' + DataFile)) {
         saveDataJSON = require(__dirname + '/' + DataFile);
         remote.getGlobal('monitor').identity = saveDataJSON.identity;
         remote.getGlobal('monitor').files = saveDataJSON.files;
@@ -95,7 +103,7 @@ function downloadNewFiles(){
     }
     for (var i = 0; i < files.toDownload.length; i++) {
         var file_id = files.toDownload[i];
-        if (!files.downloaded.file_id && files.downloading.indexOf(file_id) == -1)
+        if (!files.downloaded.file_id && files.downloading.indexOf(file_id) == -1) {
             client.request(file_id);
             files.downloading.push(file_id)
         }
@@ -124,14 +132,35 @@ function manageFiles() {
 }
 
 function downloadNewPlaylists() {
-   // check every planning for need of playlist
+    // only download unknown playlists
+    if (playlists.toDownload) {
+      playlists.toDownload.append(client.waitPlaylists);
+    } else {
+      playlists.toDownload = client.waitPlaylists;
+    }
+
+    playlists.toDownload.forEach(function(play) {
+        if (play.status) {
+            return ;
+        }
+        client.retrievePlaylist(play.id);
+    });
 }
 
 function checkPlaylists() {
     // check what client got and download its files
     client.waitPlaylists.forEach(function(play) {
-        remote.getGlobal('monitor').playlists[play.id] = play;
-        client.waitPlaylists.delete(play.id);
+        if (play.status == false) {
+            if (play.id in playlists.dowloaded ||
+                playlists.downloading.indexOf(play.id) ||
+                playlists.toDownload.indexOf(play.id)) {
+                return ;
+            }
+            playlists.toDownload.push(play.id);
+            remote.getGlobal('monitor').playlists.toDownload = playlists.toDownload;
+            return ;
+        }
+        remote.getGlobal('monitor').playlists.downloaded[play.id] = play;
         // check their files
 
         for (var i = 0; i < play.files.length; i++) {
@@ -142,23 +171,67 @@ function checkPlaylists() {
                 files.toDownload.push(file_id);
             }
         }
+        client.waitPlaylists.delete(play.id);
+        remote.getGlobal('monitor').client.waitPlaylists = client.waitPlaylists;
     });
-    client.waitPlaylists = [];
-    remote.getGlobal('monitor').client.waitPlaylists = [];
 }
 
 
 function checkPlanningStatus() {
+  client.waitPlannings.forEach(function(plan) {
+      var from = new Date(plan.from);
+      var to = new Date(plan.to);
+      from.setHours(0);
+      from.setMinutes(0);
+      from.setSeconds(0);
+      from.setMilliseconds(0);
+
+      while (from <= to) {
+          var day = new Date(from); // obviously
+          if (day in planning == false) {
+              planning[day] = {
+                  timestamp : null,
+                  timtable : []
+              };
+          }
+          if (planning[day] == null || Date(plan.timestamp).getTime() >
+              Date(planning[day].timestamp).getTime()) {
+
+              planning[day].timestamp = plan.timestamp;
+              planning[day].timetable = []; // reset for the timestamp is new
+              
+              for (var i = 0; i < plan.planning.length; i++) {
+                  if (Date(plan.planning[i].range_start) - day >= 0 &&
+                      day - Date(plan.planning[i].range_end)) {
+                          // insert
+                        // find where to insert
+                          var j = 0;
+                          var st_at = moment(plan.planning[i].start_at, 'HH:mm:ss').toDate().getTime();
+                          //neeed to check this part
+                          while (j < planning[day].timetable.length &&
+                                moment(planning[day].timetable[j].start_at, 'HH:mm:ss').toDate().getTime() - st_at > 0) {
+                                    j++;
+                                }
+                          planning[day].timetable.splice(j, 0, plan[i]);
+                      }
+              }
+          }
+          from.setDay(from.getDay() + 1);
+      }
+      remote.getGlobal('monitor').planning = planning;
+      /// key : day
+  });
   downloadNewPlaylists();
   checkPlaylists();
   // add playlists to download
 }
 
-function retrievePlanning() {
+function retrievePlanning(from, to) {
+    client.requestTimetable(from, to);
 }
 
-function checkPlanning() {
-  retrievePlanning();
+function checkPlanning(from, to) {
+  retrievePlanning(from, to);
   checkPlanningStatus();
     // retrieve planning
   //
