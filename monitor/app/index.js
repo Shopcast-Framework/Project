@@ -7,6 +7,30 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require('path');
 const url = require('url');
 
+var identity = {};
+var planning = {};
+var files = {
+    toDownload : [], // [file_id, file_id...]
+    downloading : [], // [file_id, file_id...]
+    downloaded : {}
+};
+var playlists = {
+    toDownload : [], // [play_id, play_id...]
+    downloading : [], // [play_id, play_id...]
+    downloaded : {}
+};
+var client = require('./src/client.js');
+
+global.monitor = {
+    identity : identity,
+    client : client,
+    planning : planning,
+    files : files,
+    playlists : playlists
+}
+
+
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;

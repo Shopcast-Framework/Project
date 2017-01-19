@@ -12,6 +12,7 @@
     "electron": "^1.4.1",
     "electron-connect": "^0.6.0",
     "electron-packager-interactive": "0.0.7",
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "video.js": "^5.15.1"
   }
 }
