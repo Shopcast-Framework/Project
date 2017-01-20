@@ -20,6 +20,7 @@ var Orm = function() {
 
         self.sequelize = new Sequelize(config.database, config.username, config.password, {
             host : config.host,
+            dialect: config.dialect,
             logging : function(str) {
                 fs.writeFile(process.env.NODE_PATH + '/logs/sql.log', str);
                 fs.writeFile(process.env.NODE_PATH + '/logs/sql.log', "\n");
