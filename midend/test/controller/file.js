@@ -41,16 +41,24 @@ describe('Api file controller', function () {
     });
 
     it('[POST] /api/file', function(done) {
-        var newFile = Helper.build.new('File', __files[__files.length - 1], {user_id: 1, mimetype: "video/webm"});
+        var playlists = Helper.build.associate(
+            'PlaylistFile',
+            __playlists, [[0], [], []],
+            __playlist_files
+        )
+        var files = Helper.build.associate(
+            'playlists',
+            __files.slice(0, 2), [[0], []],
+            playlists
+          );
 
         Context.server
-        .post('/api/file')
+        .get('/api/file')
         .set(Context.header())
-        .send(newFile)
         .expect(Helper.date.truncate)
         .expect(Status.OK, {
-            message : Message.get("file:post:success"),
-            file    : newFile
+            message     : Message.get("file:get:success"),
+            files       : files
         }, done);
     });
 

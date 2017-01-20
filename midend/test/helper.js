@@ -16,10 +16,10 @@ var DateHelper = function() {
                 obj[i] = self.__truncate(obj[i]) || obj[i];
             }
         } else if (typeof(obj) == "string") {
-            if (obj.substr(0, 4) == '2016') {
+            if (obj.substr(0, 4) == '2016' || obj.substr(0, 4) == '2017') {
                 return self.DATE;
             }
-            if (obj.substr(0, 4) == '2017') {
+            if (obj.substr(0, 4) == '2018') {
                 return obj.substr(0, 10);
             }
         }
