@@ -10,7 +10,7 @@ import Foundation
 
 class Request {
     
-    let apiUrl : String = "http://localhost:3001/api/"
+    let apiUrl : String = "http://api.shopcast.fr/"
     
     func getAuthToken() -> String? {
         return nil
