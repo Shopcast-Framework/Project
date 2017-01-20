@@ -1,0 +1,14 @@
+{
+  "name": "Shopcast",
+  "productName": "Shopcast",
+  "version": "1.0.8",
+  "description": "Change the way you use the advertizing",
+  "main": "./main.js",
+  "author": {
+    "name": "Guerin_f",
+    "email": "florian.guerin@epitech.eu"
+  },
+  "license": "MIT",
+  "dependencies": {
+  }
+}
