@@ -55,7 +55,7 @@ router.post('/:id/file/add/', middlewares.isLogged, middlewares.language, functi
 
     var url = 'playlist/' + id + '/add';
 
-	Rest.post(url, {files: JSON.stringify(ids.files)})
+	Rest.post(url, JSON.stringify({files: ids.files}))
     .then(function(response) {
 		console.log(response);
 		res.redirect('/playlists/'+id+'?message=' + response.body.message);
