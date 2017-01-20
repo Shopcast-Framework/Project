@@ -27,9 +27,10 @@ class PlaylistAddFileController: UIViewController, UIImagePickerControllerDelega
             let rowCount = tableView.numberOfRows(inSection: section)
             
             for row in 0 ..< rowCount {
-                let cell = tableView.cellForRow(at: IndexPath(row: row, section: section)) as! UIFileCell
-                if (cell.isToggle()) {
-                    list.append(cell.getFileId())
+                if let cell = tableView.cellForRow(at: IndexPath(row: row, section: section)) as? UIFileCell {
+                    if (cell.isToggle()) {
+                        list.append(cell.getFileId())
+                    }
                 }
             }
         }
@@ -113,7 +114,7 @@ class PlaylistAddFileController: UIViewController, UIImagePickerControllerDelega
         if let _files: Array<AnyObject> = response!["files"]! as? Array<AnyObject> {
             for _blob in _files {
                 let _file = File.parse(_blob)
-                if (_file.hasPlaylist(id: (playlist?.id)!)) {
+                if (!_file.hasPlaylist(id: (playlist?.id)!)) {
                     files += [_file]
                 }
             }
